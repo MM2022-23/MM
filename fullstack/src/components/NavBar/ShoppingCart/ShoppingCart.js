@@ -1,5 +1,3 @@
-import { useEffect } from "react";
-import StripeCheckout from "react-stripe-checkout";
 import SignUpPopUp from "../SignUpPopUp/SignUpPopUp";
 import LogInPopUP from "../LogInPopUp/LogInPopUp";
 import { useNavigate } from "react-router-dom";
@@ -11,11 +9,8 @@ import { Offcanvas } from "react-bootstrap";
 import MealData from "../../../Service/MealData";
 import userSession from "../../../Service/userSession";
 import PopUp from "../../../SharedComponents/PopUp/PopUp";
-import StripeBackend from "../../../Service/StripeBackend";
-import OrderAPIService from "../../../Service/OrderAPIService";
 import Payment from "../../../SharedComponents/PopUp/Payment/Payment";
 import DataCollectionAPI from "../../../Service/DataCollectionAPI";
-import { isNamedExportBindings } from "typescript";
 const ShoppingCart = ({
   cart,
   setCart,
