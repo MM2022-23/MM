@@ -1,0 +1,282 @@
+/* for galaxy fold */
+@media screen and (width<=280px) {
+  .imageAdjustment {
+    height: 80px;
+    width: 100px;
+  }
+  .titleAdjustment {
+    font-size: 16px;
+  }
+  .descriptionAdjustment {
+    font-size: 13px;
+  }
+
+  .amountAdjustment {
+    font-size: 30px;
+    padding-left: 10px;
+    padding-right: 5px;
+  }
+
+  .buttonAdjustment {
+    width: 40px;
+    height: 30px;
+    border: 1px;
+    padding: 0px;
+    border-radius: 30px;
+  }
+
+  .letterAdjustment {
+    font-size: 20px;
+  }
+  .spacesBetweenBoxes {
+    padding: 0px;
+  }
+
+  .checkOutButton {
+    height: 34px;
+    width: 112px;
+    border-radius: 15px;
+    font-size: 17px;
+    padding: 1px;
+  }
+
+  .backButton {
+    margin-top: 41px;
+    top: 10%;
+    left: 3%;
+    margin-left: -4px;
+    height: 30px;
+    width: 72px;
+    padding: 1px;
+    border-radius: 20px;
+    font-size: 15px;
+  }
+  .backButtonContainer {
+   background-color: black;
+   margin-bottom: 150px;
+  }
+}
+
+/* for small mobiles */
+@media screen and (width>280px) and (width<=375px) {
+  .imageAdjustment {
+    height: 100px;
+    width: 120px;
+  }
+  .titleAdjustment {
+    font-size: 20px;
+  }
+  .descriptionAdjustment {
+    font-size: 14px;
+  }
+
+  .amountAdjustment {
+    font-size: 30px;
+    padding-left: 12px;
+    padding-right: 7px;
+  }
+
+  .buttonAdjustment {
+    width: 43px;
+    height: 37px;
+    border: 1px;
+    padding: 0px;
+    border-radius: 30px;
+  }
+
+  .letterAdjustment {
+    font-size: 20px;
+  }
+  .spacesBetweenBoxes {
+    padding: 1em;
+  }
+
+  .checkOutButton {
+    height: 40px;
+    width: 125px;
+    border-radius: 15px;
+    font-size: 21px;
+    padding: 1px;
+  }
+
+  .backButton {
+    margin-top: 40px;
+    top: 10%;
+    left: 3%;
+    margin-left: -4px;
+    height: 33px;
+    width: 88px;
+    padding: 1px;
+    border-radius: 20px;
+    font-size: 20px;
+  }
+  .backButtonContainer {
+   background-color: black;
+   margin-bottom: 150px;
+  }
+}
+
+/* for mobiles */
+@media screen and (width>=376px) and (width<=420px) {
+  .imageAdjustment {
+    height: 150px;
+    width: 161px;
+    border: 0px;
+    border-radius: 20px;
+  }
+
+  .titleAdjustment {
+    font-size: 20px;
+  }
+  .descriptionAdjustment {
+    font-size: 14px;
+  }
+
+  .amountAdjustment {
+    font-size: 35px;
+    padding-left: 13px;
+    padding-right: 9px;
+  }
+
+  .buttonAdjustment {
+    width: 48px;
+    height: 44px;
+    padding: 0px;
+    border-radius: 30px;
+  }
+
+  .letterAdjustment {
+    font-size: 25px;
+  }
+  .spacesBetweenBoxes {
+    padding: 1em;
+  }
+
+  .checkOutButton {
+    height: 45px;
+    width: 130px;
+    border-radius: 20px;
+    font-size: 20px;
+  }
+
+  .backButton {
+    margin-top: 21px;
+    top: 10%;
+    left: 3%;
+    margin-left: 0px;
+    height: 36px;
+    width: 91px;
+    padding: 1px;
+    border-radius: 20px;
+    font-size: 20px;
+  }
+  .backButtonContainer {
+    margin-bottom: 136px;
+  }
+}
+
+/* for tablets */
+@media screen and (width>420px) {
+  .imageAdjustment {
+    height: 210px;
+    width: 300px;
+  }
+
+  .titleAdjustment {
+    font-size: 30px;
+  }
+  .descriptionAdjustment {
+    font-size: 20px;
+  }
+
+  .buttonAdjustment {
+    width: 55px;
+    padding: 0px;
+    border-radius: 30px;
+  }
+
+  .letterAdjustment {
+    font-size: 30px;
+  }
+
+  .amountAdjustment {
+    font-size: 35px;
+    padding-left: 20px;
+    padding-right: 15px;
+  }
+
+  .backButton {
+    margin-top: 22px;
+    top: 10%;
+    left: 3%;
+    margin-left: -10px;
+    height: 50px;
+    width: 105px;
+    padding: 1px;
+    border-radius: 20px;
+    font-size: 25px;
+  }
+  .backButtonContainer {
+   background-color: black;
+   margin-bottom: 220px;
+  }
+}
+
+/* for laptops */
+@media screen and (width>=800px) {
+  .imageAdjustment {
+    height: 220px;
+    width: 300px;
+    border: 0px;
+    border-radius: 20px;
+  }
+
+  .titleAdjustment {
+    font-size: 35px;
+  }
+  .descriptionAdjustment {
+    font-size: 25px;
+  }
+  .spacesBetweenBoxes {
+    padding: 5em;
+  }
+
+  /* for + and - */
+  .letterAdjustment {
+    font-size: 35px;
+  }
+
+  .amountAdjustment {
+    font-size: 45px;
+    padding-left: 20px;
+    padding-right: 15px;
+  }
+  .buttonAdjustment {
+    width: 60px;
+    height: 45px;
+    border-radius: 30px;
+  }
+
+  .checkOutButton {
+    height: 50px;
+    width: 150px;
+    border-radius: 25px;
+    font-size: 25px;
+  }
+
+  .backButton {
+    margin-top: 50px;
+    top: 10%;
+    left: 3%;
+    margin-left: 10px;
+    height: 50px;
+    width: 105px;
+    padding: 1px;
+    border-radius: 20px;
+    font-size: 20px;
+  }
+  .backButtonContainer {
+    background-color: black;
+    margin-bottom: 200px;
+  }
+}
