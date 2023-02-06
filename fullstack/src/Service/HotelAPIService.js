@@ -1,5 +1,6 @@
 import axios from "axios";
-const HOTE_BASE_API_URL = "https://mm-pure-backend-production.up.railway.app/api/hotel/";
+import { BASE_URL } from "./Constants";
+const HOTE_BASE_API_URL = `${BASE_URL}/hotel/`;
 
 class HotelAPIService {
   

@@ -1,6 +1,6 @@
 import axios from "axios";
-const USER_BASE_REST_API_URL =
-  "https://mm-pure-backend-production.up.railway.app/api/auth/";
+import { BASE_URL } from "./Constants";
+const USER_BASE_REST_API_URL = `${BASE_URL}/auth/`;
 
 class UserApiServer {
   // Create; REGISTER

@@ -1,5 +1,6 @@
 import axios from "axios";
-const ORDER_BASE_REST_API_URL = "https://mm-pure-backend-production.up.railway.app/api/checkout/";
+import { BASE_URL } from "./Constants";
+const ORDER_BASE_REST_API_URL = `${BASE_URL}/checkout/`;
 
 class OrderAPIService {
   addOrder(orderInfo,setSuccessBody) {
