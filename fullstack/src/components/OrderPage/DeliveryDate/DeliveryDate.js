@@ -1,19 +1,33 @@
+/**
+ * EXPERIMENT NOTES
+ * Separated all code related to date in DateService folder
+ * IF it doesn't work out uncomment previous version of code
+ */
 import { useState } from "react";
 import { useEffect } from "react";
 import React from "react";
 import Dropdown from "react-bootstrap/Dropdown";
+import DateService from "../../../Service/DateService";
 const DeliveryDate = ({ delivDate, setDelivDate }) => {
-  const isSaturday = () => {
-    return new Date().getDay() === 6;
-  };
+  // const isSaturday = () => {
+  //   return new Date().getDay() === 6;
+  // };
 
-  const isSunday = () => {
-    return new Date().getDay() === 0;
-  };
+  // const isSunday = () => {
+  //   return new Date().getDay() === 0;
+  // };
   const [mins, setmins] = useState();
   useEffect(() => {
     // Have timer IF today == saturday
-    if (isSaturday()) {
+    // if (isSaturday()) {
+    //   const interval = setInterval(() => {
+    //     setmins(new Date().getSeconds());
+    //     console.log("In Deliv Date Component");
+    //   }, 1000);
+    //   return () => clearInterval(interval);
+    // }
+
+    if (DateService.isSaturday()) {
       const interval = setInterval(() => {
         setmins(new Date().getSeconds());
         console.log("In Deliv Date Component");
@@ -23,39 +37,37 @@ const DeliveryDate = ({ delivDate, setDelivDate }) => {
   }, []);
 
   // 4 upcoming sundays
-  const sundays = () => {
-    const today = new Date();
-    const ar = [];
-    let dayToday = today.getDay();
-    let diff = (7 - dayToday) % 7;
-    // today = first sunday
-    today.setDate(today.getDate() + diff);
+  // const sundays = () => {
+  //   const today = new Date();
+  //   const ar = [];
+  //   let dayToday = today.getDay();
+  //   let diff = (7 - dayToday) % 7;
+  //   // today = first sunday
+  //   today.setDate(today.getDate() + diff);
 
-    // saturday & after 11:59AM
-    const saturdayCondition =
-      isSaturday() &&
-      new Date().toLocaleTimeString("en-US").split(" ")[1] === "PM";
+  //   // saturday & after 11:59AM
+  //   const saturdayCondition =
+  //     isSaturday() &&
+  //     new Date().toLocaleTimeString("en-US").split(" ")[1] === "PM";
 
-    let numSundays;
-    // if sunday OR (saturday AND time after 11:59 AM EST)
-    if (isSunday() || saturdayCondition) {
-      numSundays = 4;
-      today.setDate(today.getDate() + 7);
-    } else {
-      numSundays = 3;
-      ar.push("Sunday: " + today.toLocaleDateString());
-      today.setDate(today.getDate() + 7);
-    }
+  //   let numSundays;
+  //   // if sunday OR (saturday AND time after 11:59 AM EST)
+  //   if (isSunday() || saturdayCondition) {
+  //     numSundays = 4;
+  //     today.setDate(today.getDate() + 7);
+  //   } else {
+  //     numSundays = 3;
+  //     ar.push("Sunday: " + today.toLocaleDateString());
+  //     today.setDate(today.getDate() + 7);
+  //   }
 
-    for (let i = 0; i < numSundays; i++) {
-      ar.push("Sunday: " + today.toLocaleDateString());
-      today.setDate(today.getDate() + 7);
-    }
-    return ar;
-  };
+  //   for (let i = 0; i < numSundays; i++) {
+  //     ar.push("Sunday: " + today.toLocaleDateString());
+  //     today.setDate(today.getDate() + 7);
+  //   }
+  //   return ar;
+  // };
 
-
-  
   return (
     <div>
       <Dropdown>
@@ -67,9 +79,9 @@ const DeliveryDate = ({ delivDate, setDelivDate }) => {
           <span className="text-primary">{delivDate}</span>
         </Dropdown.Toggle>
         <Dropdown.Menu>
-          {sundays().map((item) => {
+          {DateService.sundays().map((item) => {
             return (
-              <Dropdown.Item key = {item} onClick={() => setDelivDate(item)}>
+              <Dropdown.Item key={item} onClick={() => setDelivDate(item)}>
                 <span>{item}</span>
               </Dropdown.Item>
             );

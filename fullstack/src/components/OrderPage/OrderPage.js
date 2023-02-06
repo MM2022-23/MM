@@ -12,6 +12,8 @@ import { useState} from "react";
 import InformationGrid from "../About/InformationGrid/InformationGrid";
 import Scroll from "../../Service/ScrollTop";
 import { Modal } from "react-bootstrap";
+import zipCodeService from "../../Service/zipCodeService";
+import DataCollectionAPI from "../../Service/DataCollectionAPI";
 
 const data = {
   backColor: "primary",
@@ -89,14 +91,29 @@ const OrderPage = ({
     document.title="Order"
     Scroll.scrollUp();
   }, []);
-
   // Pick meals button clicked
   const handlePickMeals = () => {
+    console.log("Handle pick meals!");
+    console.log("PROPER OR NOT::: "+zipCodeService.isValidZipCode(zipCode));
     // NEED PROPER ZIPCODE, AND ZIPCODE SHOULD BE in specific range
-    if (zipCode.length === 0) {
-      // might require API call
-      handleDisplay("Enter Proper Zip Code");
-    } else if (numMeals === "Select Plan") {
+    if(zipCode.length===0){
+      handleDisplay("Enter zipcode");
+    }else if(zipCode.length!==5){
+      handleDisplay("Enter 5 digit zipcode");
+    }else if (!(/^\d+$/.test(zipCode))) {
+      handleDisplay("Zipcode should not contain letters");
+    }else if (!zipCodeService.isValidZipCode(zipCode)){
+      // API call to store zipcode where we don't operate
+      DataCollectionAPI.addZipCode({zipcode:zipCode}).then((response)=>{
+        console.log("Zipcode sent successfully:: "+response.data);
+      }).catch((err)=>{
+        console.log("Error sending zipcode:: "+err);
+      });
+      handleDisplay("We're soon coming to your area. Stay tuned!");
+      
+
+    }
+    else if (numMeals === "Select Plan") {
       handleDisplay("Select Plan");
     }
     // else if (freq === "Select Frequency") {
@@ -152,7 +169,7 @@ const OrderPage = ({
             {/* User Input Stuff on Right*/}
             <Container>
               <Row>
-                <h1 className="text-center">Enter Zip Code</h1>
+                <h1 className="text-center">Enter zipcode</h1>
               </Row>
 
               {/* Zip Code Element */}
@@ -178,27 +195,27 @@ const OrderPage = ({
 
                       <Dropdown.Menu>
                         <Dropdown.Item
-                          onMouseEnter={() => setNumMeals("4 Meals")}
-                          onClick={() => setNumMeals("4 Meals")}
+                          onMouseEnter={() => setNumMeals("4 meals")}
+                          onClick={() => setNumMeals("4 meals")}
                         >
                           <span>4 meals</span>
                         </Dropdown.Item>
                         <Dropdown.Item
-                          onMouseEnter={() => setNumMeals("6 Meals")}
-                          onClick={() => setNumMeals("6 Meals")}
+                          onMouseEnter={() => setNumMeals("6 meals")}
+                          onClick={() => setNumMeals("6 meals")}
                         >
                           <span>6 meals</span>
                         </Dropdown.Item>
                         <Dropdown.Item
-                          onMouseEnter={() => setNumMeals("8 Meals")}
-                          onClick={() => setNumMeals("8 Meals")}
+                          onMouseEnter={() => setNumMeals("8 meals")}
+                          onClick={() => setNumMeals("8 meals")}
                         >
                           <span>8 meals</span>
                         </Dropdown.Item>
 
                         <Dropdown.Item
-                          onMouseEnter={() => setNumMeals("12+ Meals")}
-                          onClick={() => setNumMeals("12+ Meals")}
+                          onMouseEnter={() => setNumMeals("12+ meals")}
+                          onClick={() => setNumMeals("12+ meals")}
                         >
                           <span>12+ meals</span>
                         </Dropdown.Item>

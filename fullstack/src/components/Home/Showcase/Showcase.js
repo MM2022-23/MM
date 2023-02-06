@@ -10,7 +10,7 @@ const Showcase = ({ loggedIn, setLogIn }) => {
       id="Showcase"
       style={{
         // Background Image
-        backgroundImage: `url(${background})`
+        backgroundImage: `url(${background})`,
       }}
     >
       <div className="container">
@@ -21,13 +21,17 @@ const Showcase = ({ loggedIn, setLogIn }) => {
             <div className="bigTexts">
               {/* Text 1 */}
               <div className="text-primary">
-                <strong>Ready-to-Eat</strong>
+                <strong>Ready to Eat</strong>
               </div>
 
               {/* Text 2 */}
               {/* <div className="text-primary">
                 <strong>All In One </strong>
               </div> */}
+
+              <div className="text-primary">
+                <strong>Delivered</strong>
+              </div>
 
               {/* Text 3 */}
               <div className="text-primary">
@@ -41,11 +45,8 @@ const Showcase = ({ loggedIn, setLogIn }) => {
               <span className="lead text-primary" style={{ fontSize: "1.7em" }}>
                 <span className="text-primary">Freshly Cooked</span>
                 <br></br>
-                <span style={{ color: "rgb(255,87,20)" }}>
-                  Authentic Taste
-                </span>
+                <span style={{ color: "rgb(255,87,20)" }}>Authentic Taste</span>
                 <br></br>
-                No Preservatives
               </span>
             </div>
 

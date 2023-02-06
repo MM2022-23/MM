@@ -39,7 +39,7 @@ const Home = ({
     titleColor: "secondary",
     textColor: "dark",
 
-    heading: "How It Works?",
+    heading: "How It Works",
     image1: require("../../Resources/Vector/step1.png"),
     image1Height: "150px",
     image1Width: "250px",

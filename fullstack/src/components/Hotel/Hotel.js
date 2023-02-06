@@ -11,6 +11,7 @@ import React from "react";
 import "./Hotel.css";
 import MealData from "../../Service/MealData";
 import HotelAPIService from "../../Service/HotelAPIService";
+import DateService from "../../Service/DateService";
 
 const Hotel = () => {
   const [pinLabel, setPinLabel] = useState(
@@ -24,7 +25,7 @@ const Hotel = () => {
   useEffect(() => {
     //Replace dates with upcoming sunday's date
     // Display only after 3:00 PM on Friday
-    HotelAPIService.getMealQuantityTable({ date: "Sunday: 1/29/2023" })
+    HotelAPIService.getMealQuantityTable({ date: DateService.closestUpcomingSunday() })
       .then((res) => {
         setMealQuantityTable(res.data);
       })
@@ -33,7 +34,7 @@ const Hotel = () => {
       });
 
     //Replace dates with upcoming sunday's date
-    HotelAPIService.getOrderTables({ date: "Sunday: 1/29/2023" })
+    HotelAPIService.getOrderTables({ date: DateService.closestUpcomingSunday() })
       .then((res) => {
         setOrdersTable(res.data);
       })

@@ -40,8 +40,8 @@ const MealPlans = ({
 
           {/* Main description */}
           <p className="text-primary">
-            Order anywhere between 4 to 12 meals per week, with prices as low
-            as $12.99 per meal. No reoccurring subscriptions to tie you down.
+            Order anywhere between 4 to 12 meals per week, with prices as low as
+            $12.99 per meal. No reoccurring subscriptions to tie you down.
           </p>
         </div>
 
@@ -51,7 +51,7 @@ const MealPlans = ({
               <div className="card-body text-center">
                 {/* Image button 1  */}
                 <button
-                  onClick={() => buttonClicked("4 Meals")}
+                  onClick={() => buttonClicked("4 meals")}
                   style={{ background: "transparent", border: "none" }}
                 >
                   <img
@@ -67,7 +67,7 @@ const MealPlans = ({
                   />
                 </button>
                 {/* Text below Img 1 */}
-                <h4>4 Meals</h4>
+                <h4>4 meals</h4>
               </div>
             </Col>
 
@@ -75,7 +75,7 @@ const MealPlans = ({
               <div className="card-body text-center">
                 {/* Image button 2 */}
                 <button
-                  onClick={() => buttonClicked("6 Meals")}
+                  onClick={() => buttonClicked("6 meals")}
                   style={{ background: "transparent", border: "none" }}
                 >
                   <img
@@ -92,7 +92,7 @@ const MealPlans = ({
                 </button>
                 {/* Text below Img 2 */}
                 <h4>
-                  6 Meals{" "}
+                  6 meals{" "}
                   {/* <i>
                     <super>*</super>Save 5%<super>*</super>
                   </i> */}
@@ -104,7 +104,7 @@ const MealPlans = ({
               <div className="card-body text-center">
                 {/* Image button 3 */}
                 <button
-                  onClick={() => buttonClicked("8 Meals")}
+                  onClick={() => buttonClicked("8 meals")}
                   style={{ background: "transparent", border: "none" }}
                 >
                   <img
@@ -121,7 +121,7 @@ const MealPlans = ({
                 </button>
                 {/* Text below Img 3 */}
                 <h4>
-                  8 Meals{" "}
+                  8 meals
                   {/* <i>
                     <super>*</super>Save 8%<super>*</super>
                   </i> */}
@@ -133,7 +133,7 @@ const MealPlans = ({
               <div className="card-body text-center">
                 {/* Image button 4 */}
                 <button
-                  onClick={() => buttonClicked("12 Meals")}
+                  onClick={() => buttonClicked("12+ meals")}
                   style={{ background: "transparent", border: "none" }}
                 >
                   <img
@@ -150,7 +150,7 @@ const MealPlans = ({
                 </button>
                 {/* Text below Img 4 */}
                 <h4>
-                  12 Meals{" "}
+                  12+ meals
                   {/* <i>
                     <super>*</super>Save 10%<super>*</super>
                   </i> */}

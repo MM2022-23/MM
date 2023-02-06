@@ -9,7 +9,7 @@ const ZipCode = ({zipCode, setZipCode}) => {
           <h3 className="mb-3 mb-md-0"></h3>
 
           <div className="input-group news-input" style={{boxShadow:"10px 10px 10px black", borderRadius:"8px"}}>
-            <input type="number" min = '0' max='9999' className="form-control" placeholder="Enter Zip Code" value = {zipCode} style={{textAlign:"center"}} onChange = {(e)=>setZipCode(e.target.value)}/>
+            <input type="number" min = '0' max='9999' className="form-control" placeholder="Enter zipcode" value = {zipCode} style={{textAlign:"center"}} onChange = {(e)=>setZipCode(e.target.value)}/>
           </div>
         </div>
       </div>
