@@ -8,6 +8,7 @@ import StripeBackend from "../../../Service/StripeBackend";
 
 import { useState } from "react";
 import React from "react";
+import MealData from "../../../Service/MealData";
 
 const Payment = ({
   cart,
@@ -17,7 +18,17 @@ const Payment = ({
   setCartPrice,
   setNumMealsSelected,
   delivDate,
+  zipCode,
 }) => {
+  const getLineItems = () => {
+    let rslt = "";
+    cart.forEach((element) => {
+      rslt += `(${element.mealName}, ${mealNumbers[element.id]}, $${
+        mealNumbers[element.id] * element.price
+      })  `;
+    });
+    return rslt;
+  };
   // To give users live update about making payment & storing order
   const [statusPopUp, setStatusPopUp] = useState(false);
   const [statusTitle, setStatusTitle] = useState("");
@@ -32,23 +43,35 @@ const Payment = ({
     console.log("TOKEN::: " + JSON.stringify(token));
   };
 
-  const [amount, setAmount] = useState((Math.round((cartPrice + (cartPrice * 0.06625) + 3)*100)/100));
+  const [amount, setAmount] = useState(
+    Math.round((cartPrice + cartPrice * 0.06625 + 3) * 100) / 100
+  );
   useEffect(() => {
-    setAmount((Math.round((cartPrice + (cartPrice * 0.06625) + 3)*100)/100)); 
+    setAmount(Math.round((cartPrice + cartPrice * 0.06625 + 3) * 100) / 100);
   }, [cartPrice]);
   useEffect(() => {
-    console.log("CART PRICE:: "+cartPrice+ ":: type:: "+ typeof(cartPrice));
-    console.log("AMOUNT:: "+amount+ ":: type:: "+ typeof(amount));
+    console.log("CART PRICE:: " + cartPrice + ":: type:: " + typeof cartPrice);
+    console.log("AMOUNT:: " + amount + ":: type:: " + typeof amount);
     const makeRequest = () => {
       setStatusTitle("Payment Status");
       // Sending req to backend to create charge based on card details entered by user..
+      if (stripeToken.card.address_zip !== zipCode) {
+        setStatusTitle("Payment Insuccessful")
+        setStatusPopUp(true);
+        setStatusBody(`You were viewing meals for zipcode ${zipCode}, but trying to ship at zipcode ${stripeToken.card.address_zip}`);
+        setTimeout(() => {
+          setStatusPopUp(false);
+          setStatusTitle("Payment Status");
+          document.getElementById("hiddenPaymentButton").click();
+        }, 3000);
+        return;
+      }
       StripeBackend.requestToServer(
         stripeToken,
-        (Math.round(
-          ((cartPrice+3)*0.06625+(cartPrice+3)) * 100
-        ) / 100),
+        Math.round(((cartPrice + 3) * 0.06625 + (cartPrice + 3)) * 100) / 100,
         setStatusBody,
-        setStatusPopUp
+        setStatusPopUp,
+        getLineItems()
       ) // Response received from backend and we know if payment succeded or not
         .then((res) => {
           // Payment failed
@@ -77,9 +100,10 @@ const Payment = ({
               const objToSend = {
                 Order_date: todaysDate,
                 Shipping_date: delivDate,
-                Total_Price:  (Math.round(
-                  ((cartPrice+3)*0.06625+(cartPrice+3)) * 100
-                ) / 100),
+                Total_Price:
+                  Math.round(
+                    ((cartPrice + 3) * 0.06625 + (cartPrice + 3)) * 100
+                  ) / 100,
                 email: stripeToken.email,
                 Address: `${stripeToken.card.address_line1} ${stripeToken.card.address_city}, ${stripeToken.card.address_zip}`,
                 Customer_id: userSession.getUser().id,
@@ -128,13 +152,9 @@ const Payment = ({
           }, 3000);
         });
     };
+
     stripeToken && makeRequest();
   }, [stripeToken]);
-
-  let multilineString =
-    "This is the first line.\n" +
-    "This is the second line.\n" +
-    "This is the third line.";
 
   return (
     <>
@@ -145,14 +165,12 @@ const Payment = ({
         shippingAddress
         billingAddress
         description={`Total: $${
-          (Math.round(
-            ((cartPrice+3)*0.06625+(cartPrice+3)) * 100
-          ) / 100)
+          Math.round(((cartPrice + 3) * 0.06625 + (cartPrice + 3)) * 100) / 100
         }`}
         amount={
-          (Math.round(
-            ((cartPrice+3)*0.06625+(cartPrice+3)) * 100
-          ) / 100)*100
+          (Math.round(((cartPrice + 3) * 0.06625 + (cartPrice + 3)) * 100) /
+            100) *
+          100
         }
         image={logo}
         token={onToken}

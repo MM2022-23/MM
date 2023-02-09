@@ -383,6 +383,7 @@ const ShoppingCart = ({
         setCartPrice={setCartPrice}
         setNumMealsSelected={setNumMealsSelected}
         delivDate={delivDate}
+        zipCode={zipCode}
       />
     </Nav>
   );
