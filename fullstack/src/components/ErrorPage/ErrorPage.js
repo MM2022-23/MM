@@ -1,14 +1,40 @@
+import { useState, useEffect} from "react";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import React from "react";
 import DateService from "../../Service/DateService";
 
 const ErrorPage = () => {
+  const [mins, setmins] = useState();
+  useEffect(() => {
+    // Have timer IF today == saturday
+    // if (isSaturday()) {
+    //   const interval = setInterval(() => {
+    //     setmins(new Date().getSeconds());
+    //     console.log("In Deliv Date Component");
+    //   }, 1000);
+    //   return () => clearInterval(interval);
+    // }
+
+    // Friday
+    if (new Date().getDay()==5) {
+      const interval = setInterval(() => {
+        setmins(new Date().getSeconds());
+        console.log("In Deliv Date Component");
+      }, 60000);
+      return () => clearInterval(interval);
+    }
+  }, []);
   return (
     <section
       className="mealPlans bg-primary"
       style={{ fontFamily: "Signika", padding: "64px 32px" }}
     >
+      <h1>Time: {new Date().toLocaleString()}</h1>
+      {/* <h1>Hour: {mins.split(":")[0]}</h1>
+      <h1>Minute: {mins.split(":")[1]}</h1> */}
+      {/* <h1>Second: {mins.split(":")[2].split(" ")[0]}</h1> */}
+      {/* <h1>Second: {mins.split(":")[2].split(" ")[1]}</h1> */}
       <div
         className="container text-center"
         style={{
