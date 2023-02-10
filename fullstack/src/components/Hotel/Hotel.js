@@ -14,33 +14,57 @@ import HotelAPIService from "../../Service/HotelAPIService";
 import DateService from "../../Service/DateService";
 
 const Hotel = () => {
+  const [displayTables, setDisplayTables] = useState(false);
   const [pinLabel, setPinLabel] = useState(
     <label for="exampleInputEmail1" className="mb-2">
       PIN
     </label>
   );
+
   const [pinValue, setPinValue] = useState("");
   const [mealQuantityTable, setMealQuantityTable] = useState(null);
   const [ordersTable, setOrdersTable] = useState(null);
   useEffect(() => {
-    //Replace dates with upcoming sunday's date
-    // Display only after 3:00 PM on Friday
-    HotelAPIService.getMealQuantityTable({ date: DateService.closestUpcomingSunday() })
-      .then((res) => {
-        setMealQuantityTable(res.data);
+    if (
+      DateService.isSunday() ||
+      (DateService.isSaturday() &&
+        new Date().getHours() % 12 >= 3 &&
+        new Date().getHours() >= 12)
+    ) {
+      console.log("SHOW TABLE BECAUSE IT IS 03:00 PM EST ");
+      setDisplayTables(true);
+      HotelAPIService.getMealQuantityTable({
+        date: DateService.closestUpcomingSunday(),
       })
-      .catch((err) => {
-        console.log("Erro while fetching mealQuantityTable::: " + err);
-      });
+        .then((res) => {
+          setMealQuantityTable(res.data);
+        })
+        .catch((err) => {
+          console.log("Error while fetching mealQuantityTable::: " + err);
+        });
 
-    //Replace dates with upcoming sunday's date
-    HotelAPIService.getOrderTables({ date: DateService.closestUpcomingSunday() })
-      .then((res) => {
-        setOrdersTable(res.data);
+      //Replace dates with upcoming sunday's date
+      HotelAPIService.getOrderTables({
+        date: DateService.closestUpcomingSunday(),
       })
-      .catch((err) => {
-        console.log("Erro while fetching Orders Table::: " + err);
-      });
+        .then((res) => {
+          setOrdersTable(res.data);
+        })
+        .catch((err) => {
+          console.log("Erro while fetching Orders Table::: " + err);
+        });
+    } else {
+      console.log(
+        `COULD NOT SHOW TABLE BECAUSE IS IT SUNDAY OR SATURDAY: ${
+          DateService.isSaturday() || DateService.isSunday()
+        } TIME IS ${
+          new Date().getHours() % 12
+        } IS NOT GREATER THAN 3 IF IT IS THEN IT IS NOT PM ie. ${
+          new Date().getHours() >= 12
+        }}`
+      );
+      setDisplayTables(false);
+    }
   }, []);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [displayReport, setDisplayReport] = useState(false);
@@ -58,7 +82,7 @@ const Hotel = () => {
    * API call to send notifcation to admin
    */
   const handleSubmitReport = () => {
-    console.log("clicked:  "+report);
+    console.log("clicked:  " + report);
     if (report.length === 0) {
       setReportLabel(<span style={{ color: "red" }}>Report **</span>);
     } else {
@@ -66,7 +90,7 @@ const Hotel = () => {
       HotelAPIService.report({ msg: report })
         .then((response) => {
           console.log(response);
-          setStatus("Submit"); 
+          setStatus("Submit");
           setReportLabel(
             <span style={{ color: "green" }}>
               Admin was notified successfully
@@ -77,8 +101,12 @@ const Hotel = () => {
           }, 3000);
         })
         .catch((err) => {
-          setStatus("Submit"); 
-          setReportLabel(<span style={{color:"red"}}>Could'nt notify Admin, please call them</span>);
+          setStatus("Submit");
+          setReportLabel(
+            <span style={{ color: "red" }}>
+              Could'nt notify Admin, please call them
+            </span>
+          );
         });
     }
   };
@@ -140,11 +168,13 @@ const Hotel = () => {
   };
 
   const displayMealQuantityTable = () => {
-    return (
-      <>
-        {mealQuantityTable === null ? (
-          "Loading..."
-        ) : (
+    if (mealQuantityTable === null) {
+      return <>Loading...</>;
+    } else if (mealQuantityTable.length === 0) {
+      return <p>No Orders Yet</p>;
+    } else {
+      return (
+        <>
           <section
             className="bg-primary"
             style={{ fontFamily: "Signika", padding: "64px 32px" }}
@@ -194,16 +224,18 @@ const Hotel = () => {
               </tbody>
             </Table>
           </section>
-        )}
-      </>
-    );
+        </>
+      );
+    }
   };
   const displayOrdersTable = () => {
-    return (
-      <>
-        {ordersTable === null ? (
-          "Loading..."
-        ) : (
+    if (ordersTable === null) {
+      return <>Loading...</>;
+    } else if (ordersTable.length === 0) {
+      return <p>No Orders Yet</p>;
+    } else {
+      return (
+        <>
           <section style={{ fontFamily: "Signika", padding: "64px 32px" }}>
             <h1 style={{ fontFamily: "Signika" }} className="text-center mb-4">
               Orders Table- Due 5:30PM EST
@@ -232,15 +264,15 @@ const Hotel = () => {
 
                       <td>
                         {/* {Object.keys(meals).map((key) => {
-                          return (
-                            <span>
-                              {`${MealData.getMeals()[key].mealName} : ${
-                                meals[key]
-                              }`}
-                              <br></br>
-                            </span>
-                          );
-                        })} */}
+                            return (
+                              <span>
+                                {`${MealData.getMeals()[key].mealName} : ${
+                                  meals[key]
+                                }`}
+                                <br></br>
+                              </span>
+                            );
+                          })} */}
                         {meals.map((meal) => {
                           return (
                             <span>
@@ -257,51 +289,32 @@ const Hotel = () => {
               </tbody>
             </Table>
           </section>
-        )}
-      </>
-    );
+        </>
+      );
+    }
   };
   const actualPortal = () => {
-    /** TABLE 1
-     * call api to get first table in following format
-     * [{mealId:i1,quantity:q1},{mealId:i2,quantity:q2}, {mealId:i3,quantity:q3}...]
-     * "i": meal ID; "q": quanity of meal with meal id "i"
-     */
-    const mealQuantityTable = [
-      // gujarati thali 3 quantity
+    const actualContent = () => {
+      displayMealQuantityTable();
+      displayOrdersTable();
+    };
 
-      { id: 1, quantity: 2 },
-
-      // punjabi thali 1 quantity
-      { id: 2, quantity: 1 },
-
-      // Madrari thali 2 quantity
-      { id: 0, quantity: 2 },
-    ];
-
-    /** TABLE 2
-     * call api to get second table in following format
-     * [{orderNumber:o1, meals:[{mealId:i2,quantity:q2,mealId:i2,quantity:q2}],due:d}]
-     * "i": meal ID; "q": quanity of meal with id "i"; "d": due date
-     */
-
-    const ordersTable = [
-      {
-        orderNumber: 1,
-        meals: {
-          1: 2,
-          2: 1,
-        },
-        dueDate: "12/11/2023",
-      },
-      {
-        orderNumber: 2,
-        meals: {
-          0: 2,
-        },
-        dueDate: "12/31/2023",
-      },
-    ];
+    const checkBackLater = () => {
+      return (
+        <div
+          style={{
+            display: "table",
+            height: "100%",
+            width: "100%",
+            marginTop: "40%",
+          }}
+        >
+          <h2 style={{ verticalAlign: "middle", textAlign: "center" }}>
+            Please Check Back on Saturday at 03:00 PM EST
+          </h2>
+        </div>
+      );
+    };
     return (
       <>
         <Button
@@ -319,8 +332,7 @@ const Hotel = () => {
           Log Out
         </Button>
 
-        {displayMealQuantityTable()}
-        {displayOrdersTable()}
+        {displayTables ? actualContent() : checkBackLater()}
 
         <Modal
           show={displayReport}
@@ -342,7 +354,10 @@ const Hotel = () => {
                   id="first-name"
                   
                 /> */}
-                <textarea className="form-control" onChange={(e)=>setReport(e.target.value)}></textarea>
+                <textarea
+                  className="form-control"
+                  onChange={(e) => setReport(e.target.value)}
+                ></textarea>
               </div>
             </form>
           </Modal.Body>
@@ -354,9 +369,7 @@ const Hotel = () => {
               variant="light"
               onClick={handleSubmitReport}
             >
-              <span>
-                {status}
-              </span>
+              <span>{status}</span>
             </Button>
             <Button
               className="text-center"
@@ -369,7 +382,6 @@ const Hotel = () => {
         </Modal>
       </>
     );
-    // return(<p className="text-dark text-center" >Logged In</p>)
   };
   return <>{!isLoggedIn ? logInBox() : actualPortal()}</>;
 };

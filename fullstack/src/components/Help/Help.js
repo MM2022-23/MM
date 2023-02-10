@@ -1,7 +1,7 @@
 import { useEffect } from "react";
-import { Button, NavItem } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
-import React, { useRef } from "react";
+import React from "react";
 import ScrollTop from "../../Service/ScrollTop";
 
 const Help = ({scrollFAQ, setScrollFAQ}) => {
