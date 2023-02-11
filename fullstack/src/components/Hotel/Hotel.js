@@ -33,6 +33,7 @@ const Hotel = () => {
     ) {
       console.log("SHOW TABLE BECAUSE IT IS 03:00 PM EST ");
       setDisplayTables(true);
+      console.log(displayTables);
       HotelAPIService.getMealQuantityTable({
         date: DateService.closestUpcomingSunday(),
       })
@@ -167,10 +168,10 @@ const Hotel = () => {
     );
   };
 
-  const displayMealQuantityTable = () => {
-    if (mealQuantityTable === null) {
+  const showTables = () => {
+    if (mealQuantityTable === null || ordersTable === null) {
       return <>Loading...</>;
-    } else if (mealQuantityTable.length === 0) {
+    } else if (mealQuantityTable.length === 0 || ordersTable.length === 0) {
       return <p>No Orders Yet</p>;
     } else {
       return (
@@ -224,18 +225,6 @@ const Hotel = () => {
               </tbody>
             </Table>
           </section>
-        </>
-      );
-    }
-  };
-  const displayOrdersTable = () => {
-    if (ordersTable === null) {
-      return <>Loading...</>;
-    } else if (ordersTable.length === 0) {
-      return <p>No Orders Yet</p>;
-    } else {
-      return (
-        <>
           <section style={{ fontFamily: "Signika", padding: "64px 32px" }}>
             <h1 style={{ fontFamily: "Signika" }} className="text-center mb-4">
               Orders Table- Due 5:30PM EST
@@ -293,11 +282,8 @@ const Hotel = () => {
       );
     }
   };
+  
   const actualPortal = () => {
-    const actualContent = () => {
-      displayMealQuantityTable();
-      displayOrdersTable();
-    };
 
     const checkBackLater = () => {
       return (
@@ -332,7 +318,7 @@ const Hotel = () => {
           Log Out
         </Button>
 
-        {displayTables ? actualContent() : checkBackLater()}
+        {displayTables ? showTables() : checkBackLater()}
 
         <Modal
           show={displayReport}
@@ -348,12 +334,6 @@ const Hotel = () => {
             <form>
               <div className="mb-3">
                 <label>{reportLabel}</label>
-                {/* <input
-                  type="text"
-                  className="form-control"
-                  id="first-name"
-                  
-                /> */}
                 <textarea
                   className="form-control"
                   onChange={(e) => setReport(e.target.value)}
@@ -383,6 +363,8 @@ const Hotel = () => {
       </>
     );
   };
+
+  
   return <>{!isLoggedIn ? logInBox() : actualPortal()}</>;
 };
 
