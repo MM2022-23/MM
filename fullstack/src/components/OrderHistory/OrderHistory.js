@@ -103,9 +103,10 @@ const OrderHistory = ({ isLoggedIn }) => {
         className="bg-primary"
         style={{ fontFamily: "Signika", padding: "20% 32px" }}
       >
-        <Table striped bordered hover style={{ fontSize: "calc(16px+1vw)" }}>
+        <Table striped bordered hover style={{ fontSize: "2vw" }}>
           <thead>
             <tr>
+              <th>Order#</th>
               <th>Meal Size</th>
               <th>Types of Meals</th>
               <th>Price</th>
@@ -125,12 +126,13 @@ const OrderHistory = ({ isLoggedIn }) => {
               } = order;
               return (
                 <tr>
+                  <td>{OrderId}</td>
                   <td>{mealSize}</td>
                   <td>
                     {meals.map((meal) => {
                       return (
                         <span>
-                          {meal.name}
+                          {`${meal.name} x${meal.Quantity}`}
                           <br></br>
                         </span>
                       );

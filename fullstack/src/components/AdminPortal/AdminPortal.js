@@ -1,6 +1,8 @@
 /**
  * API call required
  */
+import { Form } from "react-bootstrap";
+
 import { useEffect } from "react";
 import { Modal } from "react-bootstrap";
 import { Table } from "react-bootstrap";
@@ -8,13 +10,9 @@ import { useState } from "react";
 import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
 import React from "react";
-import "./Hotel.css";
-import MealData from "../../Service/MealData";
 import HotelAPIService from "../../Service/HotelAPIService";
-import DateService from "../../Service/DateService";
-
-const Hotel = () => {
-  const [displayTables, setDisplayTables] = useState(false);
+import AdminAPIService from "../../Service/AdminAPIService";
+const AdminPortal = () => {
   const [pinLabel, setPinLabel] = useState(
     <label for="exampleInputEmail1" className="mb-2">
       PIN
@@ -22,51 +20,11 @@ const Hotel = () => {
   );
 
   const [pinValue, setPinValue] = useState("");
-  const [mealQuantityTable, setMealQuantityTable] = useState(null);
   const [ordersTable, setOrdersTable] = useState(null);
   useEffect(() => {
-    if (
-      DateService.isSunday() ||
-      (DateService.isSaturday() &&
-        new Date().getHours() % 12 >= 3 &&
-        new Date().getHours() >= 12)
-    ) {
-      console.log("SHOW TABLE BECAUSE IT IS 03:00 PM EST ");
-      setDisplayTables(true);
-      console.log(displayTables);
-      HotelAPIService.getMealQuantityTable({
-        date: DateService.closestUpcomingSunday(),
-      })
-        .then((res) => {
-          setMealQuantityTable(res.data);
-        })
-        .catch((err) => {
-          console.log("Error while fetching mealQuantityTable::: " + err);
-        });
-
-      //Replace dates with upcoming sunday's date
-      HotelAPIService.getOrderTables({
-        date: DateService.closestUpcomingSunday(),
-      })
-        .then((res) => {
-          setOrdersTable(res.data);
-        })
-        .catch((err) => {
-          console.log("Erro while fetching Orders Table::: " + err);
-        });
-    } else {
-      console.log(
-        `COULD NOT SHOW TABLE BECAUSE IS IT SUNDAY OR SATURDAY: ${
-          DateService.isSaturday() || DateService.isSunday()
-        } TIME IS ${
-          new Date().getHours() % 12
-        } IS NOT GREATER THAN 3 IF IT IS THEN IT IS NOT PM ie. ${
-          new Date().getHours() >= 12
-        }}`
-      );
-      setDisplayTables(false);
-    }
+    getAllOrders();
   }, []);
+  const [orderNumber, setOrderNumber] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [displayReport, setDisplayReport] = useState(false);
   const [status, setStatus] = useState("Submit");
@@ -79,6 +37,7 @@ const Hotel = () => {
 
   const [report, setReport] = useState("");
   const [reportLabel, setReportLabel] = useState(<span>Report</span>);
+
   /**
    * API call to send notifcation to admin
    */
@@ -168,100 +127,102 @@ const Hotel = () => {
     );
   };
 
+  /**
+   * API calls will be made by following functions
+   */
+  const getAllOrders = () => {
+    console.log("Get all orders");
+    AdminAPIService.getAllOrders()
+      .then((res) => {
+        setOrdersTable(res.data);
+      })
+      .catch((err) => {
+        console.log("Erro while fetching Orders Table::: " + err);
+      });
+  };
+
+  const getDeliveryOrders = () => {
+    console.log("Inside of delete function");
+    AdminAPIService.getDeliveryOrders()
+      .then((res) => {
+        console.log("From deliv orders backend");
+        setOrdersTable(res.data);
+      })
+      .catch((err) => {
+        console.log("Erro while fetching Orders Table::: " + err);
+      });
+  };
+
+  const getOrderByNumber = () => {
+    AdminAPIService.getOrderByNumber(orderNumber)
+      .then((res) => {
+        setOrdersTable(res.data);
+      })
+      .catch((err) => {
+        console.log("Erro while fetching Orders Table::: " + err);
+      });
+  };
+
+  const deleteOrder = (orderNumber) => {
+    console.log(`Inside of delete function ID:${orderNumber}`);
+    AdminAPIService.deleteOrder(orderNumber)
+      .then((res) => {
+        console.log(" At Delete");
+        // successful
+        if (res.status === 200) {
+          console.log("Success delete");
+        } else {
+          console.log("Failed delete");
+        }
+      })
+      .catch((err) => {
+        console.log("Erro while fetching Orders Table::: " + err);
+      });
+  };
+
+  const testDelete = (orderNumber) => {
+    console.log("Testing delete function...");
+  };
+
   const showTables = () => {
-    if (mealQuantityTable === null || ordersTable === null) {
-      return <>Loading...</>;
-    } else if (mealQuantityTable.length === 0 || ordersTable.length === 0) {
-      return <p>No Orders Yet</p>;
+    if (ordersTable === null) {
+      return <p className="text-center">Loading...</p>;
+    } else if (ordersTable.length === 0) {
+      return <p className="text-center">No Orders Yet</p>;
     } else {
       return (
         <>
-          <section
-            className="bg-primary"
-            style={{ fontFamily: "Signika", padding: "64px 32px" }}
-          >
-            <h1 style={{ fontFamily: "Signika", fontSize:"5vw" }} className="text-center mb-4">
-              Meal Quantity Table
-            </h1>
-            <Table
-              striped
-              bordered
-              hover
-              style={{ fontSize: "3vw", fontFamily: "Signika" }}
-            >
-              <thead>
-                <tr>
-                  <th>Meal Type</th>
-                  <th>Total Quantity</th>
-                  <th>Total Qauntity of contents</th>
-                </tr>
-              </thead>
-              <tbody>
-                {mealQuantityTable.map((mealQuantityInfo) => {
-                  const { item_id, Total_Quantity } = mealQuantityInfo;
-                  return (
-                    <tr>
-                      <td>{MealData.getMeals()[item_id].mealName}</td>
-
-                      <td>{Total_Quantity}</td>
-                      <td>
-                        {Object.keys(
-                          MealData.getMeals()[item_id].description
-                        ).map((key) => {
-                          return (
-                            <span>
-                              {`${key} : ${
-                                Total_Quantity *
-                                MealData.getMeals()[item_id].description[key]
-                              }`}
-                              <br></br>
-                            </span>
-                          );
-                        })}
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </Table>
-          </section>
           <section style={{ fontFamily: "Signika", padding: "64px 32px" }}>
-            <h1 style={{ fontFamily: "Signika", fontSize:"5vw" }} className="text-center mb-4">
-              Orders Table- Due 5:30PM EST
+            <h1
+              style={{ fontFamily: "Signika", fontSize: "5vw" }}
+              className="text-center mb-4"
+            >
+              Orders
             </h1>
+
             <Table
               striped
               bordered
               hover
-              style={{ fontSize: "3vw", fontFamily: "Signika" }}
+              style={{ fontSize: "2.2vw", fontFamily: "Signika" }}
             >
               <thead>
                 <tr>
                   <th>Order#</th>
                   <th>Meals</th>
                   <th>Due Date</th>
+                  <th>Address</th>
+                  <th>Delete</th>
                 </tr>
               </thead>
               <tbody>
                 {ordersTable.map((order) => {
-                  const { orderNumber, meals, dueDate } = order;
+                  const { orderNumber, meals, dueDate, address } = order;
                   return (
                     <tr>
                       <td>{orderNumber}</td>
 
-                      {/* handle meals  */}
-
                       <td>
-                        {/* {Object.keys(meals).map((key) => {
-                            return (
-                              <span>
-                                {`${MealData.getMeals()[key].mealName} : ${
-                                  meals[key]
-                                }`}
-                                <br></br>
-                              </span>
-                            );
-                          })} */}
                         {meals.map((meal) => {
                           return (
                             <span>
@@ -272,6 +233,31 @@ const Hotel = () => {
                         })}
                       </td>
                       <td>{dueDate}</td>
+                      <td>{address}</td>
+                      <td>
+                        <Button
+                          variant="light"
+                          style={{
+                            width: "9vw",
+                            fontSize: "2vw",
+                            padding: "1px",
+                          }}
+                          className="text-center"
+                          onClick={async (e) => {
+                            console.log("Delete clicked!!");
+                            e.preventDefault();
+                            setOrdersTable(null);
+                            await deleteOrder(orderNumber);
+                            setTimeout(() => {
+                              getAllOrders();
+                            }, 2000);
+
+                            // testDelete(orderNumber);
+                          }}
+                        >
+                          Delete
+                        </Button>
+                      </td>
                     </tr>
                   );
                 })}
@@ -282,25 +268,8 @@ const Hotel = () => {
       );
     }
   };
-  
-  const actualPortal = () => {
 
-    const checkBackLater = () => {
-      return (
-        <div
-          style={{
-            display: "table",
-            height: "100%",
-            width: "100%",
-            marginTop: "40%",
-          }}
-        >
-          <h2 style={{ verticalAlign: "middle", textAlign: "center" }}>
-            Please Check Back on Saturday at 03:00 PM EST
-          </h2>
-        </div>
-      );
-    };
+  const actualPortal = () => {
     return (
       <>
         <Button
@@ -318,7 +287,74 @@ const Hotel = () => {
           Log Out
         </Button>
 
-        {displayTables ? showTables() : checkBackLater()}
+        <div class="d-flex align-items-center">
+          <div class="container">
+            <div class="col-12 text-center">
+              <div>
+                <input
+                  type="number"
+                  placeholder="Order Number"
+                  className="text-center"
+                  style={{
+                    marginRight: "1vw",
+                    width: "20vw",
+                    fontSize: "2vw",
+                    borderRadius: "0.5vw",
+                    borderColor: "black",
+                  }}
+                  onChange={(e) => setOrderNumber(e.target.value)}
+                />
+                <Button
+                  variant="light"
+                  style={{
+                    width: "9vw",
+                    fontSize: "2vw",
+                    padding: "1px",
+                  }}
+                  className="text-center"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setOrdersTable(null);
+                    getOrderByNumber();
+                  }}
+                >
+                  Search
+                </Button>
+              </div>
+              <div style={{ marginTop: "1vh", marginBottom: "1vh" }}>
+                <button
+                  class="btn btn-light"
+                  style={{ width: "9vw", fontSize: "2vw", padding: "1px" }}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setOrdersTable(null);
+                    getAllOrders();
+                  }}
+                >
+                  All
+                </button>
+                <button
+                  class="btn btn-light"
+                  style={{
+                    marginLeft: "3vw",
+                    width: "9vw",
+                    fontSize: "2vw",
+                    padding: "1px",
+                  }}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    setOrdersTable(null);
+                    getDeliveryOrders();
+                  }}
+                >
+                  Delivery
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {showTables()}
 
         <Modal
           show={displayReport}
@@ -364,8 +400,7 @@ const Hotel = () => {
     );
   };
 
-  
   return <>{!isLoggedIn ? logInBox() : actualPortal()}</>;
 };
 
-export default Hotel;
+export default AdminPortal;

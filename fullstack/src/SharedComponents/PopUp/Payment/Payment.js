@@ -5,11 +5,8 @@ import StripeCheckout from "react-stripe-checkout";
 import OrderAPIService from "../../../Service/OrderAPIService";
 import { useEffect } from "react";
 import StripeBackend from "../../../Service/StripeBackend";
-
 import { useState } from "react";
 import React from "react";
-import MealData from "../../../Service/MealData";
-
 const Payment = ({
   cart,
   setCart,

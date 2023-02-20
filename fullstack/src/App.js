@@ -20,6 +20,7 @@ import PrivacyPolicy from "./components/PrivacyPolicy/PrivacyPolicy";
 import TermsAndCondition from "./components/TermsAndCondition/TermsAndCondition";
 import RefundsAndCancellationsPolicy from "./components/RefundsAndCancellationsPolicy/RefundsAndCancellationsPolicy";
 import DataCollectionAPI from "./Service/DataCollectionAPI";
+import AdminPortal from "./components/AdminPortal/AdminPortal";
 function App() {
   useEffect(() => {
     console.log("APP RENDERED!!!");
@@ -185,6 +186,9 @@ function App() {
 
         {/* Hotel Page */}
         <Route exact path="/hotel" element={<Hotel />} />
+
+        {/* Admin Page */}
+        <Route exact path="/admin" element={<AdminPortal />} />
 
         {/* Privacy Policy */}
         <Route exact path="/privacy" element={navAndFoot(<PrivacyPolicy />)} />
