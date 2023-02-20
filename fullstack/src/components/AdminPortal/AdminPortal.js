@@ -142,7 +142,7 @@ const AdminPortal = () => {
   };
 
   const getDeliveryOrders = () => {
-    console.log("Inside of delete function");
+    console.log("Inside of delivery function");
     AdminAPIService.getDeliveryOrders()
       .then((res) => {
         console.log("From deliv orders backend");
@@ -164,24 +164,21 @@ const AdminPortal = () => {
   };
 
   const deleteOrder = (orderNumber) => {
-    console.log(`Inside of delete function ID:${orderNumber}`);
     AdminAPIService.deleteOrder(orderNumber)
       .then((res) => {
-        console.log(" At Delete");
         // successful
         if (res.status === 200) {
+          getAllOrders();
           console.log("Success delete");
         } else {
           console.log("Failed delete");
+          getAllOrders();
         }
       })
       .catch((err) => {
+        getAllOrders();
         console.log("Erro while fetching Orders Table::: " + err);
       });
-  };
-
-  const testDelete = (orderNumber) => {
-    console.log("Testing delete function...");
   };
 
   const showTables = () => {
@@ -243,16 +240,10 @@ const AdminPortal = () => {
                             padding: "1px",
                           }}
                           className="text-center"
-                          onClick={async (e) => {
-                            console.log("Delete clicked!!");
+                          onClick={(e) => {
                             e.preventDefault();
                             setOrdersTable(null);
-                            await deleteOrder(orderNumber);
-                            setTimeout(() => {
-                              getAllOrders();
-                            }, 2000);
-
-                            // testDelete(orderNumber);
+                            deleteOrder(orderNumber);
                           }}
                         >
                           Delete
