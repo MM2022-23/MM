@@ -214,6 +214,7 @@ function SignUpPopUp({ style, setLogIn }) {
           }
         })
         .catch((err) => {
+          console.log("ERR :"+err);
           localStorage.removeItem("Loading");
           setEmailLabel(
             <label htmlFor="email" className="col-form-label">

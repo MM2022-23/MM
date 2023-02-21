@@ -318,6 +318,26 @@ const TermsAndCondition = () => {
         <h2>Nutritional Values</h2>
         <p>No nutritional values are provided.</p>
       </div>
+
+      <div className="container my-5">
+        <h2>Incorrect Address</h2>
+        <p className="mb-3">
+          Entering the correct shipping address is the responsibility of the
+          purchaser.
+        </p>
+        <p className="mb-3">
+          If the customer is to notify Mirchi Meals prior to shipping at an
+          incorrect delivery address, Mirchi Meals will attempt to update the
+          address. However, if for any reason the address is not updated and the
+          shipment is sent to the incorrectly entered address, the
+          responsibility is on the original purchaser to make arrangements to
+          have the shipment delivered to the correct location. In the event that
+          the customer fails to notify Mirchi Meals of an incorrect delivery
+          address before delivery, the responsibility is on the customer to make
+          arrangements to have the order delivered to the correct location.
+        </p>
+      </div>
+
       <div className="container my-5">
         <h2>Changes to These Terms and Conditions</h2>
         <p className="mb-3">

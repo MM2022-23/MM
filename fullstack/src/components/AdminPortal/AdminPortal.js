@@ -12,6 +12,7 @@ import Button from "react-bootstrap/Button";
 import React from "react";
 import HotelAPIService from "../../Service/HotelAPIService";
 import AdminAPIService from "../../Service/AdminAPIService";
+import PopUp from "../../SharedComponents/PopUp/PopUp";
 const AdminPortal = () => {
   const [pinLabel, setPinLabel] = useState(
     <label for="exampleInputEmail1" className="mb-2">
@@ -35,8 +36,14 @@ const AdminPortal = () => {
     setDisplayReport(false);
   };
 
+  // report states
   const [report, setReport] = useState("");
   const [reportLabel, setReportLabel] = useState(<span>Report</span>);
+
+  // password for delete
+  const [statusPopUp, setStatusPopUp] = useState(false);
+  const [statusTitle, setStatusTitle] = useState("");
+  const [statusBody, setStatusBody] = useState("");
 
   /**
    * API call to send notifcation to admin
@@ -163,22 +170,29 @@ const AdminPortal = () => {
       });
   };
 
-  const deleteOrder = (orderNumber) => {
-    AdminAPIService.deleteOrder(orderNumber)
-      .then((res) => {
-        // successful
-        if (res.status === 200) {
-          getAllOrders();
-          console.log("Success delete");
-        } else {
-          console.log("Failed delete");
-          getAllOrders();
-        }
-      })
-      .catch((err) => {
-        getAllOrders();
-        console.log("Erro while fetching Orders Table::: " + err);
-      });
+  /**
+   * IF deletable, ask for password, hit backend
+   * ELSE let admin know in Pop Up
+   */
+  const deleteOrder = (orderNumber, shippingDate) => {
+    // if shipping date is upcoming sunday and today is 
+
+    setStatusPopUp(true); 
+    // AdminAPIService.deleteOrder(orderNumber)
+    //   .then((res) => {
+    //     // successful
+    //     if (res.status === 200) {
+    //       getAllOrders();
+    //       console.log("Success delete");
+    //     } else {
+    //       console.log("Failed delete");
+    //       getAllOrders();
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     getAllOrders();
+    //     console.log("Erro while fetching Orders Table::: " + err);
+    //   });
   };
 
   const showTables = () => {
@@ -242,8 +256,9 @@ const AdminPortal = () => {
                           className="text-center"
                           onClick={(e) => {
                             e.preventDefault();
-                            setOrdersTable(null);
-                            deleteOrder(orderNumber);
+                            // setOrdersTable(null);
+                            deleteOrder(orderNumber,dueDate);
+
                           }}
                         >
                           Delete
@@ -286,6 +301,7 @@ const AdminPortal = () => {
                   type="number"
                   placeholder="Order Number"
                   className="text-center"
+                  value={orderNumber}
                   style={{
                     marginRight: "1vw",
                     width: "20vw",
@@ -318,6 +334,7 @@ const AdminPortal = () => {
                   style={{ width: "9vw", fontSize: "2vw", padding: "1px" }}
                   onClick={(e) => {
                     e.preventDefault();
+                    setOrderNumber("");
                     setOrdersTable(null);
                     getAllOrders();
                   }}
@@ -334,6 +351,7 @@ const AdminPortal = () => {
                   }}
                   onClick={(e) => {
                     e.preventDefault();
+                    setOrderNumber("");
                     setOrdersTable(null);
                     getDeliveryOrders();
                   }}
@@ -387,6 +405,12 @@ const AdminPortal = () => {
             </Button>
           </Modal.Footer>
         </Modal>
+        <PopUp
+          displayPopUp={statusPopUp}
+          setDisplayPopUp={setStatusPopUp}
+          title={statusTitle}
+          body={statusBody}
+        />
       </>
     );
   };

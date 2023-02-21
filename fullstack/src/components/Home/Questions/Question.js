@@ -15,16 +15,15 @@ const Question = () => {
           <Accordion.Header>When do I have to order by?</Accordion.Header>
           <Accordion.Body>
             Customers need to place their orders for meals at least 12 pm the
-            night before their intended day of delivery or else they will have
-            to choose to get it delivered on a later day in the week.
+            day before their intended day of delivery or else they will have to
+            choose to get it delivered in the next week.
           </Accordion.Body>
         </Accordion.Item>
         <Accordion.Item eventKey="1">
           <Accordion.Header>When do you deliver?</Accordion.Header>
           <Accordion.Body>
-            We deliver all your meals for the week depending on your choice of
-            either Monday, Wednesday, or Friday. Deliveries happen between 6pm -
-            7:30pm EST.
+            We deliver all your meals for the week depending on Sundays.
+            Deliveries happen between 6pm - 7:30pm EST.
           </Accordion.Body>
         </Accordion.Item>
 
