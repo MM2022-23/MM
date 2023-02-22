@@ -13,6 +13,7 @@ import React from "react";
 import HotelAPIService from "../../Service/HotelAPIService";
 import AdminAPIService from "../../Service/AdminAPIService";
 import PopUp from "../../SharedComponents/PopUp/PopUp";
+import DateService from "../../Service/DateService";
 const AdminPortal = () => {
   const [pinLabel, setPinLabel] = useState(
     <label for="exampleInputEmail1" className="mb-2">
@@ -170,29 +171,88 @@ const AdminPortal = () => {
       });
   };
 
+  const deleteAPICall = (orderNumber, password) => {
+    AdminAPIService.deleteOrder(orderNumber, password)
+      .then((res) => {
+        setStatusTitle("Loading...");
+        // successful
+        if (res.status === 200) {
+          setStatusTitle("Deleted Successfully");
+          setStatusBody("Deleted Successfully");
+          setTimeout(() => {
+            setStatusTitle("Admin Delete Credentials");
+            setStatusBody(
+              <>
+                <input
+                  placeholder="password"
+                  className="text-center"
+                  id="deleteCredPassword"
+                />
+                <Button
+                  className="mx-2"
+                  variant="light"
+                  onClick={() =>
+                    deleteAPICall(
+                      orderNumber,
+                      document.getElementById("deleteCredPassword").value
+                    )
+                  }
+                >
+                  Submit
+                </Button>
+              </>
+            );
+            setStatusPopUp(false);
+          }, 2000);
+          getAllOrders();
+          console.log("Success delete");
+        } else {
+          setStatusTitle(<p className="lead" style={{color:"red"}}>Incorrect password! Try Again</p>);
+        }
+      })
+      .catch((err) => {
+        getAllOrders();
+        console.log("Erro while fetching Orders Table::: " + err);
+      });
+  };
+
   /**
    * IF deletable, ask for password, hit backend
    * ELSE let admin know in Pop Up
    */
   const deleteOrder = (orderNumber, shippingDate) => {
-    // if shipping date is upcoming sunday and today is 
-
-    setStatusPopUp(true); 
-    // AdminAPIService.deleteOrder(orderNumber)
-    //   .then((res) => {
-    //     // successful
-    //     if (res.status === 200) {
-    //       getAllOrders();
-    //       console.log("Success delete");
-    //     } else {
-    //       console.log("Failed delete");
-    //       getAllOrders();
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     getAllOrders();
-    //     console.log("Erro while fetching Orders Table::: " + err);
-    //   });
+    // if shipping date is upcoming sunday and today is
+    setStatusTitle("Admin Delete Credentials");
+    if (
+      shippingDate === DateService.closestUpcomingSunday() &&
+      (DateService.isSunday() ||
+        (DateService.isSaturday() &&
+          new Date().getHours() % 12 >= 3 &&
+          new Date().getHours() >= 12))
+    ) {
+      setStatusBody("Can't delete this order");
+    } else {
+      let passew = "";
+      setStatusBody(
+        <>
+          <input
+            placeholder="password"
+            className="text-center"
+            onChange={(e) => {
+              passew = e.target.value;
+            }}
+          />
+          <Button
+            className="mx-2"
+            variant="light"
+            onClick={() => deleteAPICall(orderNumber, passew)}
+          >
+            Submit
+          </Button>
+        </>
+      );
+    }
+    setStatusPopUp(true);
   };
 
   const showTables = () => {
@@ -257,8 +317,7 @@ const AdminPortal = () => {
                           onClick={(e) => {
                             e.preventDefault();
                             // setOrdersTable(null);
-                            deleteOrder(orderNumber,dueDate);
-
+                            deleteOrder(orderNumber, dueDate);
                           }}
                         >
                           Delete

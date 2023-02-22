@@ -19,10 +19,10 @@ class AdminAPIService {
   }
 
   //   Delete order
-  deleteOrder(OrderId) {
+  deleteOrder(OrderId,passwd) {
     return axios.post(`${ADMIN_BASE_API_URL}deleteOrder`, {
       orderNumber: OrderId,
-      password: "MirchiMeals",
+      password: passwd
     });
   }
 
