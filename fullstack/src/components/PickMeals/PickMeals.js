@@ -274,7 +274,7 @@ const PickMeals = ({
       setBodyEnough(
         <>
           <h5 className="text-center mt-4">{`${
-            "Items Total$" + cartPrice
+            "Meals Total $" + cartPrice
           }`}</h5>
           <h5 className="text-center mt-2">{`${"Delivery $" + 3}`}</h5>
           <h5 className="text-center mt-2">{`${
@@ -327,7 +327,7 @@ const PickMeals = ({
                     <img src={img} className="img-fluid imageAdjustment" />
                     <h4 className="titleAdjustment">{mealName}</h4>
                     <h5>
-                      <del className="mx-2">$15.99</del>${price}
+                      <del className="mx-2">$15.28</del>${price}
                     </h5>
                     <Link
                       onClick={() => handleDisplay(description, mealName)}

@@ -27,7 +27,7 @@ function NavBar({
   setNumMealsSelected,
   setScrollFAQ,
   delivDate,
-  zipcode
+  zipcode,
 }) {
   const navigate = useNavigate();
   const [displayAccountInfo, setDisplayAccountInfo] = useState(false);
@@ -98,15 +98,6 @@ function NavBar({
         <Navbar.Collapse id="responsive-navbar-nav">
           {/* About, Order, Help Links */}
           <Nav className="me-auto" defaultActiveKey="/home">
-            <Nav.Link href="#/about">
-              {/* adjust marginRight Based on screens */}
-              <span
-                className="fontAdjustment"
-                style={{ marginLeft: "0px", marginRight: "40px" }}
-              >
-                About
-              </span>
-            </Nav.Link>
             <Nav.Link href="#/order">
               <span className="fontAdjustment" style={{ marginRight: "40px" }}>
                 Order
@@ -115,6 +106,15 @@ function NavBar({
             <Nav.Link className="text-dark mx-1" onClick={(e) => toFAQ(e)}>
               <span className="fontAdjustment" style={{ marginRight: "40px" }}>
                 FAQ
+              </span>
+            </Nav.Link>
+            <Nav.Link href="#/about">
+              {/* adjust marginRight Based on screens */}
+              <span
+                className="fontAdjustment"
+                style={{ marginLeft: "0px", marginRight: "40px" }}
+              >
+                About
               </span>
             </Nav.Link>
             <Nav.Link href="#/help">

@@ -26,8 +26,8 @@ const items = [
   />,
   <TestimonialCard
     testimony="“As a busy professional, this is the service I didn’t know I needed.”"
-    image={require("../../../Resources/Users/Vinay.png")}
-    name="Vinay, 28"
+    image={require("../../../Resources/Users/Krish.png")}
+    name="Krish, 28"
     work="Data ETL Engineer"
     location="South Brunswick, NJ"
     data-value="3"

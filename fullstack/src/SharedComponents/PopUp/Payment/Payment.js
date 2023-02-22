@@ -83,7 +83,7 @@ const Payment = ({
             setStatusBody("Successful Payment!");
             setTimeout(() => {
               setStatusTitle("Order Status");
-              setStatusBody("Sending Order to DB....");
+              setStatusBody("Processing....");
             }, 1000);
             setTimeout(() => {
               // mealAndFreqsArr is in format: [[id1,q1],[id2,q2]....]
@@ -109,7 +109,7 @@ const Payment = ({
               // setStatusTitle("Order Status");
               OrderAPIService.addOrder(objToSend, setStatusBody)
                 .then((res) => {
-                  setStatusBody("Order saved in DB! Order#: " + res.data);
+                  setStatusBody("Order saved, Order#: " + res.data);
 
                   // after 2 seconds close the pop up
                   setTimeout(() => {

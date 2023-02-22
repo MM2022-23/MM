@@ -1,4 +1,8 @@
 class MealData {
+
+
+  
+
   // depends on zipcode entered by user
   data = [
     {
@@ -11,7 +15,7 @@ class MealData {
         idli: 3,
         chutney: 1,
       },
-      price:11.99
+      price:12.99
     },
 
     {
@@ -23,7 +27,7 @@ class MealData {
         saak: 2,
         gulabJamun: 1,
       },
-      price:11.99
+      price:12.99
     },
 
     {
@@ -37,7 +41,7 @@ class MealData {
         gulabJamun: 3,
         lassi: 1,
       },
-      price:11.99
+      price:12.99
     },
 
     {
@@ -49,13 +53,50 @@ class MealData {
         saak: 2,
         rausagula: 1,
       },
-      price:11.99
+      price:12.99
     },
+    {
+      id: 4,
+      img: require("../Resources/Meals/paneer.png"),
+      mealName: "Rajasthani Thari",
+      description: {
+        rotis: 4,
+        saak: 2,
+        rausagula: 1,
+      },
+      price:12.99
+    },
+    {
+      id: 5,
+      img: require("../Resources/Meals/GulabJamun.png"),
+      mealName: "Gulaab Jamun",
+      description: {
+        rotis: 4,
+        saak: 2,
+        rausagula: 1,
+      },
+      price:12.99
+    },
+    {
+      id: 6,
+      img: require("../Resources/Meals/KajuKatri.png"),
+      mealName: "Kaju Katri",
+      description: {
+        rotis: 4,
+        saak: 2,
+        rausagula: 1,
+      },
+      price:12.99
+    }
   ];
   getMeals = () => {
     // validate zipCode then only send data
     return this.data;
   };
+
+  getNumberOfActualMeals(){
+    return 5; 
+  }
 }
 
 export default new MealData();

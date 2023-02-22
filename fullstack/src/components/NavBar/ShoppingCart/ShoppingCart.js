@@ -268,7 +268,7 @@ const ShoppingCart = ({
               })}
             </Container>
             <h5 className="text-center mt-4">{`${
-              "Items Total$" + cartPrice
+              "Meals Total $" + cartPrice
             }`}</h5>
             <h5 className="text-center mt-2">{`${
               "Delivery $" + 3

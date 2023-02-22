@@ -9,6 +9,7 @@ import Showcase from "./Showcase/Showcase";
 import Question from "./Questions/Question";
 import Contact from "./Contact/Contact";
 import InformationGrid from "../About/InformationGrid/InformationGrid";
+import Banner from "./Banner/Banner"; 
 import MealPlans from "./MealPlans/MealPlans";
 import MealsLookUp from "./MealsLookUp/MealsLookUp";
 import Testimonials from "./Testimonials/Testimonials";
@@ -90,6 +91,7 @@ const Home = ({
   };
   return (
     <>
+    <Banner/>
       {/* Log In & Sign Up Button */}
       <Showcase loggedIn={loggedIn} setLogIn={setLogIn} />
 
