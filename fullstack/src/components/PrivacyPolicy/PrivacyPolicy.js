@@ -2,7 +2,7 @@ import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import React from "react";
-import ScrollTop from "../../Service/ScrollTop";
+import ScrollTop from "../../Service/Misc/ScrollTop";
 const PrivacyPolicy = () => {
   useEffect(() => {
     ScrollTop.scrollUp();
@@ -314,7 +314,7 @@ const PrivacyPolicy = () => {
 
       <div className="container my-3">
         <p className="mb-3">
-          <strong className="text-dark" style={{marginRight:"3px"}}>
+          <strong className="text-dark" style={{ marginRight: "3px" }}>
             To provide and maintain our Service
           </strong>
           including to monitor the usage of our Service
@@ -323,7 +323,7 @@ const PrivacyPolicy = () => {
 
       <div className="container my-3">
         <p className="mb-3">
-          <strong className="text-dark" style={{marginRight:"3px"}}>
+          <strong className="text-dark" style={{ marginRight: "3px" }}>
             To manage Your Account:
           </strong>
           to manage Your registration as a user of the Service. The Personal
@@ -334,7 +334,7 @@ const PrivacyPolicy = () => {
 
       <div className="container my-3">
         <p className="mb-3">
-          <strong className="text-dark" style={{marginRight:"3px"}}>
+          <strong className="text-dark" style={{ marginRight: "3px" }}>
             For the performance of a contract:
           </strong>
           the development, compliance and undertaking of the purchase contract
@@ -345,7 +345,9 @@ const PrivacyPolicy = () => {
 
       <div className="container my-3">
         <p className="mb-3">
-          <strong className="text-dark" style={{marginRight:"3px"}}>To contact You:</strong>
+          <strong className="text-dark" style={{ marginRight: "3px" }}>
+            To contact You:
+          </strong>
           To contact You by email, telephone calls, SMS, or other equivalent
           forms of electronic communication, such as a mobile application's push
           notifications regarding updates or informative communications related
@@ -357,7 +359,9 @@ const PrivacyPolicy = () => {
 
       <div className="container my-3">
         <p className="mb-3">
-          <strong className="text-dark" style={{marginRight:"3px"}}>To provide You</strong>
+          <strong className="text-dark" style={{ marginRight: "3px" }}>
+            To provide You
+          </strong>
           with news, special offers and general information about other goods,
           services and events which we offer that are similar to those that you
           have already purchased or enquired about unless You have opted not to
@@ -367,18 +371,16 @@ const PrivacyPolicy = () => {
 
       <div className="container my-3">
         <p className="mb-3">
-          <strong className="text-dark" style={{marginRight:"3px"}}>
+          <strong className="text-dark" style={{ marginRight: "3px" }}>
             To manage Your requests:
           </strong>
           To attend and manage Your requests to Us.
         </p>
       </div>
 
-     
-
       <div className="container my-3">
         <p className="mb-3">
-          <strong className="text-dark" style={{marginRight:"3px"}}>
+          <strong className="text-dark" style={{ marginRight: "3px" }}>
             For business transfers:
           </strong>
           We may use Your information to evaluate or conduct a merger,
@@ -392,7 +394,7 @@ const PrivacyPolicy = () => {
 
       <div className="container my-3">
         <p className="mb-3">
-          <strong className="text-dark" style={{marginRight:"3px"}}>
+          <strong className="text-dark" style={{ marginRight: "3px" }}>
             For other purposes:
           </strong>
           We may use Your information for other purposes, such as data analysis,
@@ -407,7 +409,7 @@ const PrivacyPolicy = () => {
 
       <div className="container my-3">
         <p className="mb-3">
-          <strong className="text-dark" style={{marginRight:"3px"}}>
+          <strong className="text-dark" style={{ marginRight: "3px" }}>
             With Service Providers:
           </strong>
           We may share Your personal information with Service Providers to
@@ -417,7 +419,7 @@ const PrivacyPolicy = () => {
 
       <div className="container my-3">
         <p className="mb-3">
-          <strong className="text-dark" style={{marginRight:"3px"}}>
+          <strong className="text-dark" style={{ marginRight: "3px" }}>
             For business transfers:
           </strong>
           We may share or transfer Your personal information in connection with,
@@ -429,7 +431,9 @@ const PrivacyPolicy = () => {
 
       <div className="container my-3">
         <p className="mb-3">
-          <strong className="text-dark" style={{marginRight:"3px"}}>With Affiliates:</strong>
+          <strong className="text-dark" style={{ marginRight: "3px" }}>
+            With Affiliates:
+          </strong>
           We may share Your information with Our affiliates, in which case we
           will require those affiliates to honor this Privacy Policy. Affiliates
           include Our parent company and any other subsidiaries, joint venture
@@ -440,7 +444,7 @@ const PrivacyPolicy = () => {
 
       <div className="container my-3">
         <p className="mb-3">
-          <strong className="text-dark" style={{marginRight:"3px"}}>
+          <strong className="text-dark" style={{ marginRight: "3px" }}>
             With business partners:
           </strong>
           We may share Your information with Our business partners to offer You
@@ -450,7 +454,7 @@ const PrivacyPolicy = () => {
 
       <div className="container my-3">
         <p className="mb-3">
-          <strong className="text-dark" style={{marginRight:"3px"}}>
+          <strong className="text-dark" style={{ marginRight: "3px" }}>
             With other users:
           </strong>
           when You share personal information or otherwise interact in the
@@ -461,7 +465,7 @@ const PrivacyPolicy = () => {
 
       <div className="container my-3">
         <p className="mb-3">
-          <strong className="text-dark" style={{marginRight:"3px"}}>
+          <strong className="text-dark" style={{ marginRight: "3px" }}>
             With Your consent:
           </strong>
           We may disclose Your personal information for any other purpose with

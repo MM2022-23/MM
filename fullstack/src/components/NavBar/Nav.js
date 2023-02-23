@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import Nav from "react-bootstrap/Nav";
 import AccountInfo from "../AccountInfo/AccountInfo";
-import userSession from "../../Service/userSession";
+import userSession from "../../Service/Data/userSession";
 import Container from "react-bootstrap/Container";
 import "./Nav.css";
 import Navbar from "react-bootstrap/Navbar";
@@ -10,7 +10,7 @@ import { useState } from "react";
 import ShoppingCart from "./ShoppingCart/ShoppingCart";
 import UserProfile from "./UserProfile/UserProfile";
 import { useNavigate } from "react-router-dom";
-import ScrollTop from "../../Service/ScrollTop";
+import ScrollTop from "../../Service/Misc/ScrollTop";
 import { NavItem } from "react-bootstrap";
 
 function NavBar({

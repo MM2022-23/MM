@@ -7,7 +7,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import React from "react";
 import Dropdown from "react-bootstrap/Dropdown";
-import DateService from "../../../Service/DateService";
+import DateService from "../../../Service/Algorithms/DateService";
 const DeliveryDate = ({ delivDate, setDelivDate }) => {
   // const isSaturday = () => {
   //   return new Date().getDay() === 6;

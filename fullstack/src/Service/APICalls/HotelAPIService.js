@@ -1,5 +1,5 @@
 import axios from "axios";
-import { BASE_URL } from "./Constants";
+import { BASE_URL } from "../Constants";
 const HOTE_BASE_API_URL = `${BASE_URL}/hotel/`;
 
 class HotelAPIService {

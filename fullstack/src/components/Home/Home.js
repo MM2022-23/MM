@@ -3,13 +3,13 @@
  */
 
 import { useEffect } from "react";
-import ScrollTop from "../../Service/ScrollTop";
+import ScrollTop from "../../Service/Misc/ScrollTop";
 import React from "react";
 import Showcase from "./Showcase/Showcase";
 import Question from "./Questions/Question";
 import Contact from "./Contact/Contact";
 import InformationGrid from "../About/InformationGrid/InformationGrid";
-import Banner from "./Banner/Banner"; 
+import Banner from "./Banner/Banner";
 import MealPlans from "./MealPlans/MealPlans";
 import MealsLookUp from "./MealsLookUp/MealsLookUp";
 import Testimonials from "./Testimonials/Testimonials";
@@ -24,7 +24,7 @@ const Home = ({
   setScrollFAQ,
 }) => {
   useEffect(() => {
-    document.title="Mirchi Meals"
+    document.title = "Mirchi Meals";
     if (scrollFAQ) {
       console.log("Down!!!");
       ScrollTop.scrollToFAQ();
@@ -45,8 +45,7 @@ const Home = ({
     image1Height: "150px",
     image1Width: "250px",
     title1: "Choose Your Meals and Plan",
-    description1:
-      "Choose a minimum of 4 ready-to-eat meals",
+    description1: "Choose a minimum of 4 ready-to-eat meals",
 
     image2: require("../../Resources/Vector/step2.png"),
     image2Width: "250px",
@@ -91,7 +90,7 @@ const Home = ({
   };
   return (
     <>
-    <Banner/>
+      <Banner />
       {/* Log In & Sign Up Button */}
       <Showcase loggedIn={loggedIn} setLogIn={setLogIn} />
 

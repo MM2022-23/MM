@@ -4,7 +4,7 @@ import { useState } from "react";
 import SignUpPopUp from "../SignUpPopUp/SignUpPopUp";
 import LogInPopUP from "../LogInPopUp/LogInPopUp";
 import React from "react";
-import userSession from "../../../Service/userSession";
+import userSession from "../../../Service/Data/userSession";
 import { Dropdown } from "react-bootstrap";
 const UserProfile = ({ setDisplayAccountInfo, setLogIn }) => {
   // fromLogOut exists so even after user logs out login/sign up popup does not annoy user

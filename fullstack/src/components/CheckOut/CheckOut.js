@@ -10,12 +10,12 @@ import {
 
 import "./checkOut.css";
 import { Button } from "react-bootstrap";
-import userSession from "../../Service/userSession";
+import userSession from "../../Service/Data/userSession";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import SignUpPopUp from "../NavBar/SignUpPopUp/SignUpPopUp";
 import LogInPopUP from "../NavBar/LogInPopUp/LogInPopUp";
-import MealData from "../../Service/MealData";
+import MealData from "../../Service/Data/MealData";
 const CheckOut = ({ setLogIn, mealNumbers, cart, setCart, totalPrice }) => {
   const navigate = useNavigate();
   const handleBack = () => {

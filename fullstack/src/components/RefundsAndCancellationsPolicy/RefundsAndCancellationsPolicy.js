@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import ScrollTop from "../../Service/ScrollTop";
+import ScrollTop from "../../Service/Misc/ScrollTop";
 import { Link } from "react-router-dom";
 import { Button } from "react-bootstrap";
 

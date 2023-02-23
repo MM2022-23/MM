@@ -1,11 +1,11 @@
-import zipCodeService from "../../../Service/zipCodeService";
+import zipCodeService from "../../../Service/Data/zipCodeService";
 import logo from "./logo192.png";
 import PopUp from "../PopUp";
-import userSession from "../../../Service/userSession";
+import userSession from "../../../Service/Data/userSession";
 import StripeCheckout from "react-stripe-checkout";
-import OrderAPIService from "../../../Service/OrderAPIService";
+import OrderAPIService from "../../../Service/APICalls/OrderAPIService";
 import { useEffect } from "react";
-import StripeBackend from "../../../Service/StripeBackend";
+import StripeBackend from "../../../Service/APICalls/StripeBackendAPIService";
 import { useState } from "react";
 import React from "react";
 const Payment = ({
@@ -42,10 +42,22 @@ const Payment = ({
   };
 
   const [amount, setAmount] = useState(
-    Math.round((cartPrice + cartPrice * 0.06625 + zipCodeService.isValidZipCode(zipCode)) * 100) / 100
+    Math.round(
+      (cartPrice +
+        cartPrice * 0.06625 +
+        zipCodeService.isValidZipCode(zipCode)) *
+        100
+    ) / 100
   );
   useEffect(() => {
-    setAmount(Math.round((cartPrice + cartPrice * 0.06625 + zipCodeService.isValidZipCode(zipCode)) * 100) / 100);
+    setAmount(
+      Math.round(
+        (cartPrice +
+          cartPrice * 0.06625 +
+          zipCodeService.isValidZipCode(zipCode)) *
+          100
+      ) / 100
+    );
   }, [cartPrice]);
   useEffect(() => {
     console.log("CART PRICE:: " + cartPrice + ":: type:: " + typeof cartPrice);
@@ -54,9 +66,11 @@ const Payment = ({
       setStatusTitle("Payment Status");
       // Sending req to backend to create charge based on card details entered by user..
       if (stripeToken.card.address_zip !== zipCode) {
-        setStatusTitle("Payment Insuccessful")
+        setStatusTitle("Payment Insuccessful");
         setStatusPopUp(true);
-        setStatusBody(`You were viewing meals for zipcode ${zipCode}, but trying to ship at zipcode ${stripeToken.card.address_zip}`);
+        setStatusBody(
+          `You were viewing meals for zipcode ${zipCode}, but trying to ship at zipcode ${stripeToken.card.address_zip}`
+        );
         setTimeout(() => {
           setStatusPopUp(false);
           setStatusTitle("Payment Status");
@@ -66,7 +80,11 @@ const Payment = ({
       }
       StripeBackend.requestToServer(
         stripeToken,
-        Math.round(((cartPrice + zipCodeService.isValidZipCode(zipCode)) * 0.06625 + (cartPrice + zipCodeService.isValidZipCode(zipCode))) * 100) / 100,
+        Math.round(
+          ((cartPrice + zipCodeService.isValidZipCode(zipCode)) * 0.06625 +
+            (cartPrice + zipCodeService.isValidZipCode(zipCode))) *
+            100
+        ) / 100,
         setStatusBody,
         setStatusPopUp,
         getLineItems()
@@ -99,14 +117,17 @@ const Payment = ({
                 Shipping_date: delivDate,
                 Total_Price:
                   Math.round(
-                    ((cartPrice + zipCodeService.isValidZipCode(zipCode)) * 0.06625 + (cartPrice + zipCodeService.isValidZipCode(zipCode))) * 100
+                    ((cartPrice + zipCodeService.isValidZipCode(zipCode)) *
+                      0.06625 +
+                      (cartPrice + zipCodeService.isValidZipCode(zipCode))) *
+                      100
                   ) / 100,
                 email: stripeToken.email,
                 Address: `${stripeToken.card.address_line1} ${stripeToken.card.address_city}, ${stripeToken.card.address_zip}`,
                 Customer_id: userSession.getUser().id,
                 mealAndFreqs: mealAndFreqsArr,
               };
-              
+
               // setStatusTitle("Order Status");
               OrderAPIService.addOrder(objToSend, setStatusBody)
                 .then((res) => {
@@ -163,10 +184,18 @@ const Payment = ({
         shippingAddress
         billingAddress
         description={`Total: $${
-          Math.round(((cartPrice + zipCodeService.isValidZipCode(zipCode)) * 0.06625 + (cartPrice + zipCodeService.isValidZipCode(zipCode))) * 100) / 100
+          Math.round(
+            ((cartPrice + zipCodeService.isValidZipCode(zipCode)) * 0.06625 +
+              (cartPrice + zipCodeService.isValidZipCode(zipCode))) *
+              100
+          ) / 100
         }`}
         amount={
-          (Math.round(((cartPrice + zipCodeService.isValidZipCode(zipCode)) * 0.06625 + (cartPrice + zipCodeService.isValidZipCode(zipCode))) * 100) /
+          (Math.round(
+            ((cartPrice + zipCodeService.isValidZipCode(zipCode)) * 0.06625 +
+              (cartPrice + zipCodeService.isValidZipCode(zipCode))) *
+              100
+          ) /
             100) *
           100
         }

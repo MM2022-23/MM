@@ -1,10 +1,10 @@
 // makes APIcall
-import UserApiService from "../../Service/UserApiService";
+import UserAPIService from "../../Service/APICalls/UserAPIService";
 import { useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import React from "react";
 import { Modal } from "react-bootstrap";
-import userSession from "../../Service/userSession";
+import userSession from "../../Service/Data/userSession";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 const AccountInfo = ({ show, setShow }) => {
@@ -70,7 +70,7 @@ const AccountInfo = ({ show, setShow }) => {
       //   pass: userPassword,
       // };
       // userSession.cache(temp);
-      UserApiService.updateUser(toBeUpdated)
+      UserAPIService.updateUser(toBeUpdated)
         .then((response) => {
           localStorage.removeItem("Loading");
           if (response.status === 200) {

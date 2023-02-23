@@ -7,12 +7,12 @@ import { Container, Row, Col } from "react-bootstrap";
 import React from "react";
 import { useState } from "react";
 import { Offcanvas } from "react-bootstrap";
-import MealData from "../../../Service/MealData";
-import userSession from "../../../Service/userSession";
+import MealData from "../../../Service/Data/MealData";
+import userSession from "../../../Service/Data/userSession";
 import PopUp from "../../../SharedComponents/PopUp/PopUp";
 import Payment from "../../../SharedComponents/PopUp/Payment/Payment";
-import DataCollectionAPI from "../../../Service/DataCollectionAPI";
-import zipCodeService from "../../../Service/zipCodeService";
+import DataCollectionAPI from "../../../Service/APICalls/DataCollectionAPIService";
+import zipCodeService from "../../../Service/Data/zipCodeService";
 const ShoppingCart = ({
   cart,
   setCart,
@@ -293,7 +293,7 @@ const ShoppingCart = ({
               Math.round(
                 ((cartPrice + zipCodeService.isValidZipCode(zipCode)) *
                   0.06625 +
-                  (cartPrice +zipCodeService.isValidZipCode(zipCode))) *
+                  (cartPrice + zipCodeService.isValidZipCode(zipCode))) *
                   100
               ) /
                 100
@@ -403,17 +403,16 @@ const ShoppingCart = ({
       />
 
       <UpSaleItems
-          displayPopUp={displayUpSale}
-          setDisplayPopUp={setDisplayUpSale}
-          cartPrice={cartPrice}
-          setCartPrice={setCartPrice}
-          cart={cart}
-          setCart={setCart}
-          zipCode={zipCode}
-          mealNumbers={mealNumbers}
-          setMealNumbers={setMealNumbers}
-          
-        />
+        displayPopUp={displayUpSale}
+        setDisplayPopUp={setDisplayUpSale}
+        cartPrice={cartPrice}
+        setCartPrice={setCartPrice}
+        cart={cart}
+        setCart={setCart}
+        zipCode={zipCode}
+        mealNumbers={mealNumbers}
+        setMealNumbers={setMealNumbers}
+      />
     </Nav>
   );
 };

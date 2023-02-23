@@ -2,11 +2,11 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Row, Col, Container } from "react-bootstrap";
-import zipCodeService from "../../Service/zipCodeService";
+import zipCodeService from "../../Service/Data/zipCodeService";
 import Button from "react-bootstrap/Button";
 import { Modal } from "react-bootstrap";
 import React from "react";
-import MealData from "../../Service/MealData";
+import MealData from "../../Service/Data/MealData";
 
 const UpSaleItems = ({
   displayPopUp,

@@ -1,6 +1,6 @@
 import ForgotPassword from "./ForgotPassword";
 import { Link } from "react-router-dom";
-import UserApiService from "../../../Service/UserApiService";
+import UserAPIService from "../../../Service/APICalls/UserAPIService";
 /***
  * Will call backend API to authenticate user based on username and password
  */
@@ -8,7 +8,7 @@ import React from "react";
 import { Modal } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import { useState } from "react";
-import userSession from "../../../Service/userSession";
+import userSession from "../../../Service/Data/userSession";
 
 function LogInPopUP({ style, setLogIn }) {
   const [showForgotPassword, setShowForgotPassword] = useState(false);
@@ -108,7 +108,7 @@ function LogInPopUP({ style, setLogIn }) {
         password: userPassword,
       };
       // API rough work: order history not fetched!
-      UserApiService.logUserIn(toBeAuthenticated)
+      UserAPIService.logUserIn(toBeAuthenticated)
         .then((response) => {
           localStorage.removeItem("Loading");
           if (response.status === 200) {
@@ -237,7 +237,7 @@ function LogInPopUP({ style, setLogIn }) {
       <ForgotPassword
         showForgotPassword={showForgotPassword}
         setShowForgotPassword={setShowForgotPassword}
-        setDisplay = {setDisplay}
+        setDisplay={setDisplay}
       />
     </>
   );

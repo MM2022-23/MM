@@ -10,10 +10,10 @@ import { useState } from "react";
 import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
 import React from "react";
-import HotelAPIService from "../../Service/HotelAPIService";
-import AdminAPIService from "../../Service/AdminAPIService";
+import HotelAPIService from "../../Service/APICalls/HotelAPIService";
+import AdminAPIService from "../../Service/APICalls/AdminAPIService";
 import PopUp from "../../SharedComponents/PopUp/PopUp";
-import DateService from "../../Service/DateService";
+import DateService from "../../Service/Algorithms/DateService";
 const AdminPortal = () => {
   const [pinLabel, setPinLabel] = useState(
     <label for="exampleInputEmail1" className="mb-2">
@@ -207,7 +207,11 @@ const AdminPortal = () => {
           getAllOrders();
           console.log("Success delete");
         } else {
-          setStatusTitle(<p className="lead" style={{color:"red"}}>Incorrect password! Try Again</p>);
+          setStatusTitle(
+            <p className="lead" style={{ color: "red" }}>
+              Incorrect password! Try Again
+            </p>
+          );
         }
       })
       .catch((err) => {

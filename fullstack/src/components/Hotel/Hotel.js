@@ -9,9 +9,9 @@ import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
 import React from "react";
 import "./Hotel.css";
-import MealData from "../../Service/MealData";
-import HotelAPIService from "../../Service/HotelAPIService";
-import DateService from "../../Service/DateService";
+import MealData from "../../Service/Data/MealData";
+import HotelAPIService from "../../Service/APICalls/HotelAPIService";
+import DateService from "../../Service/Algorithms/DateService";
 
 const Hotel = () => {
   const [displayTables, setDisplayTables] = useState(false);
@@ -180,7 +180,10 @@ const Hotel = () => {
             className="bg-primary"
             style={{ fontFamily: "Signika", padding: "64px 32px" }}
           >
-            <h1 style={{ fontFamily: "Signika", fontSize:"5vw" }} className="text-center mb-4">
+            <h1
+              style={{ fontFamily: "Signika", fontSize: "5vw" }}
+              className="text-center mb-4"
+            >
               Meal Quantity Table
             </h1>
             <Table
@@ -226,7 +229,10 @@ const Hotel = () => {
             </Table>
           </section>
           <section style={{ fontFamily: "Signika", padding: "64px 32px" }}>
-            <h1 style={{ fontFamily: "Signika", fontSize:"5vw" }} className="text-center mb-4">
+            <h1
+              style={{ fontFamily: "Signika", fontSize: "5vw" }}
+              className="text-center mb-4"
+            >
               Orders Table- Due 5:30PM EST
             </h1>
             <Table
@@ -282,9 +288,8 @@ const Hotel = () => {
       );
     }
   };
-  
-  const actualPortal = () => {
 
+  const actualPortal = () => {
     const checkBackLater = () => {
       return (
         <div
@@ -364,7 +369,6 @@ const Hotel = () => {
     );
   };
 
-  
   return <>{!isLoggedIn ? logInBox() : actualPortal()}</>;
 };
 

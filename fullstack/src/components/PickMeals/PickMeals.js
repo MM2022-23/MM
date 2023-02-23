@@ -2,15 +2,14 @@
  *  For now can look in csv file for meal data based on zip code entered
  *  Scaling: might need API call to search meal info based on given zip code
  */
-
-import zipCodeService from "../../Service/zipCodeService";
-import DataCollectionAPI from "../../Service/DataCollectionAPI";
+import zipCodeService from "../../Service/Data/zipCodeService";
+import DataCollectionAPIService from "../../Service/APICalls/DataCollectionAPIService";
 import Payment from "../../SharedComponents/PopUp/Payment/Payment";
-import StripeBackend from "../../Service/StripeBackend";
+import StripeBackend from "../../Service/APICalls/StripeBackendAPIService";
 import StripeCheckout from "react-stripe-checkout";
 import SignUpPopUp from "../NavBar/SignUpPopUp/SignUpPopUp";
 import LogInPopUP from "../NavBar/LogInPopUp/LogInPopUp";
-import userSession from "../../Service/userSession";
+import userSession from "../../Service/Data/userSession";
 import PopUp from "../../SharedComponents/PopUp/PopUp";
 import "./PickMeals.css";
 import { useEffect } from "react";
@@ -20,9 +19,10 @@ import { useState } from "react";
 import { Modal } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
-import ScrollTop from "../../Service/ScrollTop";
-import MealData from "../../Service/MealData";
+import ScrollTop from "../../Service/Misc/ScrollTop";
+import MealData from "../../Service/Data/MealData";
 import UpSaleItems from "../../SharedComponents/UpSaleItems/UpSaleItems";
+import { add, remove} from "../../Service/Algorithms/AddItem";
 const PickMeals = ({
   zipCode,
   cart,
@@ -97,55 +97,55 @@ const PickMeals = ({
    * 2. Update cart by setCart()
    */
 
-  const add = (idNum) => {
-    setNumMealsSelected((numMealsSelected) => numMealsSelected + 1);
-    setCartPrice(
-      (cartPrice) =>
-        Math.round(
-          (cartPrice + MealData.getMeals()[idNum].price + Number.EPSILON) * 100
-        ) / 100
-    );
-    // will have to add PRICE
-    const addToCart = {
-      id: idNum,
-      mealName: mealList[idNum].mealName,
-      description: mealList[idNum].description,
-      price: mealList[idNum].price,
-    };
+  // const add = (idNum) => {
+  //   setNumMealsSelected((numMealsSelected) => numMealsSelected + 1);
+  //   setCartPrice(
+  //     (cartPrice) =>
+  //       Math.round(
+  //         (cartPrice + MealData.getMeals()[idNum].price + Number.EPSILON) * 100
+  //       ) / 100
+  //   );
+  //   // will have to add PRICE
+  //   const addToCart = {
+  //     id: idNum,
+  //     mealName: mealList[idNum].mealName,
+  //     description: mealList[idNum].description,
+  //     price: mealList[idNum].price,
+  //   };
 
-    const tempArray = [];
+  //   const tempArray = [];
 
-    if (cart.length === 0) {
-      // cart is empty
-      tempArray.push(addToCart);
-      setCart(tempArray);
-    } else {
-      // cart is NOT empty; 2 cases: idNum IS in cart OR NOT in the cart
+  //   if (cart.length === 0) {
+  //     // cart is empty
+  //     tempArray.push(addToCart);
+  //     setCart(tempArray);
+  //   } else {
+  //     // cart is NOT empty; 2 cases: idNum IS in cart OR NOT in the cart
 
-      // don't wanna add duplicate items
-      let found = false;
+  //     // don't wanna add duplicate items
+  //     let found = false;
 
-      cart.forEach((element) => {
-        if (element.id === idNum) {
-          found = true;
-        }
-        tempArray.push(element);
-      });
+  //     cart.forEach((element) => {
+  //       if (element.id === idNum) {
+  //         found = true;
+  //       }
+  //       tempArray.push(element);
+  //     });
 
-      // adding item first time
-      if (!found) {
-        tempArray.push(addToCart);
-      }
-      setCart(tempArray); // Update cart to display correct items in cart
-    }
+  //     // adding item first time
+  //     if (!found) {
+  //       tempArray.push(addToCart);
+  //     }
+  //     setCart(tempArray); // Update cart to display correct items in cart
+  //   }
 
-    mealNumbers[idNum]++; // increment quantity in mealNumbers at index "idNum"
-    const newAr = [];
-    mealNumbers.map((item) => {
-      newAr.push(item);
-    });
-    setMealNumbers(newAr); // Update mealNumbers to display correct quantity numbers in cart AND pickMeals page
-  };
+  //   mealNumbers[idNum]++; // increment quantity in mealNumbers at index "idNum"
+  //   const newAr = [];
+  //   mealNumbers.map((item) => {
+  //     newAr.push(item);
+  //   });
+  //   setMealNumbers(newAr); // Update mealNumbers to display correct quantity numbers in cart AND pickMeals page
+  // };
 
   /**
    * @Goal REMOVE item from cart && decrement quantity by 1
@@ -153,35 +153,35 @@ const PickMeals = ({
    * 1. Decrement quantity in mealNumbers at index "idNum"
    * 2. Update cart by setCart()
    */
-  const remove = (id) => {
-    // CANNOT have quantity < 0
-    if (mealNumbers[id] > 0) {
-      setNumMealsSelected((numMealsSelected) => numMealsSelected - 1);
-      setCartPrice(
-        (cartPrice) =>
-          Math.round(
-            (cartPrice - MealData.getMeals()[id].price + Number.EPSILON) * 100
-          ) / 100
-      );
-      mealNumbers[id]--; // decrement quantity in mealNumbers at index "id"
-      const newAr = [];
-      mealNumbers.map((item) => {
-        newAr.push(item);
-      });
-      setMealNumbers(newAr); // update mealNumbers
+  // const remove = (id) => {
+  //   // CANNOT have quantity < 0
+  //   if (mealNumbers[id] > 0) {
+  //     setNumMealsSelected((numMealsSelected) => numMealsSelected - 1);
+  //     setCartPrice(
+  //       (cartPrice) =>
+  //         Math.round(
+  //           (cartPrice - MealData.getMeals()[id].price + Number.EPSILON) * 100
+  //         ) / 100
+  //     );
+  //     mealNumbers[id]--; // decrement quantity in mealNumbers at index "id"
+  //     const newAr = [];
+  //     mealNumbers.map((item) => {
+  //       newAr.push(item);
+  //     });
+  //     setMealNumbers(newAr); // update mealNumbers
 
-      if (mealNumbers[id] === 0) {
-        // if item is reduced to 0 in cart, cart should be updated so we don't have an item in cart whose quantity = 0
-        const tempCart = [];
-        cart.forEach((element) => {
-          if (element.id !== id) {
-            tempCart.push(element);
-          }
-        });
-        setCart(tempCart);
-      }
-    }
-  };
+  //     if (mealNumbers[id] === 0) {
+  //       // if item is reduced to 0 in cart, cart should be updated so we don't have an item in cart whose quantity = 0
+  //       const tempCart = [];
+  //       cart.forEach((element) => {
+  //         if (element.id !== id) {
+  //           tempCart.push(element);
+  //         }
+  //       });
+  //       setCart(tempCart);
+  //     }
+  //   }
+  // };
 
   // log in warnin
   const [displayPopUp, setDisplayPopUp] = useState(false);
@@ -192,10 +192,8 @@ const PickMeals = ({
   const [titleEnough, setTitleEnough] = useState("");
   const [bodyEnough, setBodyEnough] = useState("");
 
-
   // Upsale Item PopUp State
   const [displayUpSale, setDisplayUpSale] = useState(false);
-
 
   {
     /* remove this after stripe */
@@ -234,7 +232,7 @@ const PickMeals = ({
         planSize: numMeals,
         mealsAndFreqs: getMealsData(),
       };
-      DataCollectionAPI.storeUnprocessedMeals(mealsInfo)
+      DataCollectionAPIService.storeUnprocessedMeals(mealsInfo)
         .then(() => {
           console.log("Successful");
         })
@@ -320,10 +318,9 @@ const PickMeals = ({
       //   </>
       // );
       // setDisplayEnoughPopUp(true);
-      
 
-      // after upsale pop user accesses payment pop up 
-      setDisplayUpSale(true); 
+      // after upsale pop user accesses payment pop up
+      setDisplayUpSale(true);
     }
   };
 
@@ -363,7 +360,7 @@ const PickMeals = ({
 
                     <Button
                       variant="light"
-                      onClick={() => remove(id)}
+                      onClick={() => remove(id,numMealsSelected,setNumMealsSelected,cart, setCart, cartPrice,setMealNumbers,setCartPrice,mealNumbers)}
                       className="buttonAdjustment"
                     >
                       <span className="letterAdjustment">-</span>
@@ -373,7 +370,7 @@ const PickMeals = ({
 
                     <Button
                       variant="light"
-                      onClick={() => add(id)}
+                      onClick={() => add(id,numMealsSelected,setNumMealsSelected,setCart,cartPrice,setMealNumbers,setCartPrice,mealNumbers)}
                       className="buttonAdjustment"
                     >
                       <span className="letterAdjustment">+</span>
@@ -450,7 +447,6 @@ const PickMeals = ({
           zipCode={zipCode}
           mealNumbers={mealNumbers}
           setMealNumbers={setMealNumbers}
-          
         />
 
         <Payment

@@ -2,7 +2,7 @@ import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
 import React from "react";
-import ScrollTop from "../../Service/ScrollTop";
+import ScrollTop from "../../Service/Misc/ScrollTop";
 
 const TermsAndCondition = () => {
   useEffect(() => {

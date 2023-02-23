@@ -14,18 +14,18 @@ import OrderPage from "./components/OrderPage/OrderPage";
 import PickMeals from "./components/PickMeals/PickMeals";
 import CheckOut from "./components/CheckOut/CheckOut";
 import Hotel from "./components/Hotel/Hotel";
-import userSession from "./Service/userSession";
+import userSession from "./Service/Data/userSession";
 import OrderHistory from "./components/OrderHistory/OrderHistory";
 import PrivacyPolicy from "./components/PrivacyPolicy/PrivacyPolicy";
 import TermsAndCondition from "./components/TermsAndCondition/TermsAndCondition";
 import RefundsAndCancellationsPolicy from "./components/RefundsAndCancellationsPolicy/RefundsAndCancellationsPolicy";
-import DataCollectionAPI from "./Service/DataCollectionAPI";
+import DataCollectionAPI from "./Service/APICalls/DataCollectionAPIService";
 import AdminPortal from "./components/AdminPortal/AdminPortal";
 function App() {
   useEffect(() => {
     console.log("APP RENDERED!!!");
     let referrer = document.referrer;
-    console.log("REFERED BY: "+referrer);
+    console.log("REFERED BY: " + referrer);
     if (referrer !== undefined && referrer.length !== 0) {
       DataCollectionAPI.add({ url: referrer })
         .then((response) => {
@@ -34,7 +34,7 @@ function App() {
         .catch((err) => {
           console.log("Error in sending referral::: " + err);
         });
-        referrer=""; 
+      referrer = "";
     }
   }, []);
   // Nav, Home

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { BASE_URL } from "./Constants";
+import { BASE_URL } from "../Constants";
 const DATACOLLECTION_BASE_REST_API_URL = `${BASE_URL}/dataCollection/`;
 
 class DataCollectionAPI {

@@ -1,4 +1,4 @@
-import UserApiService from "../../../Service/UserApiService";
+import UserAPIService from "../../../Service/APICalls/UserAPIService";
 import { useState } from "react";
 import { Modal } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
@@ -50,7 +50,7 @@ const ForgotPassword = ({
         </label>
       );
       // API CALL
-      UserApiService.forgotPassword(emailForgotPassword)
+      UserAPIService.forgotPassword(emailForgotPassword)
         .then((response) => {
           setStatus("Get Password");
           const data = response.data;

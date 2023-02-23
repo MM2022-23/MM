@@ -8,12 +8,12 @@ import React from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { Dropdown } from "react-bootstrap";
 import ZipCode from "./ZipCode/ZipCode";
-import { useState} from "react";
+import { useState } from "react";
 import InformationGrid from "../About/InformationGrid/InformationGrid";
-import Scroll from "../../Service/ScrollTop";
+import Scroll from "../../Service/Misc/ScrollTop";
 import { Modal } from "react-bootstrap";
-import zipCodeService from "../../Service/zipCodeService";
-import DataCollectionAPI from "../../Service/DataCollectionAPI";
+import zipCodeService from "../../Service/Data/zipCodeService";
+import DataCollectionAPIService from "../../Service/APICalls/DataCollectionAPIService";
 
 const data = {
   backColor: "primary",
@@ -82,38 +82,39 @@ const OrderPage = ({
       setDelivDate("Select Date");
     } else {
       // Want to choose every option again; Coming back from Pick Meals Page
-      console.log("COMING BACK FROM PICK MEALS OR COMING FROM HOME PAGE: RESET EVERYTHING");
+      console.log(
+        "COMING BACK FROM PICK MEALS OR COMING FROM HOME PAGE: RESET EVERYTHING"
+      );
       setNumMeals("Select Plan");
       setZipCode("");
       // setFreq("Select Frequency");
       setDelivDate("Select Date");
     }
-    document.title="Order"
+    document.title = "Order";
     Scroll.scrollUp();
   }, []);
   // Pick meals button clicked
   const handlePickMeals = () => {
     console.log("Handle pick meals!");
-    console.log("PROPER OR NOT::: "+zipCodeService.isValidZipCode(zipCode));
+    console.log("PROPER OR NOT::: " + zipCodeService.isValidZipCode(zipCode));
     // NEED PROPER ZIPCODE, AND ZIPCODE SHOULD BE in specific range
-    if(zipCode.length===0){
+    if (zipCode.length === 0) {
       handleDisplay("Enter zipcode");
-    }else if(zipCode.length!==5){
+    } else if (zipCode.length !== 5) {
       handleDisplay("Enter 5 digit zipcode");
-    }else if (!(/^\d+$/.test(zipCode))) {
+    } else if (!/^\d+$/.test(zipCode)) {
       handleDisplay("Zipcode should not contain letters");
-    }else if (!zipCodeService.isValidZipCode(zipCode)){
+    } else if (!zipCodeService.isValidZipCode(zipCode)) {
       // API call to store zipcode where we don't operate
-      DataCollectionAPI.addZipCode({zipcode:zipCode}).then((response)=>{
-        console.log("Zipcode sent successfully:: "+response.data);
-      }).catch((err)=>{
-        console.log("Error sending zipcode:: "+err);
-      });
+      DataCollectionAPIService.addZipCode({ zipcode: zipCode })
+        .then((response) => {
+          console.log("Zipcode sent successfully:: " + response.data);
+        })
+        .catch((err) => {
+          console.log("Error sending zipcode:: " + err);
+        });
       handleDisplay("We're soon coming to your area. Stay tuned!");
-      
-
-    }
-    else if (numMeals === "Select Plan") {
+    } else if (numMeals === "Select Plan") {
       handleDisplay("Select Plan");
     }
     // else if (freq === "Select Frequency") {

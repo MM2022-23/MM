@@ -3,7 +3,7 @@ class MealData {
   data = [
     {
       id: 0,
-      img: require("../Resources/Meals/meal1.png"),
+      img: require("../../Resources/Meals/meal1.png"),
       mealName: "Madrasi Thari ",
       // description: "Special Dish from South India",
       description: {
@@ -16,7 +16,7 @@ class MealData {
 
     {
       id: 1,
-      img: require("../Resources/Meals/meal2.png"),
+      img: require("../../Resources/Meals/meal2.png"),
       mealName: "Gujarati Thari",
       description: {
         rotis: 4,
@@ -28,7 +28,7 @@ class MealData {
 
     {
       id: 2,
-      img: require("../Resources/Meals/meal3.png"),
+      img: require("../../Resources/Meals/meal3.png"),
       mealName: "Punjabi Thari",
       description: {
         rotis: 6,
@@ -42,7 +42,7 @@ class MealData {
 
     {
       id: 3,
-      img: require("../Resources/Meals/meal4.png"),
+      img: require("../../Resources/Meals/meal4.png"),
       mealName: "Benagali Thari",
       description: {
         rotis: 4,
@@ -53,7 +53,7 @@ class MealData {
     },
     {
       id: 4,
-      img: require("../Resources/Meals/paneer.png"),
+      img: require("../../Resources/Meals/paneer.png"),
       mealName: "Rajasthani Thari",
       description: {
         rotis: 4,
@@ -64,7 +64,7 @@ class MealData {
     },
     {
       id: 5,
-      img: require("../Resources/Meals/GulabJamun.png"),
+      img: require("../../Resources/Meals/GulabJamun.png"),
       mealName: "Gulaab Jamun 2 pcs",
       description: {
         rotis: 4,
@@ -75,7 +75,7 @@ class MealData {
     },
     {
       id: 6,
-      img: require("../Resources/Meals/KajuKatri.png"),
+      img: require("../../Resources/Meals/KajuKatri.png"),
       mealName: "Kaju Katri 2 pcs",
       description: {
         rotis: 4,

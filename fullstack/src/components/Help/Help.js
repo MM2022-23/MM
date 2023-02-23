@@ -2,19 +2,18 @@ import { useEffect } from "react";
 import { Button } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import React from "react";
-import ScrollTop from "../../Service/ScrollTop";
+import ScrollTop from "../../Service/Misc/ScrollTop";
 
-const Help = ({scrollFAQ, setScrollFAQ}) => {
+const Help = ({ scrollFAQ, setScrollFAQ }) => {
   useEffect(() => {
-    document.title="Help"
+    document.title = "Help";
     ScrollTop.scrollUp();
   }, []);
   const navigate = useNavigate();
   const toFAQ = (e) => {
     e.preventDefault();
-    setScrollFAQ(true); 
+    setScrollFAQ(true);
     navigate("/");
-
   };
   return (
     <section
@@ -46,7 +45,10 @@ const Help = ({scrollFAQ, setScrollFAQ}) => {
               Promise :)
             </p>
             <p>
-              Please check our <Link className="text-dark mx-1" onClick={(e)=>toFAQ(e)} to ="">FAQ</Link>
+              Please check our{" "}
+              <Link className="text-dark mx-1" onClick={(e) => toFAQ(e)} to="">
+                FAQ
+              </Link>
               section to see if you can find the answer to your question.{" "}
             </p>
             <p>In the meantime, try out our meals.</p>

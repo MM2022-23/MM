@@ -1,11 +1,11 @@
 import { Link } from "react-router-dom";
 import { Form } from "react-bootstrap";
-import UserApiService from "../../../Service/UserApiService";
+import UserAPIService from "../../../Service/APICalls/UserAPIService";
 /***
  * Will call backend API to register user
  */
 
-import userSession from "../../../Service/userSession";
+import userSession from "../../../Service/Data/userSession";
 import "./SignUp.css";
 import React from "react";
 import { Modal } from "react-bootstrap";
@@ -193,7 +193,7 @@ function SignUpPopUp({ style, setLogIn }) {
         password: userPassword,
         phone: phone,
       };
-      UserApiService.registerUser(toBeAdded)
+      UserAPIService.registerUser(toBeAdded)
         .then((response) => {
           localStorage.removeItem("Loading");
           if (response.status === 201) {
@@ -214,12 +214,13 @@ function SignUpPopUp({ style, setLogIn }) {
           }
         })
         .catch((err) => {
-          console.log("ERR :"+err);
+          console.log("ERR :" + err);
           localStorage.removeItem("Loading");
           setEmailLabel(
             <label htmlFor="email" className="col-form-label">
               <span style={{ color: "red" }}>
-                Email already registered, use different Email <span style={{ color: "red" }}></span>
+                Email already registered, use different Email{" "}
+                <span style={{ color: "red" }}></span>
               </span>
             </label>
           );

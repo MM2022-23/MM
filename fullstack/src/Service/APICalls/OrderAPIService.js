@@ -1,5 +1,5 @@
 import axios from "axios";
-import { BASE_URL } from "./Constants";
+import { BASE_URL } from "../Constants";
 const ORDER_BASE_REST_API_URL = `${BASE_URL}/checkout/`;
 
 class OrderAPIService {

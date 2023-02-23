@@ -4,8 +4,8 @@ import { useEffect } from "react";
 import { Button } from "react-bootstrap";
 import React from "react";
 import Table from "react-bootstrap/Table";
-import userSession from "../../Service/userSession";
-import OrderAPIService from "../../Service/OrderAPIService";
+import userSession from "../../Service/Data/userSession";
+import OrderAPIService from "../../Service/APICalls/OrderAPIService";
 
 const OrderHistory = ({ isLoggedIn }) => {
   const navigate = useNavigate();

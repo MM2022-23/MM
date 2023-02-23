@@ -7,11 +7,11 @@ import React from "react";
 import { Button } from "react-bootstrap";
 import InformationBox from "./InformationBox/InformationBox";
 import { Link } from "react-router-dom";
-import ScrollTop from "../../Service/ScrollTop";
+import ScrollTop from "../../Service/Misc/ScrollTop";
 import { useEffect } from "react";
 const About = () => {
   useEffect(() => {
-    document.title="About"
+    document.title = "About";
     ScrollTop.scrollUp();
   }, []);
   const firstBox = {
