@@ -24,7 +24,26 @@ const UpSaleItems = ({
   // to keep track of # of items selected
   const [countSelected, setCountSelected] = useState(0);
 
-  // might be expensive
+  const noItems = () => {
+    for (let index = 0; index < MealData.getUpSaleItems().length; index++) {
+      const element = MealData.getUpSaleItems()[index];
+      if (mealNumbers[element.id] !== 0) {
+        return true;
+      }
+    }
+
+    return false;
+  };
+
+  // might be inefficient
+  useEffect(() => {
+    if (noItems()) {
+      setProceedText("No Thanks, Continue");
+    } else {
+      setProceedText("Proceed");
+    }
+  }, []);
+  // might be inefficient
   useEffect(() => {
     if (countSelected === 0) {
       setProceedText("No Thanks, Continue");
