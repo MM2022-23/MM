@@ -1,3 +1,4 @@
+import zipCodeService from "../../../Service/zipCodeService";
 import logo from "./logo192.png";
 import PopUp from "../PopUp";
 import userSession from "../../../Service/userSession";
@@ -41,10 +42,10 @@ const Payment = ({
   };
 
   const [amount, setAmount] = useState(
-    Math.round((cartPrice + cartPrice * 0.06625 + 3) * 100) / 100
+    Math.round((cartPrice + cartPrice * 0.06625 + zipCodeService.isValidZipCode(zipCode)) * 100) / 100
   );
   useEffect(() => {
-    setAmount(Math.round((cartPrice + cartPrice * 0.06625 + 3) * 100) / 100);
+    setAmount(Math.round((cartPrice + cartPrice * 0.06625 + zipCodeService.isValidZipCode(zipCode)) * 100) / 100);
   }, [cartPrice]);
   useEffect(() => {
     console.log("CART PRICE:: " + cartPrice + ":: type:: " + typeof cartPrice);
@@ -65,7 +66,7 @@ const Payment = ({
       }
       StripeBackend.requestToServer(
         stripeToken,
-        Math.round(((cartPrice + 3) * 0.06625 + (cartPrice + 3)) * 100) / 100,
+        Math.round(((cartPrice + zipCodeService.isValidZipCode(zipCode)) * 0.06625 + (cartPrice + zipCodeService.isValidZipCode(zipCode))) * 100) / 100,
         setStatusBody,
         setStatusPopUp,
         getLineItems()
@@ -93,19 +94,19 @@ const Payment = ({
               });
 
               let todaysDate = new Date().toDateString();
-
               const objToSend = {
                 Order_date: todaysDate,
                 Shipping_date: delivDate,
                 Total_Price:
                   Math.round(
-                    ((cartPrice + 3) * 0.06625 + (cartPrice + 3)) * 100
+                    ((cartPrice + zipCodeService.isValidZipCode(zipCode)) * 0.06625 + (cartPrice + zipCodeService.isValidZipCode(zipCode))) * 100
                   ) / 100,
                 email: stripeToken.email,
                 Address: `${stripeToken.card.address_line1} ${stripeToken.card.address_city}, ${stripeToken.card.address_zip}`,
                 Customer_id: userSession.getUser().id,
                 mealAndFreqs: mealAndFreqsArr,
               };
+              
               // setStatusTitle("Order Status");
               OrderAPIService.addOrder(objToSend, setStatusBody)
                 .then((res) => {
@@ -162,10 +163,10 @@ const Payment = ({
         shippingAddress
         billingAddress
         description={`Total: $${
-          Math.round(((cartPrice + 3) * 0.06625 + (cartPrice + 3)) * 100) / 100
+          Math.round(((cartPrice + zipCodeService.isValidZipCode(zipCode)) * 0.06625 + (cartPrice + zipCodeService.isValidZipCode(zipCode))) * 100) / 100
         }`}
         amount={
-          (Math.round(((cartPrice + 3) * 0.06625 + (cartPrice + 3)) * 100) /
+          (Math.round(((cartPrice + zipCodeService.isValidZipCode(zipCode)) * 0.06625 + (cartPrice + zipCodeService.isValidZipCode(zipCode))) * 100) /
             100) *
           100
         }

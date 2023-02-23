@@ -3,6 +3,7 @@
  *  Scaling: might need API call to search meal info based on given zip code
  */
 
+import zipCodeService from "../../Service/zipCodeService";
 import DataCollectionAPI from "../../Service/DataCollectionAPI";
 import Payment from "../../SharedComponents/PopUp/Payment/Payment";
 import StripeBackend from "../../Service/StripeBackend";
@@ -21,6 +22,7 @@ import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import ScrollTop from "../../Service/ScrollTop";
 import MealData from "../../Service/MealData";
+import UpSaleItems from "../../SharedComponents/UpSaleItems/UpSaleItems";
 const PickMeals = ({
   zipCode,
   cart,
@@ -49,14 +51,14 @@ const PickMeals = ({
       // scroll up only once when user arrives on this page
       ScrollTop.scrollUp();
       if (mealNumbers.length === 0) {
-        setMealNumbers(new Array(data.length).fill(0));
+        setMealNumbers(new Array(MealData.getAllItems().length).fill(0));
         console.log("RESETTING CART");
         // should do this in case of payment success
       }
     }
   }, []);
 
-  const data = MealData.getMeals();
+  const mealList = MealData.getMeals();
 
   // pop up to show description/ingridents to users
   const [show, setShow] = useState(false);
@@ -106,9 +108,9 @@ const PickMeals = ({
     // will have to add PRICE
     const addToCart = {
       id: idNum,
-      mealName: data[idNum].mealName,
-      description: data[idNum].description,
-      price: data[idNum].price,
+      mealName: mealList[idNum].mealName,
+      description: mealList[idNum].description,
+      price: mealList[idNum].price,
     };
 
     const tempArray = [];
@@ -190,6 +192,11 @@ const PickMeals = ({
   const [titleEnough, setTitleEnough] = useState("");
   const [bodyEnough, setBodyEnough] = useState("");
 
+
+  // Upsale Item PopUp State
+  const [displayUpSale, setDisplayUpSale] = useState(false);
+
+
   {
     /* remove this after stripe */
   }
@@ -270,37 +277,53 @@ const PickMeals = ({
       // Handle Stripe Payment
       // setPayPopUp(true);
       // document.getElementById("hiddenPaymentButton").click();
-      setTitleEnough("Meals Break Down");
-      setBodyEnough(
-        <>
-          <h5 className="text-center mt-4">{`${
-            "Meals Total $" + cartPrice
-          }`}</h5>
-          <h5 className="text-center mt-2">{`${"Delivery $" + 3}`}</h5>
-          <h5 className="text-center mt-2">{`${
-            "Taxes $" + Math.round((cartPrice + 3) * 0.06625 * 100) / 100
-          }`}</h5>
-          <h5 className="text-center mt-2">{`${
-            "Total $" +
-            Math.round(((cartPrice + 3) * 0.06625 + (cartPrice + 3)) * 100) /
-              100
-          }`}</h5>
+      // setTitleEnough("Meals Break Down");
+      // setBodyEnough(
+      //   <>
+      //     <h5 className="text-center mt-4">{`${
+      //       "Meals Total $" + cartPrice
+      //     }`}</h5>
+      //     <h5 className="text-center mt-2">{`${
+      //       "Delivery $" + zipCodeService.isValidZipCode(zipCode)
+      //     }`}</h5>
+      //     <h5 className="text-center mt-2">{`${
+      //       "Taxes $" +
+      //       Math.round(
+      //         (cartPrice + zipCodeService.isValidZipCode(zipCode)) *
+      //           0.06625 *
+      //           100
+      //       ) /
+      //         100
+      //     }`}</h5>
+      //     <h5 className="text-center mt-2">{`${
+      //       "Total $" +
+      //       Math.round(
+      //         ((cartPrice + zipCodeService.isValidZipCode(zipCode)) * 0.06625 +
+      //           (cartPrice + zipCodeService.isValidZipCode(zipCode))) *
+      //           100
+      //       ) /
+      //         100
+      //     }`}</h5>
 
-          <div className="h-100 d-flex align-items-center justify-content-center">
-            <Button
-              variant="light"
-              className="text-dark"
-              onClick={() => {
-                setDisplayEnoughPopUp(false);
-                document.getElementById("hiddenPaymentButton").click();
-              }}
-            >
-              Proceed
-            </Button>
-          </div>
-        </>
-      );
-      setDisplayEnoughPopUp(true);
+      //     <div className="h-100 d-flex align-items-center justify-content-center">
+      //       <Button
+      //         variant="light"
+      //         className="text-dark"
+      //         onClick={() => {
+      //           setDisplayEnoughPopUp(false);
+      //           // document.getElementById("hiddenPaymentButton").click();
+      //         }}
+      //       >
+      //         Proceed
+      //       </Button>
+      //     </div>
+      //   </>
+      // );
+      // setDisplayEnoughPopUp(true);
+      
+
+      // after upsale pop user accesses payment pop up 
+      setDisplayUpSale(true); 
     }
   };
 
@@ -319,7 +342,7 @@ const PickMeals = ({
       <section style={{ fontFamily: "Signika" }}>
         <Container className="text-dark my-4 customCss">
           <Row style={{ marginTop: "66px", marginBottom: "32px" }} xs="auto">
-            {data.map((item) => {
+            {mealList.map((item) => {
               const { id, img, mealName, description, price } = item;
               return (
                 <Col key={id} className="p-3 spacesBetweenBoxes">
@@ -415,6 +438,19 @@ const PickMeals = ({
           setDisplayPopUp={setDisplayEnoughPopUp}
           title={titleEnough}
           body={bodyEnough}
+        />
+
+        <UpSaleItems
+          displayPopUp={displayUpSale}
+          setDisplayPopUp={setDisplayUpSale}
+          cartPrice={cartPrice}
+          setCartPrice={setCartPrice}
+          cart={cart}
+          setCart={setCart}
+          zipCode={zipCode}
+          mealNumbers={mealNumbers}
+          setMealNumbers={setMealNumbers}
+          
         />
 
         <Payment

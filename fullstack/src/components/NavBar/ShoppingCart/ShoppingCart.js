@@ -1,3 +1,4 @@
+import UpSaleItems from "../../../SharedComponents/UpSaleItems/UpSaleItems";
 import SignUpPopUp from "../SignUpPopUp/SignUpPopUp";
 import LogInPopUP from "../LogInPopUp/LogInPopUp";
 import { useNavigate } from "react-router-dom";
@@ -11,6 +12,7 @@ import userSession from "../../../Service/userSession";
 import PopUp from "../../../SharedComponents/PopUp/PopUp";
 import Payment from "../../../SharedComponents/PopUp/Payment/Payment";
 import DataCollectionAPI from "../../../Service/DataCollectionAPI";
+import zipCodeService from "../../../Service/zipCodeService";
 const ShoppingCart = ({
   cart,
   setCart,
@@ -25,6 +27,7 @@ const ShoppingCart = ({
   delivDate,
   zipCode,
 }) => {
+  const [displayUpSale, setDisplayUpSale] = useState(false);
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => {
@@ -96,13 +99,13 @@ const ShoppingCart = ({
   const [titleEnough, setTitleEnough] = useState("");
   const [bodyEnough, setBodyEnough] = useState("");
 
-  const getMealsData = ()=>{
+  const getMealsData = () => {
     let tempDict = {};
-   mealNumbers.map((freq,index)=>{
-    if(freq>0){
-      tempDict[MealData.getMeals()[index].mealName] = freq;
-    }
-   });
+    mealNumbers.map((freq, index) => {
+      if (freq > 0) {
+        tempDict[MealData.getMeals()[index].mealName] = freq;
+      }
+    });
 
     return tempDict;
   };
@@ -124,15 +127,17 @@ const ShoppingCart = ({
       setDisplayEnoughPopUp(true);
     } else if (!userSession.isLoggedIn()) {
       const mealsInfo = {
-        zipcode:zipCode,
-        planSize:numMeals,
-        mealsAndFreqs:getMealsData()
+        zipcode: zipCode,
+        planSize: numMeals,
+        mealsAndFreqs: getMealsData(),
       };
-      DataCollectionAPI.storeUnprocessedMeals(mealsInfo).then(()=>{
-        console.log("Successful");
-      }).catch((err)=>{
-        console.log("Err:: "+err);
-      });
+      DataCollectionAPI.storeUnprocessedMeals(mealsInfo)
+        .then(() => {
+          console.log("Successful");
+        })
+        .catch((err) => {
+          console.log("Err:: " + err);
+        });
       setTitle("LogIn/SignUp");
       setBody(
         <div
@@ -169,7 +174,8 @@ const ShoppingCart = ({
       );
       setDisplayPopUp(true);
     } else {
-      document.getElementById("hiddenPaymentButton").click();
+      // document.getElementById("hiddenPaymentButton").click();
+      setDisplayUpSale(true);
     }
   };
 
@@ -271,15 +277,26 @@ const ShoppingCart = ({
               "Meals Total $" + cartPrice
             }`}</h5>
             <h5 className="text-center mt-2">{`${
-              "Delivery $" + 3
+              "Delivery $" + zipCodeService.isValidZipCode(zipCode)
             }`}</h5>
             <h5 className="text-center mt-2">{`${
-              "Taxes $" +  Math.round(((cartPrice+3)*0.06625)*100)/100
+              "Taxes $" +
+              Math.round(
+                (cartPrice + zipCodeService.isValidZipCode(zipCode)) *
+                  0.06625 *
+                  100
+              ) /
+                100
             }`}</h5>
             <h5 className="text-center mt-2">{`${
-              "Total $" + (Math.round(
-                ((cartPrice+3)*0.06625+(cartPrice+3)) * 100
-              ) / 100)
+              "Total $" +
+              Math.round(
+                ((cartPrice + zipCodeService.isValidZipCode(zipCode)) *
+                  0.06625 +
+                  (cartPrice +zipCodeService.isValidZipCode(zipCode))) *
+                  100
+              ) /
+                100
             }`}</h5>
             <div className="h-45 d-flex align-items-center justify-content-center">
               <button
@@ -370,11 +387,10 @@ const ShoppingCart = ({
       <PopUp
         displayPopUp={displayEnoughPopUp}
         setDisplayPopUp={setDisplayEnoughPopUp}
-        title={titleEnough}P
+        title={titleEnough}
         body={bodyEnough}
       />
 
-     
       <Payment
         cart={cart}
         setCart={setCart}
@@ -385,6 +401,19 @@ const ShoppingCart = ({
         delivDate={delivDate}
         zipCode={zipCode}
       />
+
+      <UpSaleItems
+          displayPopUp={displayUpSale}
+          setDisplayPopUp={setDisplayUpSale}
+          cartPrice={cartPrice}
+          setCartPrice={setCartPrice}
+          cart={cart}
+          setCart={setCart}
+          zipCode={zipCode}
+          mealNumbers={mealNumbers}
+          setMealNumbers={setMealNumbers}
+          
+        />
     </Nav>
   );
 };

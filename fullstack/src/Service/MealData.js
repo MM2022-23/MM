@@ -1,8 +1,4 @@
 class MealData {
-
-
-  
-
   // depends on zipcode entered by user
   data = [
     {
@@ -15,7 +11,7 @@ class MealData {
         idli: 3,
         chutney: 1,
       },
-      price:12.99
+      price: 12.99,
     },
 
     {
@@ -27,7 +23,7 @@ class MealData {
         saak: 2,
         gulabJamun: 1,
       },
-      price:12.99
+      price: 12.99,
     },
 
     {
@@ -41,7 +37,7 @@ class MealData {
         gulabJamun: 3,
         lassi: 1,
       },
-      price:12.99
+      price: 12.99,
     },
 
     {
@@ -53,7 +49,7 @@ class MealData {
         saak: 2,
         rausagula: 1,
       },
-      price:12.99
+      price: 12.99,
     },
     {
       id: 4,
@@ -64,38 +60,54 @@ class MealData {
         saak: 2,
         rausagula: 1,
       },
-      price:12.99
+      price: 12.99,
     },
     {
       id: 5,
       img: require("../Resources/Meals/GulabJamun.png"),
-      mealName: "Gulaab Jamun",
+      mealName: "Gulaab Jamun 2 pcs",
       description: {
         rotis: 4,
         saak: 2,
         rausagula: 1,
       },
-      price:12.99
+      price: 2.23,
     },
     {
       id: 6,
       img: require("../Resources/Meals/KajuKatri.png"),
-      mealName: "Kaju Katri",
+      mealName: "Kaju Katri 2 pcs",
       description: {
         rotis: 4,
         saak: 2,
         rausagula: 1,
       },
-      price:12.99
-    }
+      price: 2.50,
+    },
   ];
-  getMeals = () => {
-    // validate zipCode then only send data
+
+  getNumberOfActualMeals() {
+    return 5;
+  }
+
+  /**
+   *
+   * @returns everything including upsale items
+   */
+  getAllItems = () => {
     return this.data;
   };
 
-  getNumberOfActualMeals(){
-    return 5; 
+  /**
+   *
+   * @returns returns ONLY meals
+   */
+  getMeals() {
+    return this.data.slice(0, this.getNumberOfActualMeals());
+  }
+
+  getUpSaleItems() {
+    return this.data.slice(this.getNumberOfActualMeals());
   }
 }
 
