@@ -13,6 +13,7 @@ import Banner from "./Banner/Banner";
 import MealPlans from "./MealPlans/MealPlans";
 import MealsLookUp from "./MealsLookUp/MealsLookUp";
 import Testimonials from "./Testimonials/Testimonials";
+import {Helmet} from "react-helmet";
 const Home = ({
   loggedIn,
   setLogIn,
@@ -24,7 +25,6 @@ const Home = ({
   setScrollFAQ,
 }) => {
   useEffect(() => {
-    document.title = "Mirchi Meals";
     if (scrollFAQ) {
       console.log("Down!!!");
       ScrollTop.scrollToFAQ();
@@ -90,6 +90,13 @@ const Home = ({
   };
   return (
     <>
+    <Helmet>
+      <title>
+      Home
+      </title>
+      <meta name="description" content="Mirchi Meals adds a twist to traditional tiffins and provides New Jersey with authentic, quality, and fresh Indian meals delivered straight to you. Meal prices start as low as $12.99 and customers can choose Gujarati, Punjabi, South Indian, Bengali foods."/>
+      
+    </Helmet>
       <Banner />
       {/* Log In & Sign Up Button */}
       <Showcase loggedIn={loggedIn} setLogIn={setLogIn} />

@@ -15,7 +15,6 @@ const OrderHistory = ({ isLoggedIn }) => {
     if (!isLoggedIn) {
       navigate("/");
     } else {
-      document.title = "History";
       const fetchHistory = () => {
         console.log("SERVICE CALLED....");
         OrderAPIService.orderHistory({ id: userSession.getUser().id })

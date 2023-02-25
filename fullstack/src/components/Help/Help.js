@@ -3,10 +3,10 @@ import { Button } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import React from "react";
 import ScrollTop from "../../Service/Misc/ScrollTop";
+import {Helmet} from "react-helmet";
 
 const Help = ({ scrollFAQ, setScrollFAQ }) => {
   useEffect(() => {
-    document.title = "Help";
     ScrollTop.scrollUp();
   }, []);
   const navigate = useNavigate();
@@ -16,6 +16,14 @@ const Help = ({ scrollFAQ, setScrollFAQ }) => {
     navigate("/");
   };
   return (
+    <>
+    <Helmet>
+      <title>
+      Help
+      </title>
+      <meta name="For comments, concerns and order cancellations, please address to support@mirchimeals.com where our support staff will get back to your query within 3 hours."/>
+      
+    </Helmet>
     <section
       className="mealPlans bg-primary"
       style={{ fontFamily: "Signika", padding: "64px 32px" }}
@@ -74,6 +82,8 @@ const Help = ({ scrollFAQ, setScrollFAQ }) => {
         </div>
       </div>
     </section>
+    </>
+    
   );
 };
 

@@ -14,6 +14,7 @@ import Scroll from "../../Service/Misc/ScrollTop";
 import { Modal } from "react-bootstrap";
 import zipCodeService from "../../Service/Data/zipCodeService";
 import DataCollectionAPIService from "../../Service/APICalls/DataCollectionAPIService";
+import {Helmet} from "react-helmet";
 
 const data = {
   backColor: "primary",
@@ -90,7 +91,6 @@ const OrderPage = ({
       // setFreq("Select Frequency");
       setDelivDate("Select Date");
     }
-    document.title = "Order";
     Scroll.scrollUp();
   }, []);
   // Pick meals button clicked
@@ -144,6 +144,13 @@ const OrderPage = ({
 
   return (
     <>
+    <Helmet>
+      <title>
+      Order
+      </title>
+      <meta name="Order a variety of savory and fresh meals from every part of India, including Gujarat, Punjab, South India, and more. Grab 4 melas with prices starting as low as $12.99."/>
+      
+    </Helmet>
       {/* User Input for zipcode, freq, plan, date */}
       <section
         className="bg-light text-dark p-5 p-lg-0 pt-lg-5 text-center text-sm-start"

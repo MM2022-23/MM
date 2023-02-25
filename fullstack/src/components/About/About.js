@@ -9,9 +9,9 @@ import InformationBox from "./InformationBox/InformationBox";
 import { Link } from "react-router-dom";
 import ScrollTop from "../../Service/Misc/ScrollTop";
 import { useEffect } from "react";
+import {Helmet} from "react-helmet";
 const About = () => {
   useEffect(() => {
-    document.title = "About";
     ScrollTop.scrollUp();
   }, []);
   const firstBox = {
@@ -224,6 +224,14 @@ const About = () => {
   };
   return (
     <>
+
+<Helmet>
+      <title>
+      About
+      </title>
+      <meta name="Mirchi Meals aims to provide readily accessible Indian meals for everyone to enjoy. Our variety of Indian meals allow our customers to experience different Indian foods and delicacies across many regions of India."/>
+      
+    </Helmet>
       {/* What we do */}
       <InformationBox data={firstBox} />
 
