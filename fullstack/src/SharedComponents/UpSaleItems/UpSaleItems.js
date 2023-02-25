@@ -170,7 +170,7 @@ const UpSaleItems = ({
         style={{ fontFamily: "Signika" }}
       >
         <Modal.Header closeButton style={{ textAlign: "center" }}>
-          <Modal.Title>Add ons</Modal.Title>
+          <Modal.Title>People have also tried</Modal.Title>
         </Modal.Header>
 
         <Modal.Body>

@@ -75,7 +75,7 @@ class MealData {
     },
     {
       id: 6,
-      img: require("../../Resources/Meals/ChocoBar.png"),
+      img: require("../../Resources/Meals/chocobar.png"),
       mealName: "Chocobar",
       description: {
         rotis: 4,
