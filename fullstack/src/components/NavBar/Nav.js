@@ -37,11 +37,18 @@ function NavBar({
     if (path.indexOf("#") < 0) {
       ScrollTop.scrollToFAQ();
     } else {
-      path = path.split("#/")[1];
-      if (path.length !== 0) {
-        navigate("/");
-        setScrollFAQ(true);
-      } else {
+      console.log("PATH: " + path);
+      // SCROLL doesnt work ERR: www.mirchimeals.com/#
+      // SCROLL works NO ERR: www.mirchimeals.com/#/order
+      try {
+        path = path.split("#/")[1];
+        if (path.length !== 0) {
+          navigate("/");
+          setScrollFAQ(true);
+        } else {
+          ScrollTop.scrollToFAQ();
+        }
+      } catch (err) {
         ScrollTop.scrollToFAQ();
       }
     }
@@ -58,7 +65,7 @@ function NavBar({
       <Container style={{ fontFamily: "Signika" }}>
         {/* Mirchi Meals  */}
         <Navbar.Brand>
-          <Nav.Link href="#/">
+          <Nav.Link href="/#">
             <img
               src={require("../../Resources/Logo/mirchiMealsLogo.png")}
               alt="MirchiMealsLogo"
