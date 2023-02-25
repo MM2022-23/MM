@@ -60,8 +60,6 @@ const Payment = ({
     );
   }, [cartPrice]);
   useEffect(() => {
-    console.log("CART PRICE:: " + cartPrice + ":: type:: " + typeof cartPrice);
-    console.log("AMOUNT:: " + amount + ":: type:: " + typeof amount);
     const makeRequest = () => {
       setStatusTitle("Payment Status");
       // Sending req to backend to create charge based on card details entered by user..

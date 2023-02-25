@@ -22,7 +22,6 @@ import { useNavigate } from "react-router-dom";
 import ScrollTop from "../../Service/Misc/ScrollTop";
 import MealData from "../../Service/Data/MealData";
 import UpSaleItems from "../../SharedComponents/UpSaleItems/UpSaleItems";
-import { add, remove} from "../../Service/Algorithms/AddItem";
 const PickMeals = ({
   zipCode,
   cart,
@@ -97,55 +96,55 @@ const PickMeals = ({
    * 2. Update cart by setCart()
    */
 
-  // const add = (idNum) => {
-  //   setNumMealsSelected((numMealsSelected) => numMealsSelected + 1);
-  //   setCartPrice(
-  //     (cartPrice) =>
-  //       Math.round(
-  //         (cartPrice + MealData.getMeals()[idNum].price + Number.EPSILON) * 100
-  //       ) / 100
-  //   );
-  //   // will have to add PRICE
-  //   const addToCart = {
-  //     id: idNum,
-  //     mealName: mealList[idNum].mealName,
-  //     description: mealList[idNum].description,
-  //     price: mealList[idNum].price,
-  //   };
+  const add = (idNum) => {
+    setNumMealsSelected((numMealsSelected) => numMealsSelected + 1);
+    setCartPrice(
+      (cartPrice) =>
+        Math.round(
+          (cartPrice + MealData.getMeals()[idNum].price + Number.EPSILON) * 100
+        ) / 100
+    );
+    // will have to add PRICE
+    const addToCart = {
+      id: idNum,
+      mealName: mealList[idNum].mealName,
+      description: mealList[idNum].description,
+      price: mealList[idNum].price,
+    };
 
-  //   const tempArray = [];
+    const tempArray = [];
 
-  //   if (cart.length === 0) {
-  //     // cart is empty
-  //     tempArray.push(addToCart);
-  //     setCart(tempArray);
-  //   } else {
-  //     // cart is NOT empty; 2 cases: idNum IS in cart OR NOT in the cart
+    if (cart.length === 0) {
+      // cart is empty
+      tempArray.push(addToCart);
+      setCart(tempArray);
+    } else {
+      // cart is NOT empty; 2 cases: idNum IS in cart OR NOT in the cart
 
-  //     // don't wanna add duplicate items
-  //     let found = false;
+      // don't wanna add duplicate items
+      let found = false;
 
-  //     cart.forEach((element) => {
-  //       if (element.id === idNum) {
-  //         found = true;
-  //       }
-  //       tempArray.push(element);
-  //     });
+      cart.forEach((element) => {
+        if (element.id === idNum) {
+          found = true;
+        }
+        tempArray.push(element);
+      });
 
-  //     // adding item first time
-  //     if (!found) {
-  //       tempArray.push(addToCart);
-  //     }
-  //     setCart(tempArray); // Update cart to display correct items in cart
-  //   }
+      // adding item first time
+      if (!found) {
+        tempArray.push(addToCart);
+      }
+      setCart(tempArray); // Update cart to display correct items in cart
+    }
 
-  //   mealNumbers[idNum]++; // increment quantity in mealNumbers at index "idNum"
-  //   const newAr = [];
-  //   mealNumbers.map((item) => {
-  //     newAr.push(item);
-  //   });
-  //   setMealNumbers(newAr); // Update mealNumbers to display correct quantity numbers in cart AND pickMeals page
-  // };
+    mealNumbers[idNum]++; // increment quantity in mealNumbers at index "idNum"
+    const newAr = [];
+    mealNumbers.map((item) => {
+      newAr.push(item);
+    });
+    setMealNumbers(newAr); // Update mealNumbers to display correct quantity numbers in cart AND pickMeals page
+  };
 
   /**
    * @Goal REMOVE item from cart && decrement quantity by 1
@@ -153,35 +152,35 @@ const PickMeals = ({
    * 1. Decrement quantity in mealNumbers at index "idNum"
    * 2. Update cart by setCart()
    */
-  // const remove = (id) => {
-  //   // CANNOT have quantity < 0
-  //   if (mealNumbers[id] > 0) {
-  //     setNumMealsSelected((numMealsSelected) => numMealsSelected - 1);
-  //     setCartPrice(
-  //       (cartPrice) =>
-  //         Math.round(
-  //           (cartPrice - MealData.getMeals()[id].price + Number.EPSILON) * 100
-  //         ) / 100
-  //     );
-  //     mealNumbers[id]--; // decrement quantity in mealNumbers at index "id"
-  //     const newAr = [];
-  //     mealNumbers.map((item) => {
-  //       newAr.push(item);
-  //     });
-  //     setMealNumbers(newAr); // update mealNumbers
+  const remove = (id) => {
+    // CANNOT have quantity < 0
+    if (mealNumbers[id] > 0) {
+      setNumMealsSelected((numMealsSelected) => numMealsSelected - 1);
+      setCartPrice(
+        (cartPrice) =>
+          Math.round(
+            (cartPrice - MealData.getMeals()[id].price + Number.EPSILON) * 100
+          ) / 100
+      );
+      mealNumbers[id]--; // decrement quantity in mealNumbers at index "id"
+      const newAr = [];
+      mealNumbers.map((item) => {
+        newAr.push(item);
+      });
+      setMealNumbers(newAr); // update mealNumbers
 
-  //     if (mealNumbers[id] === 0) {
-  //       // if item is reduced to 0 in cart, cart should be updated so we don't have an item in cart whose quantity = 0
-  //       const tempCart = [];
-  //       cart.forEach((element) => {
-  //         if (element.id !== id) {
-  //           tempCart.push(element);
-  //         }
-  //       });
-  //       setCart(tempCart);
-  //     }
-  //   }
-  // };
+      if (mealNumbers[id] === 0) {
+        // if item is reduced to 0 in cart, cart should be updated so we don't have an item in cart whose quantity = 0
+        const tempCart = [];
+        cart.forEach((element) => {
+          if (element.id !== id) {
+            tempCart.push(element);
+          }
+        });
+        setCart(tempCart);
+      }
+    }
+  };
 
   // log in warnin
   const [displayPopUp, setDisplayPopUp] = useState(false);
@@ -227,6 +226,7 @@ const PickMeals = ({
       setBodyEnough(<p>Select at least {numMeals[0]} meals</p>);
       setDisplayEnoughPopUp(true);
     } else if (!userSession.isLoggedIn()) {
+      console.log("USER IS NOT LOGGED IN!");
       const mealsInfo = {
         zipcode: zipCode,
         planSize: numMeals,
@@ -270,56 +270,9 @@ const PickMeals = ({
           </form>
         </div>
       );
-      setDisplayPopUp(true);
+      !userSession.isLoggedIn() && setDisplayPopUp(true);
     } else {
-      // Handle Stripe Payment
-      // setPayPopUp(true);
-      // document.getElementById("hiddenPaymentButton").click();
-      // setTitleEnough("Meals Break Down");
-      // setBodyEnough(
-      //   <>
-      //     <h5 className="text-center mt-4">{`${
-      //       "Meals Total $" + cartPrice
-      //     }`}</h5>
-      //     <h5 className="text-center mt-2">{`${
-      //       "Delivery $" + zipCodeService.isValidZipCode(zipCode)
-      //     }`}</h5>
-      //     <h5 className="text-center mt-2">{`${
-      //       "Taxes $" +
-      //       Math.round(
-      //         (cartPrice + zipCodeService.isValidZipCode(zipCode)) *
-      //           0.06625 *
-      //           100
-      //       ) /
-      //         100
-      //     }`}</h5>
-      //     <h5 className="text-center mt-2">{`${
-      //       "Total $" +
-      //       Math.round(
-      //         ((cartPrice + zipCodeService.isValidZipCode(zipCode)) * 0.06625 +
-      //           (cartPrice + zipCodeService.isValidZipCode(zipCode))) *
-      //           100
-      //       ) /
-      //         100
-      //     }`}</h5>
-
-      //     <div className="h-100 d-flex align-items-center justify-content-center">
-      //       <Button
-      //         variant="light"
-      //         className="text-dark"
-      //         onClick={() => {
-      //           setDisplayEnoughPopUp(false);
-      //           // document.getElementById("hiddenPaymentButton").click();
-      //         }}
-      //       >
-      //         Proceed
-      //       </Button>
-      //     </div>
-      //   </>
-      // );
-      // setDisplayEnoughPopUp(true);
-
-      // after upsale pop user accesses payment pop up
+      // IF for some reason logIn Pop up shows up, add setDisplayPopUp(false)
       setDisplayUpSale(true);
     }
   };
@@ -360,7 +313,7 @@ const PickMeals = ({
 
                     <Button
                       variant="light"
-                      onClick={() => remove(id,numMealsSelected,setNumMealsSelected,cart, setCart, cartPrice,setMealNumbers,setCartPrice,mealNumbers)}
+                      onClick={() => remove(id)}
                       className="buttonAdjustment"
                     >
                       <span className="letterAdjustment">-</span>
@@ -370,7 +323,7 @@ const PickMeals = ({
 
                     <Button
                       variant="light"
-                      onClick={() => add(id,numMealsSelected,setNumMealsSelected,setCart,cartPrice,setMealNumbers,setCartPrice,mealNumbers)}
+                      onClick={() => add(id)}
                       className="buttonAdjustment"
                     >
                       <span className="letterAdjustment">+</span>

@@ -34,12 +34,16 @@ function NavBar({
   // might cause error in PRODUCTION due to paths and hashes "#/"
   const toFAQ = (e) => {
     let path = window.location.href;
-    path = path.split("#/")[1];
-    if (path.length !== 0) {
-      navigate("/");
-      setScrollFAQ(true);
-    } else {
+    if (path.indexOf("#") < 0) {
       ScrollTop.scrollToFAQ();
+    } else {
+      path = path.split("#/")[1];
+      if (path.length !== 0) {
+        navigate("/");
+        setScrollFAQ(true);
+      } else {
+        ScrollTop.scrollToFAQ();
+      }
     }
   };
 

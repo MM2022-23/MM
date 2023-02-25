@@ -64,25 +64,25 @@ class MealData {
     },
     {
       id: 5,
-      img: require("../../Resources/Meals/GulabJamun.png"),
-      mealName: "Gulaab Jamun 2 pcs",
+      img: require("../../Resources/Meals/MangoDolly.png"),
+      mealName: "Mango Dolly",
       description: {
         rotis: 4,
         saak: 2,
         rausagula: 1,
       },
-      price: 2.23,
+      price: 2,
     },
     {
       id: 6,
-      img: require("../../Resources/Meals/KajuKatri.png"),
-      mealName: "Kaju Katri 2 pcs",
+      img: require("../../Resources/Meals/ChocoBar.png"),
+      mealName: "Chocobar",
       description: {
         rotis: 4,
         saak: 2,
         rausagula: 1,
       },
-      price: 2.50,
+      price: 2,
     },
   ];
 

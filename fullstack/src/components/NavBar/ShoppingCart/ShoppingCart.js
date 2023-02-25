@@ -172,7 +172,7 @@ const ShoppingCart = ({
           </form>
         </div>
       );
-      setDisplayPopUp(true);
+      !userSession.isLoggedIn() && setDisplayPopUp(true);
     } else {
       // document.getElementById("hiddenPaymentButton").click();
       setDisplayUpSale(true);
