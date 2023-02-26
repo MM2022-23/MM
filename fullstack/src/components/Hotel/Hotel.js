@@ -204,18 +204,18 @@ const Hotel = () => {
                   const { item_id, Total_Quantity } = mealQuantityInfo;
                   return (
                     <tr>
-                      <td>{MealData.getMeals()[item_id].mealName}</td>
+                      <td>{MealData.getAllItems()[item_id].mealName}</td>
 
                       <td>{Total_Quantity}</td>
                       <td>
                         {Object.keys(
-                          MealData.getMeals()[item_id].description
+                          MealData.getAllItems()[item_id].description
                         ).map((key) => {
                           return (
                             <span>
                               {`${key} : ${
                                 Total_Quantity *
-                                MealData.getMeals()[item_id].description[key]
+                                MealData.getAllItems()[item_id].description[key]
                               }`}
                               <br></br>
                             </span>
