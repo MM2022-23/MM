@@ -70,6 +70,9 @@ const Hotel = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [displayReport, setDisplayReport] = useState(false);
   const [status, setStatus] = useState("Submit");
+
+  const [defaultstatus, setDefaultStatus] = useState("Default");
+
   const handleCloseReport = () => {
     setReport("");
     setReportLabel(<span>Report</span>);
@@ -110,6 +113,40 @@ const Hotel = () => {
           );
         });
     }
+  };
+
+  /**
+   * Send order table to Admin
+   */
+
+  const sendTablesToAdmin = () => {
+    setDefaultStatus("Loading...");
+    let tableContent = "";
+    mealQuantityTable.map((item)=>{
+      const { item_id, Total_Quantity } = item;
+      tableContent+=`${MealData.getAllItems()[item_id].mealName} x ${Total_Quantity}\n`;
+    });
+    HotelAPIService.report({ msg: tableContent })
+      .then((response) => {
+        console.log(response);
+        setDefaultStatus("Default");
+        setReportLabel(
+          <span style={{ color: "green" }}>
+            Admin was notified successfully
+          </span>
+        );
+        setTimeout(() => {
+          handleCloseReport();
+        }, 3000);
+      })
+      .catch((err) => {
+        setDefaultStatus("Default");
+        setReportLabel(
+          <span style={{ color: "red" }}>
+            Could'nt notify Admin, please call them
+          </span>
+        );
+      });
   };
 
   // do validation of pin after than let user in
@@ -348,6 +385,13 @@ const Hotel = () => {
           </Modal.Body>
 
           <Modal.Footer>
+            <Button
+              className="text-center"
+              variant="light"
+              onClick={sendTablesToAdmin}
+            >
+              <span>{defaultstatus}</span>
+            </Button>
             {/* Submit Button Clicked */}
             <Button
               className="text-center"
