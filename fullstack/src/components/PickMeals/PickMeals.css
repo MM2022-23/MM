@@ -119,8 +119,8 @@
 /* for mobiles */
 @media screen and (width>=376px) and (width<=420px) {
   .imageAdjustment {
-    height: 150px;
-    width: 161px;
+    height: 147px;
+    width: 156px;
     border: 0px;
     border-radius: 20px;
   }
@@ -226,7 +226,7 @@
 @media screen and (width>=800px) {
   .imageAdjustment {
     height: 220px;
-    width: 300px;
+    width: 260px;
     border: 0px;
     border-radius: 20px;
   }
