@@ -17,7 +17,7 @@ class MealData {
     {
       id: 1,
       img: require("../../Resources/Meals/New Paneer Tika.jpg"),
-      mealName: "Paneer Tikka Masala",
+      mealName: "Paneer Tikka",
       description: {
         rotis: 4,
         saak: 2,
