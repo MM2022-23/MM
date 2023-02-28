@@ -3,8 +3,8 @@ class MealData {
   data = [
     {
       id: 0,
-      img: require("../../Resources/Meals/meal1.png"),
-      mealName: "Madrasi Thari ",
+      img: require("../../Resources/Meals/Palak Paneer.jpg"),
+      mealName: "Palak Paneer ",
       // description: "Special Dish from South India",
       description: {
         sambhar: 2,
@@ -16,8 +16,8 @@ class MealData {
 
     {
       id: 1,
-      img: require("../../Resources/Meals/meal2.png"),
-      mealName: "Gujarati Thari",
+      img: require("../../Resources/Meals/New Paneer Tika.jpg"),
+      mealName: "Paneer Tikka Masala",
       description: {
         rotis: 4,
         saak: 2,
@@ -28,8 +28,8 @@ class MealData {
 
     {
       id: 2,
-      img: require("../../Resources/Meals/meal3.png"),
-      mealName: "Punjabi Thari",
+      img: require("../../Resources/Meals/Chana Masala.jpg"),
+      mealName: "Chana Masala",
       description: {
         rotis: 6,
         pannerSabji: 1,
@@ -42,8 +42,8 @@ class MealData {
 
     {
       id: 3,
-      img: require("../../Resources/Meals/meal4.png"),
-      mealName: "Benagali Thari",
+      img: require("../../Resources/Meals/Aloo Gobi.jpg"),
+      mealName: "Aloo Gobi",
       description: {
         rotis: 4,
         saak: 2,
@@ -53,8 +53,8 @@ class MealData {
     },
     {
       id: 4,
-      img: require("../../Resources/Meals/paneer.png"),
-      mealName: "Rajasthani Thari",
+      img: require("../../Resources/Meals/Bindi Masala.jpg"),
+      mealName: "Bhindi Masala",
       description: {
         rotis: 4,
         saak: 2,
