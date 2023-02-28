@@ -4,7 +4,7 @@ class MealData {
     {
       id: 0,
       img: require("../../Resources/Meals/Palak Paneer.jpg"),
-      mealName: "Palak Paneer ",
+      mealName: "Palak Paneer Dhamaka ",
       // description: "Special Dish from South India",
       description: {
         sambhar: 2,
@@ -17,7 +17,7 @@ class MealData {
     {
       id: 1,
       img: require("../../Resources/Meals/New Paneer Tika.jpg"),
-      mealName: "Paneer Tikka",
+      mealName: "Toofani Paneer Tikka",
       description: {
         rotis: 4,
         saak: 2,
@@ -29,7 +29,7 @@ class MealData {
     {
       id: 2,
       img: require("../../Resources/Meals/Chana Masala.jpg"),
-      mealName: "Chana Masala",
+      mealName: "Chataka Chana Masala",
       description: {
         rotis: 6,
         pannerSabji: 1,
@@ -43,7 +43,7 @@ class MealData {
     {
       id: 3,
       img: require("../../Resources/Meals/Aloo Gobi.jpg"),
-      mealName: "Aloo Gobi",
+      mealName: "Bazigar Aloo Gobi",
       description: {
         rotis: 4,
         saak: 2,
@@ -54,7 +54,7 @@ class MealData {
     {
       id: 4,
       img: require("../../Resources/Meals/Bindi Masala.jpg"),
-      mealName: "Bhindi Masala",
+      mealName: "Banger Bhindi Express",
       description: {
         rotis: 4,
         saak: 2,
