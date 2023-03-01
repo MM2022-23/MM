@@ -13,7 +13,6 @@ const items = [
     image={require("../../../Resources/Users/Mary.png")}
     name="Mary, 67"
     work="Proud Grandmother"
-    location="Edison, NJ"
     data-value="1"
   />,
   <TestimonialCard
@@ -21,7 +20,6 @@ const items = [
     image={require("../../../Resources/Users/Pallavi.png")}
     name="Pallavi, 43"
     work="Senior Financial Analyst"
-    location="Somerset, NJ"
     data-value="2"
   />,
   <TestimonialCard
@@ -29,7 +27,6 @@ const items = [
     image={require("../../../Resources/Users/Krish.png")}
     name="Krish, 28"
     work="Data ETL Engineer"
-    location="South Brunswick, NJ"
     data-value="3"
   />,
   <TestimonialCard
@@ -37,26 +34,28 @@ const items = [
     image={require("../../../Resources/Users/Cherry.png")}
     name="Cherry, 38"
     work="Caregiver"
+    data-value="4"
   />,
   <TestimonialCard
     testimony="“When my mother says its good, you know its good!”"
     image={require("../../../Resources/Users/Uma.png")}
     name="Uma, 55"
     work="Fitness Trainer"
+    data-value="5"
   />,
   <TestimonialCard
     testimony="“Between my in-laws being over for a few months, my children’s after school activities, and errands, Mirchi Meals has been able to keep me calm.”"
     image={require("../../../Resources/Users/Ankhi.png")}
     name="Ankhi, 40"
     work="Stay-at-Home Mom"
-    location="Milltown, NJ"
+    data-value="6"
   />,
   <TestimonialCard
     testimony="“The meals are fresh whenever I reheat them throughout the week, you can taste the quality and effort.”"
     image={require("../../../Resources/Users/Anastasia.png")}
     name="Anastasia, 35"
     work="Waitress"
-    location="New Brunswick, NJ"
+    data-value="7"
   />,
 
   <TestimonialCard
@@ -64,7 +63,7 @@ const items = [
     image={require("../../../Resources/Users/Shreya.png")}
     name="Shreya, 25"
     work="Student of Designing"
-    location="Metuchen, NJ"
+    data-value="8"
   />,
 
   <TestimonialCard
@@ -72,7 +71,7 @@ const items = [
     image={require("../../../Resources/Users/Maitri.png")}
     name="Maitri, 31"
     work="Human Resources Manager"
-    location="Manville, NJ"
+    data-value="9"
   />,
 ];
 
