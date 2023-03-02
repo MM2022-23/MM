@@ -1,3 +1,3 @@
-node_modules/.cache/
-node_modules/
-build/
+fullstack/node_modules/.cache/
+fullstack/node_modules/
+fullstack/build/
