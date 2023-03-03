@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import { Form } from "react-bootstrap";
 import UserAPIService from "../../../Service/APICalls/UserAPIService";
 /***
  * Will call backend API to register user

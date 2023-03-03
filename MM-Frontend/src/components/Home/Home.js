@@ -11,7 +11,6 @@ import Contact from "./Contact/Contact";
 import InformationGrid from "../About/InformationGrid/InformationGrid";
 import Banner from "./Banner/Banner";
 import MealPlans from "./MealPlans/MealPlans";
-import MealsLookUp from "./MealsLookUp/MealsLookUp";
 import Testimonials from "./Testimonials/Testimonials";
 import {Helmet} from "react-helmet";
 const Home = ({

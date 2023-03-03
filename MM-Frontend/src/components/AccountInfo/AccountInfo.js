@@ -1,12 +1,10 @@
 // makes APIcall
 import UserAPIService from "../../Service/APICalls/UserAPIService";
-import { useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import React from "react";
 import { Modal } from "react-bootstrap";
 import userSession from "../../Service/Data/userSession";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 const AccountInfo = ({ show, setShow }) => {
   // email value displayed on inputfield
   const [email, setEmail] = useState(userSession.getUser().emailAddress);

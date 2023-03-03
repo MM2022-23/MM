@@ -2,11 +2,9 @@
  *  For now can look in csv file for meal data based on zip code entered
  *  Scaling: might need API call to search meal info based on given zip code
  */
-import zipCodeService from "../../Service/Data/zipCodeService";
+
 import DataCollectionAPIService from "../../Service/APICalls/DataCollectionAPIService";
 import Payment from "../../SharedComponents/PopUp/Payment/Payment";
-import StripeBackend from "../../Service/APICalls/StripeBackendAPIService";
-import StripeCheckout from "react-stripe-checkout";
 import SignUpPopUp from "../NavBar/SignUpPopUp/SignUpPopUp";
 import LogInPopUP from "../NavBar/LogInPopUp/LogInPopUp";
 import userSession from "../../Service/Data/userSession";
