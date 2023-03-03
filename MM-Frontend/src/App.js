@@ -1,4 +1,4 @@
-// Will start commenting
+// checking git push -- remove this in cleaning process
 import ErrorPage from "./components/ErrorPage/ErrorPage";
 import { useEffect } from "react";
 import Help from "./components/Help/Help";
