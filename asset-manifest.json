@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.1fdf4853.css",
-    "main.js": "/static/js/main.e7a16b1a.js",
+    "main.js": "/static/js/main.701ebb39.js",
     "static/js/496.b7096a07.chunk.js": "/static/js/496.b7096a07.chunk.js",
     "static/media/noHistory.png": "/static/media/noHistory.4c3a724200d75503ab2f.png",
     "static/media/pavbhaji.png": "/static/media/pavbhaji.c9e0198637100f35fa89.png",
@@ -17,11 +17,8 @@
     "static/media/Bindi Masala.jpg": "/static/media/Bindi Masala.6929dd9dcc2027eebae5.jpg",
     "static/media/Palak Paneer.jpg": "/static/media/Palak Paneer.1eb304a7c1bb8c5aef1b.jpg",
     "static/media/kitchen.png": "/static/media/kitchen.0165d4bd74a2f60f3ef1.png",
-    "static/media/zipImage1.png": "/static/media/zipImage1.f89d65bbe31bdc074673.png",
     "static/media/puzzle1.png": "/static/media/puzzle1.b62e86687eece9bc9d9d.png",
-    "static/media/zipImage2.png": "/static/media/zipImage2.3eec913448600d6914f0.png",
     "static/media/puzzle.png": "/static/media/puzzle.4a9af1420608f9ec214a.png",
-    "static/media/zipImage3.png": "/static/media/zipImage3.2d6dd8c6392d5f3f2f35.png",
     "static/media/rocket.png": "/static/media/rocket.2c3930051ea1bab7db22.png",
     "static/media/help.png": "/static/media/help.615f050134e4c4cbb978.png",
     "static/media/meal4.png": "/static/media/meal4.133b4d56cfc8105bf066.png",
@@ -49,11 +46,11 @@
     "static/media/logo192.png": "/static/media/logo192.af530f4985d1db71d65d.png",
     "index.html": "/index.html",
     "main.1fdf4853.css.map": "/static/css/main.1fdf4853.css.map",
-    "main.e7a16b1a.js.map": "/static/js/main.e7a16b1a.js.map",
+    "main.701ebb39.js.map": "/static/js/main.701ebb39.js.map",
     "496.b7096a07.chunk.js.map": "/static/js/496.b7096a07.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.1fdf4853.css",
-    "static/js/main.e7a16b1a.js"
+    "static/js/main.701ebb39.js"
   ]
 }
