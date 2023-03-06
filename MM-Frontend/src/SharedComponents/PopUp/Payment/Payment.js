@@ -97,11 +97,14 @@ const Payment = ({
             }, 2000);
           } else {
             // Successful payment; so, STORE ORDER IN DB
-            setStatusBody("Successful Payment!");
-            setTimeout(() => {
-              setStatusTitle("Order Status");
-              setStatusBody("Processing....");
-            }, 1000);
+            // UNCOMMENT THIS SHIT to give status of successful payment
+              /* setStatusBody("Successful Payment!");
+                setTimeout(() => {
+                  setStatusTitle("Order Status");
+                  setStatusBody("Processing....");
+                }, 1000);
+              */
+
             setTimeout(() => {
               // mealAndFreqsArr is in format: [[id1,q1],[id2,q2]....]
               const mealAndFreqsArr = [];
@@ -129,11 +132,12 @@ const Payment = ({
               // setStatusTitle("Order Status");
               OrderAPIService.addOrder(objToSend, setStatusBody)
                 .then((res) => {
-                  setStatusBody("Order saved, Order#: " + res.data);
+                  setStatusTitle("Confirmation");
+                  setStatusBody("Order#: " + res.data);
 
                   // after 2 seconds close the pop up
                   setTimeout(() => {
-                    setStatusPopUp(false);
+                    // setStatusPopUp(false);
                     // here we empty previous token
                     setStripeToken(null);
                   }, 2000);
