@@ -270,7 +270,7 @@ const PickMeals = ({
       );
       !userSession.isLoggedIn() && setDisplayPopUp(true);
     } else {
-      // IF for some reason logIn Pop up shows up, add setDisplayPopUp(false)
+      setDisplayPopUp(false);
       setDisplayUpSale(true);
     }
   };
