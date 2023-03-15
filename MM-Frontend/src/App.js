@@ -22,6 +22,11 @@ import TermsAndCondition from "./components/TermsAndCondition/TermsAndCondition"
 import RefundsAndCancellationsPolicy from "./components/RefundsAndCancellationsPolicy/RefundsAndCancellationsPolicy";
 import DataCollectionAPI from "./Service/APICalls/DataCollectionAPIService";
 import AdminPortal from "./components/AdminPortal/AdminPortal";
+
+// import ReactGA from 'react-ga'; 
+// import { TRACKINGID } from "./Service/Constants";
+// google analytics stuff
+// ReactGA.initialize(TRACKINGID); 
 function App() {
   useEffect(() => {
     console.log("APP RENDERED!!!");
