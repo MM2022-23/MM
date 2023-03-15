@@ -22,22 +22,12 @@ import TermsAndCondition from "./components/TermsAndCondition/TermsAndCondition"
 import RefundsAndCancellationsPolicy from "./components/RefundsAndCancellationsPolicy/RefundsAndCancellationsPolicy";
 import DataCollectionAPI from "./Service/APICalls/DataCollectionAPIService";
 import AdminPortal from "./components/AdminPortal/AdminPortal";
-
 import ReactGA from "react-ga4";
 import { TRACKINGID } from "./Service/Constants";
+
 ReactGA.initialize(TRACKINGID);
 function App() {
   useEffect(() => {
-    // google analytics stuff
-    
-    ReactGA.event({
-      action:"Home Page",
-      category:"Page",
-      label:"Home Page",
-      value:"xxxx"
-    })
-    
-
     console.log("APP RENDERED!!!");
     let referrer = document.referrer;
     console.log("REFERED BY: " + referrer);

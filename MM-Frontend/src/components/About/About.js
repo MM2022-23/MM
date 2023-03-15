@@ -6,20 +6,21 @@ import React from "react";
 
 import { Button } from "react-bootstrap";
 import InformationBox from "./InformationBox/InformationBox";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import ScrollTop from "../../Service/Misc/ScrollTop";
 import { useEffect } from "react";
 import {Helmet} from "react-helmet";
 import ReactGA from 'react-ga4'; 
 const About = () => {
+  const useLoc = useLocation(); 
   useEffect(() => {
     ScrollTop.scrollUp();
-    ReactGA.event({
-      action:"About Page",
-      category:"Page",
-      label:"About Page",
-      value:"xxxx"
-    })
+    ReactGA.send({ 
+      hitType: 'pageview', 
+      page_location: window.location.href, 
+      page_path: useLoc.pathname, 
+      page_title: 'About' 
+    });
   }, []);
   const firstBox = {
     image: require("../../Resources/Meals/meal1.png"),

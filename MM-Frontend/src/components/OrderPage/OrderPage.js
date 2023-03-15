@@ -2,7 +2,7 @@
  * Might need API call to validate zipcode based on region
  */
 import DeliveryDate from "./DeliveryDate/DeliveryDate";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import React from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
@@ -15,6 +15,7 @@ import { Modal } from "react-bootstrap";
 import zipCodeService from "../../Service/Data/zipCodeService";
 import DataCollectionAPIService from "../../Service/APICalls/DataCollectionAPIService";
 import {Helmet} from "react-helmet";
+import ReactGA from 'react-ga4'; 
 
 const data = {
   backColor: "primary",
@@ -62,6 +63,7 @@ const OrderPage = ({
   const [show, setShow] = useState(false);
   const [msg, setMsg] = useState("");
 
+  const useLoc = useLocation(); 
   /**
    * coming from pickMeals, want to reselect all options
    * coming from MealPlans section of home page, want to enter everything EXCEPT plan size because we clicked on one of the buttons like 4 meals, 6 meals, ...
@@ -92,6 +94,12 @@ const OrderPage = ({
       setDelivDate("Select Date");
     }
     Scroll.scrollUp();
+    ReactGA.send({ 
+      hitType: 'pageview', 
+      page_location: window.location.href, 
+      page_path: useLoc.pathname, 
+      page_title: 'Order Page' 
+    });
   }, []);
   // Pick meals button clicked
   const handlePickMeals = () => {

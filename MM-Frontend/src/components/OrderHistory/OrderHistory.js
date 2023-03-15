@@ -1,20 +1,27 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useLocation} from "react-router-dom";
 import { useEffect } from "react";
 import { Button } from "react-bootstrap";
 import React from "react";
 import Table from "react-bootstrap/Table";
 import userSession from "../../Service/Data/userSession";
 import OrderAPIService from "../../Service/APICalls/OrderAPIService";
-
+import ReactGA from 'react-ga4'; 
 const OrderHistory = ({ isLoggedIn }) => {
   const navigate = useNavigate();
   const [orders, setOrders] = useState(null);
 
+  const useLoc = useLocation(); 
   useEffect(() => {
     if (!isLoggedIn) {
       navigate("/");
     } else {
+      ReactGA.send({ 
+        hitType: 'pageview', 
+        page_location: window.location.href, 
+        page_path: useLoc.pathname, 
+        page_title: 'Order History' 
+      });
       const fetchHistory = () => {
         console.log("SERVICE CALLED....");
         OrderAPIService.orderHistory({ id: userSession.getUser().id })

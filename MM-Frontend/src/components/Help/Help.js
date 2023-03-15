@@ -1,13 +1,21 @@
 import { useEffect } from "react";
 import { Button } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate , useLocation} from "react-router-dom";
 import React from "react";
 import ScrollTop from "../../Service/Misc/ScrollTop";
 import {Helmet} from "react-helmet";
+import ReactGA from 'react-ga4'; 
 
 const Help = ({ scrollFAQ, setScrollFAQ }) => {
+  const useLoc = useLocation(); 
   useEffect(() => {
     ScrollTop.scrollUp();
+    ReactGA.send({ 
+      hitType: 'pageview', 
+      page_location: window.location.href, 
+      page_path: useLoc.pathname, 
+      page_title: 'Help' 
+    });
   }, []);
   const navigate = useNavigate();
   const toFAQ = (e) => {
