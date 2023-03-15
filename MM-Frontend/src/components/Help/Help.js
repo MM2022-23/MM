@@ -21,7 +21,7 @@ const Help = ({ scrollFAQ, setScrollFAQ }) => {
       <title>
       Help
       </title>
-      <meta name="For comments, concerns and order cancellations, please address to support@mirchimeals.com where our support staff will get back to your query within 3 hours."/>
+      <meta name = "description" content="For comments, concerns and order cancellations, please address to support@mirchimeals.com where our support staff will get back to your query within 3 hours."/>
       
     </Helmet>
     <section

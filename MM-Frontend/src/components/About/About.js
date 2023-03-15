@@ -236,7 +236,7 @@ const About = () => {
       <title>
       About
       </title>
-      <meta name="Mirchi Meals aims to provide readily accessible Indian meals for everyone to enjoy. Our variety of Indian meals allow our customers to experience different Indian foods and delicacies across many regions of India."/>
+      <meta name = "description" content="Mirchi Meals aims to provide readily accessible Indian meals for everyone to enjoy. Our variety of Indian meals allow our customers to experience different Indian foods and delicacies across many regions of India."/>
       
     </Helmet>
       {/* What we do */}
