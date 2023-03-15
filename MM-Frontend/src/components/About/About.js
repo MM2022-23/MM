@@ -10,9 +10,16 @@ import { Link } from "react-router-dom";
 import ScrollTop from "../../Service/Misc/ScrollTop";
 import { useEffect } from "react";
 import {Helmet} from "react-helmet";
+import ReactGA from 'react-ga4'; 
 const About = () => {
   useEffect(() => {
     ScrollTop.scrollUp();
+    ReactGA.event({
+      action:"About Page",
+      category:"Page",
+      label:"About Page",
+      value:"xxxx"
+    })
   }, []);
   const firstBox = {
     image: require("../../Resources/Meals/meal1.png"),
