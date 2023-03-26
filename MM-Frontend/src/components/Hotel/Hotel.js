@@ -12,6 +12,7 @@ import "./Hotel.css";
 import MealData from "../../Service/Data/MealData";
 import HotelAPIService from "../../Service/APICalls/HotelAPIService";
 import DateService from "../../Service/Algorithms/DateService";
+import UserAPIService from "../../Service/APICalls/UserAPIService";
 
 const Hotel = () => {
   const [displayTables, setDisplayTables] = useState(false);
@@ -21,6 +22,7 @@ const Hotel = () => {
     </label>
   );
 
+  const [loading, setLoading] = useState("Log In");
   const [pinValue, setPinValue] = useState("");
   const [mealQuantityTable, setMealQuantityTable] = useState(null);
   const [ordersTable, setOrdersTable] = useState(null);
@@ -122,9 +124,11 @@ const Hotel = () => {
   const sendTablesToAdmin = () => {
     setDefaultStatus("Loading...");
     let tableContent = "";
-    mealQuantityTable.map((item)=>{
+    mealQuantityTable.map((item) => {
       const { item_id, Total_Quantity } = item;
-      tableContent+=`${MealData.getAllItems()[item_id].mealName} x ${Total_Quantity}\n`;
+      tableContent += `${
+        MealData.getAllItems()[item_id].mealName
+      } x ${Total_Quantity}\n`;
     });
     HotelAPIService.report({ msg: tableContent })
       .then((response) => {
@@ -151,21 +155,53 @@ const Hotel = () => {
 
   // do validation of pin after than let user in
   const handleSubmit = () => {
-    if (pinValue === "123") {
-      setIsLoggedIn(true);
-      setPinLabel(
-        <label for="exampleInputEmail1" className="mb-2">
-          PIN
-        </label>
-      );
+    setLoading("Loading ...");
+    if (pinValue.length > 0) {
+      UserAPIService.hotelLogIn(pinValue)
+        .then((response) => {
+          setLoading("Log In");
+          if (response.status === 200) {
+            setIsLoggedIn(true);
+            setPinLabel(
+              <label for="exampleInputEmail1" className="mb-2">
+                PIN
+              </label>
+            );
+            setPinValue(""); 
+          } else {
+            setLoading("Log In");
+            setPinLabel(
+              <label
+                for="exampleInputEmail1"
+                className="mb-2"
+                style={{ color: "red" }}
+              >
+                Incorrect PIN
+              </label>
+            );
+          }
+        })
+        .catch((err) => {
+          setLoading("Log In");
+          setPinLabel(
+            <label
+              for="exampleInputEmail1"
+              className="mb-2"
+              style={{ color: "red" }}
+            >
+              Incorrect PIN
+            </label>
+          );
+        });
     } else {
+      setLoading("Log In");
       setPinLabel(
         <label
           for="exampleInputEmail1"
           className="mb-2"
           style={{ color: "red" }}
         >
-          Incorrect PIN
+          Enter Valid PIN
         </label>
       );
     }
@@ -197,7 +233,7 @@ const Hotel = () => {
 
           <div className="container text-center">
             <Button variant="dark" onClick={handleSubmit} className="">
-              Log In
+              {loading}
             </Button>
           </div>
         </form>

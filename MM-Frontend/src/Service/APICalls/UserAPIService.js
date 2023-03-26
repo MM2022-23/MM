@@ -9,6 +9,16 @@ class UserApiServer {
     return axios.post(`${USER_BASE_REST_API_URL}register`, user);
   }
 
+  // HOTEL LOG IN
+  hotelLogIn(password) {
+    return axios.post(`${USER_BASE_REST_API_URL}hotelLogin`, {pass: password});
+  }
+
+  // ADMIN LOG IN
+  adminLogIn(password) {
+    return axios.post(`${USER_BASE_REST_API_URL}adminLogin`, password);
+  }
+
   // LOG IN
   logUserIn(user) {
     localStorage.setItem("Loading", 6);

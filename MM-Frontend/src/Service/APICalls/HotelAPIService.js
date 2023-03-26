@@ -3,6 +3,8 @@ import { BASE_URL } from "../Constants";
 const HOTE_BASE_API_URL = `${BASE_URL}/hotel/`;
 
 class HotelAPIService {
+
+  
   
   getMealQuantityTable(date){
     return axios.post(`${HOTE_BASE_API_URL}mealQuantityTable`, date);
