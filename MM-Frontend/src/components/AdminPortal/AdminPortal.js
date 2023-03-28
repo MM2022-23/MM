@@ -14,13 +14,14 @@ import HotelAPIService from "../../Service/APICalls/HotelAPIService";
 import AdminAPIService from "../../Service/APICalls/AdminAPIService";
 import PopUp from "../../SharedComponents/PopUp/PopUp";
 import DateService from "../../Service/Algorithms/DateService";
+import UserAPIService from "../../Service/APICalls/UserAPIService";
 const AdminPortal = () => {
   const [pinLabel, setPinLabel] = useState(
     <label for="exampleInputEmail1" className="mb-2">
       PIN
     </label>
   );
-
+  const [loading, setLoading] = useState("Log In");
   const [pinValue, setPinValue] = useState("");
   const [ordersTable, setOrdersTable] = useState(null);
   useEffect(() => {
@@ -81,24 +82,75 @@ const AdminPortal = () => {
 
   // do validation of pin after than let user in
   const handleSubmit = () => {
-    if (pinValue === "123") {
-      setIsLoggedIn(true);
-      setPinLabel(
-        <label for="exampleInputEmail1" className="mb-2">
-          PIN
-        </label>
-      );
+    setLoading("Loading ...");
+    if (pinValue.length > 0) {
+      UserAPIService.adminLogIn(pinValue)
+        .then((response) => {
+          setLoading("Log In");
+          if (response.status === 200) {
+            setIsLoggedIn(true);
+            setPinLabel(
+              <label for="exampleInputEmail1" className="mb-2">
+                PIN
+              </label>
+            );
+            setPinValue(""); 
+          } else {
+            setLoading("Log In");
+            setPinLabel(
+              <label
+                for="exampleInputEmail1"
+                className="mb-2"
+                style={{ color: "red" }}
+              >
+                Incorrect PIN
+              </label>
+            );
+          }
+        })
+        .catch((err) => {
+          setLoading("Log In");
+          setPinLabel(
+            <label
+              for="exampleInputEmail1"
+              className="mb-2"
+              style={{ color: "red" }}
+            >
+              Incorrect PIN
+            </label>
+          );
+        });
     } else {
+      setLoading("Log In");
       setPinLabel(
         <label
           for="exampleInputEmail1"
           className="mb-2"
           style={{ color: "red" }}
         >
-          Incorrect PIN
+          Enter Valid PIN
         </label>
       );
     }
+    
+    // if (pinValue === "123") {
+    //   setIsLoggedIn(true);
+    //   setPinLabel(
+    //     <label for="exampleInputEmail1" className="mb-2">
+    //       PIN
+    //     </label>
+    //   );
+    // } else {
+    //   setPinLabel(
+    //     <label
+    //       for="exampleInputEmail1"
+    //       className="mb-2"
+    //       style={{ color: "red" }}
+    //     >
+    //       Incorrect PIN
+    //     </label>
+    //   );
+    // }
   };
   const logInBox = () => {
     return (

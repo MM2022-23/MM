@@ -41,6 +41,11 @@ function App() {
         });
       referrer = "";
     }
+
+    const sessionDuration = Math.round((new Date() - window.performance.timing.navigationStart) / 1000);
+    ReactGA.set({
+      metric1: sessionDuration
+    });
   }, []);
   // Nav, Home
   const [loggedIn, setLogIn] = useState(userSession.isLoggedIn());

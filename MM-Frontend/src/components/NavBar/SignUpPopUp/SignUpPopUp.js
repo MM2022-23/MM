@@ -10,6 +10,7 @@ import React from "react";
 import { Modal } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import { useState } from "react";
+import ReactGA from 'react-ga4'; 
 
 function SignUpPopUp({ style, setLogIn }) {
   // display pop up
@@ -129,6 +130,11 @@ function SignUpPopUp({ style, setLogIn }) {
   };
 
   const handleDisplay = (e) => {
+    ReactGA.event({
+      category: 'Button',
+      action: 'Click',
+      label: 'SignUp Button'
+    });
     e.preventDefault();
     setDisplay(true);
   };

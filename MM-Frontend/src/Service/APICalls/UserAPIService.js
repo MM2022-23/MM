@@ -16,7 +16,7 @@ class UserApiServer {
 
   // ADMIN LOG IN
   adminLogIn(password) {
-    return axios.post(`${USER_BASE_REST_API_URL}adminLogin`, password);
+    return axios.post(`${USER_BASE_REST_API_URL}adminLogin`, {pass: password});
   }
 
   // LOG IN
