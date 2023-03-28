@@ -20,6 +20,7 @@ import { useNavigate } from "react-router-dom";
 import ScrollTop from "../../Service/Misc/ScrollTop";
 import MealData from "../../Service/Data/MealData";
 import UpSaleItems from "../../SharedComponents/UpSaleItems/UpSaleItems";
+import ReactGA from "react-ga4";
 const PickMeals = ({
   zipCode,
   cart,
@@ -45,6 +46,12 @@ const PickMeals = ({
       setResetOrderPageInfo(2); // if no zip code; go back to order page and have user fill out all the fields
       navigate("/order");
     } else {
+      ReactGA.event({
+        category: "Viewing Meals",
+        action: "viewing",
+        label: "Viewing Meals",
+      });
+
       // scroll up only once when user arrives on this page
       ScrollTop.scrollUp();
       if (mealNumbers.length === 0) {
@@ -52,6 +59,23 @@ const PickMeals = ({
         console.log("RESETTING CART");
         // should do this in case of payment success
       }
+
+      const handleScroll = () => {
+        // Send a custom event to Google Analytics when the user scrolls
+        ReactGA.event({
+          category: "Pick Meals Page",
+          action: "Scroll",
+          label: "User scrolled on the Pick Meals page",
+        });
+      };
+
+      // Register the scroll event listener
+      window.addEventListener("scroll", handleScroll);
+
+      // Clean up the event listener on unmount
+      return () => {
+        window.removeEventListener("scroll", handleScroll);
+      };
     }
   }, []);
 

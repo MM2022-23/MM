@@ -211,10 +211,16 @@ function SignUpPopUp({ style, setLogIn }) {
               password: userPassword,
               phone: phone,
             };
+            ReactGA.event({
+              category: "Button",
+              action: "SignUp",
+              label: "Sign Up successful",
+            });
             userSession.addUser(userLoggedIn);
             handleClose();
             console.log("SUCCESS ON FRONT END ");
           } else {
+            // FIX: DIFFERENTIATE OTHER ERRS FROM SIGN UP DUPLICATE EMAIL ERRORS 
             console.log("FAILURE ON FRONT END ");
           }
         })

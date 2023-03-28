@@ -1,6 +1,7 @@
 import React from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
+import ReactGA from 'react-ga4'; 
 const MealPlans = ({
   setMeals,
   setResetOrderPageInfo,
@@ -10,6 +11,11 @@ const MealPlans = ({
   const navigate = useNavigate();
 
   const buttonClicked = (meals) => {
+    ReactGA.event({
+      category: 'Order Button',
+      action: 'Click',
+      label: 'Order Button from Meal Plans in Home Page'
+    });
     setMeals(meals);
     setResetOrderPageInfo(1); // want to pick freq, date, zipCode but number of meals is chosen
     setCart([]);

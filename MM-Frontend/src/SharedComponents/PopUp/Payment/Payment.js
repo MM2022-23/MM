@@ -8,6 +8,7 @@ import { useEffect } from "react";
 import StripeBackend from "../../../Service/APICalls/StripeBackendAPIService";
 import { useState } from "react";
 import React from "react";
+import ReactGA from 'react-ga4'; 
 const Payment = ({
   cart,
   setCart,
@@ -99,13 +100,18 @@ const Payment = ({
           } else {
             // Successful payment; so, STORE ORDER IN DB
             // UNCOMMENT THIS SHIT to give status of successful payment
-              /* setStatusBody("Successful Payment!");
+            /* setStatusBody("Successful Payment!");
                 setTimeout(() => {
                   setStatusTitle("Order Status");
                   setStatusBody("Processing....");
                 }, 1000);
               */
 
+            ReactGA.event({
+              category: "Payment",
+              action: "Payment Successful",
+              label: "Payment Successful",
+            });
             setTimeout(() => {
               // mealAndFreqsArr is in format: [[id1,q1],[id2,q2]....]
               const mealAndFreqsArr = [];

@@ -12,9 +12,9 @@ import InformationGrid from "../About/InformationGrid/InformationGrid";
 import Banner from "./Banner/Banner";
 import MealPlans from "./MealPlans/MealPlans";
 import Testimonials from "./Testimonials/Testimonials";
-import {Helmet} from "react-helmet";
+import { Helmet } from "react-helmet";
 import { useLocation } from "react-router-dom";
-import ReactGA from 'react-ga4'; 
+import ReactGA from "react-ga4";
 const Home = ({
   loggedIn,
   setLogIn,
@@ -25,13 +25,14 @@ const Home = ({
   scrollFAQ,
   setScrollFAQ,
 }) => {
-  const useLoc = useLocation(); 
+  const useLoc = useLocation();
+
   useEffect(() => {
-    ReactGA.send({ 
-      hitType: 'pageview', 
-      page_location: window.location.href, 
-      page_path: useLoc.pathname, 
-      page_title: 'Home' 
+    ReactGA.send({
+      hitType: "pageview",
+      page_location: window.location.href,
+      page_path: useLoc.pathname,
+      page_title: "Home",
     });
     if (scrollFAQ) {
       console.log("Down!!!");
@@ -41,6 +42,23 @@ const Home = ({
       console.log("UP!!!");
       ScrollTop.scrollUp();
     }
+
+    // DA: Send a custom event to Google Analytics when the user scrolls
+    const handleScroll = () => {
+      ReactGA.event({
+        category: "Scroll",
+        action: "Scroll",
+        label: "Scroll in Home Page",
+      });
+    };
+
+    // Register the scroll event listener
+    window.addEventListener("scroll", handleScroll);
+
+    // Clean up the event listener on unmount
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
   const saveTime = {
     backColor: "primary",
@@ -98,13 +116,13 @@ const Home = ({
   };
   return (
     <>
-    <Helmet>
-      <title>
-      Home
-      </title>
-      <meta name="description" content="Mirchi Meals adds a twist to traditional tiffins and provides New Jersey with authentic, quality, and fresh Indian meals delivered straight to you. Meal prices start as low as $12.99 and customers can choose Gujarati, Punjabi, South Indian, Bengali foods."/>
-      
-    </Helmet>
+      <Helmet>
+        <title>Home</title>
+        <meta
+          name="description"
+          content="Mirchi Meals adds a twist to traditional tiffins and provides New Jersey with authentic, quality, and fresh Indian meals delivered straight to you. Meal prices start as low as $12.99 and customers can choose Gujarati, Punjabi, South Indian, Bengali foods."
+        />
+      </Helmet>
       <Banner />
       {/* Log In & Sign Up Button */}
       <Showcase loggedIn={loggedIn} setLogIn={setLogIn} />

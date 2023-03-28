@@ -14,8 +14,8 @@ import Scroll from "../../Service/Misc/ScrollTop";
 import { Modal } from "react-bootstrap";
 import zipCodeService from "../../Service/Data/zipCodeService";
 import DataCollectionAPIService from "../../Service/APICalls/DataCollectionAPIService";
-import {Helmet} from "react-helmet";
-import ReactGA from 'react-ga4'; 
+import { Helmet } from "react-helmet";
+import ReactGA from "react-ga4";
 
 const data = {
   backColor: "primary",
@@ -63,7 +63,7 @@ const OrderPage = ({
   const [show, setShow] = useState(false);
   const [msg, setMsg] = useState("");
 
-  const useLoc = useLocation(); 
+  const useLoc = useLocation();
   /**
    * coming from pickMeals, want to reselect all options
    * coming from MealPlans section of home page, want to enter everything EXCEPT plan size because we clicked on one of the buttons like 4 meals, 6 meals, ...
@@ -94,12 +94,30 @@ const OrderPage = ({
       setDelivDate("Select Date");
     }
     Scroll.scrollUp();
-    ReactGA.send({ 
-      hitType: 'pageview', 
-      page_location: window.location.href, 
-      page_path: useLoc.pathname, 
-      page_title: 'Order Page' 
+    ReactGA.send({
+      hitType: "pageview",
+      page_location: window.location.href,
+      page_path: useLoc.pathname,
+      page_title: "Order Page",
     });
+
+    // GA: Scroll reporting
+    const handleScroll = () => {
+      // Send a custom event to Google Analytics when the user scrolls
+      ReactGA.event({
+        category: "Order Page",
+        action: "Scroll",
+        label: "Scrolled in Order page",
+      });
+    };
+
+    // Register the scroll event listener
+    window.addEventListener("scroll", handleScroll);
+
+    // Clean up the event listener on unmount
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
   // Pick meals button clicked
   const handlePickMeals = () => {
@@ -152,13 +170,13 @@ const OrderPage = ({
 
   return (
     <>
-    <Helmet>
-      <title>
-      Order
-      </title>
-      <meta name = "description"  content="Order a variety of savory and fresh meals from every part of India, including Gujarat, Punjab, South India, and more. Grab 4 melas with prices starting as low as $12.99."/>
-      
-    </Helmet>
+      <Helmet>
+        <title>Order</title>
+        <meta
+          name="description"
+          content="Order a variety of savory and fresh meals from every part of India, including Gujarat, Punjab, South India, and more. Grab 4 melas with prices starting as low as $12.99."
+        />
+      </Helmet>
       {/* User Input for zipcode, freq, plan, date */}
       <section
         className="bg-light text-dark p-5 p-lg-0 pt-lg-5 text-center text-sm-start"

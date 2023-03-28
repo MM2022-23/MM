@@ -9,7 +9,7 @@ import { Modal } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import { useState } from "react";
 import userSession from "../../../Service/Data/userSession";
-
+import ReactGA from 'react-ga4'; 
 function LogInPopUP({ style, setLogIn }) {
   const [showForgotPassword, setShowForgotPassword] = useState(false);
   // display pop up
@@ -74,6 +74,11 @@ function LogInPopUP({ style, setLogIn }) {
   };
 
   const handleDisplay = (e) => {
+    ReactGA.event({
+      category: 'Button',
+      action: 'Click',
+      label: 'LogIn Button'
+    });
     e.preventDefault();
     setDisplay(true);
   };
@@ -121,6 +126,11 @@ function LogInPopUP({ style, setLogIn }) {
                 password: response.data.Password,
                 phone: response.data.phone,
               };
+              ReactGA.event({
+                category: "Button",
+                action: "LogIn",
+                label: "Log In successful",
+              });
               userSession.addUser(userLoggedIn);
               setInvalid(false);
               setLogIn(true);
