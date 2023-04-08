@@ -41,11 +41,15 @@ const ShoppingCart = ({
     setMealNumbers(emptyAr);
   };
   const add = (id) => {
-    setNumMealsSelected((numMealsSelected) => numMealsSelected + 1);
+    // ONLY IF actual meal is selected addons not counted
+    if (id < MealData.getNumberOfActualMeals()) {
+      setNumMealsSelected((numMealsSelected) => numMealsSelected + 1);
+    }
+
     setCartPrice(
       (cartPrice) =>
         Math.round(
-          (cartPrice + MealData.getMeals()[id].price + Number.EPSILON) * 100
+          (cartPrice + MealData.getAllItems()[id].price + Number.EPSILON) * 100
         ) / 100
     );
     mealNumbers[id]++;
@@ -60,11 +64,15 @@ const ShoppingCart = ({
   };
   const remove = (id) => {
     if (mealNumbers[id] > 0) {
-      setNumMealsSelected((numMealsSelected) => numMealsSelected - 1);
+      // ONLY IF actual meal is selected addons not counted
+      if (id < MealData.getNumberOfActualMeals()) {
+        setNumMealsSelected((numMealsSelected) => numMealsSelected - 1);
+      }
+
       setCartPrice(
         (cartPrice) =>
           Math.round(
-            (cartPrice - MealData.getMeals()[id].price + Number.EPSILON) * 100
+            (cartPrice - MealData.getAllItems()[id].price + Number.EPSILON) * 100
           ) / 100
       );
       mealNumbers[id]--;
