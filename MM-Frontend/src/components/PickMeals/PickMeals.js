@@ -21,6 +21,7 @@ import ScrollTop from "../../Service/Misc/ScrollTop";
 import MealData from "../../Service/Data/MealData";
 import UpSaleItems from "../../SharedComponents/UpSaleItems/UpSaleItems";
 import ReactGA from "react-ga4";
+import Banner from "../Home/Banner/Banner";
 const PickMeals = ({
   zipCode,
   cart,
@@ -98,10 +99,27 @@ const PickMeals = ({
   };
 
   // Handles PopUp display
-  const handleDisplay = (description, mealName) => {
-    setDescription(description);
-    setMealSelected(mealName);
-    setShow(true);
+  const handleDisplay = (descrption, mealName) => {
+    // content
+    if (Array.isArray(descrption)) {
+      let contentString = "";
+      for (let index = 0; index < descrption.length; index++) {
+        const element = descrption[index];
+        if(index!=descrption.length-1){
+          contentString += `${element}, `;
+        }else{
+          contentString += `and ${element}`;
+        }
+      }
+      setDescription(contentString);
+      setMealSelected(mealName);
+      setShow(true);
+    } else {
+      //description
+      setDescription(descrption);
+      setMealSelected(mealName);
+      setShow(true);
+    }
   };
 
   // closes description pop up when user closes it
@@ -301,6 +319,15 @@ const PickMeals = ({
 
   return (
     <>
+      <div
+        className="text-center text-primary py-2"
+        style={{ backgroundColor: "rgb(98, 10, 21)" }}
+      >
+        {/* following can be adjusted */}
+        <span style={{ fontSize: "16px" }}>
+          Each meal is appropriate for 1 Adult in 1 sitting.
+        </span>
+      </div>
       <div className="justify-content-center backButtonContainer">
         <Button
           variant="secondary"
@@ -315,7 +342,7 @@ const PickMeals = ({
         <Container className="text-dark my-4 customCss">
           <Row style={{ marginTop: "66px", marginBottom: "32px" }} xs="auto">
             {mealList.map((item) => {
-              const { id, img, mealName, description, price } = item;
+              const { id, img, mealName, description, content, price } = item;
               return (
                 <Col key={id} className="p-3 spacesBetweenBoxes">
                   <div className="card-body text-center">
@@ -325,11 +352,21 @@ const PickMeals = ({
                       <del className="mx-2">$15.28</del>${price}
                     </h5>
                     <Link
+                      onClick={() =>
+                        handleDisplay(content, `Content of "${mealName}" meal`)
+                      }
+                      to=""
+                    >
+                      <p className="text-light descriptionAdjustment">
+                        Content
+                      </p>
+                    </Link>
+                    <Link
                       onClick={() => handleDisplay(description, mealName)}
                       to=""
                     >
                       <p className="text-light descriptionAdjustment">
-                        Description/Ingridients
+                        Description
                       </p>
                     </Link>
 
@@ -364,14 +401,15 @@ const PickMeals = ({
                 <Modal.Title>{mealSelected}</Modal.Title>
               </Modal.Header>
               <Modal.Body>
-                {Object.keys(description).map((key) => {
+                {/* {Object.keys(description).map((key) => {
                   return (
                     <span>
                       {`${key} : ${description[key]}`}
                       <br></br>
                     </span>
                   );
-                })}
+                })} */}
+                {description}
               </Modal.Body>
               <Modal.Footer>
                 <Button variant="light" onClick={handleClose}>

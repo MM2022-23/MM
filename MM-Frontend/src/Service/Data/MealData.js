@@ -6,11 +6,10 @@ class MealData {
       img: require("../../Resources/Meals/Palak Paneer.jpg"),
       mealName: "Palak Paneer Dhamaka ",
       // description: "Special Dish from South India",
-      description: {
-        sambhar: 2,
-        idli: 3,
-        chutney: 1,
-      },
+      description:
+        "Marinated cubes of paneer (a type of Indian cheese) that are simmered in a rich and creamy tomato-based gravy.",
+      content: ["1 8oz Palak Paneer ", "1 8oz Masala Rice", "1 Tandoor Roti"],
+
       price: 12.99,
     },
 
@@ -18,11 +17,15 @@ class MealData {
       id: 1,
       img: require("../../Resources/Meals/New Paneer Tika.jpg"),
       mealName: "Toofani Paneer Tikka",
-      description: {
-        rotis: 4,
-        saak: 2,
-        gulabJamun: 1,
-      },
+      description:
+        "Soft paneer (a type of Indian cheese) cubes cooked in a creamy spinach gravy.",
+      content: [
+        "1 8oz Paneer Tikka Masala ",
+
+        "1 8oz Masala Rice",
+
+        "1 Tandoor Roti",
+      ],
       price: 12.99,
     },
 
@@ -30,13 +33,8 @@ class MealData {
       id: 2,
       img: require("../../Resources/Meals/Chana Masala.jpg"),
       mealName: "Chataka Chana Masala",
-      description: {
-        rotis: 6,
-        pannerSabji: 1,
-        saak: 3,
-        gulabJamun: 3,
-        lassi: 1,
-      },
+      description: "Chickpeas cooked in a spicy and tangy tomato-based gravy.",
+      content: ["1 8oz Chana Masala ", "1 8oz Masala Rice", "1 Tandoor Roti"],
       price: 12.99,
     },
 
@@ -44,44 +42,34 @@ class MealData {
       id: 3,
       img: require("../../Resources/Meals/Aloo Gobi.jpg"),
       mealName: "Bazigar Aloo Gobi",
-      description: {
-        rotis: 4,
-        saak: 2,
-        rausagula: 1,
-      },
+      description:
+        "A dry curry made with potatoes (aloo) and cauliflower (gobi) that are cooked together with a blend of aromatic spices.",
+      content: ["1 8oz Aloo Gobi ", "1 8oz Masala Rice", "1 Tandoor Roti"],
       price: 12.99,
     },
     {
       id: 4,
       img: require("../../Resources/Meals/Bindi Masala.jpg"),
-      mealName: "Banger Bhindi Express",
-      description: {
-        rotis: 4,
-        saak: 2,
-        rausagula: 1,
-      },
+      mealName: "Jugadu Bhindi Express",
+      description:
+        "Okra cooked in a spicy and tangy tomato-based gravy along with onions and spices.",
+      content: ["1 8oz Bhindi Masala ", "1 8oz Masala Rice", "1 Tandoor Roti"],
       price: 12.99,
     },
     {
       id: 5,
       img: require("../../Resources/Meals/MangoDolly.png"),
       mealName: "Mango Dolly",
-      description: {
-        rotis: 4,
-        saak: 2,
-        rausagula: 1,
-      },
+      description:"Mango Dolly",
+      content: [],
       price: 2,
     },
     {
       id: 6,
       img: require("../../Resources/Meals/ChocoBar.png"),
       mealName: "Chocobar",
-      description: {
-        rotis: 4,
-        saak: 2,
-        rausagula: 1,
-      },
+      description: "Chocobar",
+      content: [],
       price: 2,
     },
   ];
