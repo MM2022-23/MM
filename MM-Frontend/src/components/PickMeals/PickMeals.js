@@ -319,39 +319,8 @@ const PickMeals = ({
 
   return (
     <>
-      {/* <div
-        className="text-center text-primary py-2"
-        style={{ backgroundColor: "rgb(98, 10, 21)" }}
-      >
-        
-        <span style={{ fontSize: "16px" }}>
-          Each meal is appropriate for 1 Adult in 1 sitting.
-        </span>
-      </div> */}
-
-      {/* <section className="">
-        <Container className="">
-          <Row className="">
-            <strong
-              className="position-fixed text-primary text-center py-1"
-              style={{ backgroundColor: "rgb(98, 10, 21)" }}
-            >
-              Each meal is appropriate for 1 Adult in 1 sitting.
-            </strong>
-          </Row>
-        </Container>
-      </section> */}
-
       {/* <div className="justify-content-center backButtonContainer"> */}
       <div className="justify-content-center">
-        {/* <Row className="">
-          <strong
-            className="position-fixed text-primary text-center py-1 lead"
-            style={{ backgroundColor: "rgb(98, 10, 21)", width:"100%"}}
-          >
-            Each meal is appropriate for 1 Adult in 1 sitting.
-          </strong>
-        </Row> */}
         <div
           className="position-fixed text-primary text-center py-1"
           style={{ backgroundColor: "rgb(98, 10, 21)", width: "100%" }}
