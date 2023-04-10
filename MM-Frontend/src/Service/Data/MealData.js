@@ -4,10 +4,9 @@ class MealData {
     {
       id: 0,
       img: require("../../Resources/Meals/Palak Paneer.jpg"),
-      mealName: "Palak Paneer Dhamaka ",
+      mealName: "Palak Paneer Dhamaka",
       // description: "Special Dish from South India",
-      description:
-        "Marinated cubes of paneer (a type of Indian cheese) that are simmered in a rich and creamy tomato-based gravy.",
+      description: "Soft paneer (a type of Indian cheese) cubes cooked in a creamy spinach gravy.",
       content: ["1 8oz Palak Paneer ", "1 8oz Masala Rice", "1 Tandoor Roti"],
 
       price: 12.99,
@@ -18,9 +17,9 @@ class MealData {
       img: require("../../Resources/Meals/New Paneer Tika.jpg"),
       mealName: "Toofani Paneer Tikka",
       description:
-        "Soft paneer (a type of Indian cheese) cubes cooked in a creamy spinach gravy.",
+      "Marinated cubes of paneer (a type of Indian cheese) that are simmered in a rich and creamy tomato-based gravy.",
       content: [
-        "1 8oz Paneer Tikka Masala ",
+        "1 8oz Paneer Tikka Masala",
 
         "1 8oz Masala Rice",
 
