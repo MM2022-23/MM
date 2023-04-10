@@ -105,9 +105,9 @@ const PickMeals = ({
       let contentString = "";
       for (let index = 0; index < descrption.length; index++) {
         const element = descrption[index];
-        if(index!=descrption.length-1){
+        if (index != descrption.length - 1) {
           contentString += `${element}, `;
-        }else{
+        } else {
           contentString += `and ${element}`;
         }
       }
@@ -319,28 +319,60 @@ const PickMeals = ({
 
   return (
     <>
-      <div
+      {/* <div
         className="text-center text-primary py-2"
         style={{ backgroundColor: "rgb(98, 10, 21)" }}
       >
-        {/* following can be adjusted */}
+        
         <span style={{ fontSize: "16px" }}>
           Each meal is appropriate for 1 Adult in 1 sitting.
         </span>
-      </div>
-      <div className="justify-content-center backButtonContainer">
-        <Button
-          variant="secondary"
-          className="position-fixed backButton"
-          onClick={() => backToOrderPage()}
-          style={{ fontFamily: "Signika", color: "white" }}
+      </div> */}
+
+      {/* <section className="">
+        <Container className="">
+          <Row className="">
+            <strong
+              className="position-fixed text-primary text-center py-1"
+              style={{ backgroundColor: "rgb(98, 10, 21)" }}
+            >
+              Each meal is appropriate for 1 Adult in 1 sitting.
+            </strong>
+          </Row>
+        </Container>
+      </section> */}
+
+      {/* <div className="justify-content-center backButtonContainer"> */}
+      <div className="justify-content-center">
+        {/* <Row className="">
+          <strong
+            className="position-fixed text-primary text-center py-1 lead"
+            style={{ backgroundColor: "rgb(98, 10, 21)", width:"100%"}}
+          >
+            Each meal is appropriate for 1 Adult in 1 sitting.
+          </strong>
+        </Row> */}
+        <div
+          className="position-fixed text-primary text-center py-1"
+          style={{ backgroundColor: "rgb(98, 10, 21)", width: "100%" }}
         >
-          Back
-        </Button>
+          Each meal is appropriate for 1 Adult in 1 sitting.
+        </div>
+        <div className="py-5">
+          <Button
+            variant="secondary"
+            // className="position-fixed backButton"
+            className="position-fixed mx-2"
+            onClick={() => backToOrderPage()}
+            style={{ fontFamily: "Signika", color: "white", width:"5.5rem", height:"2.5rem"}}
+          >
+            Back
+          </Button>
+        </div>
       </div>
       <section style={{ fontFamily: "Signika" }}>
         <Container className="text-dark my-4 customCss">
-          <Row style={{ marginTop: "66px", marginBottom: "32px" }} xs="auto">
+          <Row style={{ marginTop: "px", marginBottom: "32px" }} xs="auto">
             {mealList.map((item) => {
               const { id, img, mealName, description, content, price } = item;
               return (
