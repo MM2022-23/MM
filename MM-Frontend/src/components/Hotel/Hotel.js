@@ -280,6 +280,8 @@ const Hotel = () => {
                       <td>{MealData.getAllItems()[item_id].mealName}</td>
 
                       <td>{Total_Quantity}</td>
+                      
+                      {/* FIX THIS AND THINK OF BETTER MODEL */}
                       <td>
                         {Object.keys(
                           MealData.getAllItems()[item_id].description
