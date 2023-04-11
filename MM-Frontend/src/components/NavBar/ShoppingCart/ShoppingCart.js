@@ -237,16 +237,19 @@ const ShoppingCart = ({
                         variant="light"
                         onClick={() => remove(item.id)}
                         style={{
-                          borderRadius: "30px",
+                          borderRadius: "10px",
                           border: "0px",
                           backgroundColor: "rgb(247, 193, 68)",
+                          width:"7.5vw",
+                          height:"38px",
+                          fontSize:"6vw"
                         }}
                       >
                         <span
-                          className="material-symbols-outlined"
+                          // className="material-symbols-outlined"
                           style={{ padding: "0px" }}
                         >
-                          remove
+                          -
                         </span>
                       </button>
 
@@ -264,16 +267,19 @@ const ShoppingCart = ({
                         variant="light"
                         onClick={() => add(item.id)}
                         style={{
-                          borderRadius: "30px",
+                          borderRadius: "10px",
                           border: "0px",
                           backgroundColor: "rgb(247, 193, 68)",
+                          width:"7.5vw",
+                          height:"38px",
+                          fontSize:"6vw"
                         }}
                       >
                         <span
-                          className="material-symbols-outlined"
+                          // className="material-symbols-outlined"
                           style={{ padding: "4px" }}
                         >
-                          add
+                          +
                         </span>
                       </button>
                     </Col>

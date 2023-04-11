@@ -348,6 +348,7 @@ const PickMeals = ({
                 <Col key={id} className="p-3 spacesBetweenBoxes">
                   <div className="card-body text-center">
                     <img src={img} className="img-fluid imageAdjustment" />
+                    {/* <img src={img} className="img-fluid" style={{height:"25vh",width:"50vw"}}/> */}
                     <h4 className="titleAdjustment">{mealName}</h4>
                     <h5>
                       <del className="mx-2">$15.28</del>${price}
