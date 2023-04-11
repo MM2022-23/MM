@@ -184,7 +184,7 @@ const UpSaleItems = ({
                       <div className="card-body text-center">
                         <img
                           src={img}
-                          style={{ width: "56vw", height:"15vh"}}
+                          style={{ width: "47vw", height:"15vh"}}
                           className="img-fluid"
                         />
                         <h4 style={{ fontSize: "20px" }}>{mealName}</h4>
