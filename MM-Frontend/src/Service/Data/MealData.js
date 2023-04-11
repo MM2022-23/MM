@@ -3,7 +3,7 @@ class MealData {
   data = [
     {
       id: 0,
-      img: require("../../Resources/Meals/Palak Paneer.png"),
+      img: require("../../Resources/Meals/Palak Paneer.jpg"),
       mealName: "Palak Paneer Dhamaka",
       // description: "Special Dish from South India",
       description: "Soft paneer (a type of Indian cheese) cubes cooked in a creamy spinach gravy.",
@@ -14,7 +14,7 @@ class MealData {
 
     {
       id: 1,
-      img: require("../../Resources/Meals/Paneer Tikka.png"),
+      img: require("../../Resources/Meals/Paneer Tikka.jpg"),
       mealName: "Toofani Paneer Tikka",
       description:
       "Marinated cubes of paneer (a type of Indian cheese) that are simmered in a rich and creamy tomato-based gravy.",
@@ -30,7 +30,7 @@ class MealData {
 
     {
       id: 2,
-      img: require("../../Resources/Meals/Chana Masala.png"),
+      img: require("../../Resources/Meals/Chana Masala.jpg"),
       mealName: "Chataka Chana Masala",
       description: "Chickpeas cooked in a spicy and tangy tomato-based gravy.",
       content: ["1 8oz Chana Masala ", "1 8oz Masala Rice", "1 Tandoor Roti"],
@@ -39,7 +39,7 @@ class MealData {
 
     {
       id: 3,
-      img: require("../../Resources/Meals/Aloo Gobi.png"),
+      img: require("../../Resources/Meals/Aloo Gobi.jpg"),
       mealName: "Bazigar Aloo Gobi",
       description:
         "A dry curry made with potatoes (aloo) and cauliflower (gobi) that are cooked together with a blend of aromatic spices.",
@@ -48,7 +48,7 @@ class MealData {
     },
     {
       id: 4,
-      img: require("../../Resources/Meals/Bhindi Masala.png"),
+      img: require("../../Resources/Meals/Bhindi Masala.jpg"),
       mealName: "Jugadu Bhindi Express",
       description:
         "Okra cooked in a spicy and tangy tomato-based gravy along with onions and spices.",
