@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.a9c60261.css",
-    "main.js": "/static/js/main.254576a9.js",
+    "main.js": "/static/js/main.42e8e2f8.js",
     "static/js/496.b7096a07.chunk.js": "/static/js/496.b7096a07.chunk.js",
     "static/media/noHistory.png": "/static/media/noHistory.4c3a724200d75503ab2f.png",
     "static/media/pavbhaji.png": "/static/media/pavbhaji.c9e0198637100f35fa89.png",
@@ -12,13 +12,13 @@
     "static/media/satisfiction.png": "/static/media/satisfiction.6c1c267191b8b75da7c9.png",
     "static/media/biryani.png": "/static/media/biryani.6a5323d4670c9d9bc292.png",
     "static/media/kitchen.png": "/static/media/kitchen.0165d4bd74a2f60f3ef1.png",
-    "static/media/Chana Masala.png": "/static/media/Chana Masala.c09b5f5b1508b65a287c.png",
-    "static/media/Bhindi Masala.png": "/static/media/Bhindi Masala.a1202ceb257a733b2a51.png",
-    "static/media/Paneer Tikka.png": "/static/media/Paneer Tikka.316058e0c03f099ad0e6.png",
-    "static/media/Aloo Gobi.png": "/static/media/Aloo Gobi.1d8810506bde922531e7.png",
-    "static/media/Palak Paneer.png": "/static/media/Palak Paneer.7401e5eb9a1f91940d9d.png",
     "static/media/puzzle1.png": "/static/media/puzzle1.b62e86687eece9bc9d9d.png",
+    "static/media/Chana Masala.jpg": "/static/media/Chana Masala.b4957f9be3a689a4fcd7.jpg",
+    "static/media/Aloo Gobi.jpg": "/static/media/Aloo Gobi.32e2e8e9d3802caf4fce.jpg",
+    "static/media/Paneer Tikka.jpg": "/static/media/Paneer Tikka.c0ae4018ea7285f2f79b.jpg",
+    "static/media/Bhindi Masala.jpg": "/static/media/Bhindi Masala.61af450b93836b576796.jpg",
     "static/media/puzzle.png": "/static/media/puzzle.4a9af1420608f9ec214a.png",
+    "static/media/Palak Paneer.jpg": "/static/media/Palak Paneer.b0d679fba6547de3f1ca.jpg",
     "static/media/rocket.png": "/static/media/rocket.2c3930051ea1bab7db22.png",
     "static/media/help.png": "/static/media/help.615f050134e4c4cbb978.png",
     "static/media/meal4.png": "/static/media/meal4.133b4d56cfc8105bf066.png",
@@ -46,11 +46,11 @@
     "static/media/logo192.png": "/static/media/logo192.af530f4985d1db71d65d.png",
     "index.html": "/index.html",
     "main.a9c60261.css.map": "/static/css/main.a9c60261.css.map",
-    "main.254576a9.js.map": "/static/js/main.254576a9.js.map",
+    "main.42e8e2f8.js.map": "/static/js/main.42e8e2f8.js.map",
     "496.b7096a07.chunk.js.map": "/static/js/496.b7096a07.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.a9c60261.css",
-    "static/js/main.254576a9.js"
+    "static/js/main.42e8e2f8.js"
   ]
 }
