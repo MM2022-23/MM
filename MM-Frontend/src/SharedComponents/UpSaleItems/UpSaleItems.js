@@ -193,7 +193,7 @@ const UpSaleItems = ({
                           onClick={() => handleDisplay(description, mealName)}
                           to=""
                         >
-                          <p className="text-light">Description/Ingridients</p>
+                          <p className="text-light">Description</p>
                         </Link>
 
                         <button

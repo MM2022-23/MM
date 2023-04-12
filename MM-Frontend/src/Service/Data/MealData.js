@@ -6,8 +6,14 @@ class MealData {
       img: require("../../Resources/Meals/Palak Paneer.jpg"),
       mealName: "Palak Paneer Dhamaka",
       // description: "Special Dish from South India",
-      description: "Soft paneer (a type of Indian cheese) cubes cooked in a creamy spinach gravy.",
-      content: ["1 8oz Palak Paneer ", "1 8oz Masala Rice", "1 Tandoor Roti"],
+      description:
+        "Soft paneer (a type of Indian cheese) cubes cooked in a creamy spinach gravy.",
+      content: [
+        "1 8oz Palak Paneer ",
+        "1 8oz Masala Rice",
+        "1 Tandoor Roti",
+        "1 6oz Amul Buttermilk Drink",
+      ],
 
       price: 12.99,
     },
@@ -17,13 +23,14 @@ class MealData {
       img: require("../../Resources/Meals/Paneer Tikka.jpg"),
       mealName: "Toofani Paneer Tikka",
       description:
-      "Marinated cubes of paneer (a type of Indian cheese) that are simmered in a rich and creamy tomato-based gravy.",
+        "Marinated cubes of paneer (a type of Indian cheese) that are simmered in a rich and creamy tomato-based gravy.",
       content: [
         "1 8oz Paneer Tikka Masala",
 
         "1 8oz Masala Rice",
 
         "1 Tandoor Roti",
+        "1 6oz Amul Buttermilk Drink",
       ],
       price: 12.99,
     },
@@ -33,7 +40,12 @@ class MealData {
       img: require("../../Resources/Meals/Chana Masala.jpg"),
       mealName: "Chataka Chana Masala",
       description: "Chickpeas cooked in a spicy and tangy tomato-based gravy.",
-      content: ["1 8oz Chana Masala ", "1 8oz Masala Rice", "1 Tandoor Roti"],
+      content: [
+        "1 8oz Chana Masala ",
+        "1 8oz Masala Rice",
+        "1 Tandoor Roti",
+        "1 6oz Amul Buttermilk Drink",
+      ],
       price: 12.99,
     },
 
@@ -43,38 +55,62 @@ class MealData {
       mealName: "Bazigar Aloo Gobi",
       description:
         "A dry curry made with potatoes (aloo) and cauliflower (gobi) that are cooked together with a blend of aromatic spices.",
-      content: ["1 8oz Aloo Gobi ", "1 8oz Masala Rice", "1 Tandoor Roti"],
+      content: [
+        "1 8oz Aloo Gobi ",
+        "1 8oz Masala Rice",
+        "1 Tandoor Roti",
+        "1 6oz Amul Buttermilk Drink",
+      ],
       price: 12.99,
     },
     {
       id: 4,
-      img: require("../../Resources/Meals/Bhindi Masala.jpg"),
-      mealName: "Jugadu Bhindi Express",
+      img: require("../../Resources/Meals/Baigan Bharta.jpg"),
+      mealName: "Best Baigan Bharta",
       description:
-        "Okra cooked in a spicy and tangy tomato-based gravy along with onions and spices.",
-      content: ["1 8oz Bhindi Masala ", "1 8oz Masala Rice", "1 Tandoor Roti"],
+        "Grilled eggplant minced into curry consisting of authentic herbs and spices.",
+      content: [
+        "1 8oz Baigan Bharta ",
+        "1 8oz Masala Rice",
+        "1 Tandoor Roti",
+        "1 6oz Amul Buttermilk Drink",
+      ],
       price: 12.99,
     },
     {
       id: 5,
+      img: require("../../Resources/Meals/Rajma.jpg"),
+      mealName: "Royal Rajma Express",
+      description:
+        "Kidney beans cooked in a spicy and tangy tomato-based gravy along with onions and spices.",
+      content: [
+        "1 8oz Rajma ",
+        "1 8oz Masala Rice",
+        "1 Tandoor Roti",
+        "1 6oz Amul Buttermilk Drink",
+      ],
+      price: 12.99,
+    },
+    {
+      id: 6,
       img: require("../../Resources/Meals/MangoDolly.png"),
       mealName: "Mango Dolly",
-      description:"Mango Dolly",
+      description: "Delightfully creamy vanilla ice cream bar enveloped in a mango coating",
       content: [],
       price: 2,
     },
     {
-      id: 6,
+      id: 7,
       img: require("../../Resources/Meals/ChocoBar.png"),
       mealName: "Chocobar",
-      description: "Chocobar",
+      description: "Savory ice cream bar with a vanilla ice cream center and chocolate exterior",
       content: [],
       price: 2,
     },
   ];
 
   getNumberOfActualMeals() {
-    return 5;
+    return 6;
   }
 
   /**
