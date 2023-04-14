@@ -341,7 +341,7 @@ const PickMeals = ({
       </div>
       <section style={{ fontFamily: "Signika" }}>
         <Container className="text-dark my-4 customCss">
-          <Row style={{ marginTop: "px", marginBottom: "32px" }} xs="auto">
+          <Row style={{ marginTop: "px", marginBottom: "32px" }}>
             {mealList.map((item) => {
               const { id, img, mealName, description, content, price } = item;
               return (
