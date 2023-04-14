@@ -52,8 +52,8 @@
     font-size: 15px;
   }
   .backButtonContainer {
-   background-color: black;
-   margin-bottom: 150px;
+    background-color: black;
+    margin-bottom: 150px;
   }
 }
 
@@ -111,8 +111,8 @@
     font-size: 20px;
   }
   .backButtonContainer {
-   background-color: black;
-   margin-bottom: 150px;
+    background-color: black;
+    margin-bottom: 150px;
   }
 }
 
@@ -160,7 +160,7 @@
   }
 
   .backButton {
-    margin-top:85px;
+    margin-top: 85px;
     top: 10%;
     left: 3%;
     margin-left: 0px;
@@ -178,8 +178,8 @@
 /* for tablets */
 @media screen and (width>420px) {
   .imageAdjustment {
-    height: 260px;
-    width: 260px;
+    height: 154px;
+    width: 154px;
   }
 
   .titleAdjustment {
@@ -217,16 +217,16 @@
     font-size: 25px;
   }
   .backButtonContainer {
-   background-color: black;
-   margin-bottom: 220px;
+    background-color: black;
+    margin-bottom: 220px;
   }
 }
 
 /* for laptops */
 @media screen and (width>=800px) {
   .imageAdjustment {
-    height: 260px;
-    width: 260px;
+    height: 154px;
+    width: 154px;
     border: 0px;
     border-radius: 20px;
   }

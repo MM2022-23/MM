@@ -9,10 +9,10 @@ class MealData {
       description:
         "Soft paneer (a type of Indian cheese) cubes cooked in a creamy spinach gravy.",
       content: [
-        "1 8oz Palak Paneer ",
-        "1 8oz Masala Rice",
-        "1 Tandoor Roti",
-        "1 6oz Amul Buttermilk Drink",
+        "8oz Palak Paneer ",
+        "8oz Masala Rice",
+        "Tandoor Roti",
+        "6oz Amul Buttermilk Drink",
       ],
 
       price: 12.99,
@@ -25,12 +25,12 @@ class MealData {
       description:
         "Marinated cubes of paneer (a type of Indian cheese) that are simmered in a rich and creamy tomato-based gravy.",
       content: [
-        "1 8oz Paneer Tikka Masala",
+        "8oz Paneer Tikka Masala",
 
-        "1 8oz Masala Rice",
+        "8oz Masala Rice",
 
-        "1 Tandoor Roti",
-        "1 6oz Amul Buttermilk Drink",
+        "Tandoor Roti",
+        "6oz Amul Buttermilk Drink",
       ],
       price: 12.99,
     },
@@ -41,10 +41,10 @@ class MealData {
       mealName: "Chataka Chana Masala",
       description: "Chickpeas cooked in a spicy and tangy tomato-based gravy.",
       content: [
-        "1 8oz Chana Masala ",
-        "1 8oz Masala Rice",
-        "1 Tandoor Roti",
-        "1 6oz Amul Buttermilk Drink",
+        "8oz Chana Masala ",
+        "8oz Masala Rice",
+        "Tandoor Roti",
+        "6oz Amul Buttermilk Drink",
       ],
       price: 12.99,
     },
@@ -56,10 +56,10 @@ class MealData {
       description:
         "A dry curry made with potatoes (aloo) and cauliflower (gobi) that are cooked together with a blend of aromatic spices.",
       content: [
-        "1 8oz Aloo Gobi ",
-        "1 8oz Masala Rice",
-        "1 Tandoor Roti",
-        "1 6oz Amul Buttermilk Drink",
+        "8oz Aloo Gobi ",
+        "8oz Masala Rice",
+        "Tandoor Roti",
+        "6oz Amul Buttermilk Drink",
       ],
       price: 12.99,
     },
@@ -70,10 +70,10 @@ class MealData {
       description:
         "Grilled eggplant minced into curry consisting of authentic herbs and spices.",
       content: [
-        "1 8oz Baigan Bharta ",
-        "1 8oz Masala Rice",
-        "1 Tandoor Roti",
-        "1 6oz Amul Buttermilk Drink",
+        "8oz Baigan Bharta ",
+        "8oz Masala Rice",
+        "Tandoor Roti",
+        "6oz Amul Buttermilk Drink",
       ],
       price: 12.99,
     },
@@ -84,10 +84,10 @@ class MealData {
       description:
         "Kidney beans cooked in a spicy and tangy tomato-based gravy along with onions and spices.",
       content: [
-        "1 8oz Rajma ",
-        "1 8oz Masala Rice",
-        "1 Tandoor Roti",
-        "1 6oz Amul Buttermilk Drink",
+        "8oz Rajma ",
+        "8oz Masala Rice",
+        "Tandoor Roti",
+        "6oz Amul Buttermilk Drink",
       ],
       price: 12.99,
     },
@@ -96,7 +96,7 @@ class MealData {
       img: require("../../Resources/Meals/MangoDolly.png"),
       mealName: "Mango Dolly",
       description: "Delightfully creamy vanilla ice cream bar enveloped in a mango coating",
-      content: [],
+      content: ["Mango dolly"],
       price: 2,
     },
     {
@@ -104,7 +104,7 @@ class MealData {
       img: require("../../Resources/Meals/ChocoBar.png"),
       mealName: "Chocobar",
       description: "Savory ice cream bar with a vanilla ice cream center and chocolate exterior",
-      content: [],
+      content: ["Chocobar"],
       price: 2,
     },
   ];

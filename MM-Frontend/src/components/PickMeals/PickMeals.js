@@ -111,7 +111,10 @@ const PickMeals = ({
           contentString += `and ${element}`;
         }
       }
-      setDescription(contentString);
+      const showList = <ul>{descrption.map((item,index)=>{
+        return (<li key= {index}>{`1 ${item}`}</li>)
+      })}</ul>;
+      setDescription(showList);
       setMealSelected(mealName);
       setShow(true);
     } else {
@@ -333,7 +336,12 @@ const PickMeals = ({
             // className="position-fixed backButton"
             className="position-fixed mx-2"
             onClick={() => backToOrderPage()}
-            style={{ fontFamily: "Signika", color: "white", width:"5.5rem", height:"2.5rem"}}
+            style={{
+              fontFamily: "Signika",
+              color: "white",
+              width: "5.5rem",
+              height: "2.5rem",
+            }}
           >
             Back
           </Button>

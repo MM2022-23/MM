@@ -27,47 +27,47 @@ const Hotel = () => {
   const [mealQuantityTable, setMealQuantityTable] = useState(null);
   const [ordersTable, setOrdersTable] = useState(null);
   useEffect(() => {
-    if (
-      DateService.isSunday() ||
-      (DateService.isSaturday() &&
-        new Date().getHours() % 12 >= 3 &&
-        new Date().getHours() >= 12)
-    ) {
-      console.log("SHOW TABLE BECAUSE IT IS 03:00 PM EST ");
-      setDisplayTables(true);
-      console.log(displayTables);
-      HotelAPIService.getMealQuantityTable({
-        date: DateService.closestUpcomingSunday(),
+    // if (
+    //   DateService.isSunday() ||
+    //   (DateService.isSaturday() &&
+    //     new Date().getHours() % 12 >= 3 &&
+    //     new Date().getHours() >= 12)
+    // ) {
+    console.log("SHOW TABLE BECAUSE IT IS 03:00 PM EST ");
+    setDisplayTables(true);
+    console.log(displayTables);
+    HotelAPIService.getMealQuantityTable({
+      date: DateService.closestUpcomingSunday(),
+    })
+      .then((res) => {
+        setMealQuantityTable(res.data);
       })
-        .then((res) => {
-          setMealQuantityTable(res.data);
-        })
-        .catch((err) => {
-          console.log("Error while fetching mealQuantityTable::: " + err);
-        });
+      .catch((err) => {
+        console.log("Error while fetching mealQuantityTable::: " + err);
+      });
 
-      //Replace dates with upcoming sunday's date
-      HotelAPIService.getOrderTables({
-        date: DateService.closestUpcomingSunday(),
+    //Replace dates with upcoming sunday's date
+    HotelAPIService.getOrderTables({
+      date: DateService.closestUpcomingSunday(),
+    })
+      .then((res) => {
+        setOrdersTable(res.data);
       })
-        .then((res) => {
-          setOrdersTable(res.data);
-        })
-        .catch((err) => {
-          console.log("Erro while fetching Orders Table::: " + err);
-        });
-    } else {
-      console.log(
-        `COULD NOT SHOW TABLE BECAUSE IS IT SUNDAY OR SATURDAY: ${
-          DateService.isSaturday() || DateService.isSunday()
-        } TIME IS ${
-          new Date().getHours() % 12
-        } IS NOT GREATER THAN 3 IF IT IS THEN IT IS NOT PM ie. ${
-          new Date().getHours() >= 12
-        }}`
-      );
-      setDisplayTables(false);
-    }
+      .catch((err) => {
+        console.log("Erro while fetching Orders Table::: " + err);
+      });
+    // } else {
+    //   console.log(
+    //     `COULD NOT SHOW TABLE BECAUSE IS IT SUNDAY OR SATURDAY: ${
+    //       DateService.isSaturday() || DateService.isSunday()
+    //     } TIME IS ${
+    //       new Date().getHours() % 12
+    //     } IS NOT GREATER THAN 3 IF IT IS THEN IT IS NOT PM ie. ${
+    //       new Date().getHours() >= 12
+    //     }}`
+    //   );
+    //   setDisplayTables(false);
+    // }
   }, []);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [displayReport, setDisplayReport] = useState(false);
@@ -167,7 +167,7 @@ const Hotel = () => {
                 PIN
               </label>
             );
-            setPinValue(""); 
+            setPinValue("");
           } else {
             setLoading("Log In");
             setPinLabel(
@@ -280,18 +280,13 @@ const Hotel = () => {
                       <td>{MealData.getAllItems()[item_id].mealName}</td>
 
                       <td>{Total_Quantity}</td>
-                      
+
                       {/* FIX THIS AND THINK OF BETTER MODEL */}
                       <td>
-                        {Object.keys(
-                          MealData.getAllItems()[item_id].description
-                        ).map((key) => {
+                        {MealData.getAllItems()[item_id].content.map((item) => {
                           return (
                             <span>
-                              {`${key} : ${
-                                Total_Quantity *
-                                MealData.getAllItems()[item_id].description[key]
-                              }`}
+                              {`${Total_Quantity} : ${item}`}
                               <br></br>
                             </span>
                           );
