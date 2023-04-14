@@ -1,18 +1,18 @@
 {
   "files": {
     "main.css": "/static/css/main.46f4aa29.css",
-    "main.js": "/static/js/main.79db1795.js",
+    "main.js": "/static/js/main.d1f488f0.js",
     "static/js/496.b7096a07.chunk.js": "/static/js/496.b7096a07.chunk.js",
     "static/media/noHistory.png": "/static/media/noHistory.4c3a724200d75503ab2f.png",
     "static/media/pavbhaji.png": "/static/media/pavbhaji.c9e0198637100f35fa89.png",
     "static/media/paneer.png": "/static/media/paneer.5e53177aa0e4746775c1.png",
+    "static/media/Palak Paneer.jpg": "/static/media/Palak Paneer.c813f642e71b0490374d.jpg",
     "static/media/rajma.png": "/static/media/rajma.8e40a390bc19881f4646.png",
     "static/media/Aloo Gobi.jpg": "/static/media/Aloo Gobi.1da79c72a61252f8099f.jpg",
     "static/media/Baigan Bharta.jpg": "/static/media/Baigan Bharta.f2d7d2a406ae8eabd636.jpg",
     "static/media/Paneer Tikka.jpg": "/static/media/Paneer Tikka.440ba9412857aad07183.jpg",
     "static/media/Chana Masala.jpg": "/static/media/Chana Masala.9d250944f55b78de04a5.jpg",
     "static/media/Rajma.jpg": "/static/media/Rajma.8083ae880b2213446c82.jpg",
-    "static/media/Palak Paneer.jpg": "/static/media/Palak Paneer.975d597629299b799d63.jpg",
     "static/media/newBackground.png": "/static/media/newBackground.205faf319bd151ddaec9.png",
     "static/media/customers.png": "/static/media/customers.fd128c736d97eab3a55b.png",
     "static/media/satisfiction.png": "/static/media/satisfiction.6c1c267191b8b75da7c9.png",
@@ -47,11 +47,11 @@
     "static/media/logo192.png": "/static/media/logo192.af530f4985d1db71d65d.png",
     "index.html": "/index.html",
     "main.46f4aa29.css.map": "/static/css/main.46f4aa29.css.map",
-    "main.79db1795.js.map": "/static/js/main.79db1795.js.map",
+    "main.d1f488f0.js.map": "/static/js/main.d1f488f0.js.map",
     "496.b7096a07.chunk.js.map": "/static/js/496.b7096a07.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.46f4aa29.css",
-    "static/js/main.79db1795.js"
+    "static/js/main.d1f488f0.js"
   ]
 }
