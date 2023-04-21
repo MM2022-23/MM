@@ -124,12 +124,24 @@ const Hotel = () => {
   const sendTablesToAdmin = () => {
     setDefaultStatus("Loading...");
     let tableContent = "";
+    let totalRicesAndNans = 0;
     mealQuantityTable.map((item) => {
       const { item_id, Total_Quantity } = item;
-      tableContent += `${
-        MealData.getAllItems()[item_id].mealName
-      } x ${Total_Quantity}\n`;
+      if (item_id < 6) {
+        tableContent += `${
+          MealData.getAllItems()[item_id].mealName
+        } x ${Total_Quantity}\n`;
+        totalRicesAndNans += 1;
+      }
     });
+    // including nans and Masala Rice
+    if (totalRicesAndNans > 0) {
+      // Tandoori Rotis
+      tableContent += `Tandoori Rotis x ${totalRicesAndNans} \n`;
+      // Masala Rice
+      tableContent += `8oz Masala Rice x ${totalRicesAndNans} `;
+    }
+    console.log(`Content: ${tableContent}`);
     HotelAPIService.report({ msg: tableContent })
       .then((response) => {
         console.log(response);
