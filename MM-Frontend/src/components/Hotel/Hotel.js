@@ -131,7 +131,7 @@ const Hotel = () => {
         tableContent += `${
           MealData.getAllItems()[item_id].mealName
         } x ${Total_Quantity}\n`;
-        totalRicesAndNans += 1;
+        totalRicesAndNans += Total_Quantity;
       }
     });
     // including nans and Masala Rice
