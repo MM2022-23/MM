@@ -101,23 +101,6 @@ const OrderPage = ({
       page_title: "Order Page",
     });
 
-    // GA: Scroll reporting
-    const handleScroll = () => {
-      // Send a custom event to Google Analytics when the user scrolls
-      ReactGA.event({
-        category: "Order Page",
-        action: "Scroll",
-        label: "Scrolled in Order page",
-      });
-    };
-
-    // Register the scroll event listener
-    window.addEventListener("scroll", handleScroll);
-
-    // Clean up the event listener on unmount
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
   }, []);
   // Pick meals button clicked
   const handlePickMeals = () => {

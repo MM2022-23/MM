@@ -43,22 +43,6 @@ const Home = ({
       ScrollTop.scrollUp();
     }
 
-    // DA: Send a custom event to Google Analytics when the user scrolls
-    const handleScroll = () => {
-      ReactGA.event({
-        category: "Scroll",
-        action: "Scroll",
-        label: "Scroll in Home Page",
-      });
-    };
-
-    // Register the scroll event listener
-    window.addEventListener("scroll", handleScroll);
-
-    // Clean up the event listener on unmount
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
   }, []);
   const saveTime = {
     backColor: "primary",

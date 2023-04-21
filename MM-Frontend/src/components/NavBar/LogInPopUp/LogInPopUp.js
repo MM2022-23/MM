@@ -126,11 +126,16 @@ function LogInPopUP({ style, setLogIn }) {
                 password: response.data.Password,
                 phone: response.data.phone,
               };
-              ReactGA.event({
-                category: "Button",
-                action: "LogIn",
+              ReactGA.send({ 
+                hitType: 'Button',
+                action:"Button",
                 label: "Log In successful",
               });
+              // ReactGA.event({
+              //   category: "Button",
+              //   action: "LogIn",
+              //   label: "Log In successful",
+              // });
               userSession.addUser(userLoggedIn);
               setInvalid(false);
               setLogIn(true);

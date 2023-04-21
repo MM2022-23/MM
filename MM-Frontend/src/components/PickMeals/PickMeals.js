@@ -61,22 +61,6 @@ const PickMeals = ({
         // should do this in case of payment success
       }
 
-      const handleScroll = () => {
-        // Send a custom event to Google Analytics when the user scrolls
-        ReactGA.event({
-          category: "Pick Meals Page",
-          action: "Scroll",
-          label: "User scrolled on the Pick Meals page",
-        });
-      };
-
-      // Register the scroll event listener
-      window.addEventListener("scroll", handleScroll);
-
-      // Clean up the event listener on unmount
-      return () => {
-        window.removeEventListener("scroll", handleScroll);
-      };
     }
   }, []);
 
