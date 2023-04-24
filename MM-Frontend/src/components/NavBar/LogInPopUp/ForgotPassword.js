@@ -80,6 +80,7 @@ const ForgotPassword = ({
           }
         })
         .catch((err) => {
+          setStatus("Get Password");
           setTitle(
             <span style={{ color: "red" }}>
               Error while sending emailForgotPassword create new account or
