@@ -9,6 +9,7 @@ import StripeBackend from "../../../Service/APICalls/StripeBackendAPIService";
 import { useState } from "react";
 import React from "react";
 import ReactGA from 'react-ga4'; 
+import { STRIPE_KEY } from "../../../Service/Constants";
 const Payment = ({
   cart,
   setCart,
@@ -32,9 +33,6 @@ const Payment = ({
   const [statusPopUp, setStatusPopUp] = useState(false);
   const [statusTitle, setStatusTitle] = useState("");
   const [statusBody, setStatusBody] = useState("");
-  const STRIPE_KEY =
-    "pk_test_51MLGUDLxe44udBspRQVfTcgFGVZRI6NRIlrfX4lexUptlrYTJjsqfJZFBeDrKXdyOCiJVVQKcD88WAQDsNPVWZ9b00bKBn0FaU";
-
   // stripeToken will have store shipping info
   const [stripeToken, setStripeToken] = useState(null);
   const onToken = (token) => {
