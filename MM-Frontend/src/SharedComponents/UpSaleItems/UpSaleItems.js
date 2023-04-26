@@ -19,39 +19,21 @@ const UpSaleItems = ({
   mealNumbers,
   setMealNumbers,
 }) => {
-  // to change text of button
-  const [proceedText, setProceedText] = useState("No Thanks, Proceed");
-  // to keep track of # of items selected
-  const [countSelected, setCountSelected] = useState(0);
+  
+
 
   const noItems = () => {
     for (let index = 0; index < MealData.getUpSaleItems().length; index++) {
       const element = MealData.getUpSaleItems()[index];
       if (mealNumbers[element.id] !== 0) {
-        return true;
+        return false;
       }
     }
 
-    return false;
+    return true;
   };
 
-  // might be inefficient
-  useEffect(() => {
-    if (noItems()) {
-      setProceedText("No Thanks, Continue");
-    } else {
-      setProceedText("Proceed");
-    }
-  }, []);
-  // might be inefficient
-  useEffect(() => {
-    if (countSelected === 0) {
-      setProceedText("No Thanks, Continue");
-    } else {
-      setProceedText("Proceed");
-    }
-  }, [countSelected]);
-
+ 
   const [show, setShow] = useState(false);
   const [description, setDescription] = useState("");
   const handleDisplay = (description, mealName) => {
@@ -62,7 +44,7 @@ const UpSaleItems = ({
   const add = (id) => {
     console.log(`ID SENT IS ${id}`);
     // setProceedText("Proceed");
-    setCountSelected(countSelected + 1);
+    
 
     // setCartPrice(
     //   (cartPrice) =>
@@ -127,7 +109,7 @@ const UpSaleItems = ({
     console.log("Remove clicked...");
     // CANNOT have quantity < 0
     if (mealNumbers[id] > 0) {
-      setCountSelected(countSelected - 1);
+      
       // if (countSelected === 0) {
       //   setProceedText("No Thanks, Proceed");
       // }
@@ -184,7 +166,7 @@ const UpSaleItems = ({
                       <div className="card-body text-center">
                         <img
                           src={img}
-                          style={{ width: "47vw", height:"15vh"}}
+                          style={{ width: "47vw", height: "15vh" }}
                           className="img-fluid"
                         />
                         <h4 style={{ fontSize: "20px" }}>{mealName}</h4>
@@ -269,7 +251,7 @@ const UpSaleItems = ({
                   document.getElementById("hiddenPaymentButton").click();
                 }}
               >
-                {proceedText}
+                {noItems() ? "No Thanks, Continue" : "Proceed"}
               </Button>
             </div>
           </>
