@@ -4,7 +4,7 @@ class MealData {
     {
       id: 0,
       img: require("../../Resources/Meals/Palak Paneer.jpg"),
-      mealName: "Palak Paneer Dhamaka",
+      mealName: "Palak Paneer",
       // description: "Special Dish from South India",
       description:
         "Soft paneer (a type of Indian cheese) cubes cooked in a creamy spinach gravy.",
@@ -21,7 +21,7 @@ class MealData {
     {
       id: 1,
       img: require("../../Resources/Meals/Paneer Tikka.jpg"),
-      mealName: "Toofani Paneer Tikka",
+      mealName: "Paneer Tikka",
       description:
         "Marinated cubes of paneer (a type of Indian cheese) that are simmered in a rich and creamy tomato-based gravy.",
       content: [
@@ -38,7 +38,7 @@ class MealData {
     {
       id: 2,
       img: require("../../Resources/Meals/Chana Masala.jpg"),
-      mealName: "Chataka Chana Masala",
+      mealName: "Chana Masala",
       description: "Chickpeas cooked in a spicy and tangy tomato-based gravy.",
       content: [
         "8oz Chana Masala ",
