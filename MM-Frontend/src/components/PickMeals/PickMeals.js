@@ -352,7 +352,7 @@ const PickMeals = ({
                       to=""
                     >
                       <p className="text-light descriptionAdjustment">
-                        Content
+                        Contents
                       </p>
                     </Link>
                     <Link

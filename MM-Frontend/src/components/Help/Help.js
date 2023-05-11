@@ -54,7 +54,7 @@ const Help = ({ scrollFAQ, setScrollFAQ }) => {
           <div style={{ marginTop: "30px" }}>
             <p className="">
               Any inquiries, comments, concerns, or requests for cancellations
-              please address to: support@mirchimeal.com
+              please address to: support@mirchimeals.com
             </p>
             <p>
               Our support staff will get back to you in less than 3 hours.
