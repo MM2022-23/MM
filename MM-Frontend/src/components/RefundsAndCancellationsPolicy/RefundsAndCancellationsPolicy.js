@@ -56,7 +56,7 @@ const RefundsAndCancellationsPolicy = () => {
 
         <p className="my-2">
           If you have any questions about the Refund and Cancellation Policy,
-          You can contact us by email at{" "}
+          You can contact us by email at
           <span style={{ color: "blue", marginLeft: "4px" }}>
             support@mirchimeals.com
           </span>

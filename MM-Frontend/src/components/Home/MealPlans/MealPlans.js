@@ -98,7 +98,7 @@ const MealPlans = ({
                 </button>
                 {/* Text below Img 2 */}
                 <h4>
-                  6 meals{" "}
+                  6 meals
                   {/* <i>
                     <super>*</super>Save 5%<super>*</super>
                   </i> */}

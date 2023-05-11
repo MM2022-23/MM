@@ -230,7 +230,7 @@ function SignUpPopUp({ style, setLogIn }) {
           setEmailLabel(
             <label htmlFor="email" className="col-form-label">
               <span style={{ color: "red" }}>
-                Email already registered, use different Email{" "}
+                Email already registered, use different Email
                 <span style={{ color: "red" }}></span>
               </span>
             </label>
@@ -328,19 +328,19 @@ function SignUpPopUp({ style, setLogIn }) {
 
             <div className="mb-3">
               <p id="agreement">
-                {" "}
+                
                 <span style={{ marginRight: "7px" }}>
                   <input type="checkbox" id="ageRestriction" />
                 </span>
-                I am 18 years of age or older and agree to the{" "}
+                I am 18 years of age or older and agree to the
                 <Link className="text-dark" to="/privacy">
                   Privacy Policy
                 </Link>
-                ,{" "}
+                ,
                 <Link className="text-dark" to="/terms">
                   Terms and Conditions
                 </Link>
-                , and{" "}
+                , and
                 <Link className="text-dark" to="/refund">
                   Refunds and Cancellation Policy
                 </Link>
