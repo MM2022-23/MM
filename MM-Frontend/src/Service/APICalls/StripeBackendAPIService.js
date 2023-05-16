@@ -11,6 +11,7 @@ class StripeBackend {
       tokenId: token.id,
       amount: Math.round(amount * 100),
       lines: lines,
+      email:token.email
     });
   }
 }
