@@ -9,11 +9,7 @@ const Contact = () => {
             <h2 className="text-center mb-4">Contact Info</h2>
             <ul className="list-group list-group-flush lead">
               <li className="list-group-item">
-                <span className="fw-bold">Phone:</span> (123) 456-7890
-              </li>
-
-              <li className="list-group-item">
-                <span className="fw-bold">Email:</span>
+                <span className="fw-bold">Email: </span>
                 support@mirchimeals.com
               </li>
             </ul>
