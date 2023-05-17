@@ -35,11 +35,11 @@ const Home = ({
       page_title: "Home",
     });
     if (scrollFAQ) {
-      console.log("Down!!!");
+      // console.log("Down!!!");
       ScrollTop.scrollToFAQ();
       setScrollFAQ(false);
     } else {
-      console.log("UP!!!");
+      // console.log("UP!!!");
       ScrollTop.scrollUp();
     }
 

@@ -149,7 +149,7 @@ function LogInPopUP({ style, setLogIn }) {
         .catch((err) => {
           localStorage.removeItem("Loading");
           setInvalid(true);
-          console.log("ERROR::: " + err);
+          // console.log("ERROR::: " + err);
         });
 
       // IF username && password valid => following things

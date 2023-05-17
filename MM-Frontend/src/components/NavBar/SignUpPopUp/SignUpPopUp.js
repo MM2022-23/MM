@@ -218,14 +218,14 @@ function SignUpPopUp({ style, setLogIn }) {
             });
             userSession.addUser(userLoggedIn);
             handleClose();
-            console.log("SUCCESS ON FRONT END ");
+            // console.log("SUCCESS ON FRONT END ");
           } else {
             // FIX: DIFFERENTIATE OTHER ERRS FROM SIGN UP DUPLICATE EMAIL ERRORS 
-            console.log("FAILURE ON FRONT END ");
+            // console.log("FAILURE ON FRONT END ");
           }
         })
         .catch((err) => {
-          console.log("ERR :" + err);
+          // console.log("ERR :" + err);
           localStorage.removeItem("Loading");
           setEmailLabel(
             <label htmlFor="email" className="col-form-label">
@@ -235,7 +235,7 @@ function SignUpPopUp({ style, setLogIn }) {
               </span>
             </label>
           );
-          console.log("ERROR::: " + err);
+          // console.log("ERROR::: " + err);
         });
       // IF email valid => following things
       // store more info on order history

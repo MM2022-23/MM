@@ -37,7 +37,7 @@ const Payment = ({
   const [stripeToken, setStripeToken] = useState(null);
   const onToken = (token) => {
     setStripeToken(token);
-    console.log("TOKEN::: " + JSON.stringify(token));
+    // console.log("TOKEN::: " + JSON.stringify(token));
   };
 
   const [amount, setAmount] = useState(
@@ -65,7 +65,7 @@ const Payment = ({
       if (stripeToken.card.address_zip !== zipCode) {
         setStatusTitle("Payment Insuccessful");
         setStatusPopUp(true);
-        console.log("PAYMENT POPUP OPENED IN PAYMENT INSUCCESSFUL");
+        // console.log("PAYMENT POPUP OPENED IN PAYMENT INSUCCESSFUL");
         setStatusBody(
           `You were viewing meals for zipcode ${zipCode}, but trying to ship at zipcode ${stripeToken.card.address_zip}`
         );
@@ -170,7 +170,7 @@ const Payment = ({
           }
         })
         .catch((error) => {
-          console.log("PAYMENT POPUP OPENED IN CATCH ERR BLOCK");
+          // console.log("PAYMENT POPUP OPENED IN CATCH ERR BLOCK");
           setStatusPopUp(true);
           setStatusBody("" + error);
           setTimeout(() => {

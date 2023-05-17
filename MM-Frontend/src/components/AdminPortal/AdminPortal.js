@@ -51,14 +51,14 @@ const AdminPortal = () => {
    * API call to send notifcation to admin
    */
   const handleSubmitReport = () => {
-    console.log("clicked:  " + report);
+    // console.log("clicked:  " + report);
     if (report.length === 0) {
       setReportLabel(<span style={{ color: "red" }}>Report **</span>);
     } else {
       setStatus("Loading...");
       HotelAPIService.report({ msg: report })
         .then((response) => {
-          console.log(response);
+          // console.log(response);
           setStatus("Submit");
           setReportLabel(
             <span style={{ color: "green" }}>
@@ -191,25 +191,25 @@ const AdminPortal = () => {
    * API calls will be made by following functions
    */
   const getAllOrders = () => {
-    console.log("Get all orders");
+    // console.log("Get all orders");
     AdminAPIService.getAllOrders()
       .then((res) => {
         setOrdersTable(res.data);
       })
       .catch((err) => {
-        console.log("Erro while fetching Orders Table::: " + err);
+        // console.log("Erro while fetching Orders Table::: " + err);
       });
   };
 
   const getDeliveryOrders = () => {
-    console.log("Inside of delivery function");
+    // console.log("Inside of delivery function");
     AdminAPIService.getDeliveryOrders()
       .then((res) => {
-        console.log("From deliv orders backend");
+        // console.log("From deliv orders backend");
         setOrdersTable(res.data);
       })
       .catch((err) => {
-        console.log("Erro while fetching Orders Table::: " + err);
+        // console.log("Erro while fetching Orders Table::: " + err);
       });
   };
 
@@ -219,7 +219,7 @@ const AdminPortal = () => {
         setOrdersTable(res.data);
       })
       .catch((err) => {
-        console.log("Erro while fetching Orders Table::: " + err);
+        // console.log("Erro while fetching Orders Table::: " + err);
       });
   };
 
@@ -257,7 +257,7 @@ const AdminPortal = () => {
             setStatusPopUp(false);
           }, 2000);
           getAllOrders();
-          console.log("Success delete");
+          // console.log("Success delete");
         } else {
           setStatusTitle(
             <p className="lead" style={{ color: "red" }}>
@@ -268,7 +268,7 @@ const AdminPortal = () => {
       })
       .catch((err) => {
         getAllOrders();
-        console.log("Erro while fetching Orders Table::: " + err);
+        // console.log("Erro while fetching Orders Table::: " + err);
       });
   };
 

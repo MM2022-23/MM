@@ -35,7 +35,7 @@ function NavBar({
     if (path.indexOf("#") < 0) {
       ScrollTop.scrollToFAQ();
     } else {
-      console.log("PATH: " + path);
+      // console.log("PATH: " + path);
       // SCROLL doesnt work ERR: www.mirchimeals.com/#
       // SCROLL works NO ERR: www.mirchimeals.com/#/order
       try {

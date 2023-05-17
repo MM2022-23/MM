@@ -28,16 +28,16 @@ import { TRACKINGID } from "./Service/Constants";
 ReactGA.initialize(TRACKINGID);
 function App() {
   useEffect(() => {
-    console.log("APP RENDERED!!!");
+    // console.log("APP RENDERED!!!");
     let referrer = document.referrer;
-    console.log("REFERED BY: " + referrer);
+    // console.log("REFERED BY: " + referrer);
     if (referrer !== undefined && referrer.length !== 0) {
       DataCollectionAPI.add({ url: referrer })
         .then((response) => {
-          console.log("SUCCESS in sending referral::: " + response.data);
+          // console.log("SUCCESS in sending referral::: " + response.data);
         })
         .catch((err) => {
-          console.log("Error in sending referral::: " + err);
+          // console.log("Error in sending referral::: " + err);
         });
       referrer = "";
     }

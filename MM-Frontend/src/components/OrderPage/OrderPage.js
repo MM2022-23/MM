@@ -70,11 +70,11 @@ const OrderPage = ({
    * coming from else where, go to pickMeals page or stay on orderPage depending on previous interaction of user with orderPage
    */
   useEffect(() => {
-    console.log("ORDER PAGE FOR FIRST TIME");
+    // console.log("ORDER PAGE FOR FIRST TIME");
     // user was looking at pickMeals; went else where; wants to go back to pickMeals
     // GO to pick meals
     if (resetOrderPageInfo === 0) {
-      console.log("GOING TO PM PAGE==>");
+      // console.log("GOING TO PM PAGE==>");
       navigate("/pickMeals");
     }
     // came from mealPlans section of Home Page
@@ -85,9 +85,9 @@ const OrderPage = ({
       setDelivDate("Select Date");
     } else {
       // Want to choose every option again; Coming back from Pick Meals Page
-      console.log(
-        "COMING BACK FROM PICK MEALS OR COMING FROM HOME PAGE: RESET EVERYTHING"
-      );
+      
+      // console.log("COMING BACK FROM PICK MEALS OR COMING FROM HOME PAGE: RESET EVERYTHING");
+      
       setNumMeals("Select Plan");
       setZipCode("");
       // setFreq("Select Frequency");
@@ -104,8 +104,8 @@ const OrderPage = ({
   }, []);
   // Pick meals button clicked
   const handlePickMeals = () => {
-    console.log("Handle pick meals!");
-    console.log("PROPER OR NOT::: " + zipCodeService.isValidZipCode(zipCode));
+    // console.log("Handle pick meals!");
+    // console.log("PROPER OR NOT::: " + zipCodeService.isValidZipCode(zipCode));
     // NEED PROPER ZIPCODE, AND ZIPCODE SHOULD BE in specific range
     if (zipCode.length === 0) {
       handleDisplay("Enter zipcode");
@@ -117,10 +117,10 @@ const OrderPage = ({
       // API call to store zipcode where we don't operate
       DataCollectionAPIService.addZipCode({ zipcode: zipCode })
         .then((response) => {
-          console.log("Zipcode sent successfully:: " + response.data);
+          // console.log("Zipcode sent successfully:: " + response.data);
         })
         .catch((err) => {
-          console.log("Error sending zipcode:: " + err);
+          // console.log("Error sending zipcode:: " + err);
         });
       handleDisplay("We're soon coming to your area. Stay tuned!");
     } else if (numMeals === "Select Plan") {

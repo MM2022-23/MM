@@ -88,14 +88,14 @@ const AccountInfo = ({ show, setShow }) => {
 
             handleClose();
           } else if (response.status === 501) {
-            console.log("INTERNAL ERR ON SERVER SIDE...");
+            // console.log("INTERNAL ERR ON SERVER SIDE...");
           } else {
-            console.log("NO CHANGES MADE! ");
+            // console.log("NO CHANGES MADE! ");
           }
         })
         .catch((err) => {
           localStorage.removeItem("Loading");
-          console.log("ERROR::: " + err);
+          // console.log("ERROR::: " + err);
         });
       // API call to update both email and password
     }

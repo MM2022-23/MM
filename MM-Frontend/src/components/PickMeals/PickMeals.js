@@ -40,10 +40,10 @@ const PickMeals = ({
   // so we can go back to orderPage
   const navigate = useNavigate();
   useEffect(() => {
-    console.log("ZIPCODE ON PM RENDERED::: " + zipCode);
+    // console.log("ZIPCODE ON PM RENDERED::: " + zipCode);
     // if zipCode not provided, go back to order page
     if (zipCode.length === 0) {
-      console.log("NO ZIPCODE; GO BACK TO ORDER AND RESET EVERYTHING");
+      // console.log("NO ZIPCODE; GO BACK TO ORDER AND RESET EVERYTHING");
       setResetOrderPageInfo(2); // if no zip code; go back to order page and have user fill out all the fields
       navigate("/order");
     } else {
@@ -57,7 +57,7 @@ const PickMeals = ({
       ScrollTop.scrollUp();
       if (mealNumbers.length === 0) {
         setMealNumbers(new Array(MealData.getAllItems().length).fill(0));
-        console.log("RESETTING CART");
+        // console.log("RESETTING CART");
         // should do this in case of payment success
       }
 
@@ -78,7 +78,7 @@ const PickMeals = ({
     setNumMealsSelected(0);
     setMealNumbers([]);
     setResetOrderPageInfo(2); // reset everything in orderPage
-    console.log("<== BACK BUTTON CLICKED...");
+    // console.log("<== BACK BUTTON CLICKED...");
     navigate("/order");
   };
 
@@ -253,7 +253,7 @@ const PickMeals = ({
       setBodyEnough(<p>Select at least {numMeals[0]} meals</p>);
       setDisplayEnoughPopUp(true);
     } else if (!userSession.isLoggedIn()) {
-      console.log("USER IS NOT LOGGED IN!");
+      // console.log("USER IS NOT LOGGED IN!");
       const mealsInfo = {
         zipcode: zipCode,
         planSize: numMeals,
@@ -261,10 +261,10 @@ const PickMeals = ({
       };
       DataCollectionAPIService.storeUnprocessedMeals(mealsInfo)
         .then(() => {
-          console.log("Successful");
+          // console.log("Successful");
         })
         .catch((err) => {
-          console.log("Err:: " + err);
+          // console.log("Err:: " + err);
         });
       setTitle("LogIn/SignUp");
       setBody(

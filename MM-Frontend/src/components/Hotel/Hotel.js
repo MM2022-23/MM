@@ -33,9 +33,9 @@ const Hotel = () => {
     //     new Date().getHours() % 12 >= 3 &&
     //     new Date().getHours() >= 12)
     // ) {
-    console.log("SHOW TABLE BECAUSE IT IS 03:00 PM EST ");
+    // console.log("SHOW TABLE BECAUSE IT IS 03:00 PM EST ");
     setDisplayTables(true);
-    console.log(displayTables);
+    // console.log(displayTables);
     HotelAPIService.getMealQuantityTable({
       date: DateService.closestUpcomingSunday(),
     })
@@ -43,7 +43,7 @@ const Hotel = () => {
         setMealQuantityTable(res.data);
       })
       .catch((err) => {
-        console.log("Error while fetching mealQuantityTable::: " + err);
+        // console.log("Error while fetching mealQuantityTable::: " + err);
       });
 
     //Replace dates with upcoming sunday's date
@@ -54,7 +54,7 @@ const Hotel = () => {
         setOrdersTable(res.data);
       })
       .catch((err) => {
-        console.log("Erro while fetching Orders Table::: " + err);
+        // console.log("Erro while fetching Orders Table::: " + err);
       });
     // } else {
     //   console.log(
@@ -88,14 +88,14 @@ const Hotel = () => {
    * API call to send notifcation to admin
    */
   const handleSubmitReport = () => {
-    console.log("clicked:  " + report);
+    // console.log("clicked:  " + report);
     if (report.length === 0) {
       setReportLabel(<span style={{ color: "red" }}>Report **</span>);
     } else {
       setStatus("Loading...");
       HotelAPIService.report({ msg: report })
         .then((response) => {
-          console.log(response);
+          // console.log(response);
           setStatus("Submit");
           setReportLabel(
             <span style={{ color: "green" }}>
@@ -141,10 +141,10 @@ const Hotel = () => {
       // Masala Rice
       tableContent += `8oz Masala Rice x ${totalRicesAndNans} `;
     }
-    console.log(`Content: ${tableContent}`);
+    // console.log(`Content: ${tableContent}`);
     HotelAPIService.report({ msg: tableContent })
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         setDefaultStatus("Default");
         setReportLabel(
           <span style={{ color: "green" }}>

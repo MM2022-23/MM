@@ -30,7 +30,7 @@ const DeliveryDate = ({ delivDate, setDelivDate }) => {
     if (DateService.isSaturday()) {
       const interval = setInterval(() => {
         setmins(new Date().getSeconds());
-        console.log("In Deliv Date Component");
+        // console.log("In Deliv Date Component");
       }, 1000);
       return () => clearInterval(interval);
     }

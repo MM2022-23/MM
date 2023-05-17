@@ -23,7 +23,7 @@ const OrderHistory = ({ isLoggedIn }) => {
         page_title: 'Order History' 
       });
       const fetchHistory = () => {
-        console.log("SERVICE CALLED....");
+        // console.log("SERVICE CALLED....");
         OrderAPIService.orderHistory({ id: userSession.getUser().id })
           .then((response) => {
             if (response.status == 200) {
@@ -33,7 +33,7 @@ const OrderHistory = ({ isLoggedIn }) => {
             }
           })
           .catch((err) => {
-            console.log(err);
+            // console.log(err);
             setOrders(null);
           });
       };

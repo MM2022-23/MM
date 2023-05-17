@@ -42,7 +42,7 @@ const UpSaleItems = ({
   };
 
   const add = (id) => {
-    console.log(`ID SENT IS ${id}`);
+    // console.log(`ID SENT IS ${id}`);
     // setProceedText("Proceed");
     
 
@@ -62,7 +62,7 @@ const UpSaleItems = ({
           ) / 100
       );
     } catch (Err) {
-      console.log(JSON.stringify(MealData.getAllItems()));
+      // console.log(JSON.stringify(MealData.getAllItems()));
     }
     // // will have to add PRICE
     const addToCart = {
@@ -106,7 +106,7 @@ const UpSaleItems = ({
     setMealNumbers(newAr); // Update mealNumbers to display correct quantity numbers in cart AND pickMeals page
   };
   const remove = (id) => {
-    console.log("Remove clicked...");
+    // console.log("Remove clicked...");
     // CANNOT have quantity < 0
     if (mealNumbers[id] > 0) {
       
@@ -122,7 +122,7 @@ const UpSaleItems = ({
             ) / 100
         );
       } catch (Err) {
-        console.log(JSON.stringify(MealData.getAllItems()));
+        // console.log(JSON.stringify(MealData.getAllItems()));
       }
       mealNumbers[id]--; // decrement quantity in mealNumbers at index "id"
       const newAr = [];

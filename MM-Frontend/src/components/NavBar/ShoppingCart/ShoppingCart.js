@@ -124,7 +124,7 @@ const ShoppingCart = ({
    * STRIP INTEGRATION
    */
   const handleCheckOut = () => {
-    console.log(`numMeals:: ${numMeals};;; Selected::: ${numMealsSelected}`);
+    // console.log(`numMeals:: ${numMeals};;; Selected::: ${numMealsSelected}`);
     // not enough meals selected
     if (numMeals === "12+ meals" && numMealsSelected < 12) {
       setTitleEnough("Not Enough Meals selected!!");
@@ -142,10 +142,10 @@ const ShoppingCart = ({
       };
       DataCollectionAPI.storeUnprocessedMeals(mealsInfo)
         .then(() => {
-          console.log("Successful");
+          // console.log("Successful");
         })
         .catch((err) => {
-          console.log("Err:: " + err);
+          // console.log("Err:: " + err);
         });
       setTitle("LogIn/SignUp");
       setBody(
