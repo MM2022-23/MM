@@ -1,3 +1,4 @@
+// To Add/remove meal/upsale items: update # of getNumberOfActualMeals();
 class MealData {
   // depends on zipcode entered by user
   data = [
@@ -5,7 +6,6 @@ class MealData {
       id: 0,
       img: require("../../Resources/Meals/Palak Paneer.jpg"),
       mealName: "Palak Paneer",
-      // description: "Special Dish from South India",
       description:
         "Soft paneer (a type of Indian cheese) cubes cooked in a creamy spinach gravy.",
       content: [

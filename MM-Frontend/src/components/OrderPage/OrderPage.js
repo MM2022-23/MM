@@ -284,7 +284,7 @@ const OrderPage = ({
                 <Col style={{ marginBottom: "55px" }}>
                   <h2 className="text-center">Delivery</h2>
                   <h6 className="text-center">
-                    Deliveries between 6pm - 7:30pm
+                    Deliveries between 1pm - 2:30pm
                   </h6>
                   <div className="d-flex align-items-center justify-content-center">
                     {/* <Dropdown>

@@ -24,7 +24,7 @@ const Question = () => {
           <Accordion.Header>When do you deliver?</Accordion.Header>
           <Accordion.Body>
             We deliver all your meals for the week depending on Sundays.
-            Deliveries happen between 6pm - 7:30pm EST.
+            Deliveries happen between 1pm - 2:30pm EST.
           </Accordion.Body>
         </Accordion.Item>
 

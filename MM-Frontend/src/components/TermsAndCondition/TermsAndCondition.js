@@ -290,7 +290,7 @@ const TermsAndCondition = () => {
       <div className="container my-5">
         <h2>Delivery Policy</h2>
         <p>
-          Deliveries are Sunday between 5pm – 8:30pm a later delivery may occur
+          Deliveries are Sunday 1pm – 1:30pm a later delivery may occur
           due to traffic, bad weather or unforeseen conditions. Our delivery
           team will reach out to you via text the previous day before delivery
           to remind you of your upcoming delivery. You will also receive a
