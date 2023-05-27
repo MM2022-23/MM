@@ -1,3 +1,5 @@
+import {Row, Col, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import React from "react";
 import LogInPopUP from "../../NavBar/LogInPopUp/LogInPopUp";
 import SignUpPopUp from "../../NavBar/SignUpPopUp/SignUpPopUp";
@@ -51,7 +53,7 @@ const Showcase = ({ loggedIn, setLogIn }) => {
             </div>
 
             {/* ONLY if user not logged in  */}
-            {!loggedIn && (
+            {!loggedIn ? (
               <div className="row align-items-center justify-content-between my-4">
                 <div className="col-md">
                   {/* Sign Up Button */}
@@ -68,6 +70,28 @@ const Showcase = ({ loggedIn, setLogIn }) => {
                   />
                 </div>
               </div>
+            ) : (
+              <Row className="my-2">
+                <Col>
+                  <div className="d-flex justify-content-center align-items-center">
+                    {/* Link to order page */}
+                    <Link to="/order">
+                      <Button
+                        variant="primary"
+                        className="text-dark"
+                        style={{
+                          height: "50px",
+                          width: "150px",
+                          borderRadius: "15px",
+                          fontSize: "25px",
+                        }}
+                      >
+                        Order
+                      </Button>
+                    </Link>
+                  </div>
+                </Col>
+              </Row>
             )}
           </div>
         </div>
