@@ -16,6 +16,7 @@ import zipCodeService from "../../Service/Data/zipCodeService";
 import DataCollectionAPIService from "../../Service/APICalls/DataCollectionAPIService";
 import { Helmet } from "react-helmet";
 import ReactGA from "react-ga4";
+import userSession from "../../Service/Data/userSession";
 
 const data = {
   backColor: "primary",
@@ -70,7 +71,6 @@ const OrderPage = ({
    * coming from else where, go to pickMeals page or stay on orderPage depending on previous interaction of user with orderPage
    */
   useEffect(() => {
-    // console.log("ORDER PAGE FOR FIRST TIME");
     // user was looking at pickMeals; went else where; wants to go back to pickMeals
     // GO to pick meals
     if (resetOrderPageInfo === 0) {
@@ -85,9 +85,9 @@ const OrderPage = ({
       setDelivDate("Select Date");
     } else {
       // Want to choose every option again; Coming back from Pick Meals Page
-      
+
       // console.log("COMING BACK FROM PICK MEALS OR COMING FROM HOME PAGE: RESET EVERYTHING");
-      
+
       setNumMeals("Select Plan");
       setZipCode("");
       // setFreq("Select Frequency");
@@ -100,7 +100,6 @@ const OrderPage = ({
       page_path: useLoc.pathname,
       page_title: "Order Page",
     });
-
   }, []);
   // Pick meals button clicked
   const handlePickMeals = () => {
@@ -132,6 +131,28 @@ const OrderPage = ({
     else if (delivDate === "Select Date") {
       handleDisplay("Select Date");
     } else {
+      const now = new Date();
+      const options = { timeZone: "America/New_York" };
+      const time = now.toLocaleString("en-US", options);
+      const userinfo = userSession.isLoggedIn()
+        ? userSession.getUser().emailAddress
+        : "User Not Logged In";
+
+      const dataToSend = {
+        sessionID: userSession.getSessionID(),
+        timeOfRecord: time,
+        userInfo: userinfo,
+        zipCode: zipCode,
+        mealSize: numMeals,
+        deliveryDateSelected: delivDate,
+        activity: "Pick Meals Button Clicked",
+      };
+
+      // Send DATA FOR COLLECTION
+      DataCollectionAPIService.orderPageDataCollect(dataToSend)
+        .then((res) => {})
+        .catch((err) => {});
+
       // move to pickMeals page
       setResetOrderPageInfo(0);
       setMealNumbers([]);

@@ -28,25 +28,43 @@ import { TRACKINGID } from "./Service/Constants";
 ReactGA.initialize(TRACKINGID);
 function App() {
   useEffect(() => {
-    // console.log("APP RENDERED!!!");
-    let referrer = document.referrer;
-    // console.log("REFERED BY: " + referrer);
-    if (referrer !== undefined && referrer.length !== 0) {
-      DataCollectionAPI.add({ url: referrer })
-        .then((response) => {
-          // console.log("SUCCESS in sending referral::: " + response.data);
-        })
-        .catch((err) => {
-          // console.log("Error in sending referral::: " + err);
-        });
-      referrer = "";
-    }
 
-    // GA stuff
-    const sessionDuration = Math.round((new Date() - window.performance.timing.navigationStart) / 1000);
-    ReactGA.set({
-      metric1: sessionDuration
-    });
+    const handleBeforeUnload = ()=>{
+      userSession.removeSessionID();
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+
+
+    
+    
+    // // GA crap
+    // // console.log("APP STARTED!!!");
+    // let referrer = document.referrer;
+    // // console.log("REFERED BY: " + referrer);
+    // if (referrer !== undefined && referrer.length !== 0) {
+    //   DataCollectionAPI.add({ url: referrer })
+    //     .then((response) => {
+    //       // console.log("SUCCESS in sending referral::: " + response.data);
+    //     })
+    //     .catch((err) => {
+    //       // console.log("Error in sending referral::: " + err);
+    //     });
+    //   referrer = "";
+    // }
+
+    // // GA stuff
+    // const sessionDuration = Math.round(
+    //   (new Date() - window.performance.timing.navigationStart) / 1000
+    // );
+    // ReactGA.set({
+    //   metric1: sessionDuration,
+    // });
+
   }, []);
   // Nav, Home
   const [loggedIn, setLogIn] = useState(userSession.isLoggedIn());
@@ -218,7 +236,21 @@ function App() {
           element={navAndFoot(<RefundsAndCancellationsPolicy />)}
         />
 
-        <Route path="*" element={navAndFoot(<ErrorPage />)} />
+        <Route
+          path="*"
+          element={navAndFoot(
+            <Home
+              loggedIn={loggedIn}
+              setLogIn={setLogIn}
+              setMeals={setNumMeals}
+              setResetOrderPageInfo={setResetOrderPageInfo}
+              setCart={setCart}
+              setMealNumbers={setMealNumbers}
+              scrollFAQ={scrollFAQ}
+              setScrollFAQ={setScrollFAQ}
+            />
+          )}
+        />
       </Routes>
     </>
   );

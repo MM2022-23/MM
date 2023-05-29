@@ -60,7 +60,6 @@ const PickMeals = ({
         // console.log("RESETTING CART");
         // should do this in case of payment success
       }
-
     }
   }, []);
 
@@ -95,9 +94,13 @@ const PickMeals = ({
           contentString += `and ${element}`;
         }
       }
-      const showList = <ul>{descrption.map((item,index)=>{
-        return (<li key= {index}>{`1 ${item}`}</li>)
-      })}</ul>;
+      const showList = (
+        <ul>
+          {descrption.map((item, index) => {
+            return <li key={index}>{`1 ${item}`}</li>;
+          })}
+        </ul>
+      );
       setDescription(showList);
       setMealSelected(mealName);
       setShow(true);
@@ -253,19 +256,24 @@ const PickMeals = ({
       setBodyEnough(<p>Select at least {numMeals[0]} meals</p>);
       setDisplayEnoughPopUp(true);
     } else if (!userSession.isLoggedIn()) {
-      // console.log("USER IS NOT LOGGED IN!");
-      const mealsInfo = {
-        zipcode: zipCode,
-        planSize: numMeals,
-        mealsAndFreqs: getMealsData(),
+      const now = new Date();
+      const options = { timeZone: "America/New_York" };
+      const time = now.toLocaleString("en-US", options);
+      const dataToSend = {
+        sessionID: userSession.getSessionID(),
+        timeOfRecord: time,
+        userInfo: "User Not logged In",
+        zipCode: zipCode,
+        specificMeals: JSON.stringify(getMealsData()),
+        deliveryDateSelected: delivDate,
+        activity: "Pick Meals Button Clicked",
       };
-      DataCollectionAPIService.storeUnprocessedMeals(mealsInfo)
-        .then(() => {
-          // console.log("Successful");
-        })
-        .catch((err) => {
-          // console.log("Err:: " + err);
-        });
+
+      // Send DATA FOR COLLECTION
+      DataCollectionAPIService.pickMealsPageDataCollection(dataToSend)
+        .then((res) => {})
+        .catch((err) => {});
+
       setTitle("LogIn/SignUp");
       setBody(
         <div
@@ -299,6 +307,23 @@ const PickMeals = ({
       );
       !userSession.isLoggedIn() && setDisplayPopUp(true);
     } else {
+      const now = new Date();
+      const options = { timeZone: "America/New_York" };
+      const time = now.toLocaleString("en-US", options);
+      const dataToSend = {
+        sessionID: userSession.getSessionID(),
+        timeOfRecord: time,
+        userInfo: userSession.getUser().emailAddress,
+        zipCode: zipCode,
+        specificMeals: JSON.stringify(getMealsData()),
+        deliveryDateSelected: delivDate,
+        activity: "Pick Meals Button Clicked",
+      };
+
+      // Send DATA FOR COLLECTION
+      DataCollectionAPIService.pickMealsPageDataCollection(dataToSend)
+        .then((res) => {})
+        .catch((err) => {});
       setDisplayPopUp(false);
       setDisplayUpSale(true);
     }

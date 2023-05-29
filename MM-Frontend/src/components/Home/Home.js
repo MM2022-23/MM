@@ -15,6 +15,8 @@ import Testimonials from "./Testimonials/Testimonials";
 import { Helmet } from "react-helmet";
 import { useLocation } from "react-router-dom";
 import ReactGA from "react-ga4";
+import userSession from "../../Service/Data/userSession";
+import DataCollectionAPIService from "../../Service/APICalls/DataCollectionAPIService";
 const Home = ({
   loggedIn,
   setLogIn,
@@ -28,12 +30,30 @@ const Home = ({
   const useLoc = useLocation();
 
   useEffect(() => {
-    ReactGA.send({
-      hitType: "pageview",
-      page_location: window.location.href,
-      page_path: useLoc.pathname,
-      page_title: "Home",
-    });
+    
+    const pathname = window.location.hash;
+    // // coming from fb
+    if (pathname.includes("#/")&& pathname.split("#/")[1].length!==0) {
+      // console.log("Coming from FB");
+      userSession.addSessionID(pathname.split("#/")[1]);
+    } else {
+      // console.log("Coming 1st time");
+      
+      // Coming 1st time
+      if(!pathname.includes("#")&& !userSession.getSessionID()){
+        userSession.addSessionID("Not From FB");
+      }
+    
+    }
+
+
+
+    // ReactGA.send({
+    //   hitType: "pageview",
+    //   page_location: window.location.href,
+    //   page_path: useLoc.pathname,
+    //   page_title: "Home",
+    // });
     if (scrollFAQ) {
       // console.log("Down!!!");
       ScrollTop.scrollToFAQ();
@@ -42,7 +62,6 @@ const Home = ({
       // console.log("UP!!!");
       ScrollTop.scrollUp();
     }
-
   }, []);
   const saveTime = {
     backColor: "primary",
