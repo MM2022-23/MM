@@ -260,12 +260,13 @@ function DA() {
         >
           <thead>
             <tr>
-              <th>id</th>
-              <th>First</th>
-              <th>Last</th>
-              <th>Email</th>
-              <th>Pass</th>
-              <th>Phone</th>
+            <th>session</th>
+              <th>Time</th>
+              <th>user</th>
+              <th>zip</th>
+              <th>meals</th>
+              <th>delivDate</th>
+              <th>activity</th>
             </tr>
           </thead>
           <tbody>
