@@ -221,7 +221,7 @@ function App() {
         <Route exact path="/admin" element={<AdminPortal />} />
 
         {/* DA Page */}
-        <Route exact path="/da" element={<DA/>} />
+        <Route exact path="/jhtkd$!2" element={<DA/>} />
 
         {/* Privacy Policy */}
         <Route exact path="/privacy" element={navAndFoot(<PrivacyPolicy />)} />
