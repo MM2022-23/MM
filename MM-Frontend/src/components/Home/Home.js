@@ -35,34 +35,53 @@ const Home = ({
     if (pathname.includes("#/") && pathname.split("#/")[1].length !== 0) {
       // console.log("Coming from FB");
       userSession.addSessionID(pathname.split("#/")[1]);
+      const activity = userSession.isLoggedIn()
+        ? `Viewed Home: ${userSession.getUser().emailAddress}`
+        : "Viewed Home: Anon";
+      const dataToSend = {
+        sessionID: userSession.getSessionID(),
+        pageView: "Home",
+        activity: activity,
+      };
+      DataCollectionAPIService.pageViewCollect(dataToSend)
+        .then((r) => {})
+        .catch((err) => {});
+
+      if (scrollFAQ) {
+        // console.log("Down!!!");
+        ScrollTop.scrollToFAQ();
+        setScrollFAQ(false);
+      } else {
+        // console.log("UP!!!");
+        ScrollTop.scrollUp();
+      }
     } else {
       // console.log("Coming 1st time");
 
       // Coming 1st time
       if (!pathname.includes("#") && !userSession.getSessionID()) {
         userSession.addSessionID("Not From FB");
+        const activity = userSession.isLoggedIn()
+          ? `Viewed Home: ${userSession.getUser().emailAddress}`
+          : "Viewed Home: Anon";
+        const dataToSend = {
+          sessionID: userSession.getSessionID(),
+          pageView: "Home",
+          activity: activity,
+        };
+        DataCollectionAPIService.pageViewCollect(dataToSend)
+          .then((r) => {})
+          .catch((err) => {});
+
+        if (scrollFAQ) {
+          // console.log("Down!!!");
+          ScrollTop.scrollToFAQ();
+          setScrollFAQ(false);
+        } else {
+          // console.log("UP!!!");
+          ScrollTop.scrollUp();
+        }
       }
-    }
-
-    const activity = userSession.isLoggedIn()
-      ? `Viewed Home: ${userSession.getUser().emailAddress}`
-      : "Viewed Home: Anon";
-    const dataToSend = {
-      sessionID: userSession.getSessionID(),
-      pageView: "Home",
-      activity: activity,
-    };
-    DataCollectionAPIService.pageViewCollect(dataToSend)
-      .then((r) => {})
-      .catch((err) => {});
-
-    if (scrollFAQ) {
-      // console.log("Down!!!");
-      ScrollTop.scrollToFAQ();
-      setScrollFAQ(false);
-    } else {
-      // console.log("UP!!!");
-      ScrollTop.scrollUp();
     }
   }, []);
   const saveTime = {
