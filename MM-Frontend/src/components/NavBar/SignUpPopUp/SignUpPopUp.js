@@ -130,11 +130,7 @@ function SignUpPopUp({ style, setLogIn }) {
   };
 
   const handleDisplay = (e) => {
-    ReactGA.event({
-      category: 'Button',
-      action: 'Click',
-      label: 'SignUp Button'
-    });
+    
     e.preventDefault();
     setDisplay(true);
   };
@@ -211,11 +207,6 @@ function SignUpPopUp({ style, setLogIn }) {
               password: userPassword,
               phone: phone,
             };
-            ReactGA.event({
-              category: "Button",
-              action: "SignUp",
-              label: "Sign Up successful",
-            });
             userSession.addUser(userLoggedIn);
             handleClose();
             // console.log("SUCCESS ON FRONT END ");

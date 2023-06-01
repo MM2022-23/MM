@@ -1,3 +1,5 @@
+import userSession from "../../../Service/Data/userSession";
+import DataCollectionAPIService from "../../../Service/APICalls/DataCollectionAPIService";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import React from "react";
@@ -85,7 +87,9 @@ export default function App() {
   return (
     <>
       <div className="testimonial-container ">
-        <div className="testimonials" style={{fontSize:"48px"}}>Customer Reviews</div>
+        <div className="testimonials" style={{ fontSize: "48px" }}>
+          Customer Reviews
+        </div>
         <p className="testimonials-description">
           Don't take our word, see what our customers are saying
         </p>
@@ -109,6 +113,21 @@ export default function App() {
                 width: "150px",
                 borderRadius: "25px",
                 fontSize: "25px",
+              }}
+              onClick={() => {
+                const activity = userSession.isLoggedIn()
+                  ? `Clicked Order frm Cus Revs: ${
+                      userSession.getUser().emailAddress
+                    }`
+                  : `Clicked Order frm Cus Revs: Anon`;
+                const dataToSend = {
+                  sessionID: userSession.getSessionID(),
+                  pageView: "Home",
+                  activity: activity,
+                };
+                DataCollectionAPIService.pageViewCollect(dataToSend)
+                  .then((r) => {})
+                  .catch((err) => {});
               }}
             >
               Order

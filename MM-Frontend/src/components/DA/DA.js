@@ -5,90 +5,168 @@ import React from "react";
 import { MDBRadio, MDBBtnGroup } from "mdb-react-ui-kit";
 import ShowDBAPIService from "../../Service/APICalls/ShowDBAPIService";
 function DA() {
-  const [mode, setMode] = useState("Visitors");
+  const [mode, setMode] = useState("Customers");
   const [table, setTable] = useState(null);
 
   // for password handling
   useEffect(() => {
-    getUserEntered();
+    getCustomerTable();
   }, []);
 
   const options = () => {
     return (
-      <MDBBtnGroup>
-        <MDBRadio
-          btn
-          btnColor="light"
-          id="btn-radio"
+      // <MDBBtnGroup className="radio-group">
+      //   <MDBRadio
+      //     btn
+      //     btnColor="light"
+      //     id="btn-radio"
+      //     name="options"
+      //     wrapperTag="span"
+      //     label="Customers"
+      // onClick={() => {
+      //   getCustomerTable();
+      //   setMode("Customers");
+      // }}
+      //   />
+      //   <MDBRadio
+      //     btn
+      //     btnColor="light"
+      //     id="btn-radio2"
+      //     name="options"
+      //     wrapperClass="mx-2"
+      //     wrapperTag="span"
+      //     label="Visitors"
+      // onClick={() => {
+      //   getUserEntered();
+      //   setMode("Visitors");
+      // }}
+      //     defaultChecked
+      //   />
+      //   <MDBRadio
+      //     btn
+      //     btnColor="light"
+      //     id="btn-radio3"
+      //     name="options"
+      //     wrapperTag="span"
+      //     label="Order"
+      // onClick={() => {
+      //   getOrderPage();
+      //   setMode("Order");
+      // }}
+      //   />
+
+      //   <MDBRadio
+      //     btn
+      //     btnColor="light"
+      //     id="btn-radio4"
+      //     name="options"
+      //     wrapperTag="span"
+      //     wrapperClass="mx-2"
+      //     label="Proceed"
+      // onClick={() => {
+      //   getPickMeals();
+      //   setMode("Proceed");
+      // }}
+      //   />
+
+      //   <MDBRadio
+      //     btn
+      //     btnColor="light"
+      //     id="btn-radio5"
+      //     name="options"
+      //     wrapperTag="span"
+      //     wrapperClass="mx-2"
+      //     label="Pages"
+      // onClick={() => {
+      //   getPageActivity();
+      //   setMode("Pages");
+      // }}
+      //   />
+      // </MDBBtnGroup>
+      <div className="radio-group px-2 mt-3">
+        <input
+          type="radio"
+          id="option1"
           name="options"
-          wrapperTag="span"
-          label="Customers"
+          value="option1"
+          className="mx-3"
+          defaultChecked
           onClick={() => {
             getCustomerTable();
             setMode("Customers");
           }}
         />
-        <MDBRadio
-          btn
-          btnColor="light"
-          id="btn-radio2"
+        <label htmlFor="option1" className="text-dark">
+          Customers
+        </label>
+
+        <input
+          type="radio"
+          id="option2"
           name="options"
-          wrapperClass="mx-2"
-          wrapperTag="span"
-          label="Visitors"
+          value="option2"
+          className="mx-3"
           onClick={() => {
             getUserEntered();
             setMode("Visitors");
           }}
-          defaultChecked
         />
-        <MDBRadio
-          btn
-          btnColor="light"
-          id="btn-radio3"
+        <label htmlFor="option2" className="text-dark">
+          Visitors
+        </label>
+
+        <input
+          type="radio"
+          id="option3"
           name="options"
-          wrapperTag="span"
-          label="Order Page"
+          value="option3"
+          className="mx-3"
           onClick={() => {
             getOrderPage();
             setMode("Order");
           }}
         />
+        <label htmlFor="option3" className="text-dark">
+          Order
+        </label>
 
-        <MDBRadio
-          btn
-          btnColor="light"
-          id="btn-radio4"
+        <input
+          type="radio"
+          id="option4"
           name="options"
-          wrapperTag="span"
-          wrapperClass="mx-2"
-          label="Proceed Button"
+          value="option4"
+          className="mx-3"
           onClick={() => {
             getPickMeals();
             setMode("Proceed");
           }}
         />
+        <label htmlFor="option4" className="text-dark">
+          Proceed
+        </label>
 
-        <MDBRadio
-          btn
-          btnColor="light"
-          id="btn-radio4"
+        <input
+          type="radio"
+          id="option5"
           name="options"
-          wrapperTag="span"
-          wrapperClass="mx-2"
-          label="Page Activity"
+          value="option5"
+          className="mx-3"
           onClick={() => {
             getPageActivity();
             setMode("Pages");
           }}
         />
-      </MDBBtnGroup>
+        <label htmlFor="option5" className="text-dark">
+          Pages
+        </label>
+      </div>
     );
   };
 
   const getCustomerTable = () => {
     ShowDBAPIService.getCustomers()
       .then((res) => {
+        console.log("Customers called!!!");
         setTable(res.data);
       })
       .catch((err) => {
@@ -137,36 +215,37 @@ function DA() {
     if (!table) {
       return <>Loading...</>;
     } else if (mode === "Pages") {
-      <Table
-        striped
-        bordered
-        hover
-        style={{ fontSize: "2.2vw", fontFamily: "Signika" }}
-      >
-        <thead>
-          <tr>
-            <th>sessionID</th>
-            <th>page</th>
-            <th>time</th>
-            <th>activity</th>
-            
-          </tr>
-        </thead>
-        <tbody>
-          {table.map((entry) => {
-            const { sessionID,timeOfRecord,pageView, activity } = entry;
+      return (
+        <Table
+          striped
+          bordered
+          hover
+          style={{ fontSize: "2.2vw", fontFamily: "Signika" }}
+        >
+          <thead>
+            <tr>
+              <th>sessionID</th>
+              <th>page</th>
+              <th>time</th>
+              <th>activity</th>
+            </tr>
+          </thead>
+          <tbody>
+            {table.map((entry) => {
+              const { sessionID, timeOfRecord, pageView, activity } = entry;
 
-            return (
-              <tr>
-                <td>{sessionID}</td>
-                <td>{pageView}</td>
-                <td>{timeOfRecord}</td>
-                <td>{activity}</td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </Table>;
+              return (
+                <tr>
+                  <td>{sessionID}</td>
+                  <td>{pageView}</td>
+                  <td>{timeOfRecord}</td>
+                  <td>{activity}</td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </Table>
+      );
     } else if (mode === "Customers") {
       return (
         <Table
@@ -260,7 +339,7 @@ function DA() {
         >
           <thead>
             <tr>
-            <th>session</th>
+              <th>session</th>
               <th>Time</th>
               <th>user</th>
               <th>zip</th>

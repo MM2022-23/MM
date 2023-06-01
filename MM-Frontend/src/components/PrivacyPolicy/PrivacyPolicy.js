@@ -1,3 +1,5 @@
+import userSession from "../../Service/Data/userSession";
+import DataCollectionAPIService from "../../Service/APICalls/DataCollectionAPIService";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
@@ -5,6 +7,17 @@ import React from "react";
 import ScrollTop from "../../Service/Misc/ScrollTop";
 const PrivacyPolicy = () => {
   useEffect(() => {
+    const activity = userSession.isLoggedIn()
+      ? `Viewed PrivacyPolicy: ${userSession.getUser().emailAddress}`
+      : "Viewed PrivacyPolicy: Anon";
+    const dataToSend = {
+      sessionID: userSession.getSessionID(),
+      pageView: "PrivacyPolicy",
+      activity: activity,
+    };
+    DataCollectionAPIService.pageViewCollect(dataToSend)
+      .then((r) => {})
+      .catch((err) => {});
     ScrollTop.scrollUp();
   }, []);
   return (
@@ -619,6 +632,21 @@ const PrivacyPolicy = () => {
                 borderRadius: "9px",
                 fontSize: "25px",
                 padding: "1px",
+              }}
+              onClick={() => {
+                const activity = userSession.isLoggedIn()
+                  ? `Clicked Order frm PrivacyPolicy: ${
+                      userSession.getUser().emailAddress
+                    }`
+                  : "Clicked Order frm PrivacyPolicy: Anon";
+                const dataToSend = {
+                  sessionID: userSession.getSessionID(),
+                  pageView: "PrivacyPolicy",
+                  activity: activity,
+                };
+                DataCollectionAPIService.pageViewCollect(dataToSend)
+                  .then((r) => {})
+                  .catch((err) => {});
               }}
             >
               Order

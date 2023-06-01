@@ -1,3 +1,5 @@
+import userSession from "../../Service/Data/userSession";
+import DataCollectionAPIService from "../../Service/APICalls/DataCollectionAPIService";
 import { useEffect } from "react";
 import ScrollTop from "../../Service/Misc/ScrollTop";
 import { Link } from "react-router-dom";
@@ -7,6 +9,17 @@ import React from "react";
 
 const RefundsAndCancellationsPolicy = () => {
   useEffect(() => {
+    const activity = userSession.isLoggedIn()
+      ? `Viewed Refunds: ${userSession.getUser().emailAddress}`
+      : "Viewed Refunds: Anon";
+    const dataToSend = {
+      sessionID: userSession.getSessionID(),
+      pageView: "Refunds",
+      activity: activity,
+    };
+    DataCollectionAPIService.pageViewCollect(dataToSend)
+      .then((r) => {})
+      .catch((err) => {});
     ScrollTop.scrollUp();
   }, []);
   return (
@@ -76,6 +89,21 @@ const RefundsAndCancellationsPolicy = () => {
                 borderRadius: "9px",
                 fontSize: "25px",
                 padding: "1px",
+              }}
+              onClick={() => {
+                const activity = userSession.isLoggedIn()
+                  ? `Clicked Order frm Refunds: ${
+                      userSession.getUser().emailAddress
+                    }`
+                  : "Clicked Order frm Refunds: Anon";
+                const dataToSend = {
+                  sessionID: userSession.getSessionID(),
+                  pageView: "Refunds",
+                  activity: activity,
+                };
+                DataCollectionAPIService.pageViewCollect(dataToSend)
+                  .then((r) => {})
+                  .catch((err) => {});
               }}
             >
               Order

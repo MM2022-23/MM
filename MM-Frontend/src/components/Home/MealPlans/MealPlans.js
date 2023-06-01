@@ -1,7 +1,9 @@
+import userSession from "../../../Service/Data/userSession";
+import DataCollectionAPIService from "../../../Service/APICalls/DataCollectionAPIService";
 import React from "react";
 import { Container, Row, Col, Button } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
-import ReactGA from 'react-ga4'; 
+import ReactGA from "react-ga4";
 const MealPlans = ({
   setMeals,
   setResetOrderPageInfo,
@@ -11,11 +13,17 @@ const MealPlans = ({
   const navigate = useNavigate();
 
   const buttonClicked = (meals) => {
-    ReactGA.event({
-      category: 'Order Button',
-      action: 'Click',
-      label: 'Order Button from Meal Plans in Home Page'
-    });
+    const activity = userSession.isLoggedIn()
+      ? `Clicked ${meals}: ${userSession.getUser().emailAddress}`
+      : `Clicked ${meals}: Anon`;
+    const dataToSend = {
+      sessionID: userSession.getSessionID(),
+      pageView: "Home",
+      activity: activity,
+    };
+    DataCollectionAPIService.pageViewCollect(dataToSend)
+      .then((r) => {})
+      .catch((err) => {});
     setMeals(meals);
     setResetOrderPageInfo(1); // want to pick freq, date, zipCode but number of meals is chosen
     setCart([]);
@@ -178,6 +186,21 @@ const MealPlans = ({
                       width: "150px",
                       borderRadius: "25px",
                       fontSize: "25px",
+                    }}
+                    onClick={() => {
+                      const activity = userSession.isLoggedIn()
+                        ? `Clicked Order frm MealPlans: ${
+                            userSession.getUser().emailAddress
+                          }`
+                        : `Clicked Order frm MealPlans: Anon`;
+                      const dataToSend = {
+                        sessionID: userSession.getSessionID(),
+                        pageView: "Home",
+                        activity: activity,
+                      };
+                      DataCollectionAPIService.pageViewCollect(dataToSend)
+                        .then((r) => {})
+                        .catch((err) => {});
                     }}
                   >
                     Order

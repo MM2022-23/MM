@@ -3,24 +3,30 @@
  */
 
 import React from "react";
-
+import userSession from "../../Service/Data/userSession";
+import DataCollectionAPIService from "../../Service/APICalls/DataCollectionAPIService";
 import { Button } from "react-bootstrap";
 import InformationBox from "./InformationBox/InformationBox";
 import { Link, useLocation } from "react-router-dom";
 import ScrollTop from "../../Service/Misc/ScrollTop";
 import { useEffect } from "react";
-import {Helmet} from "react-helmet";
-import ReactGA from 'react-ga4'; 
+import { Helmet } from "react-helmet";
+import ReactGA from "react-ga4";
 const About = () => {
-  const useLoc = useLocation(); 
+  const useLoc = useLocation();
   useEffect(() => {
     ScrollTop.scrollUp();
-    ReactGA.send({ 
-      hitType: 'pageview', 
-      page_location: window.location.href, 
-      page_path: useLoc.pathname, 
-      page_title: 'About' 
-    });
+    const activity = userSession.isLoggedIn()
+      ? `Viewed About: ${userSession.getUser().emailAddress}`
+      : "Viewed About: Anon";
+    const dataToSend = {
+      sessionID: userSession.getSessionID(),
+      pageView: "About",
+      activity: activity,
+    };
+    DataCollectionAPIService.pageViewCollect(dataToSend)
+      .then((r) => {})
+      .catch((err) => {});
   }, []);
   const firstBox = {
     image: require("../../Resources/Meals/meal1.png"),
@@ -68,6 +74,21 @@ const About = () => {
               width: "150px",
               borderRadius: "25px",
               fontSize: "25px",
+            }}
+            onClick={() => {
+              const activity = userSession.isLoggedIn()
+                ? `Clicked Order frm What WeDo: ${
+                    userSession.getUser().emailAddress
+                  }`
+                : "Clicked Order frm What WeDo: Anon";
+              const dataToSend = {
+                sessionID: userSession.getSessionID(),
+                pageView: "About",
+                activity: activity,
+              };
+              DataCollectionAPIService.pageViewCollect(dataToSend)
+                .then((r) => {})
+                .catch((err) => {});
             }}
           >
             Order
@@ -129,6 +150,21 @@ const About = () => {
               borderRadius: "25px",
               fontSize: "25px",
             }}
+            onClick={() => {
+              const activity = userSession.isLoggedIn()
+                ? `Clicked Order frm Our Mission: ${
+                    userSession.getUser().emailAddress
+                  }`
+                : "Clicked Order frm Our Mission: Anon";
+              const dataToSend = {
+                sessionID: userSession.getSessionID(),
+                pageView: "About",
+                activity: activity,
+              };
+              DataCollectionAPIService.pageViewCollect(dataToSend)
+                .then((r) => {})
+                .catch((err) => {});
+            }}
           >
             Order
           </Button>
@@ -187,6 +223,21 @@ const About = () => {
               borderRadius: "25px",
               fontSize: "25px",
             }}
+            onClick={() => {
+              const activity = userSession.isLoggedIn()
+                ? `Clicked Order frm Guiding Vals: ${
+                    userSession.getUser().emailAddress
+                  }`
+                : "Clicked Order frm Guiding Vals: Anon";
+              const dataToSend = {
+                sessionID: userSession.getSessionID(),
+                pageView: "About",
+                activity: activity,
+              };
+              DataCollectionAPIService.pageViewCollect(dataToSend)
+                .then((r) => {})
+                .catch((err) => {});
+            }}
           >
             Order
           </Button>
@@ -232,14 +283,13 @@ const About = () => {
   };
   return (
     <>
-
-<Helmet>
-      <title>
-      About
-      </title>
-      <meta name = "description" content="Mirchi Meals aims to provide readily accessible Indian meals for everyone to enjoy. Our variety of Indian meals allow our customers to experience different Indian foods and delicacies across many regions of India."/>
-      
-    </Helmet>
+      <Helmet>
+        <title>About</title>
+        <meta
+          name="description"
+          content="Mirchi Meals aims to provide readily accessible Indian meals for everyone to enjoy. Our variety of Indian meals allow our customers to experience different Indian foods and delicacies across many regions of India."
+        />
+      </Helmet>
       {/* What we do */}
       <InformationBox data={firstBox} />
 

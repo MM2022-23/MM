@@ -74,11 +74,6 @@ function LogInPopUP({ style, setLogIn }) {
   };
 
   const handleDisplay = (e) => {
-    ReactGA.event({
-      category: 'Button',
-      action: 'Click',
-      label: 'LogIn Button'
-    });
     e.preventDefault();
     setDisplay(true);
   };
@@ -126,16 +121,6 @@ function LogInPopUP({ style, setLogIn }) {
                 password: response.data.Password,
                 phone: response.data.phone,
               };
-              ReactGA.send({ 
-                hitType: 'Button',
-                action:"Button",
-                label: "Log In successful",
-              });
-              // ReactGA.event({
-              //   category: "Button",
-              //   action: "LogIn",
-              //   label: "Log In successful",
-              // });
               userSession.addUser(userLoggedIn);
               setInvalid(false);
               setLogIn(true);

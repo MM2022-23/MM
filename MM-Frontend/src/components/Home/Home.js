@@ -30,30 +30,32 @@ const Home = ({
   const useLoc = useLocation();
 
   useEffect(() => {
-    
     const pathname = window.location.hash;
     // // coming from fb
-    if (pathname.includes("#/")&& pathname.split("#/")[1].length!==0) {
+    if (pathname.includes("#/") && pathname.split("#/")[1].length !== 0) {
       // console.log("Coming from FB");
       userSession.addSessionID(pathname.split("#/")[1]);
     } else {
       // console.log("Coming 1st time");
-      
+
       // Coming 1st time
-      if(!pathname.includes("#")&& !userSession.getSessionID()){
+      if (!pathname.includes("#") && !userSession.getSessionID()) {
         userSession.addSessionID("Not From FB");
       }
-    
     }
 
+    const activity = userSession.isLoggedIn()
+      ? `Viewed Home: ${userSession.getUser().emailAddress}`
+      : "Viewed Home: Anon";
+    const dataToSend = {
+      sessionID: userSession.getSessionID(),
+      pageView: "Home",
+      activity: activity,
+    };
+    DataCollectionAPIService.pageViewCollect(dataToSend)
+      .then((r) => {})
+      .catch((err) => {});
 
-
-    // ReactGA.send({
-    //   hitType: "pageview",
-    //   page_location: window.location.href,
-    //   page_path: useLoc.pathname,
-    //   page_title: "Home",
-    // });
     if (scrollFAQ) {
       // console.log("Down!!!");
       ScrollTop.scrollToFAQ();

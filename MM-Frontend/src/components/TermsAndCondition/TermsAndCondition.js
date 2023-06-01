@@ -1,3 +1,5 @@
+import userSession from "../../Service/Data/userSession";
+import DataCollectionAPIService from "../../Service/APICalls/DataCollectionAPIService";
 import { Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
@@ -6,6 +8,17 @@ import ScrollTop from "../../Service/Misc/ScrollTop";
 
 const TermsAndCondition = () => {
   useEffect(() => {
+    const activity = userSession.isLoggedIn()
+      ? `Viewed Terms: ${userSession.getUser().emailAddress}`
+      : "Viewed Terms: Anon";
+    const dataToSend = {
+      sessionID: userSession.getSessionID(),
+      pageView: "Terms&Cond",
+      activity: activity,
+    };
+    DataCollectionAPIService.pageViewCollect(dataToSend)
+      .then((r) => {})
+      .catch((err) => {});
     ScrollTop.scrollUp();
   }, []);
   return (
@@ -290,13 +303,13 @@ const TermsAndCondition = () => {
       <div className="container my-5">
         <h2>Delivery Policy</h2>
         <p>
-          Deliveries are Sunday 1pm – 1:30pm a later delivery may occur
-          due to traffic, bad weather or unforeseen conditions. Our delivery
-          team will reach out to you via text the previous day before delivery
-          to remind you of your upcoming delivery. You will also receive a
-          delivery reminder via text about 1 hour from the delivery location.
-          Our deliveries are contact-less, meaning our driver will leave your
-          order outside your location.
+          Deliveries are Sunday 1pm – 1:30pm a later delivery may occur due to
+          traffic, bad weather or unforeseen conditions. Our delivery team will
+          reach out to you via text the previous day before delivery to remind
+          you of your upcoming delivery. You will also receive a delivery
+          reminder via text about 1 hour from the delivery location. Our
+          deliveries are contact-less, meaning our driver will leave your order
+          outside your location.
         </p>
       </div>
       <div className="container my-5">
@@ -377,6 +390,21 @@ const TermsAndCondition = () => {
                 borderRadius: "9px",
                 fontSize: "25px",
                 padding: "1px",
+              }}
+              onClick={() => {
+                const activity = userSession.isLoggedIn()
+                  ? `Clicked Order frm Terms&Cond: ${
+                      userSession.getUser().emailAddress
+                    }`
+                  : "Clicked Order frm Terms&Cond: Anon";
+                const dataToSend = {
+                  sessionID: userSession.getSessionID(),
+                  pageView: "Terms&Cond.",
+                  activity: activity,
+                };
+                DataCollectionAPIService.pageViewCollect(dataToSend)
+                  .then((r) => {})
+                  .catch((err) => {});
               }}
             >
               Order

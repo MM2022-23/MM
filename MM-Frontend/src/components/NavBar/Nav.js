@@ -1,3 +1,4 @@
+import DataCollectionAPIService from "../../Service/APICalls/DataCollectionAPIService";
 import Nav from "react-bootstrap/Nav";
 import AccountInfo from "../AccountInfo/AccountInfo";
 import userSession from "../../Service/Data/userSession";
@@ -31,6 +32,18 @@ function NavBar({
   const [displayAccountInfo, setDisplayAccountInfo] = useState(false);
   // might cause error in PRODUCTION due to paths and hashes "#/"
   const toFAQ = (e) => {
+    const activity = userSession.isLoggedIn()
+      ? `Clicked FAQ: ${userSession.getUser().emailAddress}`
+      : "Clicked FAQ: Anon";
+    const dataToSend = {
+      sessionID: userSession.getSessionID(),
+      pageView: window.location.href,
+      activity: activity,
+    };
+    DataCollectionAPIService.pageViewCollect(dataToSend)
+      .then((r) => {})
+      .catch((err) => {});
+
     let path = window.location.href;
     if (path.indexOf("#") < 0) {
       ScrollTop.scrollToFAQ();

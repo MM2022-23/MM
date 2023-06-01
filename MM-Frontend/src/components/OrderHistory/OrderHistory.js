@@ -1,27 +1,33 @@
+import DataCollectionAPIService from "../../Service/APICalls/DataCollectionAPIService";
 import { useState } from "react";
-import { Link, useNavigate, useLocation} from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { Button } from "react-bootstrap";
 import React from "react";
 import Table from "react-bootstrap/Table";
 import userSession from "../../Service/Data/userSession";
 import OrderAPIService from "../../Service/APICalls/OrderAPIService";
-import ReactGA from 'react-ga4'; 
+import ReactGA from "react-ga4";
 const OrderHistory = ({ isLoggedIn }) => {
   const navigate = useNavigate();
   const [orders, setOrders] = useState(null);
 
-  const useLoc = useLocation(); 
+  const useLoc = useLocation();
   useEffect(() => {
     if (!isLoggedIn) {
       navigate("/");
     } else {
-      ReactGA.send({ 
-        hitType: 'pageview', 
-        page_location: window.location.href, 
-        page_path: useLoc.pathname, 
-        page_title: 'Order History' 
-      });
+      const activity = userSession.isLoggedIn()
+        ? `Viewed OrderHistory: ${userSession.getUser().emailAddress}`
+        : "Viewed OrderHistory: Anon";
+      const dataToSend = {
+        sessionID: userSession.getSessionID(),
+        pageView: "OrderHistory",
+        activity: activity,
+      };
+      DataCollectionAPIService.pageViewCollect(dataToSend)
+        .then((r) => {})
+        .catch((err) => {});
       const fetchHistory = () => {
         // console.log("SERVICE CALLED....");
         OrderAPIService.orderHistory({ id: userSession.getUser().id })

@@ -15,7 +15,6 @@ import { Modal } from "react-bootstrap";
 import zipCodeService from "../../Service/Data/zipCodeService";
 import DataCollectionAPIService from "../../Service/APICalls/DataCollectionAPIService";
 import { Helmet } from "react-helmet";
-import ReactGA from "react-ga4";
 import userSession from "../../Service/Data/userSession";
 
 const data = {
@@ -93,13 +92,18 @@ const OrderPage = ({
       // setFreq("Select Frequency");
       setDelivDate("Select Date");
     }
+    const activity = userSession.isLoggedIn()
+      ? `Viewed OrderPage: ${userSession.getUser().emailAddress}`
+      : "Viewed OrderPage: Anon";
+    const dataToSend = {
+      sessionID: userSession.getSessionID(),
+      pageView: "OrderPage",
+      activity: activity,
+    };
+    DataCollectionAPIService.pageViewCollect(dataToSend)
+      .then((r) => {})
+      .catch((err) => {});
     Scroll.scrollUp();
-    ReactGA.send({
-      hitType: "pageview",
-      page_location: window.location.href,
-      page_path: useLoc.pathname,
-      page_title: "Order Page",
-    });
   }, []);
   // Pick meals button clicked
   const handlePickMeals = () => {
