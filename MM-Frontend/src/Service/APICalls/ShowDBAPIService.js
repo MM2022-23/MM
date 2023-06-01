@@ -31,6 +31,12 @@ class ShowDBAPIService {
     });
   }
 
+  getPageActivity(){
+    return axios.post(`${SHOWDB_BASE_API_URL}getPageActivity`, {
+      password: "MirchiMeals",
+    });
+  }
+
 
 }
 

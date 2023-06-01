@@ -68,6 +68,20 @@ function DA() {
             setMode("Proceed");
           }}
         />
+
+        <MDBRadio
+          btn
+          btnColor="light"
+          id="btn-radio4"
+          name="options"
+          wrapperTag="span"
+          wrapperClass="mx-2"
+          label="Page Activity"
+          onClick={() => {
+            getPageActivity();
+            setMode("Pages");
+          }}
+        />
       </MDBBtnGroup>
     );
   };
@@ -109,9 +123,50 @@ function DA() {
       });
   };
 
+  const getPageActivity = () => {
+    ShowDBAPIService.getPageActivity()
+      .then((res) => {
+        setTable(res.data);
+      })
+      .catch((err) => {
+        console.log("Err:: " + err);
+      });
+  };
+
   const showTables = () => {
     if (!table) {
       return <>Loading...</>;
+    } else if (mode === "Pages") {
+      <Table
+        striped
+        bordered
+        hover
+        style={{ fontSize: "2.2vw", fontFamily: "Signika" }}
+      >
+        <thead>
+          <tr>
+            <th>sessionID</th>
+            <th>page</th>
+            <th>time</th>
+            <th>activity</th>
+            
+          </tr>
+        </thead>
+        <tbody>
+          {table.map((entry) => {
+            const { sessionID,timeOfRecord,pageView, activity } = entry;
+
+            return (
+              <tr>
+                <td>{sessionID}</td>
+                <td>{pageView}</td>
+                <td>{timeOfRecord}</td>
+                <td>{activity}</td>
+              </tr>
+            );
+          })}
+        </tbody>
+      </Table>;
     } else if (mode === "Customers") {
       return (
         <Table
