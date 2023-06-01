@@ -24,6 +24,7 @@ import DataCollectionAPI from "./Service/APICalls/DataCollectionAPIService";
 import AdminPortal from "./components/AdminPortal/AdminPortal";
 import ReactGA from "react-ga4";
 import { TRACKINGID } from "./Service/Constants";
+import DA from "./components/DA/DA";
 
 ReactGA.initialize(TRACKINGID);
 function App() {
@@ -218,6 +219,9 @@ function App() {
 
         {/* Admin Page */}
         <Route exact path="/admin" element={<AdminPortal />} />
+
+        {/* DA Page */}
+        <Route exact path="/da" element={<DA/>} />
 
         {/* Privacy Policy */}
         <Route exact path="/privacy" element={navAndFoot(<PrivacyPolicy />)} />
