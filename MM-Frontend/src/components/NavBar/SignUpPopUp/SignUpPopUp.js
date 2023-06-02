@@ -5,12 +5,13 @@ import UserAPIService from "../../../Service/APICalls/UserAPIService";
  */
 
 import userSession from "../../../Service/Data/userSession";
+import DataCollectionAPIService from "../../../Service/APICalls/DataCollectionAPIService";
 import "./SignUp.css";
 import React from "react";
 import { Modal } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import { useState } from "react";
-import ReactGA from 'react-ga4'; 
+import ReactGA from "react-ga4";
 
 function SignUpPopUp({ style, setLogIn }) {
   // display pop up
@@ -130,7 +131,6 @@ function SignUpPopUp({ style, setLogIn }) {
   };
 
   const handleDisplay = (e) => {
-    
     e.preventDefault();
     setDisplay(true);
   };
@@ -209,9 +209,20 @@ function SignUpPopUp({ style, setLogIn }) {
             };
             userSession.addUser(userLoggedIn);
             handleClose();
+            const activity = `${
+              userSession.getUser().emailAddress
+            } Successfully Signed Up`;
+            const dataToSend = {
+              sessionID: userSession.getSessionID(),
+              pageView: "Unkown, bc this is universal popup",
+              activity: activity,
+            };
+            DataCollectionAPIService.pageViewCollect(dataToSend)
+              .then((r) => {})
+              .catch((err) => {});
             // console.log("SUCCESS ON FRONT END ");
           } else {
-            // FIX: DIFFERENTIATE OTHER ERRS FROM SIGN UP DUPLICATE EMAIL ERRORS 
+            // FIX: DIFFERENTIATE OTHER ERRS FROM SIGN UP DUPLICATE EMAIL ERRORS
             // console.log("FAILURE ON FRONT END ");
           }
         })
@@ -247,7 +258,21 @@ function SignUpPopUp({ style, setLogIn }) {
   return (
     <>
       {/* Sign Up Button on Red Box in Showcase */}
-      <button onClick={(e) => handleDisplay(e)} className="buttonAdjustments">
+      <button
+        onClick={(e) => {
+          handleDisplay(e);
+          const activity = "Signing Up";
+          const dataToSend = {
+            sessionID: userSession.getSessionID(),
+            pageView: "Unkown, bc this is universal popup",
+            activity: activity,
+          };
+          DataCollectionAPIService.pageViewCollect(dataToSend)
+            .then((r) => {})
+            .catch((err) => {});
+        }}
+        className="buttonAdjustments"
+      >
         <span style={{ color: style.textColor }}>Sign Up</span>
       </button>
 
@@ -319,7 +344,6 @@ function SignUpPopUp({ style, setLogIn }) {
 
             <div className="mb-3">
               <p id="agreement">
-                
                 <span style={{ marginRight: "7px" }}>
                   <input type="checkbox" id="ageRestriction" />
                 </span>

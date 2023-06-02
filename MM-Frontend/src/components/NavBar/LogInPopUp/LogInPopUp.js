@@ -9,7 +9,7 @@ import { Modal } from "react-bootstrap";
 import { Button } from "react-bootstrap";
 import { useState } from "react";
 import userSession from "../../../Service/Data/userSession";
-import ReactGA from 'react-ga4'; 
+import DataCollectionAPIService from "../../../Service/APICalls/DataCollectionAPIService";
 function LogInPopUP({ style, setLogIn }) {
   const [showForgotPassword, setShowForgotPassword] = useState(false);
   // display pop up
@@ -125,6 +125,15 @@ function LogInPopUP({ style, setLogIn }) {
               setInvalid(false);
               setLogIn(true);
               handleClose();
+              const activity = `${userSession.getUser().emailAddress} Successfully Logged In`;
+              const dataToSend = {
+                sessionID: userSession.getSessionID(),
+                pageView: "Unkown, bc this is universal popup",
+                activity: activity,
+              };
+              DataCollectionAPIService.pageViewCollect(dataToSend)
+                .then((r) => {})
+                .catch((err) => {});
             } else {
               // incorrect password!
               setInvalid(true);
@@ -161,7 +170,21 @@ function LogInPopUP({ style, setLogIn }) {
   return (
     <>
       {/* Log In Button on Red Box in Showcase */}
-      <button onClick={(e) => handleDisplay(e)} className="buttonAdjustments">
+      <button
+        onClick={(e) => {
+          handleDisplay(e);
+          const activity = "Logging In";
+          const dataToSend = {
+            sessionID: userSession.getSessionID(),
+            pageView: "Unkown, bc this is universal popup",
+            activity: activity,
+          };
+          DataCollectionAPIService.pageViewCollect(dataToSend)
+            .then((r) => {})
+            .catch((err) => {});
+        }}
+        className="buttonAdjustments"
+      >
         <span style={{ color: style.textColor }}>Log In</span>
       </button>
 

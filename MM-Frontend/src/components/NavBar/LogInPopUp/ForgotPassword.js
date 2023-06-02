@@ -1,4 +1,5 @@
 import UserAPIService from "../../../Service/APICalls/UserAPIService";
+import DataCollectionAPIService from "../../../Service/APICalls/DataCollectionAPIService";
 import { useState } from "react";
 import { Modal } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
@@ -73,6 +74,16 @@ const ForgotPassword = ({
                 Check your emailForgotPassword and Log in!
               </span>
             );
+
+            const activity = `Forgot Password submitted: ${emailForgotPassword}`;
+            const dataToSend = {
+              sessionID: userSession.getSessionID(),
+              pageView: "Unkown, bc this is universal popup",
+              activity: activity,
+            };
+            DataCollectionAPIService.pageViewCollect(dataToSend)
+              .then((r) => {})
+              .catch((err) => {});
 
             setTimeout(() => {
               handleClose();
