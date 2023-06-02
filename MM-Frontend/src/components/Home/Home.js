@@ -46,15 +46,6 @@ const Home = ({
       DataCollectionAPIService.pageViewCollect(dataToSend)
         .then((r) => {})
         .catch((err) => {});
-
-      if (scrollFAQ) {
-        // console.log("Down!!!");
-        ScrollTop.scrollToFAQ();
-        setScrollFAQ(false);
-      } else {
-        // console.log("UP!!!");
-        ScrollTop.scrollUp();
-      }
     } else {
       // console.log("Coming 1st time");
 
@@ -72,16 +63,29 @@ const Home = ({
         DataCollectionAPIService.pageViewCollect(dataToSend)
           .then((r) => {})
           .catch((err) => {});
-
-        if (scrollFAQ) {
-          // console.log("Down!!!");
-          ScrollTop.scrollToFAQ();
-          setScrollFAQ(false);
-        } else {
-          // console.log("UP!!!");
-          ScrollTop.scrollUp();
-        }
+      } else if (!userSession.getSessionID()) {
+        userSession.addSessionID("Not From FB");
+        const activity = userSession.isLoggedIn()
+          ? `Viewed Home: ${userSession.getUser().emailAddress}`
+          : "Viewed Home: Anon";
+        const dataToSend = {
+          sessionID: userSession.getSessionID(),
+          pageView: "Home",
+          activity: activity,
+        };
+        DataCollectionAPIService.pageViewCollect(dataToSend)
+          .then((r) => {})
+          .catch((err) => {});
       }
+    }
+
+    if (scrollFAQ) {
+      // console.log("Down!!!");
+      ScrollTop.scrollToFAQ();
+      setScrollFAQ(false);
+    } else {
+      // console.log("UP!!!");
+      ScrollTop.scrollUp();
     }
   }, []);
   const saveTime = {
