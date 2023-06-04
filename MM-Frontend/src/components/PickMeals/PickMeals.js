@@ -242,7 +242,8 @@ const PickMeals = ({
     return tempDict;
   };
 
-  const handleNoSignUp = () => {
+  const handleNoSignUp = (e) => {
+    e.preventDefault();
     console.log("No Sign Up clicked");
     const activity = "Sign up skipped";
     const dataToSend = {
@@ -312,7 +313,7 @@ const PickMeals = ({
 
             <div className="container text-center mt-4 mb-4">
               <button
-                onClick={handleNoSignUp}
+                onClick={(e)=>handleNoSignUp(e)}
                 className="text-primary mx-2"
                 style={{
                   backgroundColor: "rgb(212,106,25)",
