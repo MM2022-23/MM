@@ -1,3 +1,6 @@
+import PopUp from "../PopUp/PopUp";
+import SignUpPopUp from "../../components/NavBar/SignUpPopUp/SignUpPopUp";
+import LogInPopUP from "../../components/NavBar/LogInPopUp/LogInPopUp";
 import DataCollection from "../../Service/Data/DataCollection";
 import userSession from "../../Service/Data/userSession";
 import { useEffect } from "react";
@@ -21,6 +24,7 @@ const UpSaleItems = ({
   zipCode,
   mealNumbers,
   setMealNumbers,
+  setLogIn,
 }) => {
   const noItems = () => {
     for (let index = 0; index < MealData.getUpSaleItems().length; index++) {
@@ -32,6 +36,11 @@ const UpSaleItems = ({
 
     return true;
   };
+
+  // SignUp/LogIn Pop Up
+  const [showSignUpLogIn, setShowSignUpLogIn] = useState(false);
+  const [signUpLogInTitle, setSignUpLogInTitle] = useState("LogIn/SignUp");
+  const [signUpLogInBody, setSignUpLogInBody] = useState("");
 
   const [show, setShow] = useState(false);
   const [description, setDescription] = useState("");
@@ -141,6 +150,92 @@ const UpSaleItems = ({
     }
   };
 
+  const handleNoSignUp = (e) => {
+    e.preventDefault();
+    // No sign up clicked from pick meals
+    DataCollection.registerActivity(
+      "UpSaleItemsPopUp",
+      `Signup skipped from UpSales: ${
+        userSession.isLoggedIn() && userSession.getUser().id !== "improper"
+          ? userSession.getUser().emailAddress
+          : "Anon"
+      }`
+    );
+
+    const userLoggedIn = {
+      id: "improper",
+    };
+    userSession.addUser(userLoggedIn);
+    setShowSignUpLogIn(false);
+    // document clicked!
+    setDisplayPopUp(false);
+    document.getElementById("hiddenPaymentButton").click();
+  };
+
+  const handleProceed = (e) => {
+    e.preventDefault();
+    if (!userSession.isLoggedIn() || userSession.getUser().id === "improper") {
+      // user not logged in
+      setSignUpLogInBody(
+        <div
+          className="container align-items-center d-flex justify-content-center"
+          style={{ fontFamily: "Signika" }}
+        >
+          <form style={{ padding: "20px" }} className="rounded">
+            <Row className="">
+              <div className="form-group">
+                <label htmlFor="exampleInputEmail1" className="mb-4">
+                  <p className="lead">Log in or Sign Up to continue</p>
+                </label>
+              </div>
+            </Row>
+
+            <div className="container text-center mt-4 mb-4">
+              <button
+                onClick={(e) => handleNoSignUp(e)}
+                className="text-primary mx-2"
+                style={{
+                  backgroundColor: "rgb(212,106,25)",
+                  borderRadius: "10px",
+                  border: "0",
+                  height: "45px",
+                  width: "100px",
+                  fontSize: "15px",
+                }}
+              >
+                Skip Sign Up
+              </button>
+            </div>
+
+            <div className="container text-center mb-4">
+              <LogInPopUP
+                style={{ buttonColor: "secondary", textColor: "white" }}
+                setLogIn={setLogIn}
+              />
+            </div>
+
+            <div className="container text-center">
+              <SignUpPopUp
+                style={{ buttonColor: "secondary", textColor: "white" }}
+                setLogIn={setLogIn}
+              />
+            </div>
+          </form>
+        </div>
+      );
+      (!userSession.isLoggedIn() || userSession.getUser().id === "improper") &&
+        setShowSignUpLogIn(true);
+    } else {
+      // logged in
+      DataCollection.registerActivity(
+        "UpSaleItmes",
+        "Clicked Proceed frm UpSale: Anon"
+      );
+      setDisplayPopUp(false);
+      document.getElementById("hiddenPaymentButton").click();
+    }
+  };
+
   return (
     <>
       <Modal
@@ -243,18 +338,8 @@ const UpSaleItems = ({
               <Button
                 variant="light"
                 className="text-dark"
-                onClick={() => {
-                  DataCollection.registerActivity(
-                    "UpSaleItmes",
-                    `Clicked Proceed frm UpSale: ${
-                      userSession.isLoggedIn() &&
-                      userSession.getUser().id !== "improper"
-                        ? userSession.getUser().emailAddress
-                        : "Anon"
-                    }`
-                  );
-                  setDisplayPopUp(false);
-                  document.getElementById("hiddenPaymentButton").click();
+                onClick={(e) => {
+                  handleProceed(e);
                 }}
               >
                 {noItems() ? "No Thanks, Continue" : "Proceed"}
@@ -295,6 +380,15 @@ const UpSaleItems = ({
           </Button>
         </Modal.Footer>
       </Modal>
+      {(!userSession.isLoggedIn() ||
+        userSession.getUser().id === "improper") && (
+        <PopUp
+          displayPopUp={showSignUpLogIn}
+          setDisplayPopUp={setShowSignUpLogIn}
+          title={signUpLogInTitle}
+          body={signUpLogInBody}
+        />
+      )}
     </>
   );
 };

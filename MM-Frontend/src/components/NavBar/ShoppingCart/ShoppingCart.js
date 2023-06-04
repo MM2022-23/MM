@@ -153,61 +153,63 @@ const ShoppingCart = ({
       setTitleEnough("Not Enough Meals selected!!");
       setBodyEnough(<p>Select at least {numMeals[0]} meals</p>);
       setDisplayEnoughPopUp(true);
-    } else if (
-      !userSession.isLoggedIn() ||
-      userSession.getUser().id === "improper"
-    ) {
-      setTitle("LogIn/SignUp");
-      setBody(
-        <div
-          className="container align-items-center d-flex justify-content-center"
-          style={{ fontFamily: "Signika" }}
-        >
-          <form style={{ padding: "20px" }} className="rounded">
-            <Row className="">
-              <div className="form-group">
-                <label htmlFor="exampleInputEmail1" className="mb-4">
-                  <p className="lead">Log in or Sign Up to continue</p>
-                </label>
-              </div>
-            </Row>
+    } 
+    // else if (
+    //   !userSession.isLoggedIn() ||
+    //   userSession.getUser().id === "improper"
+    // ) {
+    //   setTitle("LogIn/SignUp");
+    //   setBody(
+    //     <div
+    //       className="container align-items-center d-flex justify-content-center"
+    //       style={{ fontFamily: "Signika" }}
+    //     >
+    //       <form style={{ padding: "20px" }} className="rounded">
+    //         <Row className="">
+    //           <div className="form-group">
+    //             <label htmlFor="exampleInputEmail1" className="mb-4">
+    //               <p className="lead">Log in or Sign Up to continue</p>
+    //             </label>
+    //           </div>
+    //         </Row>
 
-            <div className="container text-center mt-4 mb-4">
-              <button
-                onClick={(e) => handleNoSignUp(e)}
-                className="text-primary mx-2"
-                style={{
-                  backgroundColor: "rgb(212,106,25)",
-                  borderRadius: "10px",
-                  border: "0",
-                  height: "45px",
-                  width: "100px",
-                  fontSize: "15px",
-                }}
-              >
-                Skip Sign Up
-              </button>
-            </div>
+    //         <div className="container text-center mt-4 mb-4">
+    //           <button
+    //             onClick={(e) => handleNoSignUp(e)}
+    //             className="text-primary mx-2"
+    //             style={{
+    //               backgroundColor: "rgb(212,106,25)",
+    //               borderRadius: "10px",
+    //               border: "0",
+    //               height: "45px",
+    //               width: "100px",
+    //               fontSize: "15px",
+    //             }}
+    //           >
+    //             Skip Sign Up
+    //           </button>
+    //         </div>
 
-            <div className="container text-center mb-4">
-              <LogInPopUP
-                style={{ buttonColor: "secondary", textColor: "white" }}
-                setLogIn={setLogIn}
-              />
-            </div>
+    //         <div className="container text-center mb-4">
+    //           <LogInPopUP
+    //             style={{ buttonColor: "secondary", textColor: "white" }}
+    //             setLogIn={setLogIn}
+    //           />
+    //         </div>
 
-            <div className="container text-center">
-              <SignUpPopUp
-                style={{ buttonColor: "secondary", textColor: "white" }}
-                setLogIn={setLogIn}
-              />
-            </div>
-          </form>
-        </div>
-      );
-      (!userSession.isLoggedIn() || userSession.getUser().id === "improper") &&
-        setDisplayPopUp(true);
-    } else {
+    //         <div className="container text-center">
+    //           <SignUpPopUp
+    //             style={{ buttonColor: "secondary", textColor: "white" }}
+    //             setLogIn={setLogIn}
+    //           />
+    //         </div>
+    //       </form>
+    //     </div>
+    //   );
+    //   (!userSession.isLoggedIn() || userSession.getUser().id === "improper") &&
+    //     setDisplayPopUp(true);
+    // } 
+    else {
       // document.getElementById("hiddenPaymentButton").click();
       setDisplayPopUp(false);
       setDisplayUpSale(true);

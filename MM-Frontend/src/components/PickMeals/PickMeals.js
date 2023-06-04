@@ -283,88 +283,89 @@ const PickMeals = ({
       setTitleEnough("Not Enough Meals selected!!");
       setBodyEnough(<p>Select at least {numMeals[0]} meals</p>);
       setDisplayEnoughPopUp(true);
-    } else if (
-      !userSession.isLoggedIn() ||
-      userSession.getUser().id === "improper"
-    ) {
-      const now = new Date();
-      const options = { timeZone: "America/New_York" };
-      const time = now.toLocaleString("en-US", options);
-      const dataToSend = {
-        sessionID: userSession.getSessionID(),
-        timeOfRecord: time,
-        userInfo: "User Not logged In",
-        zipCode: zipCode,
-        specificMeals: JSON.stringify(getMealsData()),
-        deliveryDateSelected: delivDate,
-        activity: "Proceed Button Clicked",
-      };
+    } 
+    // else if (
+    //   !userSession.isLoggedIn() ||
+    //   userSession.getUser().id === "improper"
+    // ) {
+    //   const now = new Date();
+    //   const options = { timeZone: "America/New_York" };
+    //   const time = now.toLocaleString("en-US", options);
+    //   const dataToSend = {
+    //     sessionID: userSession.getSessionID(),
+    //     timeOfRecord: time,
+    //     userInfo: "User Not logged In",
+    //     zipCode: zipCode,
+    //     specificMeals: JSON.stringify(getMealsData()),
+    //     deliveryDateSelected: delivDate,
+    //     activity: "Proceed Button Clicked",
+    //   };
 
-      // Send DATA FOR COLLECTION
-      DataCollectionAPIService.pickMealsPageDataCollection(dataToSend)
-        .then((res) => {})
-        .catch((err) => {});
+    //   // Send DATA FOR COLLECTION
+    //   DataCollectionAPIService.pickMealsPageDataCollection(dataToSend)
+    //     .then((res) => {})
+    //     .catch((err) => {});
 
-      DataCollection.registerActivity(
-        "Pick Meals",
-        `Proceed Button Clicked: ${
-          userSession.isLoggedIn() && userSession.getUser().id !== "improper"
-            ? userSession.getUser().emailAddress
-            : "Anon"
-        }`
-      );
+    //   DataCollection.registerActivity(
+    //     "Pick Meals",
+    //     `Proceed Button Clicked: ${
+    //       userSession.isLoggedIn() && userSession.getUser().id !== "improper"
+    //         ? userSession.getUser().emailAddress
+    //         : "Anon"
+    //     }`
+    //   );
+    //   setTitle("LogIn/SignUp");
+    //   setBody(
+    //     <div
+    //       className="container align-items-center d-flex justify-content-center"
+    //       style={{ fontFamily: "Signika" }}
+    //     >
+    //       <form style={{ padding: "20px" }} className="rounded">
+    //         <Row className="">
+    //           <div className="form-group">
+    //             <label htmlFor="exampleInputEmail1" className="mb-4">
+    //               <p className="lead">Log in or Sign Up to continue</p>
+    //             </label>
+    //           </div>
+    //         </Row>
 
-      setTitle("LogIn/SignUp");
-      setBody(
-        <div
-          className="container align-items-center d-flex justify-content-center"
-          style={{ fontFamily: "Signika" }}
-        >
-          <form style={{ padding: "20px" }} className="rounded">
-            <Row className="">
-              <div className="form-group">
-                <label htmlFor="exampleInputEmail1" className="mb-4">
-                  <p className="lead">Log in or Sign Up to continue</p>
-                </label>
-              </div>
-            </Row>
+    //         <div className="container text-center mt-4 mb-4">
+    //           <button
+    //             onClick={(e) => handleNoSignUp(e)}
+    //             className="text-primary mx-2"
+    //             style={{
+    //               backgroundColor: "rgb(212,106,25)",
+    //               borderRadius: "10px",
+    //               border: "0",
+    //               height: "45px",
+    //               width: "100px",
+    //               fontSize: "15px",
+    //             }}
+    //           >
+    //             Skip Sign Up
+    //           </button>
+    //         </div>
 
-            <div className="container text-center mt-4 mb-4">
-              <button
-                onClick={(e) => handleNoSignUp(e)}
-                className="text-primary mx-2"
-                style={{
-                  backgroundColor: "rgb(212,106,25)",
-                  borderRadius: "10px",
-                  border: "0",
-                  height: "45px",
-                  width: "100px",
-                  fontSize: "15px",
-                }}
-              >
-                Skip Sign Up
-              </button>
-            </div>
+    //         <div className="container text-center mb-4">
+    //           <LogInPopUP
+    //             style={{ buttonColor: "secondary", textColor: "white" }}
+    //             setLogIn={setLogIn}
+    //           />
+    //         </div>
 
-            <div className="container text-center mb-4">
-              <LogInPopUP
-                style={{ buttonColor: "secondary", textColor: "white" }}
-                setLogIn={setLogIn}
-              />
-            </div>
-
-            <div className="container text-center">
-              <SignUpPopUp
-                style={{ buttonColor: "secondary", textColor: "white" }}
-                setLogIn={setLogIn}
-              />
-            </div>
-          </form>
-        </div>
-      );
-      (!userSession.isLoggedIn() || userSession.getUser().id === "improper") &&
-        setDisplayPopUp(true);
-    } else {
+    //         <div className="container text-center">
+    //           <SignUpPopUp
+    //             style={{ buttonColor: "secondary", textColor: "white" }}
+    //             setLogIn={setLogIn}
+    //           />
+    //         </div>
+    //       </form>
+    //     </div>
+    //   );
+    //   (!userSession.isLoggedIn() || userSession.getUser().id === "improper") &&
+    //     setDisplayPopUp(true);
+    // } 
+    else {
       const now = new Date();
       const options = { timeZone: "America/New_York" };
       const time = now.toLocaleString("en-US", options);
@@ -548,6 +549,7 @@ const PickMeals = ({
           zipCode={zipCode}
           mealNumbers={mealNumbers}
           setMealNumbers={setMealNumbers}
+          setLogIn = {setLogIn}
         />
 
         <Payment
