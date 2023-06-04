@@ -53,7 +53,7 @@ const PickMeals = ({
         `Viewing Pick Meals: ${
           userSession.isLoggedIn() && userSession.getUser().id !== "improper"
             ? userSession.getUser().emailAddress
-            : "Viewing Pick Meals: Anon"
+            : "Anon"
         }`
       );
       ReactGA.event({
@@ -259,7 +259,7 @@ const PickMeals = ({
       `Signup skipped from proceed button: ${
         userSession.isLoggedIn() && userSession.getUser().id !== "improper"
           ? userSession.getUser().emailAddress
-          : "Signup skipped from proceed button: Anon"
+          : "Anon"
       }`
     );
 
@@ -304,6 +304,15 @@ const PickMeals = ({
       DataCollectionAPIService.pickMealsPageDataCollection(dataToSend)
         .then((res) => {})
         .catch((err) => {});
+
+      DataCollection.registerActivity(
+        "Pick Meals",
+        `Proceed Button Clicked: ${
+          userSession.isLoggedIn() && userSession.getUser().id !== "improper"
+            ? userSession.getUser().emailAddress
+            : "Anon"
+        }`
+      );
 
       setTitle("LogIn/SignUp");
       setBody(
@@ -373,6 +382,15 @@ const PickMeals = ({
       DataCollectionAPIService.pickMealsPageDataCollection(dataToSend)
         .then((res) => {})
         .catch((err) => {});
+
+      DataCollection.registerActivity(
+        "Pick Meals",
+        `Proceed Button Clicked: ${
+          userSession.isLoggedIn() && userSession.getUser().id !== "improper"
+            ? userSession.getUser().emailAddress
+            : "Anon"
+        }`
+      );
       setDisplayPopUp(false);
       setDisplayUpSale(true);
     }

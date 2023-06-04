@@ -1,3 +1,4 @@
+import DataCollection from "../../Service/Data/DataCollection";
 import userSession from "../../Service/Data/userSession";
 import DataCollectionAPIService from "../../Service/APICalls/DataCollectionAPIService";
 import { Button } from "react-bootstrap";
@@ -7,17 +8,14 @@ import React from "react";
 import ScrollTop from "../../Service/Misc/ScrollTop";
 const PrivacyPolicy = () => {
   useEffect(() => {
-    const activity = userSession.isLoggedIn()
-      ? `Viewed PrivacyPolicy: ${userSession.getUser().emailAddress}`
-      : "Viewed PrivacyPolicy: Anon";
-    const dataToSend = {
-      sessionID: userSession.getSessionID(),
-      pageView: "PrivacyPolicy",
-      activity: activity,
-    };
-    DataCollectionAPIService.pageViewCollect(dataToSend)
-      .then((r) => {})
-      .catch((err) => {});
+    DataCollection.registerActivity(
+      "Privacy Page",
+      `Viewing Privacy Policy: ${
+        userSession.isLoggedIn() && userSession.getUser().id !== "improper"
+          ? userSession.getUser().emailAddress
+          : "Anon"
+      }`
+    );
     ScrollTop.scrollUp();
   }, []);
   return (
@@ -634,19 +632,15 @@ const PrivacyPolicy = () => {
                 padding: "1px",
               }}
               onClick={() => {
-                const activity = userSession.isLoggedIn()
-                  ? `Clicked Order frm PrivacyPolicy: ${
-                      userSession.getUser().emailAddress
-                    }`
-                  : "Clicked Order frm PrivacyPolicy: Anon";
-                const dataToSend = {
-                  sessionID: userSession.getSessionID(),
-                  pageView: "PrivacyPolicy",
-                  activity: activity,
-                };
-                DataCollectionAPIService.pageViewCollect(dataToSend)
-                  .then((r) => {})
-                  .catch((err) => {});
+                DataCollection.registerActivity(
+                  "Privacy Policy",
+                  `Clicked order frm PrivacyPolicy: ${
+                    userSession.isLoggedIn() &&
+                    userSession.getUser().id !== "improper"
+                      ? userSession.getUser().emailAddress
+                      : "Anon"
+                  }`
+                );
               }}
             >
               Order

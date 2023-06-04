@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Modal } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import React from "react";
+import DataCollection from "../../../Service/Data/DataCollection";
 
 const ForgotPassword = ({
   showForgotPassword,
@@ -76,15 +77,10 @@ const ForgotPassword = ({
               </span>
             );
 
-            const activity = `Forgot Password submitted: ${emailForgotPassword}`;
-            const dataToSend = {
-              sessionID: userSession.getSessionID(),
-              pageView: "Unkown, bc this is universal popup",
-              activity: activity,
-            };
-            DataCollectionAPIService.pageViewCollect(dataToSend)
-              .then((r) => {})
-              .catch((err) => {});
+            DataCollection.registerActivity(
+              "Unkown, bc this is universal popup",
+              `Forgot Password Submitted: ${emailForgotPassword}`
+            );
 
             setTimeout(() => {
               handleClose();

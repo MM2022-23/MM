@@ -1,3 +1,4 @@
+import DataCollection from "../../../Service/Data/DataCollection";
 import DataCollectionAPIService from "../../../Service/APICalls/DataCollectionAPIService";
 import UpSaleItems from "../../../SharedComponents/UpSaleItems/UpSaleItems";
 import SignUpPopUp from "../SignUpPopUp/SignUpPopUp";
@@ -38,6 +39,8 @@ const ShoppingCart = ({
 
   const clearCart = () => {
     setCart([]);
+    setNumMealsSelected(0);
+    setCartPrice(0);
     const emptyAr = new Array(mealNumbers.length).fill(0);
     setMealNumbers(emptyAr);
   };
@@ -122,15 +125,11 @@ const ShoppingCart = ({
 
   const handleNoSignUp = (e) => {
     e.preventDefault();
-    const activity = "Sign up skipped from Shopping Cart";
-    const dataToSend = {
-      sessionID: userSession.getSessionID(),
-      pageView: "Shopping Cart",
-      activity: activity,
-    };
-    DataCollectionAPIService.pageViewCollect(dataToSend)
-      .then((r) => {})
-      .catch((err) => {});
+    DataCollection.registerActivity(
+      "Shopping Cart",
+      "Sign up skipped frm Shopping Cart"
+    );
+
     const userLoggedIn = {
       id: "improper",
     };
@@ -337,9 +336,8 @@ const ShoppingCart = ({
             <div className="h-45 d-flex align-items-center justify-content-center">
               <button
                 onClick={() => {
-                  setCartPrice(0);
                   clearCart();
-                  setNumMealsSelected(0); 
+
                   handleClose();
                 }}
                 className="text-dark"
@@ -412,7 +410,8 @@ const ShoppingCart = ({
       )}
 
       {/* login warning */}
-      {(!userSession.isLoggedIn()||userSession.getUser().id==="improper") && (
+      {(!userSession.isLoggedIn() ||
+        userSession.getUser().id === "improper") && (
         <PopUp
           displayPopUp={displayPopUp}
           setDisplayPopUp={setDisplayPopUp}

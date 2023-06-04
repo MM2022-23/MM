@@ -22,7 +22,7 @@ const About = () => {
       `Viewing About: ${
         userSession.isLoggedIn() && userSession.getUser().id !== "improper"
           ? userSession.getUser().emailAddress
-          : "Viewing About: Anon"
+          : "Anon"
       }`
     );
   }, []);
@@ -76,11 +76,11 @@ const About = () => {
             onClick={() => {
               DataCollection.registerActivity(
                 "About",
-                `Clicked order frm WhatWeDo: ${
+                `Clicked Order frm WhatWeDo: ${
                   userSession.isLoggedIn() &&
                   userSession.getUser().id !== "improper"
                     ? userSession.getUser().emailAddress
-                    : "Clicked order frm WhatWeDo: Anon"
+                    : "Anon"
                 }`
               );
             }}
@@ -151,7 +151,7 @@ const About = () => {
                   userSession.isLoggedIn() &&
                   userSession.getUser().id !== "improper"
                     ? userSession.getUser().emailAddress
-                    : "Clicked order frm Our Mission: Anon"
+                    : "Anon"
                 }`
               );
             }}
@@ -220,7 +220,7 @@ const About = () => {
                   userSession.isLoggedIn() &&
                   userSession.getUser().id !== "improper"
                     ? userSession.getUser().emailAddress
-                    : "Clicked order frm Our Guiding Vals: Anon"
+                    : "Anon"
                 }`
               );
             }}

@@ -17,7 +17,7 @@ const Help = ({ scrollFAQ, setScrollFAQ }) => {
       `Viewing Help Page: ${
         userSession.isLoggedIn() && userSession.getUser().id !== "improper"
           ? userSession.getUser().emailAddress
-          : "Viewing Help Page: Anon"
+          : "Anon"
       }`
     );
     ScrollTop.scrollUp();
@@ -30,7 +30,7 @@ const Help = ({ scrollFAQ, setScrollFAQ }) => {
       `FAQ Clicked: ${
         userSession.isLoggedIn() && userSession.getUser().id !== "improper"
           ? userSession.getUser().emailAddress
-          : "FAQ Clicked: Anon"
+          : "Anon"
       }`
     );
     setScrollFAQ(true);
@@ -105,7 +105,7 @@ const Help = ({ scrollFAQ, setScrollFAQ }) => {
                           userSession.isLoggedIn() &&
                           userSession.getUser().id !== "improper"
                             ? userSession.getUser().emailAddress
-                            : "Clicked Order frm Help: Anon"
+                            : "Anon"
                         }`
                       );
                     }}

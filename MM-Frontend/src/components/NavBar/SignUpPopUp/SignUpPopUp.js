@@ -1,3 +1,4 @@
+import DataCollection from "../../../Service/Data/DataCollection";
 import { Link } from "react-router-dom";
 import UserAPIService from "../../../Service/APICalls/UserAPIService";
 /***
@@ -209,17 +210,12 @@ function SignUpPopUp({ style, setLogIn }) {
             };
             userSession.addUser(userLoggedIn);
             handleClose();
-            const activity = `${
-              userSession.getUser().emailAddress
-            } Successfully Signed Up`;
-            const dataToSend = {
-              sessionID: userSession.getSessionID(),
-              pageView: "Unkown, bc this is universal popup",
-              activity: activity,
-            };
-            DataCollectionAPIService.pageViewCollect(dataToSend)
-              .then((r) => {})
-              .catch((err) => {});
+
+            DataCollection.registerActivity(
+              "Universal SignUp PopUp",
+              `Signed up Successfully: ${userSession.getUser().emailAddress}`
+            );
+
             // console.log("SUCCESS ON FRONT END ");
           } else {
             // FIX: DIFFERENTIATE OTHER ERRS FROM SIGN UP DUPLICATE EMAIL ERRORS
@@ -261,15 +257,7 @@ function SignUpPopUp({ style, setLogIn }) {
       <button
         onClick={(e) => {
           handleDisplay(e);
-          const activity = "Signing Up";
-          const dataToSend = {
-            sessionID: userSession.getSessionID(),
-            pageView: "Unkown, bc this is universal popup",
-            activity: activity,
-          };
-          DataCollectionAPIService.pageViewCollect(dataToSend)
-            .then((r) => {})
-            .catch((err) => {});
+          DataCollection.registerActivity("Universal SignUp", "Signing Up");
         }}
         className="buttonAdjustments"
       >

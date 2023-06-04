@@ -41,7 +41,7 @@ const Home = ({
         `Viewing Home Page: ${
           userSession.isLoggedIn() && userSession.getUser().id !== "improper"
             ? userSession.getUser().emailAddress
-            : "Viewing Home Page: Anon"
+            : "Anon"
         }`
       );
     } else {
@@ -55,7 +55,7 @@ const Home = ({
           `Viewing Home Page: ${
             userSession.isLoggedIn() && userSession.getUser().id !== "improper"
               ? userSession.getUser().emailAddress
-              : "Viewing Home Page: Anon"
+              : "Anon"
           }`
         );
       } else if (!userSession.getSessionID()) {
@@ -65,7 +65,7 @@ const Home = ({
           `Viewing Home Page: ${
             userSession.isLoggedIn() && userSession.getUser().id !== "improper"
               ? userSession.getUser().emailAddress
-              : "Viewing Home Page: Anon"
+              : "Anon"
           }`
         );
       }

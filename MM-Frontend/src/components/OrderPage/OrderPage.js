@@ -1,6 +1,7 @@
 /**
  * Might need API call to validate zipcode based on region
  */
+import DataCollection from "../../Service/Data/DataCollection";
 import DeliveryDate from "./DeliveryDate/DeliveryDate";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useEffect } from "react";
@@ -92,17 +93,15 @@ const OrderPage = ({
       // setFreq("Select Frequency");
       setDelivDate("Select Date");
     }
-    const activity = userSession.isLoggedIn()
-      ? `Viewed OrderPage: ${userSession.getUser().emailAddress}`
-      : "Viewed OrderPage: Anon";
-    const dataToSend = {
-      sessionID: userSession.getSessionID(),
-      pageView: "OrderPage",
-      activity: activity,
-    };
-    DataCollectionAPIService.pageViewCollect(dataToSend)
-      .then((r) => {})
-      .catch((err) => {});
+
+    DataCollection.registerActivity(
+      "Order Page",
+      `Viewing Order Page: ${
+        userSession.isLoggedIn() && userSession.getUser().id !== "improper"
+          ? userSession.getUser().emailAddress
+          : "Anon"
+      }`
+    );
     Scroll.scrollUp();
   }, []);
   // Pick meals button clicked

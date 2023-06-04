@@ -1,3 +1,4 @@
+import DataCollection from "../../Service/Data/DataCollection";
 import userSession from "../../Service/Data/userSession";
 import { useEffect } from "react";
 import { useState } from "react";
@@ -243,17 +244,15 @@ const UpSaleItems = ({
                 variant="light"
                 className="text-dark"
                 onClick={() => {
-                  const activity = userSession.isLoggedIn()
-                    ? `Clicked Proceed: ${userSession.getUser().emailAddress}`
-                    : "Clicked Proceed: Anon";
-                  const dataToSend = {
-                    sessionID: userSession.getSessionID(),
-                    pageView: "UpSaleItems",
-                    activity: activity,
-                  };
-                  DataCollectionAPIService.pageViewCollect(dataToSend)
-                    .then((r) => {})
-                    .catch((err) => {});
+                  DataCollection.registerActivity(
+                    "UpSaleItmes",
+                    `Clicked Proceed frm UpSale: ${
+                      userSession.isLoggedIn() &&
+                      userSession.getUser().id !== "improper"
+                        ? userSession.getUser().emailAddress
+                        : "Anon"
+                    }`
+                  );
                   setDisplayPopUp(false);
                   document.getElementById("hiddenPaymentButton").click();
                 }}

@@ -1,3 +1,4 @@
+import DataCollection from "../../../Service/Data/DataCollection";
 import userSession from "../../../Service/Data/userSession";
 import DataCollectionAPIService from "../../../Service/APICalls/DataCollectionAPIService";
 import { Button } from "react-bootstrap";
@@ -115,19 +116,15 @@ export default function App() {
                 fontSize: "25px",
               }}
               onClick={() => {
-                const activity = userSession.isLoggedIn()
-                  ? `Clicked Order frm Cus Revs: ${
-                      userSession.getUser().emailAddress
-                    }`
-                  : `Clicked Order frm Cus Revs: Anon`;
-                const dataToSend = {
-                  sessionID: userSession.getSessionID(),
-                  pageView: "Home",
-                  activity: activity,
-                };
-                DataCollectionAPIService.pageViewCollect(dataToSend)
-                  .then((r) => {})
-                  .catch((err) => {});
+                DataCollection.registerActivity(
+                  "Home",
+                  `Clicked Order frm Cus Revs: ${
+                    userSession.isLoggedIn() &&
+                    userSession.getUser().id !== "improper"
+                      ? userSession.getUser().emailAddress
+                      : "Anon"
+                  }`
+                );
               }}
             >
               Order

@@ -1,4 +1,4 @@
-import DataCollectionAPIService from "../../Service/APICalls/DataCollectionAPIService";
+import DataCollection from "../../Service/Data/DataCollection";
 import { useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useEffect } from "react";
@@ -17,17 +17,14 @@ const OrderHistory = ({ isLoggedIn }) => {
     if (!isLoggedIn) {
       navigate("/");
     } else {
-      const activity = userSession.isLoggedIn()
-        ? `Viewed OrderHistory: ${userSession.getUser().emailAddress}`
-        : "Viewed OrderHistory: Anon";
-      const dataToSend = {
-        sessionID: userSession.getSessionID(),
-        pageView: "OrderHistory",
-        activity: activity,
-      };
-      DataCollectionAPIService.pageViewCollect(dataToSend)
-        .then((r) => {})
-        .catch((err) => {});
+      DataCollection.registerActivity(
+        "Order History",
+        `Viewing OrderHistory: ${
+          userSession.isLoggedIn() && userSession.getUser().id !== "improper"
+            ? userSession.getUser().emailAddress
+            : "Anon"
+        }`
+      );
       const fetchHistory = () => {
         // console.log("SERVICE CALLED....");
         OrderAPIService.orderHistory({ id: userSession.getUser().id })

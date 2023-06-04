@@ -1,3 +1,4 @@
+import DataCollection from "../../../Service/Data/DataCollection";
 import ForgotPassword from "./ForgotPassword";
 import { Link } from "react-router-dom";
 import UserAPIService from "../../../Service/APICalls/UserAPIService";
@@ -125,16 +126,16 @@ function LogInPopUP({ style, setLogIn }) {
               setInvalid(false);
               setLogIn(true);
               handleClose();
-              const activity = `${userSession.getUser().emailAddress} Successfully Logged In`;
-              const dataToSend = {
-                sessionID: userSession.getSessionID(),
-                pageView: "Unkown, bc this is universal popup",
-                activity: activity,
-              };
-              DataCollectionAPIService.pageViewCollect(dataToSend)
-                .then((r) => {})
-                .catch((err) => {});
+
+              DataCollection.registerActivity(
+                "Universal Log In PopUp",
+                `Successfully Logged In: ${userSession.getUser().emailAddress} `
+              );
             } else {
+              DataCollection.registerActivity(
+                "Universal Log In PopUp",
+                `Invalid credentials`
+              );
               // incorrect password!
               setInvalid(true);
             }
@@ -173,15 +174,10 @@ function LogInPopUP({ style, setLogIn }) {
       <button
         onClick={(e) => {
           handleDisplay(e);
-          const activity = "Logging In";
-          const dataToSend = {
-            sessionID: userSession.getSessionID(),
-            pageView: "Unkown, bc this is universal popup",
-            activity: activity,
-          };
-          DataCollectionAPIService.pageViewCollect(dataToSend)
-            .then((r) => {})
-            .catch((err) => {});
+          DataCollection.registerActivity(
+            "Universal Log In PopUp",
+            `Log In Button Clicked`
+          );
         }}
         className="buttonAdjustments"
       >

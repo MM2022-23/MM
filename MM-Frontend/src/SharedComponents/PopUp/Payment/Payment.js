@@ -1,3 +1,4 @@
+import DataCollection from "../../../Service/Data/DataCollection";
 import DataCollectionAPIService from "../../../Service/APICalls/DataCollectionAPIService";
 import zipCodeService from "../../../Service/Data/zipCodeService";
 import logo from "./logo192.png";
@@ -218,18 +219,15 @@ const Payment = ({
                   });
               }
 
-              // SUCCESS; RESET: cart, numMealsSelected, mealNumbers
-              const activity = userSession.isLoggedIn()
-                ? `Payment Successful!!: ${userSession.getUser().emailAddress}`
-                : "Payment Successful!!: Anon";
-              const dataToSend = {
-                sessionID: userSession.getSessionID(),
-                pageView: "PaymentCompletion",
-                activity: activity,
-              };
-              DataCollectionAPIService.pageViewCollect(dataToSend)
-                .then((r) => {})
-                .catch((err) => {});
+              DataCollection.registerActivity(
+                "PaymentCompletion",
+                `Payment Sucessful: ${
+                  userSession.isLoggedIn() &&
+                  userSession.getUser().id !== "improper"
+                    ? userSession.getUser().emailAddress
+                    : "Anon"
+                }`
+              );
               setCart([]);
               setNumMealsSelected(0);
               setCartPrice(0);
