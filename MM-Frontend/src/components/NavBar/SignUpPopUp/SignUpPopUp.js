@@ -212,14 +212,18 @@ function SignUpPopUp({ style, setLogIn }) {
             handleClose();
 
             DataCollection.registerActivity(
-              "Universal SignUp PopUp",
-              `Signed up Successfully: ${userSession.getUser().emailAddress}`
+              "Universal Sign up PopUp",
+              `Successfully Signed up: ${userSession.getUser().emailAddress}`
             );
 
             // console.log("SUCCESS ON FRONT END ");
           } else {
             // FIX: DIFFERENTIATE OTHER ERRS FROM SIGN UP DUPLICATE EMAIL ERRORS
             // console.log("FAILURE ON FRONT END ");
+            DataCollection.registerActivity(
+              "Universal Sign Up PopUp",
+              "Unsuccessful Sign up"
+            );
           }
         })
         .catch((err) => {
@@ -257,7 +261,10 @@ function SignUpPopUp({ style, setLogIn }) {
       <button
         onClick={(e) => {
           handleDisplay(e);
-          DataCollection.registerActivity("Universal SignUp", "Signing Up");
+          DataCollection.registerActivity(
+            "Universal SignUP PopUp",
+            `Sign Up Button Clicked`
+          );
         }}
         className="buttonAdjustments"
       >
