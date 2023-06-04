@@ -366,24 +366,6 @@ const PickMeals = ({
     //     setDisplayPopUp(true);
     // } 
     else {
-      const now = new Date();
-      const options = { timeZone: "America/New_York" };
-      const time = now.toLocaleString("en-US", options);
-      const dataToSend = {
-        sessionID: userSession.getSessionID(),
-        timeOfRecord: time,
-        userInfo: userSession.getUser().emailAddress,
-        zipCode: zipCode,
-        specificMeals: JSON.stringify(getMealsData()),
-        deliveryDateSelected: delivDate,
-        activity: "Pick Meals Button Clicked",
-      };
-
-      // Send DATA FOR COLLECTION
-      DataCollectionAPIService.pickMealsPageDataCollection(dataToSend)
-        .then((res) => {})
-        .catch((err) => {});
-
       DataCollection.registerActivity(
         "Pick Meals",
         `Proceed Button Clicked: ${

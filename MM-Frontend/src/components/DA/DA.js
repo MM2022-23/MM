@@ -166,11 +166,11 @@ function DA() {
   const getCustomerTable = () => {
     ShowDBAPIService.getCustomers()
       .then((res) => {
-        console.log("Customers called!!!");
+        // console.log("Customers called!!!");
         setTable(res.data);
       })
       .catch((err) => {
-        console.log("Err:: " + err);
+        // console.log("Err:: " + err);
       });
   };
   const getUserEntered = () => {
@@ -179,7 +179,7 @@ function DA() {
         setTable(res.data);
       })
       .catch((err) => {
-        console.log("Err:: " + err);
+        // console.log("Err:: " + err);
       });
   };
   const getOrderPage = () => {
@@ -188,7 +188,7 @@ function DA() {
         setTable(res.data);
       })
       .catch((err) => {
-        console.log("Err:: " + err);
+        // console.log("Err:: " + err);
       });
   };
   const getPickMeals = () => {
@@ -197,7 +197,7 @@ function DA() {
         setTable(res.data);
       })
       .catch((err) => {
-        console.log("Err:: " + err);
+        // console.log("Err:: " + err);
       });
   };
 
@@ -207,7 +207,7 @@ function DA() {
         setTable(res.data);
       })
       .catch((err) => {
-        console.log("Err:: " + err);
+        // console.log("Err:: " + err);
       });
   };
 
