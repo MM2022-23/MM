@@ -242,6 +242,24 @@ const PickMeals = ({
     return tempDict;
   };
 
+  const handleNoSignUp = () => {
+    console.log("No Sign Up clicked");
+    const activity = "Sign up skipped";
+    const dataToSend = {
+      sessionID: userSession.getSessionID(),
+      pageView: "Unkown, bc this is universal popup",
+      activity: activity,
+    };
+    DataCollectionAPIService.pageViewCollect(dataToSend)
+      .then((r) => {})
+      .catch((err) => {});
+    const userLoggedIn = {
+      id: "improper",
+    };
+    userSession.addUser(userLoggedIn);
+    setDisplayPopUp(false);
+    setDisplayUpSale(true);
+  };
   /**
    * send Data to DB for DA purporses
    * STRIP INTEGRATION
@@ -255,7 +273,10 @@ const PickMeals = ({
       setTitleEnough("Not Enough Meals selected!!");
       setBodyEnough(<p>Select at least {numMeals[0]} meals</p>);
       setDisplayEnoughPopUp(true);
-    } else if (!userSession.isLoggedIn()) {
+    } else if (
+      !userSession.isLoggedIn() ||
+      userSession.getUser().id === "improper"
+    ) {
       const now = new Date();
       const options = { timeZone: "America/New_York" };
       const time = now.toLocaleString("en-US", options);
@@ -266,7 +287,7 @@ const PickMeals = ({
         zipCode: zipCode,
         specificMeals: JSON.stringify(getMealsData()),
         deliveryDateSelected: delivDate,
-        activity: "Pick Meals Button Clicked",
+        activity: "Proceed Button Clicked",
       };
 
       // Send DATA FOR COLLECTION
@@ -289,6 +310,23 @@ const PickMeals = ({
               </div>
             </Row>
 
+            <div className="container text-center mt-4 mb-4">
+              <button
+                onClick={handleNoSignUp}
+                className="text-primary mx-2"
+                style={{
+                  backgroundColor: "rgb(212,106,25)",
+                  borderRadius: "10px",
+                  border: "0",
+                  height: "45px",
+                  width: "100px",
+                  fontSize: "15px",
+                }}
+              >
+                Skip Sign Up
+              </button>
+            </div>
+
             <div className="container text-center mb-4">
               <LogInPopUP
                 style={{ buttonColor: "secondary", textColor: "white" }}
@@ -305,7 +343,8 @@ const PickMeals = ({
           </form>
         </div>
       );
-      !userSession.isLoggedIn() && setDisplayPopUp(true);
+      (!userSession.isLoggedIn() || userSession.getUser().id === "improper") &&
+        setDisplayPopUp(true);
     } else {
       const now = new Date();
       const options = { timeZone: "America/New_York" };
@@ -453,7 +492,9 @@ const PickMeals = ({
           </Row>
         </Container>
         {/* should probably remove 1st condition */}
-        {(numMealsSelected === 0 || !userSession.isLoggedIn()) && (
+        {(numMealsSelected === 0 ||
+          !userSession.isLoggedIn() ||
+          userSession.getUser().id === "improper") && (
           <PopUp
             displayPopUp={displayPopUp}
             setDisplayPopUp={setDisplayPopUp}

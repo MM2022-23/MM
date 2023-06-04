@@ -1,3 +1,4 @@
+import userSession from "../../Service/Data/userSession";
 import { useEffect } from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
@@ -7,6 +8,7 @@ import Button from "react-bootstrap/Button";
 import { Modal } from "react-bootstrap";
 import React from "react";
 import MealData from "../../Service/Data/MealData";
+import DataCollectionAPIService from "../../Service/APICalls/DataCollectionAPIService";
 
 const UpSaleItems = ({
   displayPopUp,
@@ -19,9 +21,6 @@ const UpSaleItems = ({
   mealNumbers,
   setMealNumbers,
 }) => {
-  
-
-
   const noItems = () => {
     for (let index = 0; index < MealData.getUpSaleItems().length; index++) {
       const element = MealData.getUpSaleItems()[index];
@@ -33,7 +32,6 @@ const UpSaleItems = ({
     return true;
   };
 
- 
   const [show, setShow] = useState(false);
   const [description, setDescription] = useState("");
   const handleDisplay = (description, mealName) => {
@@ -44,7 +42,6 @@ const UpSaleItems = ({
   const add = (id) => {
     // console.log(`ID SENT IS ${id}`);
     // setProceedText("Proceed");
-    
 
     // setCartPrice(
     //   (cartPrice) =>
@@ -109,7 +106,6 @@ const UpSaleItems = ({
     // console.log("Remove clicked...");
     // CANNOT have quantity < 0
     if (mealNumbers[id] > 0) {
-      
       // if (countSelected === 0) {
       //   setProceedText("No Thanks, Proceed");
       // }
@@ -247,6 +243,17 @@ const UpSaleItems = ({
                 variant="light"
                 className="text-dark"
                 onClick={() => {
+                  const activity = userSession.isLoggedIn()
+                    ? `Clicked Proceed: ${userSession.getUser().emailAddress}`
+                    : "Clicked Proceed: Anon";
+                  const dataToSend = {
+                    sessionID: userSession.getSessionID(),
+                    pageView: "UpSaleItems",
+                    activity: activity,
+                  };
+                  DataCollectionAPIService.pageViewCollect(dataToSend)
+                    .then((r) => {})
+                    .catch((err) => {});
                   setDisplayPopUp(false);
                   document.getElementById("hiddenPaymentButton").click();
                 }}

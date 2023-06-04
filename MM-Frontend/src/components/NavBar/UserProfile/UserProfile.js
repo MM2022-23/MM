@@ -18,7 +18,7 @@ const UserProfile = ({ setDisplayAccountInfo, setLogIn }) => {
     if (fromLogOut) {
       setDisplayPopUp(false);
       fromLogOut = false;
-    } else if (!userSession.isLoggedIn()) {
+    } else if (!userSession.isLoggedIn()||userSession.getUser().id==="improper") {
       setTitle("LogIn/SignUp");
       setBody(
         <div
@@ -80,7 +80,7 @@ const UserProfile = ({ setDisplayAccountInfo, setLogIn }) => {
           ></i>
         </Dropdown.Toggle>
 
-        {userSession.isLoggedIn() && (
+        {(userSession.isLoggedIn()&&userSession.getUser().id!=="improper") && (
           <Dropdown.Menu>
             <Dropdown.Item href="#/orderHistory">Order History</Dropdown.Item>
             <Dropdown.Item onClick={() => setDisplayAccountInfo(true)}>
@@ -90,7 +90,7 @@ const UserProfile = ({ setDisplayAccountInfo, setLogIn }) => {
           </Dropdown.Menu>
         )}
       </Dropdown>
-      {!userSession.isLoggedIn() && (
+      {(!userSession.isLoggedIn()||userSession.getUser().id==="improper") && (
         <PopUp
           displayPopUp={displayPopUp}
           setDisplayPopUp={setDisplayPopUp}

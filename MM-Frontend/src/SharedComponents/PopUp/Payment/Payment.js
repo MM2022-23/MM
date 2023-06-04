@@ -1,3 +1,4 @@
+import DataCollectionAPIService from "../../../Service/APICalls/DataCollectionAPIService";
 import zipCodeService from "../../../Service/Data/zipCodeService";
 import logo from "./logo192.png";
 import PopUp from "../PopUp";
@@ -8,8 +9,9 @@ import { useEffect } from "react";
 import StripeBackend from "../../../Service/APICalls/StripeBackendAPIService";
 import { useState } from "react";
 import React from "react";
-import ReactGA from 'react-ga4'; 
+import ReactGA from "react-ga4";
 import { STRIPE_KEY } from "../../../Service/Constants";
+import UserAPIService from "../../../Service/APICalls/UserAPIService";
 const Payment = ({
   cart,
   setCart,
@@ -117,49 +119,117 @@ const Payment = ({
                 mealAndFreqsArr.push([item.id, mealNumbers[item.id]]);
               });
 
-              let todaysDate = new Date().toDateString();
-              const objToSend = {
-                Order_date: todaysDate,
-                Shipping_date: delivDate,
-                Total_Price:
-                  Math.round(
-                    ((cartPrice + zipCodeService.isValidZipCode(zipCode)) *
-                      0.06625 +
-                      (cartPrice + zipCodeService.isValidZipCode(zipCode))) *
-                      100
-                  ) / 100,
-                email: stripeToken.email,
-                Address: `${stripeToken.card.address_line1} ${stripeToken.card.address_city}, ${stripeToken.card.address_zip}`,
-                Customer_id: userSession.getUser().id,
-                mealAndFreqs: mealAndFreqsArr,
-              };
-
-              // setStatusTitle("Order Status");
-              OrderAPIService.addOrder(objToSend, setStatusBody)
-                .then((res) => {
-                  setStatusTitle("Confirmation");
-                  setStatusBody("Order#: " + res.data);
-
-                  // after 2 seconds close the pop up
-                  setTimeout(() => {
-                    // setStatusPopUp(false);
-                    // here we empty previous token
-                    setStripeToken(null);
-                  }, 2000);
+              if (userSession.getUser().id === "improper") {
+                UserAPIService.registerNoSignUps({
+                  name: stripeToken.card.name,
+                  email: stripeToken.email,
                 })
-                .catch((err) => {
-                  setStatusBody(
-                    "Could NOT store the order please contact Admin "
-                  );
-                  // after 2 seconds close the pop up
-                  setTimeout(() => {
-                    setStatusPopUp(false);
-                    // here we empty previous token
-                    setStripeToken(null);
-                  }, 2000);
-                });
+                  .then((res) => {
+                    let todaysDate = new Date().toDateString();
+                    const objToSend = {
+                      Order_date: todaysDate,
+                      Shipping_date: delivDate,
+                      Total_Price:
+                        Math.round(
+                          ((cartPrice +
+                            zipCodeService.isValidZipCode(zipCode)) *
+                            0.06625 +
+                            (cartPrice +
+                              zipCodeService.isValidZipCode(zipCode))) *
+                            100
+                        ) / 100,
+                      email: stripeToken.email,
+                      Address: `${stripeToken.card.address_line1} ${stripeToken.card.address_city}, ${stripeToken.card.address_zip}`,
+                      Customer_id: res.data,
+                      mealAndFreqs: mealAndFreqsArr,
+                    };
+
+                    // setStatusTitle("Order Status");
+                    OrderAPIService.addOrderNoSignUps(objToSend, setStatusBody)
+                      .then((res) => {
+                        setStatusTitle("Confirmation");
+                        setStatusBody(
+                          "Order#: " +
+                            res.data +
+                            " Check email provided for receipt"
+                        );
+
+                        // after 2 seconds close the pop up
+                        setTimeout(() => {
+                          // setStatusPopUp(false);
+                          // here we empty previous token
+                          setStripeToken(null);
+                        }, 2000);
+                      })
+                      .catch((err) => {
+                        setStatusBody(
+                          "Could NOT store the order please contact Admin "
+                        );
+                        // after 2 seconds close the pop up
+                        setTimeout(() => {
+                          setStatusPopUp(false);
+                          // here we empty previous token
+                          setStripeToken(null);
+                        }, 2000);
+                      });
+                  })
+                  .catch((err) => {});
+              } else {
+                let todaysDate = new Date().toDateString();
+                const objToSend = {
+                  Order_date: todaysDate,
+                  Shipping_date: delivDate,
+                  Total_Price:
+                    Math.round(
+                      ((cartPrice + zipCodeService.isValidZipCode(zipCode)) *
+                        0.06625 +
+                        (cartPrice + zipCodeService.isValidZipCode(zipCode))) *
+                        100
+                    ) / 100,
+                  email: stripeToken.email,
+                  Address: `${stripeToken.card.address_line1} ${stripeToken.card.address_city}, ${stripeToken.card.address_zip}`,
+                  Customer_id: userSession.getUser().id,
+                  mealAndFreqs: mealAndFreqsArr,
+                };
+
+                // setStatusTitle("Order Status");
+                OrderAPIService.addOrder(objToSend, setStatusBody)
+                  .then((res) => {
+                    setStatusTitle("Confirmation");
+                    setStatusBody("Order#: " + res.data);
+
+                    // after 2 seconds close the pop up
+                    setTimeout(() => {
+                      // setStatusPopUp(false);
+                      // here we empty previous token
+                      setStripeToken(null);
+                    }, 2000);
+                  })
+                  .catch((err) => {
+                    setStatusBody(
+                      "Could NOT store the order please contact Admin "
+                    );
+                    // after 2 seconds close the pop up
+                    setTimeout(() => {
+                      setStatusPopUp(false);
+                      // here we empty previous token
+                      setStripeToken(null);
+                    }, 2000);
+                  });
+              }
 
               // SUCCESS; RESET: cart, numMealsSelected, mealNumbers
+              const activity = userSession.isLoggedIn()
+                ? `Payment Successful!!: ${userSession.getUser().emailAddress}`
+                : "Payment Successful!!: Anon";
+              const dataToSend = {
+                sessionID: userSession.getSessionID(),
+                pageView: "PaymentCompletion",
+                activity: activity,
+              };
+              DataCollectionAPIService.pageViewCollect(dataToSend)
+                .then((r) => {})
+                .catch((err) => {});
               setCart([]);
               setNumMealsSelected(0);
               setCartPrice(0);

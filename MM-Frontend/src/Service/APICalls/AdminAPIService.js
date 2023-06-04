@@ -9,6 +9,14 @@ class AdminAPIService {
       password: "MirchiMeals",
     });
   }
+
+
+  getAllOrdersNoSignUp() {
+    return axios.post(`${ADMIN_BASE_API_URL}getOrdersNoSignUps`, {
+      password: "MirchiMeals",
+    });
+  }
+
   getDeliveryOrders() {
     return axios.get(`${ADMIN_BASE_API_URL}ordersDelivery`);
   }

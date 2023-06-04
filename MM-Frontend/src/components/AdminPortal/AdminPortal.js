@@ -24,8 +24,11 @@ const AdminPortal = () => {
   const [loading, setLoading] = useState("Log In");
   const [pinValue, setPinValue] = useState("");
   const [ordersTable, setOrdersTable] = useState(null);
+
+  const [ordersNoSignUps, setOrdersNoSignUps] = useState(null);
   useEffect(() => {
     getAllOrders();
+    getAllOrdersNoSignUp();
   }, []);
   const [orderNumber, setOrderNumber] = useState("");
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -94,7 +97,7 @@ const AdminPortal = () => {
                 PIN
               </label>
             );
-            setPinValue(""); 
+            setPinValue("");
           } else {
             setLoading("Log In");
             setPinLabel(
@@ -132,7 +135,7 @@ const AdminPortal = () => {
         </label>
       );
     }
-    
+
     // if (pinValue === "123") {
     //   setIsLoggedIn(true);
     //   setPinLabel(
@@ -195,6 +198,20 @@ const AdminPortal = () => {
     AdminAPIService.getAllOrders()
       .then((res) => {
         setOrdersTable(res.data);
+      })
+      .catch((err) => {
+        // console.log("Erro while fetching Orders Table::: " + err);
+      });
+  };
+
+  /**
+   * Get orders of people who did'nt sign up
+   */
+  const getAllOrdersNoSignUp = () => {
+    // console.log("Get all orders");
+    AdminAPIService.getAllOrdersNoSignUp()
+      .then((res) => {
+        setOrdersNoSignUps(res.data);
       })
       .catch((err) => {
         // console.log("Erro while fetching Orders Table::: " + err);
@@ -311,7 +328,7 @@ const AdminPortal = () => {
     setStatusPopUp(true);
   };
 
-  const showTables = () => {
+  const showTableForRegularCustomers = () => {
     if (ordersTable === null) {
       return <p className="text-center">Loading...</p>;
     } else if (ordersTable.length === 0) {
@@ -389,6 +406,86 @@ const AdminPortal = () => {
       );
     }
   };
+
+  const showTableForNoSignUpsCustomers = () => {
+    if (ordersNoSignUps === null) {
+      return <p className="text-center">Loading...</p>;
+    } else if (ordersNoSignUps.length === 0) {
+      return <p className="text-center">No Orders Yet</p>;
+    } else {
+      return (
+        <>
+          <section style={{ fontFamily: "Signika", padding: "64px 32px" }}>
+            <h1
+              style={{ fontFamily: "Signika", fontSize: "5vw" }}
+              className="text-center mb-4"
+            >
+              Orders For No Sign Ups
+            </h1>
+
+            <Table
+              striped
+              bordered
+              hover
+              style={{ fontSize: "2.2vw", fontFamily: "Signika" }}
+            >
+              <thead>
+                <tr>
+                  <th>Order#</th>
+                  <th>Meals</th>
+                  <th>Due Date</th>
+                  <th>Address</th>
+                  <th>Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+                {ordersNoSignUps.map((order) => {
+                  const { orderNumber, meals, dueDate, address } = order;
+                  return (
+                    <tr>
+                      <td>{orderNumber}</td>
+
+                      <td>
+                        {meals.map((meal) => {
+                          return (
+                            <span>
+                              {`${meal[0]} : ${meal[1]}`}
+                              <br></br>
+                            </span>
+                          );
+                        })}
+                      </td>
+                      <td>{dueDate}</td>
+                      <td>{address}</td>
+                      {/* <td>
+                        <Button
+                          variant="light"
+                          style={{
+                            width: "9vw",
+                            fontSize: "2vw",
+                            padding: "1px",
+                          }}
+                          className="text-center"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            // setOrdersTable(null);
+                            deleteOrder(orderNumber, dueDate);
+                          }}
+                        >
+                          Delete
+                        </Button>
+                      </td> */}
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </Table>
+          </section>
+        </>
+      );
+    }
+  };
+
 
   const actualPortal = () => {
     return (
@@ -478,7 +575,8 @@ const AdminPortal = () => {
           </div>
         </div>
 
-        {showTables()}
+        {showTableForRegularCustomers()}
+        {showTableForNoSignUpsCustomers()}
 
         <Modal
           show={displayReport}
