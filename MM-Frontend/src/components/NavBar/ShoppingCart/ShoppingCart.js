@@ -158,18 +158,6 @@ const ShoppingCart = ({
       !userSession.isLoggedIn() ||
       userSession.getUser().id === "improper"
     ) {
-      const mealsInfo = {
-        zipcode: zipCode,
-        planSize: numMeals,
-        mealsAndFreqs: getMealsData(),
-      };
-      DataCollectionAPI.storeUnprocessedMeals(mealsInfo)
-        .then(() => {
-          // console.log("Successful");
-        })
-        .catch((err) => {
-          // console.log("Err:: " + err);
-        });
       setTitle("LogIn/SignUp");
       setBody(
         <div
@@ -210,9 +198,6 @@ const ShoppingCart = ({
             </div>
 
             <div className="container text-center">
-              {/* <Button variant="dark" className="">
-                Log In
-              </Button> */}
               <SignUpPopUp
                 style={{ buttonColor: "secondary", textColor: "white" }}
                 setLogIn={setLogIn}
@@ -225,6 +210,7 @@ const ShoppingCart = ({
         setDisplayPopUp(true);
     } else {
       // document.getElementById("hiddenPaymentButton").click();
+      setDisplayPopUp(false);
       setDisplayUpSale(true);
     }
   };
@@ -353,6 +339,7 @@ const ShoppingCart = ({
                 onClick={() => {
                   setCartPrice(0);
                   clearCart();
+                  setNumMealsSelected(0); 
                   handleClose();
                 }}
                 className="text-dark"
@@ -425,7 +412,7 @@ const ShoppingCart = ({
       )}
 
       {/* login warning */}
-      {!userSession.isLoggedIn() && (
+      {(!userSession.isLoggedIn()||userSession.getUser().id==="improper") && (
         <PopUp
           displayPopUp={displayPopUp}
           setDisplayPopUp={setDisplayPopUp}

@@ -5,6 +5,7 @@ import LogInPopUP from "../../NavBar/LogInPopUp/LogInPopUp";
 import SignUpPopUp from "../../NavBar/SignUpPopUp/SignUpPopUp";
 import background from "../../../Resources/Background/newBackground.png";
 import "./Showcase.css";
+import userSession from "../../../Service/Data/userSession";
 const Showcase = ({ loggedIn, setLogIn }) => {
   return (
     <section
@@ -53,7 +54,7 @@ const Showcase = ({ loggedIn, setLogIn }) => {
             </div>
 
             {/* ONLY if user not logged in  */}
-            {!loggedIn ? (
+            {(!loggedIn || userSession.getUser().id==="improper") ? (
               <div className="row align-items-center justify-content-between my-4">
                 <div className="col-md">
                   {/* Sign Up Button */}
