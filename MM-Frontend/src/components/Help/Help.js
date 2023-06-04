@@ -1,3 +1,4 @@
+import DataCollection from "../../Service/Data/DataCollection";
 import DataCollectionAPIService from "../../Service/APICalls/DataCollectionAPIService";
 import userSession from "../../Service/Data/userSession";
 import { useEffect } from "react";
@@ -11,33 +12,27 @@ import ReactGA from "react-ga4";
 const Help = ({ scrollFAQ, setScrollFAQ }) => {
   const useLoc = useLocation();
   useEffect(() => {
-    const activity = userSession.isLoggedIn()
-      ? `Viewed Help: ${userSession.getUser().emailAddress}`
-      : "Viewed Help: Anon";
-    const dataToSend = {
-      sessionID: userSession.getSessionID(),
-      pageView: "Help",
-      activity: activity,
-    };
-    DataCollectionAPIService.pageViewCollect(dataToSend)
-      .then((r) => {})
-      .catch((err) => {});
+    DataCollection.registerActivity(
+      "Help",
+      `Viewing Help Page: ${
+        userSession.isLoggedIn() && userSession.getUser().id !== "improper"
+          ? userSession.getUser().emailAddress
+          : "Viewing Help Page: Anon"
+      }`
+    );
     ScrollTop.scrollUp();
   }, []);
   const navigate = useNavigate();
   const toFAQ = (e) => {
     e.preventDefault();
-    const activity = userSession.isLoggedIn()
-      ? `FAQ clicked frm abt: ${userSession.getUser().emailAddress}`
-      : "FAQ clicked frm abt: Anon";
-    const dataToSend = {
-      sessionID: userSession.getSessionID(),
-      pageView: "About",
-      activity: activity,
-    };
-    DataCollectionAPIService.pageViewCollect(dataToSend)
-      .then((r) => {})
-      .catch((err) => {});
+    DataCollection.registerActivity(
+      "Help",
+      `FAQ Clicked: ${
+        userSession.isLoggedIn() && userSession.getUser().id !== "improper"
+          ? userSession.getUser().emailAddress
+          : "FAQ Clicked: Anon"
+      }`
+    );
     setScrollFAQ(true);
     navigate("/");
   };
@@ -104,19 +99,15 @@ const Help = ({ scrollFAQ, setScrollFAQ }) => {
                       fontSize: "25px",
                     }}
                     onClick={() => {
-                      const activity = userSession.isLoggedIn()
-                        ? `Clicked Order frm Help: ${
-                            userSession.getUser().emailAddress
-                          }`
-                        : "Clicked Order frm Help: Anon";
-                      const dataToSend = {
-                        sessionID: userSession.getSessionID(),
-                        pageView: "Help",
-                        activity: activity,
-                      };
-                      DataCollectionAPIService.pageViewCollect(dataToSend)
-                        .then((r) => {})
-                        .catch((err) => {});
+                      DataCollection.registerActivity(
+                        "Help",
+                        `Clicked Order frm Help: ${
+                          userSession.isLoggedIn() &&
+                          userSession.getUser().id !== "improper"
+                            ? userSession.getUser().emailAddress
+                            : "Clicked Order frm Help: Anon"
+                        }`
+                      );
                     }}
                   >
                     Order

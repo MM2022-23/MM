@@ -22,6 +22,7 @@ import MealData from "../../Service/Data/MealData";
 import UpSaleItems from "../../SharedComponents/UpSaleItems/UpSaleItems";
 import ReactGA from "react-ga4";
 import Banner from "../Home/Banner/Banner";
+import DataCollection from "../../Service/Data/DataCollection";
 const PickMeals = ({
   zipCode,
   cart,
@@ -47,6 +48,14 @@ const PickMeals = ({
       setResetOrderPageInfo(2); // if no zip code; go back to order page and have user fill out all the fields
       navigate("/order");
     } else {
+      DataCollection.registerActivity(
+        "Pick Meals",
+        `Viewing Pick Meals: ${
+          userSession.isLoggedIn() && userSession.getUser().id !== "improper"
+            ? userSession.getUser().emailAddress
+            : "Viewing Pick Meals: Anon"
+        }`
+      );
       ReactGA.event({
         category: "Viewing Meals",
         action: "viewing",
@@ -244,16 +253,16 @@ const PickMeals = ({
 
   const handleNoSignUp = (e) => {
     e.preventDefault();
-    console.log("No Sign Up clicked");
-    const activity = "Sign up skipped";
-    const dataToSend = {
-      sessionID: userSession.getSessionID(),
-      pageView: "Unkown, bc this is universal popup",
-      activity: activity,
-    };
-    DataCollectionAPIService.pageViewCollect(dataToSend)
-      .then((r) => {})
-      .catch((err) => {});
+    // No sign up clicked from pick meals
+    DataCollection.registerActivity(
+      "Pick Meals",
+      `Signup skipped from proceed button: ${
+        userSession.isLoggedIn() && userSession.getUser().id !== "improper"
+          ? userSession.getUser().emailAddress
+          : "Signup skipped from proceed button: Anon"
+      }`
+    );
+
     const userLoggedIn = {
       id: "improper",
     };
@@ -313,7 +322,7 @@ const PickMeals = ({
 
             <div className="container text-center mt-4 mb-4">
               <button
-                onClick={(e)=>handleNoSignUp(e)}
+                onClick={(e) => handleNoSignUp(e)}
                 className="text-primary mx-2"
                 style={{
                   backgroundColor: "rgb(212,106,25)",

@@ -1,3 +1,4 @@
+import DataCollection from "../../../Service/Data/DataCollection";
 import userSession from "../../../Service/Data/userSession";
 import DataCollectionAPIService from "../../../Service/APICalls/DataCollectionAPIService";
 import React from "react";
@@ -13,17 +14,14 @@ const MealPlans = ({
   const navigate = useNavigate();
 
   const buttonClicked = (meals) => {
-    const activity = userSession.isLoggedIn()
-      ? `Clicked ${meals}: ${userSession.getUser().emailAddress}`
-      : `Clicked ${meals}: Anon`;
-    const dataToSend = {
-      sessionID: userSession.getSessionID(),
-      pageView: "Home",
-      activity: activity,
-    };
-    DataCollectionAPIService.pageViewCollect(dataToSend)
-      .then((r) => {})
-      .catch((err) => {});
+    DataCollection.registerActivity(
+      "Home",
+      `Clicked: ${
+        userSession.isLoggedIn() && userSession.getUser().id !== "improper"
+          ? `${meals} ${userSession.getUser().emailAddress}`
+          : `${meals} Anon`
+      }`
+    );
     setMeals(meals);
     setResetOrderPageInfo(1); // want to pick freq, date, zipCode but number of meals is chosen
     setCart([]);
@@ -188,19 +186,15 @@ const MealPlans = ({
                       fontSize: "25px",
                     }}
                     onClick={() => {
-                      const activity = userSession.isLoggedIn()
-                        ? `Clicked Order frm MealPlans: ${
-                            userSession.getUser().emailAddress
-                          }`
-                        : `Clicked Order frm MealPlans: Anon`;
-                      const dataToSend = {
-                        sessionID: userSession.getSessionID(),
-                        pageView: "Home",
-                        activity: activity,
-                      };
-                      DataCollectionAPIService.pageViewCollect(dataToSend)
-                        .then((r) => {})
-                        .catch((err) => {});
+                      DataCollection.registerActivity(
+                        "Home",
+                        `Clicked Order frm Meal Plans: ${
+                          userSession.isLoggedIn() &&
+                          userSession.getUser().id !== "improper"
+                            ? userSession.getUser().emailAddress
+                            : "Anon"
+                        }`
+                      );
                     }}
                   >
                     Order

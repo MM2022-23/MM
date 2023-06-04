@@ -1,3 +1,4 @@
+import DataCollection from "../../Service/Data/DataCollection";
 /***
  * has 1 Nav bar, 2 Information Boxes, 1 Foot Bar
  */
@@ -35,47 +36,38 @@ const Home = ({
     if (pathname.includes("#/") && pathname.split("#/")[1].length !== 0) {
       // console.log("Coming from FB");
       userSession.addSessionID(pathname.split("#/")[1]);
-      const activity = userSession.isLoggedIn()
-        ? `Viewed Home: ${userSession.getUser().emailAddress}`
-        : "Viewed Home: Anon";
-      const dataToSend = {
-        sessionID: userSession.getSessionID(),
-        pageView: "Home",
-        activity: activity,
-      };
-      DataCollectionAPIService.pageViewCollect(dataToSend)
-        .then((r) => {})
-        .catch((err) => {});
+      DataCollection.registerActivity(
+        "Home",
+        `Viewing Home Page: ${
+          userSession.isLoggedIn() && userSession.getUser().id !== "improper"
+            ? userSession.getUser().emailAddress
+            : "Viewing Home Page: Anon"
+        }`
+      );
     } else {
       // console.log("Coming 1st time");
 
       // Coming 1st time
       if (!pathname.includes("#") && !userSession.getSessionID()) {
         userSession.addSessionID("Not From FB");
-        const activity = userSession.isLoggedIn()
-          ? `Viewed Home: ${userSession.getUser().emailAddress}`
-          : "Viewed Home: Anon";
-        const dataToSend = {
-          sessionID: userSession.getSessionID(),
-          pageView: "Home",
-          activity: activity,
-        };
-        DataCollectionAPIService.pageViewCollect(dataToSend)
-          .then((r) => {})
-          .catch((err) => {});
+        DataCollection.registerActivity(
+          "Home",
+          `Viewing Home Page: ${
+            userSession.isLoggedIn() && userSession.getUser().id !== "improper"
+              ? userSession.getUser().emailAddress
+              : "Viewing Home Page: Anon"
+          }`
+        );
       } else if (!userSession.getSessionID()) {
         userSession.addSessionID("Not From FB");
-        const activity = userSession.isLoggedIn()
-          ? `Viewed Home: ${userSession.getUser().emailAddress}`
-          : "Viewed Home: Anon";
-        const dataToSend = {
-          sessionID: userSession.getSessionID(),
-          pageView: "Home",
-          activity: activity,
-        };
-        DataCollectionAPIService.pageViewCollect(dataToSend)
-          .then((r) => {})
-          .catch((err) => {});
+        DataCollection.registerActivity(
+          "Home",
+          `Viewing Home Page: ${
+            userSession.isLoggedIn() && userSession.getUser().id !== "improper"
+              ? userSession.getUser().emailAddress
+              : "Viewing Home Page: Anon"
+          }`
+        );
       }
     }
 

@@ -1,3 +1,4 @@
+import DataCollectionAPIService from "../../../Service/APICalls/DataCollectionAPIService";
 import UpSaleItems from "../../../SharedComponents/UpSaleItems/UpSaleItems";
 import SignUpPopUp from "../SignUpPopUp/SignUpPopUp";
 import LogInPopUP from "../LogInPopUp/LogInPopUp";
@@ -119,6 +120,25 @@ const ShoppingCart = ({
     return tempDict;
   };
 
+  const handleNoSignUp = (e) => {
+    e.preventDefault();
+    const activity = "Sign up skipped from Shopping Cart";
+    const dataToSend = {
+      sessionID: userSession.getSessionID(),
+      pageView: "Shopping Cart",
+      activity: activity,
+    };
+    DataCollectionAPIService.pageViewCollect(dataToSend)
+      .then((r) => {})
+      .catch((err) => {});
+    const userLoggedIn = {
+      id: "improper",
+    };
+    userSession.addUser(userLoggedIn);
+    setDisplayPopUp(false);
+    setDisplayUpSale(true);
+  };
+
   /**
    * send Data to DB for DA purporses
    * STRIP INTEGRATION
@@ -134,7 +154,10 @@ const ShoppingCart = ({
       setTitleEnough("Not Enough Meals selected!!");
       setBodyEnough(<p>Select at least {numMeals[0]} meals</p>);
       setDisplayEnoughPopUp(true);
-    } else if (!userSession.isLoggedIn()) {
+    } else if (
+      !userSession.isLoggedIn() ||
+      userSession.getUser().id === "improper"
+    ) {
       const mealsInfo = {
         zipcode: zipCode,
         planSize: numMeals,
@@ -162,6 +185,23 @@ const ShoppingCart = ({
               </div>
             </Row>
 
+            <div className="container text-center mt-4 mb-4">
+              <button
+                onClick={(e) => handleNoSignUp(e)}
+                className="text-primary mx-2"
+                style={{
+                  backgroundColor: "rgb(212,106,25)",
+                  borderRadius: "10px",
+                  border: "0",
+                  height: "45px",
+                  width: "100px",
+                  fontSize: "15px",
+                }}
+              >
+                Skip Sign Up
+              </button>
+            </div>
+
             <div className="container text-center mb-4">
               <LogInPopUP
                 style={{ buttonColor: "secondary", textColor: "white" }}
@@ -181,7 +221,8 @@ const ShoppingCart = ({
           </form>
         </div>
       );
-      !userSession.isLoggedIn() && setDisplayPopUp(true);
+      (!userSession.isLoggedIn() || userSession.getUser().id === "improper") &&
+        setDisplayPopUp(true);
     } else {
       // document.getElementById("hiddenPaymentButton").click();
       setDisplayUpSale(true);

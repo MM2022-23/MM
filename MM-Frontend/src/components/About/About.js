@@ -2,6 +2,7 @@
  * has 1 Nav bar, 2 Information Boxes, 1 Foot Bar
  */
 
+import DataCollection from "../../Service/Data/DataCollection";
 import React from "react";
 import userSession from "../../Service/Data/userSession";
 import DataCollectionAPIService from "../../Service/APICalls/DataCollectionAPIService";
@@ -16,17 +17,14 @@ const About = () => {
   const useLoc = useLocation();
   useEffect(() => {
     ScrollTop.scrollUp();
-    const activity = userSession.isLoggedIn()
-      ? `Viewed About: ${userSession.getUser().emailAddress}`
-      : "Viewed About: Anon";
-    const dataToSend = {
-      sessionID: userSession.getSessionID(),
-      pageView: "About",
-      activity: activity,
-    };
-    DataCollectionAPIService.pageViewCollect(dataToSend)
-      .then((r) => {})
-      .catch((err) => {});
+    DataCollection.registerActivity(
+      "About",
+      `Viewing About: ${
+        userSession.isLoggedIn() && userSession.getUser().id !== "improper"
+          ? userSession.getUser().emailAddress
+          : "Viewing About: Anon"
+      }`
+    );
   }, []);
   const firstBox = {
     image: require("../../Resources/Meals/meal1.png"),
@@ -76,19 +74,15 @@ const About = () => {
               fontSize: "25px",
             }}
             onClick={() => {
-              const activity = userSession.isLoggedIn()
-                ? `Clicked Order frm What WeDo: ${
-                    userSession.getUser().emailAddress
-                  }`
-                : "Clicked Order frm What WeDo: Anon";
-              const dataToSend = {
-                sessionID: userSession.getSessionID(),
-                pageView: "About",
-                activity: activity,
-              };
-              DataCollectionAPIService.pageViewCollect(dataToSend)
-                .then((r) => {})
-                .catch((err) => {});
+              DataCollection.registerActivity(
+                "About",
+                `Clicked order frm WhatWeDo: ${
+                  userSession.isLoggedIn() &&
+                  userSession.getUser().id !== "improper"
+                    ? userSession.getUser().emailAddress
+                    : "Clicked order frm WhatWeDo: Anon"
+                }`
+              );
             }}
           >
             Order
@@ -151,19 +145,15 @@ const About = () => {
               fontSize: "25px",
             }}
             onClick={() => {
-              const activity = userSession.isLoggedIn()
-                ? `Clicked Order frm Our Mission: ${
-                    userSession.getUser().emailAddress
-                  }`
-                : "Clicked Order frm Our Mission: Anon";
-              const dataToSend = {
-                sessionID: userSession.getSessionID(),
-                pageView: "About",
-                activity: activity,
-              };
-              DataCollectionAPIService.pageViewCollect(dataToSend)
-                .then((r) => {})
-                .catch((err) => {});
+              DataCollection.registerActivity(
+                "About",
+                `Clicked order frm Our Mission: ${
+                  userSession.isLoggedIn() &&
+                  userSession.getUser().id !== "improper"
+                    ? userSession.getUser().emailAddress
+                    : "Clicked order frm Our Mission: Anon"
+                }`
+              );
             }}
           >
             Order
@@ -224,19 +214,15 @@ const About = () => {
               fontSize: "25px",
             }}
             onClick={() => {
-              const activity = userSession.isLoggedIn()
-                ? `Clicked Order frm Guiding Vals: ${
-                    userSession.getUser().emailAddress
-                  }`
-                : "Clicked Order frm Guiding Vals: Anon";
-              const dataToSend = {
-                sessionID: userSession.getSessionID(),
-                pageView: "About",
-                activity: activity,
-              };
-              DataCollectionAPIService.pageViewCollect(dataToSend)
-                .then((r) => {})
-                .catch((err) => {});
+              DataCollection.registerActivity(
+                "About",
+                `Clicked order frm Our Guiding Vals: ${
+                  userSession.isLoggedIn() &&
+                  userSession.getUser().id !== "improper"
+                    ? userSession.getUser().emailAddress
+                    : "Clicked order frm Our Guiding Vals: Anon"
+                }`
+              );
             }}
           >
             Order
