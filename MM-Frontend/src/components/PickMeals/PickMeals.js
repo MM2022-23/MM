@@ -3,6 +3,7 @@
  *  Scaling: might need API call to search meal info based on given zip code
  */
 
+import DataCollection from "../../Service/Data/DataCollection";
 import DataCollectionAPIService from "../../Service/APICalls/DataCollectionAPIService";
 import Payment from "../../SharedComponents/PopUp/Payment/Payment";
 import SignUpPopUp from "../NavBar/SignUpPopUp/SignUpPopUp";
@@ -22,7 +23,6 @@ import MealData from "../../Service/Data/MealData";
 import UpSaleItems from "../../SharedComponents/UpSaleItems/UpSaleItems";
 import ReactGA from "react-ga4";
 import Banner from "../Home/Banner/Banner";
-import DataCollection from "../../Service/Data/DataCollection";
 const PickMeals = ({
   zipCode,
   cart,
@@ -283,7 +283,7 @@ const PickMeals = ({
       setTitleEnough("Not Enough Meals selected!!");
       setBodyEnough(<p>Select at least {numMeals[0]} meals</p>);
       setDisplayEnoughPopUp(true);
-    } 
+    }
     // else if (
     //   !userSession.isLoggedIn() ||
     //   userSession.getUser().id === "improper"
@@ -364,8 +364,28 @@ const PickMeals = ({
     //   );
     //   (!userSession.isLoggedIn() || userSession.getUser().id === "improper") &&
     //     setDisplayPopUp(true);
-    // } 
+    // }
     else {
+      const now = new Date();
+      const options = { timeZone: "America/New_York" };
+      const time = now.toLocaleString("en-US", options);
+      const dataToSend = {
+        sessionID: userSession.getSessionID(),
+        timeOfRecord: time,
+        userInfo:
+          userSession.isLoggedIn() && userSession.getUser().id !== "improper"
+            ? userSession.getUser().emailAddress
+            : "Anon",
+        zipCode: zipCode,
+        specificMeals: JSON.stringify(getMealsData()),
+        deliveryDateSelected: delivDate,
+        activity: "Pick Meals Button Clicked",
+      };
+
+      // Send DATA FOR COLLECTION
+      DataCollectionAPIService.pickMealsPageDataCollection(dataToSend)
+        .then((res) => {})
+        .catch((err) => {});
       DataCollection.registerActivity(
         "Pick Meals",
         `Proceed Button Clicked: ${
@@ -531,7 +551,7 @@ const PickMeals = ({
           zipCode={zipCode}
           mealNumbers={mealNumbers}
           setMealNumbers={setMealNumbers}
-          setLogIn = {setLogIn}
+          setLogIn={setLogIn}
         />
 
         <Payment

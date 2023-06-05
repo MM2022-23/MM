@@ -1,3 +1,4 @@
+import DataCollection from "./DataCollection";
 import DataCollectionAPIService from "../APICalls/DataCollectionAPIService";
 
 class userSession {
@@ -11,9 +12,20 @@ class userSession {
     const now = new Date();
     const options = { timeZone: "America/New_York" };
     const dateTimeEST = now.toLocaleString("en-US", options);
-    DataCollectionAPIService.createSession({fbInfo:comingFrom,time:dateTimeEST}).then((response)=>{
+    DataCollectionAPIService.createSession({
+      fbInfo: comingFrom,
+      time: dateTimeEST,
+    }).then((response) => {
       localStorage.setItem("mirchiMealsSessionID", response.data);
     });
+    DataCollection.registerActivity(
+      "Home",
+      `Viewing Home Page: ${
+        userSession.isLoggedIn() && userSession.getUser().id !== "improper"
+          ? userSession.getUser().emailAddress
+          : "Anon"
+      }`
+    );
   };
 
   getSessionID = () => {
