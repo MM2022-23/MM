@@ -21,8 +21,9 @@ class userSession {
     DataCollection.registerActivity(
       "Home",
       `Viewing Home Page: ${
-        userSession.isLoggedIn() && userSession.getUser().id !== "improper"
-          ? userSession.getUser().emailAddress
+        localStorage.getItem("user") !== null &&
+        JSON.parse(localStorage.getItem("user")).id !== "improper"
+          ? JSON.parse(localStorage.getItem("user")).emailAddress
           : "Anon"
       }`
     );
