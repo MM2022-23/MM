@@ -83,13 +83,6 @@ const Payment = ({
       }
 
       // console.log("About to send req to backend");
-
-      StripeBackend.requestToServer("xxx",2000,setStatusBody,setStatusPopUp,getLineItems()).then((res)=>{
-        // console.log(`RES: ${res}`);
-      }).catch((err)=>{
-        // console.log(`ERR: ${err}`);
-      })
-
       StripeBackend.requestToServer(
         stripeToken,
         Math.round(
@@ -109,6 +102,7 @@ const Payment = ({
             setStatusBody(res.data);
             // let user view err msg for 2s; close pop up; reopen payment pop up
             setTimeout(() => {
+              setStripeToken(null);
               document.getElementById("hiddenPaymentButton").click();
             }, 2000);
           } else {
@@ -253,6 +247,7 @@ const Payment = ({
           setStatusPopUp(true);
           setStatusBody("" + error);
           setTimeout(() => {
+            setStripeToken(null);
             setStatusPopUp(false);
             document.getElementById("hiddenPaymentButton").click();
           }, 3000);

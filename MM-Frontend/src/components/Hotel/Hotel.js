@@ -26,6 +26,10 @@ const Hotel = () => {
   const [pinValue, setPinValue] = useState("");
   const [mealQuantityTable, setMealQuantityTable] = useState(null);
   const [ordersTable, setOrdersTable] = useState(null);
+
+  const [mealQuantityTableForNoSignUps, setMealQuantityTableNoSignUps] =
+    useState(null);
+  const [ordersTableForNoSignUps, setOrdersTableNoSignUps] = useState(null);
   useEffect(() => {
     // if (
     //   DateService.isSunday() ||
@@ -56,6 +60,33 @@ const Hotel = () => {
       .catch((err) => {
         // console.log("Erro while fetching Orders Table::: " + err);
       });
+
+    //MealQuantity table for no signups
+    HotelAPIService.getMealQuantityTableForNoSignUps({
+      date: DateService.closestUpcomingSunday(),
+    })
+      .then((res) => {
+        setMealQuantityTableNoSignUps(res.data);
+        console.log(
+          "REceived:: " + JSON.stringify(mealQuantityTableForNoSignUps)
+        );
+      })
+      .catch((err) => {
+        // console.log("Error while fetching mealQuantityTable::: " + err);
+      });
+
+    //Order table for no signups
+    HotelAPIService.getOrderTablesForNoSignUps({
+      date: DateService.closestUpcomingSunday(),
+    })
+      .then((res) => {
+        setOrdersTableNoSignUps(res.data);
+        console.log("REceived:: " + JSON.stringify(ordersTableForNoSignUps));
+      })
+      .catch((err) => {
+        // console.log("Erro while fetching Orders Table::: " + err);
+      });
+
     // } else {
     //   console.log(
     //     `COULD NOT SHOW TABLE BECAUSE IS IT SUNDAY OR SATURDAY: ${
@@ -253,6 +284,130 @@ const Hotel = () => {
     );
   };
 
+  const showTableForNoSignUpsCustomers = () => {
+    if (
+      mealQuantityTableForNoSignUps === null ||
+      ordersTableForNoSignUps === null
+    ) {
+      return <>Loading...</>;
+    } else if (
+      mealQuantityTableForNoSignUps.length === 0 ||
+      ordersTableForNoSignUps.length === 0
+    ) {
+      return <p>No Orders Yet for Customers without Sign Ups</p>;
+    } else {
+      return (
+        <>
+          <section
+            className="bg-primary"
+            style={{ fontFamily: "Signika", padding: "64px 32px" }}
+          >
+            <h1
+              style={{ fontFamily: "Signika", fontSize: "5vw" }}
+              className="text-center mb-4"
+            >
+              Meal Quantity Table for Customers without Sign Ups
+            </h1>
+            <Table
+              striped
+              bordered
+              hover
+              style={{ fontSize: "3vw", fontFamily: "Signika" }}
+            >
+              <thead>
+                <tr>
+                  <th>Meal Type</th>
+                  <th>Total Quantity</th>
+                  <th>Total Qauntity of contents</th>
+                </tr>
+              </thead>
+              <tbody>
+                {mealQuantityTableForNoSignUps.map((mealQuantityInfo) => {
+                  const { item_id, Total_Quantity } = mealQuantityInfo;
+                  return (
+                    <tr>
+                      <td>{MealData.getAllItems()[item_id].mealName}</td>
+
+                      <td>{Total_Quantity}</td>
+
+                      {/* FIX THIS AND THINK OF BETTER MODEL */}
+                      <td>
+                        {MealData.getAllItems()[item_id].content.map((item) => {
+                          return (
+                            <span>
+                              {`${Total_Quantity} : ${item}`}
+                              <br></br>
+                            </span>
+                          );
+                        })}
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </Table>
+          </section>
+          <section style={{ fontFamily: "Signika", padding: "64px 32px" }}>
+            <h1
+              style={{ fontFamily: "Signika", fontSize: "5vw" }}
+              className="text-center mb-4"
+            >
+              Orders Table- Due 5:30PM EST for Customers without Sign Ups
+            </h1>
+            <Table
+              striped
+              bordered
+              hover
+              style={{ fontSize: "3vw", fontFamily: "Signika" }}
+            >
+              <thead>
+                <tr>
+                  <th>Order#</th>
+                  <th>Meals</th>
+                  <th>Due Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                {ordersTableForNoSignUps.map((order) => {
+                  const { orderNumber, meals, dueDate } = order;
+                  return (
+                    <tr>
+                      <td>{orderNumber}</td>
+
+                      {/* handle meals  */}
+
+                      <td>
+                        {/* {Object.keys(meals).map((key) => {
+                            return (
+                              <span>
+                                {`${MealData.getMeals()[key].mealName} : ${
+                                  meals[key]
+                                }`}
+                                <br></br>
+                              </span>
+                            );
+                          })} */}
+                        {meals.map((meal) => {
+                          return (
+                            <span>
+                              {`${meal[0]} : ${meal[1]}`}
+                              <br></br>
+                            </span>
+                          );
+                        })}
+                      </td>
+                      <td>{dueDate}</td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </Table>
+          </section>
+        </>
+      );
+    }
+  };
+
   const showTables = () => {
     if (mealQuantityTable === null || ordersTable === null) {
       return <>Loading...</>;
@@ -406,6 +561,8 @@ const Hotel = () => {
         </Button>
 
         {displayTables ? showTables() : checkBackLater()}
+
+        {displayTables ? showTableForNoSignUpsCustomers() : checkBackLater()}
 
         <Modal
           show={displayReport}

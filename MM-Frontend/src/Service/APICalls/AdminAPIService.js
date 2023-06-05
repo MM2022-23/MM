@@ -34,6 +34,13 @@ class AdminAPIService {
     });
   }
 
+  //   Delete order for no sign ups
+  deleteOrderNoSignUps(OrderId,passwd) {
+    return axios.post(`${ADMIN_BASE_API_URL}deleteOrderNoSignUps`, {
+      orderNumber: OrderId,
+      password: passwd
+    });
+  }
   //   If delivery guy wants to report to Admin
   report(msg) {
     return axios.post(`${ADMIN_BASE_API_URL}report`, msg);

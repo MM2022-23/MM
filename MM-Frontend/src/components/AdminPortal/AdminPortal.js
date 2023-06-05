@@ -289,6 +289,55 @@ const AdminPortal = () => {
       });
   };
 
+  const deleteAPICallNoSignUps = (orderNumber, password) => {
+    AdminAPIService.deleteOrderNoSignUps(orderNumber, password)
+      .then((res) => {
+        setStatusTitle("Loading...");
+        // successful
+        if (res.status === 200) {
+          setStatusTitle("Deleted Successfully");
+          setStatusBody("Deleted Successfully");
+          setTimeout(() => {
+            setStatusTitle("Admin Delete Credentials");
+            setStatusBody(
+              <>
+                <input
+                  placeholder="password"
+                  className="text-center"
+                  id="deleteCredPassword"
+                />
+                <Button
+                  className="mx-2"
+                  variant="light"
+                  onClick={() =>
+                    deleteAPICall(
+                      orderNumber,
+                      document.getElementById("deleteCredPassword").value
+                    )
+                  }
+                >
+                  Submit
+                </Button>
+              </>
+            );
+            setStatusPopUp(false);
+          }, 2000);
+          getAllOrdersNoSignUp();
+          // console.log("Success delete");
+        } else {
+          setStatusTitle(
+            <p className="lead" style={{ color: "red" }}>
+              Incorrect password! Try Again
+            </p>
+          );
+        }
+      })
+      .catch((err) => {
+        getAllOrdersNoSignUp();
+        // console.log("Erro while fetching Orders Table::: " + err);
+      });
+  };
+
   /**
    * IF deletable, ask for password, hit backend
    * ELSE let admin know in Pop Up
@@ -328,11 +377,46 @@ const AdminPortal = () => {
     setStatusPopUp(true);
   };
 
+  const deleteOrderNoSignUps = (orderNumber, shippingDate) => {
+    // if shipping date is upcoming sunday and today is
+    setStatusTitle("Admin Delete Credentials");
+    if (
+      shippingDate === DateService.closestUpcomingSunday() &&
+      (DateService.isSunday() ||
+        (DateService.isSaturday() &&
+          new Date().getHours() % 12 >= 3 &&
+          new Date().getHours() >= 12))
+    ) {
+      setStatusBody("Can't delete this order");
+    } else {
+      let passew = "";
+      setStatusBody(
+        <>
+          <input
+            placeholder="password"
+            className="text-center"
+            onChange={(e) => {
+              passew = e.target.value;
+            }}
+          />
+          <Button
+            className="mx-2"
+            variant="light"
+            onClick={() => deleteAPICallNoSignUps(orderNumber, passew)}
+          >
+            Submit
+          </Button>
+        </>
+      );
+    }
+    setStatusPopUp(true);
+  };
+
   const showTableForRegularCustomers = () => {
     if (ordersTable === null) {
       return <p className="text-center">Loading...</p>;
     } else if (ordersTable.length === 0) {
-      return <p className="text-center">No Orders Yet</p>;
+      return <p className="text-center">No Orders Yet For Regular Customers</p>;
     } else {
       return (
         <>
@@ -411,7 +495,7 @@ const AdminPortal = () => {
     if (ordersNoSignUps === null) {
       return <p className="text-center">Loading...</p>;
     } else if (ordersNoSignUps.length === 0) {
-      return <p className="text-center">No Orders Yet</p>;
+      return <p className="text-center">No Orders Yet For Customers without Sign Ups</p>;
     } else {
       return (
         <>
@@ -457,7 +541,7 @@ const AdminPortal = () => {
                       </td>
                       <td>{dueDate}</td>
                       <td>{address}</td>
-                      {/* <td>
+                      <td>
                         <Button
                           variant="light"
                           style={{
@@ -469,12 +553,12 @@ const AdminPortal = () => {
                           onClick={(e) => {
                             e.preventDefault();
                             // setOrdersTable(null);
-                            deleteOrder(orderNumber, dueDate);
+                            deleteOrderNoSignUps(orderNumber, dueDate);
                           }}
                         >
                           Delete
                         </Button>
-                      </td> */}
+                      </td>
                     </tr>
                   );
                 })}
@@ -485,7 +569,6 @@ const AdminPortal = () => {
       );
     }
   };
-
 
   const actualPortal = () => {
     return (

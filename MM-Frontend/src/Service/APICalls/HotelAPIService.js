@@ -12,6 +12,13 @@ class HotelAPIService {
   getOrderTables(date){
     return axios.post(`${HOTE_BASE_API_URL}ordersTable`, date);
   }
+
+  getMealQuantityTableForNoSignUps(date){
+    return axios.post(`${HOTE_BASE_API_URL}mealQuantityTableNoSignUps`, date);
+  }
+  getOrderTablesForNoSignUps(date){
+    return axios.post(`${HOTE_BASE_API_URL}ordersTableNoSignUps`, date);
+  }
   report(msg){
     return axios.post(`${HOTE_BASE_API_URL}report`, msg);
   }
