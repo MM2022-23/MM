@@ -36,38 +36,14 @@ const Home = ({
     if (pathname.includes("#/") && pathname.split("#/")[1].length !== 0) {
       // console.log("Coming from FB");
       userSession.addSessionID(pathname.split("#/")[1]);
-      DataCollection.registerActivity(
-        "Home",
-        `Viewing Home Page: ${
-          userSession.isLoggedIn() && userSession.getUser().id !== "improper"
-            ? userSession.getUser().emailAddress
-            : "Anon"
-        }`
-      );
     } else {
       // console.log("Coming 1st time");
 
       // Coming 1st time
       if (!pathname.includes("#") && !userSession.getSessionID()) {
         userSession.addSessionID("Not From FB");
-        DataCollection.registerActivity(
-          "Home",
-          `Viewing Home Page: ${
-            userSession.isLoggedIn() && userSession.getUser().id !== "improper"
-              ? userSession.getUser().emailAddress
-              : "Anon"
-          }`
-        );
       } else if (!userSession.getSessionID()) {
         userSession.addSessionID("Not From FB");
-        DataCollection.registerActivity(
-          "Home",
-          `Viewing Home Page: ${
-            userSession.isLoggedIn() && userSession.getUser().id !== "improper"
-              ? userSession.getUser().emailAddress
-              : "Anon"
-          }`
-        );
       }
     }
 

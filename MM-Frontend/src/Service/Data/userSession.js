@@ -17,16 +17,16 @@ class userSession {
       time: dateTimeEST,
     }).then((response) => {
       localStorage.setItem("mirchiMealsSessionID", response.data);
+      DataCollection.registerActivity(
+        "Home",
+        `Viewing Home Page: ${
+          localStorage.getItem("user") !== null &&
+          JSON.parse(localStorage.getItem("user")).id !== "improper"
+            ? JSON.parse(localStorage.getItem("user")).emailAddress
+            : "Anon"
+        }`
+      );
     });
-    DataCollection.registerActivity(
-      "Home",
-      `Viewing Home Page: ${
-        localStorage.getItem("user") !== null &&
-        JSON.parse(localStorage.getItem("user")).id !== "improper"
-          ? JSON.parse(localStorage.getItem("user")).emailAddress
-          : "Anon"
-      }`
-    );
   };
 
   getSessionID = () => {
