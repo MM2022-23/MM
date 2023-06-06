@@ -74,6 +74,7 @@ const Payment = ({
         setStatusBody(
           `You were viewing meals for zipcode ${zipCode}, but trying to ship at zipcode ${stripeToken.card.address_zip}`
         );
+        setStripeToken(null); 
         setTimeout(() => {
           setStatusPopUp(false);
           setStatusTitle("Payment Status");
@@ -81,6 +82,8 @@ const Payment = ({
         }, 3000);
         return;
       }
+
+      // NEED FIX BELOW!!
 
       // console.log("About to send req to backend");
       StripeBackend.requestToServer(

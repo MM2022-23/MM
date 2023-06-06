@@ -251,25 +251,25 @@ const PickMeals = ({
     return tempDict;
   };
 
-  const handleNoSignUp = (e) => {
-    e.preventDefault();
-    // No sign up clicked from pick meals
-    DataCollection.registerActivity(
-      "Pick Meals",
-      `Signup skipped from proceed button: ${
-        userSession.isLoggedIn() && userSession.getUser().id !== "improper"
-          ? userSession.getUser().emailAddress
-          : "Anon"
-      }`
-    );
+  // const handleNoSignUp = (e) => {
+  //   e.preventDefault();
+  //   // No sign up clicked from pick meals
+  //   DataCollection.registerActivity(
+  //     "Pick Meals",
+  //     `Signup skipped from proceed button: ${
+  //       userSession.isLoggedIn() && userSession.getUser().id !== "improper"
+  //         ? userSession.getUser().emailAddress
+  //         : "Anon"
+  //     }`
+  //   );
 
-    const userLoggedIn = {
-      id: "improper",
-    };
-    userSession.addUser(userLoggedIn);
-    setDisplayPopUp(false);
-    setDisplayUpSale(true);
-  };
+  //   const userLoggedIn = {
+  //     id: "improper",
+  //   };
+  //   userSession.addUser(userLoggedIn);
+  //   setDisplayPopUp(false);
+  //   setDisplayUpSale(true);
+  // };
   /**
    * send Data to DB for DA purporses
    * STRIP INTEGRATION
@@ -379,7 +379,7 @@ const PickMeals = ({
         zipCode: zipCode,
         specificMeals: JSON.stringify(getMealsData()),
         deliveryDateSelected: delivDate,
-        activity: "Pick Meals Button Clicked",
+        activity: "Proceed Button Clicked frm Pick Meals Page",
       };
 
       // Send DATA FOR COLLECTION

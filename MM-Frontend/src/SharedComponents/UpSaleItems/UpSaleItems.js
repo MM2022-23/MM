@@ -154,8 +154,8 @@ const UpSaleItems = ({
     e.preventDefault();
     // No sign up clicked from pick meals
     DataCollection.registerActivity(
-      "UpSaleItemsPopUp",
-      `Signup skipped from UpSales: ${
+      "SignUpPopUp",
+      `Sign Up Skipped after clicking No Thanks, Continue: ${
         userSession.isLoggedIn() && userSession.getUser().id !== "improper"
           ? userSession.getUser().emailAddress
           : "Anon"
@@ -174,6 +174,14 @@ const UpSaleItems = ({
 
   const handleProceed = (e) => {
     e.preventDefault();
+    DataCollection.registerActivity(
+      "UpSaleItmes",
+      `Clicked No Thanks, Continue (or Proceed) frm UpSale: ${
+        !userSession.isLoggedIn() || userSession.getUser().id === "improper"
+          ? "Anon"
+          : userSession.getUser().emailAddress
+      }`
+    );
     if (!userSession.isLoggedIn() || userSession.getUser().id === "improper") {
       // user not logged in
       setSignUpLogInBody(
@@ -184,9 +192,10 @@ const UpSaleItems = ({
           <form style={{ padding: "20px" }} className="rounded">
             <Row className="">
               <div className="form-group">
-                <label htmlFor="exampleInputEmail1" className="mb-4">
+                {/* DO NOT REMOVE: COMMENTED BC UPSALE IS REMOVED */}
+                {/* <label htmlFor="exampleInputEmail1" className="mb-4">
                   <p className="lead">Log in or Sign Up to continue</p>
-                </label>
+                </label> */}
               </div>
             </Row>
 
@@ -226,11 +235,6 @@ const UpSaleItems = ({
       (!userSession.isLoggedIn() || userSession.getUser().id === "improper") &&
         setShowSignUpLogIn(true);
     } else {
-      // logged in
-      DataCollection.registerActivity(
-        "UpSaleItmes",
-        "Clicked Proceed frm UpSale: Anon"
-      );
       setDisplayPopUp(false);
       document.getElementById("hiddenPaymentButton").click();
     }
@@ -244,12 +248,15 @@ const UpSaleItems = ({
         style={{ fontFamily: "Signika" }}
       >
         <Modal.Header closeButton style={{ textAlign: "center" }}>
-          <Modal.Title>People have also tried</Modal.Title>
+          {/* Replacing  */}
+          {/* <Modal.Title>People have also tried</Modal.Title> */}
+          <Modal.Title>Total</Modal.Title>
         </Modal.Header>
 
         <Modal.Body>
           <>
-            <Container>
+            {/* UpSale Item things commented DO NOT REMOVE*/}
+            {/* <Container>
               <Row>
                 {MealData.getUpSaleItems().map((item) => {
                   const { id, img, mealName, description, price } = item;
@@ -304,9 +311,9 @@ const UpSaleItems = ({
                   );
                 })}
               </Row>
-            </Container>
+            </Container> */}
+            {/* <hr /> */}
 
-            <hr />
             {/* Final version below do NOT change it */}
             <h5 className="text-center mt-4">{`${
               "Meals Total $" + cartPrice
@@ -334,7 +341,8 @@ const UpSaleItems = ({
                 100
             }`}</h5>
 
-            <div className="h-100 d-flex align-items-center justify-content-center">
+            {/* UpSale Item things commented DO NOT REMOVE*/}
+            {/* <div className="h-100 d-flex align-items-center justify-content-center">
               <Button
                 variant="light"
                 className="text-dark"
@@ -343,6 +351,18 @@ const UpSaleItems = ({
                 }}
               >
                 {noItems() ? "No Thanks, Continue" : "Proceed"}
+              </Button>
+            </div> */}
+
+            <div className="h-100 d-flex align-items-center justify-content-center">
+              <Button
+                variant="light"
+                className="text-dark"
+                onClick={(e) => {
+                  handleProceed(e);
+                }}
+              >
+                Proceed
               </Button>
             </div>
           </>

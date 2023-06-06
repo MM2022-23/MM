@@ -113,7 +113,7 @@ function LogInPopUP({ style, setLogIn }) {
         .then((response) => {
           localStorage.removeItem("Loading");
           if (response.status === 200) {
-            if (response.data.length !== 0) {
+            if (response.data) {
               const userLoggedIn = {
                 id: response.data.id,
                 fname: response.data.First_Name,

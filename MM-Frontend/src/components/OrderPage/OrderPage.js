@@ -137,9 +137,9 @@ const OrderPage = ({
       const now = new Date();
       const options = { timeZone: "America/New_York" };
       const time = now.toLocaleString("en-US", options);
-      const userinfo = userSession.isLoggedIn()
+      const userinfo = userSession.isLoggedIn() && userSession.getUser().id!=="improper"
         ? userSession.getUser().emailAddress
-        : "User Not Logged In";
+        : "Anon";
 
       const dataToSend = {
         sessionID: userSession.getSessionID(),
