@@ -104,7 +104,7 @@ const About = () => {
         <p className="mb-3">
           Our meals are prepared by experienced Indian chefs who have a passion
           for creating authentic, delicious dishes that are sure to please your
-          taste buds. They use traditional Indian cooking methods and
+          taste buds. We use traditional Indian cooking methods and
           ingredients to bring out the full flavor of each dish.
         </p>
         <p className="mb-3">
