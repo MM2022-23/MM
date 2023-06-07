@@ -15,7 +15,7 @@ class MealData {
         "6oz Amul Buttermilk Drink",
       ],
 
-      price: 12.99,
+      price: 11.99,
     },
 
     {
@@ -32,7 +32,7 @@ class MealData {
         "Tandoor Roti",
         "6oz Amul Buttermilk Drink",
       ],
-      price: 12.99,
+      price: 11.99,
     },
 
     {
@@ -46,7 +46,7 @@ class MealData {
         "Tandoor Roti",
         "6oz Amul Buttermilk Drink",
       ],
-      price: 12.99,
+      price: 11.99,
     },
 
     {
@@ -61,7 +61,7 @@ class MealData {
         "Tandoor Roti",
         "6oz Amul Buttermilk Drink",
       ],
-      price: 12.99,
+      price: 11.99,
     },
     {
       id: 4,
@@ -75,7 +75,7 @@ class MealData {
         "Tandoor Roti",
         "6oz Amul Buttermilk Drink",
       ],
-      price: 12.99,
+      price: 11.99,
     },
     {
       id: 5,
@@ -89,7 +89,7 @@ class MealData {
         "Tandoor Roti",
         "6oz Amul Buttermilk Drink",
       ],
-      price: 12.99,
+      price: 11.99,
     },
     {
       id: 6,
