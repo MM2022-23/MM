@@ -438,7 +438,7 @@ const PickMeals = ({
                     {/* <img src={img} className="img-fluid" style={{height:"25vh",width:"50vw"}}/> */}
                     <h4 className="titleAdjustment">{mealName}</h4>
                     <h5>
-                      <del className="mx-2">$15.28</del>${price}
+                      <del className="mx-2">$14.11</del>${price}
                     </h5>
                     <Link
                       onClick={() =>
