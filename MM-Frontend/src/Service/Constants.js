@@ -3,7 +3,7 @@ export const STRIPE_KEY =
 
 // for cloud testing
 // export const BASE_URL = "https://mm-pure-backend-production.up.railway.app/api";
-export const BASE_URL = "https://mm-pure-backend-production.onrender.com/api";
+export const BASE_URL = "https://purple-sparrow-tam.cyclic.app/api";
 
 
 //// for local testing
