@@ -181,7 +181,7 @@ const OrderPage = ({
         <title>Order</title>
         <meta
           name="description"
-          content="Order a variety of savory and fresh meals from every part of India, including Gujarat, Punjab, South India, and more. Grab 4 melas with prices starting as low as $12.99."
+          content="Order a variety of savory and fresh meals from every part of India, including Gujarat, Punjab, South India, and more. Grab 4 melas with prices starting as low as $11.99."
         />
       </Helmet>
       {/* User Input for zipcode, freq, plan, date */}

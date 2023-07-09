@@ -53,7 +53,7 @@ const MealPlans = ({
           {/* Main description */}
           <p className="text-primary">
             Order anywhere between 4 to 12 meals per week, with prices as low as
-            $12.99 per meal. No reoccurring subscriptions to tie you down.
+            $11.99 per meal. No reoccurring subscriptions to tie you down.
           </p>
         </div>
 

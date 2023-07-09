@@ -116,7 +116,7 @@ const Home = ({
         <title>Home</title>
         <meta
           name="description"
-          content="Mirchi Meals adds a twist to traditional tiffins and provides New Jersey with authentic, quality, and fresh Indian meals delivered straight to you. Meal prices start as low as $12.99 and customers can choose Gujarati, Punjabi, South Indian, Bengali foods."
+          content="Mirchi Meals adds a twist to traditional tiffins and provides New Jersey with authentic, quality, and fresh Indian meals delivered straight to you. Meal prices start as low as $11.99 and customers can choose Gujarati, Punjabi, South Indian, Bengali foods."
         />
       </Helmet>
       <Banner />
