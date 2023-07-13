@@ -63,7 +63,7 @@ const MealPlans = ({
               <div className="card-body text-center">
                 {/* Image button 1  */}
                 <button
-                  onClick={() => buttonClicked("4 meals")}
+                  onClick={() => buttonClicked("2 meals")}
                   style={{ background: "transparent", border: "none" }}
                 >
                   <img
@@ -79,7 +79,7 @@ const MealPlans = ({
                   />
                 </button>
                 {/* Text below Img 1 */}
-                <h4>4 meals</h4>
+                <h4>2 meals</h4>
               </div>
             </Col>
 
@@ -87,7 +87,7 @@ const MealPlans = ({
               <div className="card-body text-center">
                 {/* Image button 2 */}
                 <button
-                  onClick={() => buttonClicked("6 meals")}
+                  onClick={() => buttonClicked("4 meals")}
                   style={{ background: "transparent", border: "none" }}
                 >
                   <img
@@ -104,7 +104,7 @@ const MealPlans = ({
                 </button>
                 {/* Text below Img 2 */}
                 <h4>
-                  6 meals
+                  4 meals
                   {/* <i>
                     <super>*</super>Save 5%<super>*</super>
                   </i> */}
@@ -116,7 +116,7 @@ const MealPlans = ({
               <div className="card-body text-center">
                 {/* Image button 3 */}
                 <button
-                  onClick={() => buttonClicked("8 meals")}
+                  onClick={() => buttonClicked("6 meals")}
                   style={{ background: "transparent", border: "none" }}
                 >
                   <img
@@ -133,7 +133,7 @@ const MealPlans = ({
                 </button>
                 {/* Text below Img 3 */}
                 <h4>
-                  8 meals
+                  6 meals
                   {/* <i>
                     <super>*</super>Save 8%<super>*</super>
                   </i> */}
@@ -145,7 +145,7 @@ const MealPlans = ({
               <div className="card-body text-center">
                 {/* Image button 4 */}
                 <button
-                  onClick={() => buttonClicked("12+ meals")}
+                  onClick={() => buttonClicked("8+ meals")}
                   style={{ background: "transparent", border: "none" }}
                 >
                   <img
@@ -162,7 +162,7 @@ const MealPlans = ({
                 </button>
                 {/* Text below Img 4 */}
                 <h4>
-                  12+ meals
+                  8+ meals
                   {/* <i>
                     <super>*</super>Save 10%<super>*</super>
                   </i> */}

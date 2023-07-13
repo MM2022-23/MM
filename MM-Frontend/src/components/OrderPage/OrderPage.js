@@ -236,6 +236,12 @@ const OrderPage = ({
 
                       <Dropdown.Menu>
                         <Dropdown.Item
+                          onMouseEnter={() => setNumMeals("2 meals")}
+                          onClick={() => setNumMeals("2 meals")}
+                        >
+                          <span>2 meals</span>
+                        </Dropdown.Item>
+                        <Dropdown.Item
                           onMouseEnter={() => setNumMeals("4 meals")}
                           onClick={() => setNumMeals("4 meals")}
                         >
@@ -247,18 +253,12 @@ const OrderPage = ({
                         >
                           <span>6 meals</span>
                         </Dropdown.Item>
-                        <Dropdown.Item
-                          onMouseEnter={() => setNumMeals("8 meals")}
-                          onClick={() => setNumMeals("8 meals")}
-                        >
-                          <span>8 meals</span>
-                        </Dropdown.Item>
 
                         <Dropdown.Item
-                          onMouseEnter={() => setNumMeals("12+ meals")}
-                          onClick={() => setNumMeals("12+ meals")}
+                          onMouseEnter={() => setNumMeals("8+ meals")}
+                          onClick={() => setNumMeals("8+ meals")}
                         >
-                          <span>12+ meals</span>
+                          <span>8+ meals</span>
                         </Dropdown.Item>
                       </Dropdown.Menu>
                     </Dropdown>

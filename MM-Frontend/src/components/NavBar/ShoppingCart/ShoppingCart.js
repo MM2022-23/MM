@@ -145,9 +145,9 @@ const ShoppingCart = ({
   const handleCheckOut = () => {
     // console.log(`numMeals:: ${numMeals};;; Selected::: ${numMealsSelected}`);
     // not enough meals selected
-    if (numMeals === "12+ meals" && numMealsSelected < 12) {
+    if (numMeals === "8+ meals" && numMealsSelected < 8) {
       setTitleEnough("Not Enough Meals selected!!");
-      setBodyEnough(<p>Select at least 12 meals</p>);
+      setBodyEnough(<p>Select at least 8 meals</p>);
       setDisplayEnoughPopUp(true);
     } else if (parseInt(numMeals[0]) > numMealsSelected) {
       setTitleEnough("Not Enough Meals selected!!");

@@ -41,7 +41,7 @@ const Question = () => {
 
         <Accordion.Item eventKey="3">
           <Accordion.Header>
-            Why can't I order less than 4 meals?
+            Why can't I order less than 2 meals?
           </Accordion.Header>
           <Accordion.Body>
             We understand our customers are busy and sometimes chaotically busy.
