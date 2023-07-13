@@ -67,7 +67,7 @@ const Home = ({
     image1Height: "150px",
     image1Width: "250px",
     title1: "Choose Your Meals and Plan",
-    description1: "Choose a minimum of 4 ready-to-eat meals",
+    description1: "Choose a minimum of 2 ready-to-eat meals",
 
     image2: require("../../Resources/Vector/step2.png"),
     image2Width: "250px",

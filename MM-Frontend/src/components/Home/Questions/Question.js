@@ -33,9 +33,9 @@ const Question = () => {
             How many people can eat from each meal?
           </Accordion.Header>
           <Accordion.Body>
-            Each Mirchi Meal is designed to serve 1 adult. If you’re ordering
+            Each Mirchi Meal is designed to serve 1 adult. If you're ordering
             for more people, we encourage you to follow our larger meal plans
-            (6, 8, 12 meals/week).
+            (6, 8+ meals/week).
           </Accordion.Body>
         </Accordion.Item>
 
