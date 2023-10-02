@@ -1,0 +1,23 @@
+body {
+    background-color: #f8f9fa;
+}
+
+.maintenance-container {
+    text-align: center;
+    margin-top: 150px;
+}
+
+.maintenance-icon {
+    font-size: 100px;
+    color: #dc3545;
+}
+
+.maintenance-title {
+    font-size: 30px;
+    margin-top: 20px;
+}
+
+.maintenance-text {
+    font-size: 18px;
+    margin-top: 10px;
+}

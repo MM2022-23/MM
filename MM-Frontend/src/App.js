@@ -25,24 +25,21 @@ import AdminPortal from "./components/AdminPortal/AdminPortal";
 import ReactGA from "react-ga4";
 import { TRACKINGID } from "./Service/Constants";
 import DA from "./components/DA/DA";
+import Maintenance from "./components/Maintenance/Maintenance";
 
 ReactGA.initialize(TRACKINGID);
 function App() {
   useEffect(() => {
-
-    const handleBeforeUnload = ()=>{
+    const handleBeforeUnload = () => {
       userSession.removeSessionID();
     };
 
-    window.addEventListener('beforeunload', handleBeforeUnload);
+    window.addEventListener("beforeunload", handleBeforeUnload);
 
     return () => {
-      window.removeEventListener('beforeunload', handleBeforeUnload);
+      window.removeEventListener("beforeunload", handleBeforeUnload);
     };
 
-
-    
-    
     // // GA crap
     // // console.log("APP STARTED!!!");
     // let referrer = document.referrer;
@@ -65,7 +62,6 @@ function App() {
     // ReactGA.set({
     //   metric1: sessionDuration,
     // });
-
   }, []);
   // Nav, Home
   const [loggedIn, setLogIn] = useState(userSession.isLoggedIn());
@@ -126,137 +122,138 @@ function App() {
   };
 
   return (
-    <>
-      <Routes>
-        {/* Home */}
-        <Route
-          exact
-          path="/"
-          element={navAndFoot(
-            <Home
-              loggedIn={loggedIn}
-              setLogIn={setLogIn}
-              setMeals={setNumMeals}
-              setResetOrderPageInfo={setResetOrderPageInfo}
-              setCart={setCart}
-              setMealNumbers={setMealNumbers}
-              scrollFAQ={scrollFAQ}
-              setScrollFAQ={setScrollFAQ}
-            />
-          )}
-        />
+    // <>
+    //   <Routes>
+    //     {/* Home */}
+    //     <Route
+    //       exact
+    //       path="/"
+    //       element={navAndFoot(
+    //         <Home
+    //           loggedIn={loggedIn}
+    //           setLogIn={setLogIn}
+    //           setMeals={setNumMeals}
+    //           setResetOrderPageInfo={setResetOrderPageInfo}
+    //           setCart={setCart}
+    //           setMealNumbers={setMealNumbers}
+    //           scrollFAQ={scrollFAQ}
+    //           setScrollFAQ={setScrollFAQ}
+    //         />
+    //       )}
+    //     />
 
-        {/* About */}
-        <Route exact path="/about" element={navAndFoot(<About />)} />
+    //     {/* About */}
+    //     <Route exact path="/about" element={navAndFoot(<About />)} />
 
-        {/* Help */}
-        <Route
-          exact
-          path="/help"
-          element={navAndFoot(
-            <Help scrollFAQ={scrollFAQ} setScrollFAQ={setScrollFAQ} />
-          )}
-        />
+    //     {/* Help */}
+    //     <Route
+    //       exact
+    //       path="/help"
+    //       element={navAndFoot(
+    //         <Help scrollFAQ={scrollFAQ} setScrollFAQ={setScrollFAQ} />
+    //       )}
+    //     />
 
-        {/* Order Page */}
-        <Route
-          exact
-          path="/order"
-          element={navAndFoot(
-            <OrderPage
-              numMeals={numMeals}
-              setNumMeals={setNumMeals}
-              zipCode={zipCode}
-              setZipCode={setZipCode}
-              // freq={freq}
-              // setFreq={setFreq}
-              delivDate={delivDate}
-              setDelivDate={setDelivDate}
-              resetOrderPageInfo={resetOrderPageInfo}
-              setResetOrderPageInfo={setResetOrderPageInfo}
-              setMealNumbers={setMealNumbers}
-            />
-          )}
-        />
+    //     {/* Order Page */}
+    //     <Route
+    //       exact
+    //       path="/order"
+    //       element={navAndFoot(
+    //         <OrderPage
+    //           numMeals={numMeals}
+    //           setNumMeals={setNumMeals}
+    //           zipCode={zipCode}
+    //           setZipCode={setZipCode}
+    //           // freq={freq}
+    //           // setFreq={setFreq}
+    //           delivDate={delivDate}
+    //           setDelivDate={setDelivDate}
+    //           resetOrderPageInfo={resetOrderPageInfo}
+    //           setResetOrderPageInfo={setResetOrderPageInfo}
+    //           setMealNumbers={setMealNumbers}
+    //         />
+    //       )}
+    //     />
 
-        {/* PickMeals page */}
-        <Route
-          exact
-          path="/pickMeals"
-          element={navAndFoot(
-            <PickMeals
-              zipCode={zipCode}
-              cart={cart}
-              setCart={setCart}
-              mealNumbers={mealNumbers}
-              setMealNumbers={setMealNumbers}
-              setResetOrderPageInfo={setResetOrderPageInfo}
-              totalPrice={totalPrice}
-              setTotalPrice={setTotalPrice}
-              numMealsSelected={numMealsSelected}
-              setNumMealsSelected={setNumMealsSelected}
-              setLogIn={setLogIn}
-              numMeals={numMeals}
-              cartPrice={cartPrice}
-              setCartPrice={setCartPrice}
-              delivDate={delivDate}
-            />
-          )}
-        />
+    //     {/* PickMeals page */}
+    //     <Route
+    //       exact
+    //       path="/pickMeals"
+    //       element={navAndFoot(
+    //         <PickMeals
+    //           zipCode={zipCode}
+    //           cart={cart}
+    //           setCart={setCart}
+    //           mealNumbers={mealNumbers}
+    //           setMealNumbers={setMealNumbers}
+    //           setResetOrderPageInfo={setResetOrderPageInfo}
+    //           totalPrice={totalPrice}
+    //           setTotalPrice={setTotalPrice}
+    //           numMealsSelected={numMealsSelected}
+    //           setNumMealsSelected={setNumMealsSelected}
+    //           setLogIn={setLogIn}
+    //           numMeals={numMeals}
+    //           cartPrice={cartPrice}
+    //           setCartPrice={setCartPrice}
+    //           delivDate={delivDate}
+    //         />
+    //       )}
+    //     />
 
-        {/* CheckOut Page */}
-        <Route exact path="/checkOut" element={<CheckOut />} />
+    //     {/* CheckOut Page */}
+    //     <Route exact path="/checkOut" element={<CheckOut />} />
 
-        {/* Order History Page */}
-        <Route
-          exact
-          path="/orderHistory"
-          element={navAndFoot(<OrderHistory isLoggedIn={loggedIn} />)}
-        />
+    //     {/* Order History Page */}
+    //     <Route
+    //       exact
+    //       path="/orderHistory"
+    //       element={navAndFoot(<OrderHistory isLoggedIn={loggedIn} />)}
+    //     />
 
-        {/* Hotel Page */}
-        <Route exact path="/hotel" element={<Hotel />} />
+    //     {/* Hotel Page */}
+    //     <Route exact path="/hotel" element={<Hotel />} />
 
-        {/* Admin Page */}
-        <Route exact path="/admin" element={<AdminPortal />} />
+    //     {/* Admin Page */}
+    //     <Route exact path="/admin" element={<AdminPortal />} />
 
-        {/* DA Page */}
-        <Route exact path="/jhtkd$!2" element={<DA/>} />
+    //     {/* DA Page */}
+    //     <Route exact path="/jhtkd$!2" element={<DA />} />
 
-        {/* Privacy Policy */}
-        <Route exact path="/privacy" element={navAndFoot(<PrivacyPolicy />)} />
+    //     {/* Privacy Policy */}
+    //     <Route exact path="/privacy" element={navAndFoot(<PrivacyPolicy />)} />
 
-        {/* Terms & Condition Policy */}
-        <Route
-          exact
-          path="/terms"
-          element={navAndFoot(<TermsAndCondition />)}
-        />
+    //     {/* Terms & Condition Policy */}
+    //     <Route
+    //       exact
+    //       path="/terms"
+    //       element={navAndFoot(<TermsAndCondition />)}
+    //     />
 
-        {/* Refunds Policy */}
-        <Route
-          exact
-          path="/refund"
-          element={navAndFoot(<RefundsAndCancellationsPolicy />)}
-        />
+    //     {/* Refunds Policy */}
+    //     <Route
+    //       exact
+    //       path="/refund"
+    //       element={navAndFoot(<RefundsAndCancellationsPolicy />)}
+    //     />
 
-        <Route
-          path="*"
-          element={navAndFoot(
-            <Home
-              loggedIn={loggedIn}
-              setLogIn={setLogIn}
-              setMeals={setNumMeals}
-              setResetOrderPageInfo={setResetOrderPageInfo}
-              setCart={setCart}
-              setMealNumbers={setMealNumbers}
-              scrollFAQ={scrollFAQ}
-              setScrollFAQ={setScrollFAQ}
-            />
-          )}
-        />
-      </Routes>
-    </>
+    //     <Route
+    //       path="*"
+    //       element={navAndFoot(
+    //         <Home
+    //           loggedIn={loggedIn}
+    //           setLogIn={setLogIn}
+    //           setMeals={setNumMeals}
+    //           setResetOrderPageInfo={setResetOrderPageInfo}
+    //           setCart={setCart}
+    //           setMealNumbers={setMealNumbers}
+    //           scrollFAQ={scrollFAQ}
+    //           setScrollFAQ={setScrollFAQ}
+    //         />
+    //       )}
+    //     />
+    //   </Routes>
+    // </>
+    <Maintenance />
   );
 }
 
